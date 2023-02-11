@@ -1,9 +1,53 @@
 # proyecto-final
-proyecto final
+PROYECTO FINAL : COMPUTER STORE
+"Un e-commerce dedicado a el área de computación"
 
-Computer Store
+Grupo de Trabajo:
 
-e-commerce con un nicho dedicado a el área de computación.
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">Miembro</th>
+    <th class="tg-0lax">GitHub</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Lucia Daniela Radwanski</td>
+    <td class="tg-0lax">luciaradwanski</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Liam Marlon Perez Lupia</td>
+    <td class="tg-0lax">L03A95</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Laia Mia Perez Lupia</td>
+    <td class="tg-0lax">laiamia5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Leandro Tomas Kronsteiner</td>
+    <td class="tg-0lax">LeanKrn</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Eduardo Carlos Toledo</td>
+    <td class="tg-0lax">eduardocarlostoledo</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Franco Agustin Chaparro</td>
+    <td class="tg-0lax">FrancooChaparro</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Claudio Andres Bernal Denis</td>
+    <td class="tg-0lax">ClaudioBe</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Joaquin Gonzalo Ruiz Diaz</td>
+    <td class="tg-0lax"></td>
+  </tr>
+</tbody>
+</table>
+
 
 Deploy
 Frontend con Vercel, Backend con Railway.
