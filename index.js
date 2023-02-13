@@ -35,3 +35,15 @@ console.log(laCajaDePandora(3))
 
 
 
+function nameAgeAndNacionality (){
+    let data = [
+        {
+            name: 'Lucia',
+            age: 31,
+            nacionality: 'Argentina'
+        }
+    ]
+    return {data}
+}
+
+console.log(nameAgeAndNacionality())
