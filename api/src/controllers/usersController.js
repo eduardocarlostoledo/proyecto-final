@@ -13,7 +13,6 @@ else {
         throw Error(error.message)
     }
 }
-
 }
 
 module.exports = {
