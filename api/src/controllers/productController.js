@@ -1,5 +1,21 @@
 const { Product, User, Type, Trademark } = require("../db");
 
+const getProductsByName = async (productName) => {
+  try {
+    const products = await Product.findAll({
+      where: {
+        productName: {
+          [Op.iLike]: `%${productName}%`,
+        },
+      },
+    });
+    return products;
+  } catch (error) {
+    throw new Error("Error retrieving product by Name: " + error.message);
+  }
+};
+
+
 const getProducts = async () => {
     try {
       const allProducts = await Product.findAll();
@@ -16,7 +32,7 @@ const getProductId = async (productId) => {
     if (result) return result;
     throw new Error("Product not found with ID: " + productId);
   } catch (error) {
-    throw new Error("Error retrieving product: " + error.message);
+    throw new Error("Error retrieving product by ID: " + error.message);
   }
 };
 
@@ -44,4 +60,5 @@ module.exports = {
   postProduct,
   getProducts,
   getProductId,
+  getProductsByName
 };
