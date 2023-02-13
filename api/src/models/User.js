@@ -1,3 +1,4 @@
+
 const { DataTypes} = require('sequelize');
 
 module.exports = (sequelize) => {
@@ -15,8 +16,13 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        imgage: {
-            type: DataTypes.STRING
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        image: {
+            type: DataTypes.TEXT
         },
         password: {
             type: DataTypes.STRING,
@@ -32,7 +38,7 @@ module.exports = (sequelize) => {
         city: {
             type: DataTypes.STRING
         },
-        adress: {
+        address: {
             type: DataTypes.STRING
         }
     },{timestamps:false})
