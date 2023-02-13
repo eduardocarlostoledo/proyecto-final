@@ -12,3 +12,14 @@ return Number(num.toString(2));
 }
 
 console.log(laCajaDePandora(20))
+
+function EduardoToledo () {
+    let datos = [ 
+        {name: "Eduardo",
+        edad: 39,
+        nacionalidad: "Argentino"
+}]
+    return {datos}
+}
+
+console.log(EduardoToledo())
