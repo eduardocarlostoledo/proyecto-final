@@ -1,0 +1,10 @@
+.NavDiv {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(80, 80, 80);
+}
+
+.NavLink {
+    padding: 20px;
+    color: white;
+}
