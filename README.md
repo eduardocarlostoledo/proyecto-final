@@ -10,40 +10,49 @@ Grupo de Trabajo:
   <tr>
     <th class="tg-0lax">Miembro</th>
     <th class="tg-0lax">GitHub</th>
+    <th class="tg-0lax">email</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td class="tg-0lax">Lucia Daniela Radwanski</td>
     <td class="tg-0lax">luciaradwanski</td>
+    <td class="tg-0lax">luciadanieladarwanski@gmail.com</td>
   </tr>
   <tr>
     <td class="tg-0lax">Liam Marlon Perez Lupia</td>
     <td class="tg-0lax">L03A95</td>
+    <td class="tg-0lax">liamperezlupia53@gmail.com</td>
   </tr>
   <tr>
     <td class="tg-0lax">Laia Mia Perez Lupia</td>
     <td class="tg-0lax">laiamia5</td>
+    <td class="tg-0lax">laiperez1020@gmail.com</td>
   </tr>
   <tr>
     <td class="tg-0lax">Leandro Tomas Kronsteiner</td>
     <td class="tg-0lax">LeanKrn</td>
+    <td class="tg-0lax">leandrotomask@gmail.com</td>
   </tr>
   <tr>
     <td class="tg-0lax">Eduardo Carlos Toledo</td>
     <td class="tg-0lax">eduardocarlostoledo</td>
+    <td class="tg-0lax">eduardocarlostoledo@gmail.com</td>
   </tr>
   <tr>
     <td class="tg-0lax">Franco Agustin Chaparro</td>
     <td class="tg-0lax">FrancooChaparro</td>
+    <td class="tg-0lax">francoo_chaparro@hotmail.com</td>
   </tr>
   <tr>
     <td class="tg-0lax">Claudio Andres Bernal Denis</td>
     <td class="tg-0lax">ClaudioBe</td>
+    <td class="tg-0lax">bernalclaudio044@gmail.com</td>
   </tr>
   <tr>
     <td class="tg-0lax">Joaquin Gonzalo Ruiz Diaz</td>
-    <td class="tg-0lax"></td>
+    <td class="tg-0lax">joaquingrd</td>
+    <td class="tg-0lax">joaquing.ruizdiaz@gmail.com</td>
   </tr>
 </tbody>
 </table>
