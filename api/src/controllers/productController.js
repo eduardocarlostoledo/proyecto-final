@@ -1,5 +1,57 @@
 const { Product, User, Type, Trademark } = require("../db");
 
+
+const getTypeProductsByName = async (productName) => {
+  try {
+    const products = await Product.findAll({
+      where: {
+        productName: {
+          [Op.iLike]: `%${productName}%`,
+        },
+      },
+    });
+    return products;
+  } catch (error) {
+    throw new Error("Error retrieving product by Type Name: " + error.message);
+
+  }
+}
+
+const getTypeProducts = async() => {
+  try {
+    const products = await Type.findAll();  
+    return products;
+  } catch (error) {
+    throw new Error("Error retrieving product by Type: " + error.message);
+
+  }
+}
+
+const getTrademarkProductsByName = async(productName) => {
+  try {
+    const products = await Trademark.findAll({
+      where: {
+        productName: {
+          [Op.iLike]: `%${productName}%`,
+        },
+      },
+    });
+    return products;
+  } catch (error) {
+    throw new Error("Error retrieving product by Trademark Name: " + error.message);
+
+  }
+}
+
+const getTrademarkProducts = async() => {
+  try {
+    const products = await Trademark.findAll();
+    return products;
+  } catch (error) {
+    throw new Error("Error retrieving products by Trademark: " + error.message);
+  }
+}
+
 const getProductsByName = async (productName) => {
   try {
     const products = await Product.findAll({
@@ -60,5 +112,9 @@ module.exports = {
   postProduct,
   getProducts,
   getProductId,
-  getProductsByName
+  getProductsByName,
+  getTrademarkProducts,
+  getTrademarkProductsByName,
+  getTypeProducts,
+  getTypeProductsByName
 };

@@ -1,5 +1,12 @@
 const { Router } = require('express');
-const { postProduct, getProducts, getProductId, getProductsByName } = require('../controllers/productController')
+const { postProduct,
+  getProducts,
+  getProductId,
+  getProductsByName,
+  getTrademarkProducts,
+  getTrademarkProductsByName,
+  getTypeProducts,
+  getTypeProductsByName } = require('../controllers/productController')
 
 const productRouter = Router()
 
@@ -11,6 +18,36 @@ productRouter.post('/', async (req,res) => {
         res.status(400).json(error.message)
     }
 })
+
+productRouter.get("/typeproducts", (req, res) => {
+  const productTypeName = req.query.name;
+  try {
+    let products;
+    if (productTypeName) {
+      products = getTypeProductsByName(productTypeName);
+    } else {
+      products = getTypeProducts();
+    }
+    res.status(200).json({ data: products, message: "Listado de productos por tipo" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+productRouter.get("/trademarkproducts", (req, res) => {
+  const productTradeName = req.query.name;
+  try {
+    let products;
+    if (productTradeName) {
+      products = getTrademarkProductsByName(productTradeName);
+    } else {
+      products = getTrademarkProducts();
+    }
+    res.status(200).json({ data: products, message: "Listado de productos por marca" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 productRouter.get("/products", (req, res) => {
   const productName = req.query.name;
