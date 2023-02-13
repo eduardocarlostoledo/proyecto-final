@@ -1,5 +1,13 @@
 const {User} = require('../db')
 
+const getUsers = async () => {
+try {
+    const users = await User.findAll()
+    return users
+} catch (error) {
+    throw Error(error.message)
+}    
+}
 
 const putUser = async (user) => {
     const { name, lastname, email, image, password, phonenumber, country, city, address } = user
@@ -16,5 +24,5 @@ else {
 }
 
 module.exports = {
-    putUser
+    putUser, getUsers
 }
