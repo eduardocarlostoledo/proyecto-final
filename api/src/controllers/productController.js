@@ -1,24 +1,15 @@
-const { Product, User, Type, Trademark } = require("../db");
+const { Product, User, Type, Brand } = require("../db");
+const {Op} = require('sequelize')
 
 
-const getTypeProductsByName = async (productName) => {
-  try {
-    const products = await Product.findAll({
-      where: {
-        productName: {
-          [Op.iLike]: `%${productName}%`,
-        },
-      },
-    });
-    return products;
-  } catch (error) {
-    throw new Error("Error retrieving product by Type Name: " + error.message);
-
-  }
-}
+// Obtiene los tipos de productos de la BDD
 
 const getTypeProducts = async() => {
   try {
+    const addTypes = ["Cooler", "Power Supply", "Graphics Card","Processor", "SSD","HDD", "RAM", "Motherboard", "Mouse", "Headset", "Monitor", "PC Case", "Keyboard"]
+    addTypes.map(async (t) => {
+      await Type.create({name: t}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
+    })
     const products = await Type.findAll();  
     return products;
   } catch (error) {
@@ -27,36 +18,28 @@ const getTypeProducts = async() => {
   }
 }
 
-const getTrademarkProductsByName = async(productName) => {
+// Obtiene las marcas de la BDD
+
+const getBrandProducts = async() => {
   try {
-    const products = await Trademark.findAll({
-      where: {
-        productName: {
-          [Op.iLike]: `%${productName}%`,
-        },
-      },
-    });
+    const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
+    addBrand.map(async (b) => {
+      await Brand.create({name:b})
+    })
+    const products = await Brand.findAll();
     return products;
   } catch (error) {
-    throw new Error("Error retrieving product by Trademark Name: " + error.message);
-
+    throw new Error("Error retrieving products by brand: " + error.message);
   }
 }
 
-const getTrademarkProducts = async() => {
-  try {
-    const products = await Trademark.findAll();
-    return products;
-  } catch (error) {
-    throw new Error("Error retrieving products by Trademark: " + error.message);
-  }
-}
+// Obtiene los productos si contienen la palabra que recibe por parametro (Para la busqueda)
 
 const getProductsByName = async (productName) => {
   try {
     const products = await Product.findAll({
       where: {
-        productName: {
+        name: {
           [Op.iLike]: `%${productName}%`,
         },
       },
@@ -68,9 +51,12 @@ const getProductsByName = async (productName) => {
 };
 
 
+//Obtiene todos los productos de la BDD
+
 const getProducts = async () => {
     try {
       const allProducts = await Product.findAll();
+      console.log(allProducts)
       return allProducts;
     } catch (error) {
       throw new Error("Error retrieving products: " + error.message);
@@ -78,27 +64,32 @@ const getProducts = async () => {
   };
   
 
-const getProductId = async (productId) => {
+// Obtiene los productos cuando tienen el nombre exactamente igual al que reciben por parametro (Sirve para la ruta Detail en el Front)
+
+const getProductName = async (product) => {
   try {
-    const result = await Product.findByPk(productId);
+    const result = await Product.findAll({where:{name:product}});
     if (result) return result;
-    throw new Error("Product not found with ID: " + productId);
+    throw new Error("Product not found with exact name: " + product);
   } catch (error) {
-    throw new Error("Error retrieving product by ID: " + error.message);
+    throw new Error("Error retrieving product by name: " + error.message);
   }
 };
 
+// Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
+
 const postProduct = async (product) => {
-  console.log(product);
-  const { name, price, type, trademark } = product;
-  if (!name || !price) throw Error("Mandatory data missing");
+  const { name, price, type, brand, image, description } = product;
+  if (!name || !price || !type || !brand || !description) throw Error("Mandatory data missing");
   else {
     try {
       const newProduct = await Product.create({
         name,
         price,
-        trademarkId: type,
-        typeId: trademark,
+        description,
+        image,
+        typeId: type,
+        brandId: brand,
       });
 
       return newProduct;
@@ -111,10 +102,8 @@ const postProduct = async (product) => {
 module.exports = {
   postProduct,
   getProducts,
-  getProductId,
+  getProductName,
   getProductsByName,
-  getTrademarkProducts,
-  getTrademarkProductsByName,
+  getBrandProducts,
   getTypeProducts,
-  getTypeProductsByName
 };
