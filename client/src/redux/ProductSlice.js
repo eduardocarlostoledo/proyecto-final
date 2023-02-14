@@ -1,8 +1,8 @@
-import {createSlice} from '@reactjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
-export const ProductSile = createSlice({
-    name: "productos",
-    initialStae: {
+export const ProductSlice = createSlice({
+    name: 'productos',
+    initialState: {
         productos: [],
         detail: {},
     },
@@ -16,3 +16,5 @@ export const ProductSile = createSlice({
         }
     }
 })
+
+export default ProductSlice.reducer
