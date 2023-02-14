@@ -8,16 +8,13 @@ export const ProductSlice = createSlice({
     },
 
     reducers: {
-        getAllUsers: (state, action) => {
+        getUsers: (state, action) => {
             state.users = action.payload
         },
-        getUsersById: (state, action) => {
+        getUsersId: (state, action) => {
             state.detailUsers = action.payload
         },
-        // postUser: (state, action) => {
-        //     state.users = action.payload
-        // },
-        modifyUser: (state, action) => {
+        putUser: (state, action) => {
             state.users = action.payload
         },
         
