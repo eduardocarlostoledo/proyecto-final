@@ -32,7 +32,7 @@ Grupo de Trabajo:
   <tr>
     <td class="tg-0lax">Lucia Daniela Radwanski</td>
     <td class="tg-0lax">luciaradwanski</td>
-    <td class="tg-0lax">luciadanieladarwanski@gmail.com</td>
+    <td class="tg-0lax">luciadanielaradwanski@gmail.com</td>
   </tr>
   <tr>
     <td class="tg-0lax">Liam Marlon Perez Lupia</td>
