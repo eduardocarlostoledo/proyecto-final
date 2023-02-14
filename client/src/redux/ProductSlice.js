@@ -13,6 +13,15 @@ export const ProductSlice = createSlice({
         },
         getProductsById: (state, action) => {
             state.detail = action.payload
+        },
+        postProduct: (state, action) => {
+            state.productos = action.payload
+        },
+        getTypeProducts: (state, action) => {
+            state.productos = action.payload
+        },
+        getTrademarkProducts: (state, action) => {
+            state.productos = action.payload
         }
     }
 })
