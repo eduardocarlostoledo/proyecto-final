@@ -1,0 +1,7 @@
+.HomeContainer{
+
+    display:flex;
+    flex-wrap: wrap;
+    background-color: #f0efef;
+    width: 100%;
+}
