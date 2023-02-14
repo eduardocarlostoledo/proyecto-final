@@ -1,0 +1,19 @@
+.SearchButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.InputBuscar{
+    width: 400px;
+    padding: 10px;
+}
+
+.SubmitBuscar{
+    width: 100px;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    margin-left: 20px;
+}

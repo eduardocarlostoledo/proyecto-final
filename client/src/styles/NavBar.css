@@ -1,0 +1,18 @@
+.NavDiv {
+    display: flex;
+    justify-content: space-between;
+    background-color: #7200ca;
+    width: 100%;
+    height:60px;
+    align-items: center;
+}
+
+.NavDiv2{
+    float: right;
+}
+
+.NavLink {
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+}

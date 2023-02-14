@@ -1,8 +1,8 @@
-
+import '../styles/Detail.css';
 
 export const Detail = () => {
     return(
-        <div>
+        <div className="DetailContainer">
             <h1>Detail</h1>
         </div>
     )
