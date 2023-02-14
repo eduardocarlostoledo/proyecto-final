@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {getAllProducts, getProductsById} from './ProductSlice';
+import { getUsers,getUsersId, putUser} from './UserSlice';
 
 export const getProducts = () => {
 return async function (dispatch) {
