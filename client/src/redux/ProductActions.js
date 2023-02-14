@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import {getAllProducts, getProductsById, postProduct, getTypeProducts, getTrademarkProducts} from './ProductSlice';
 
 export const getProducts = () => (dispatch) => {
@@ -27,44 +28,5 @@ export const getTrademarkProduct = () => (dispatch) => {
     .then((r) => dispatch(getTrademarkProducts(r.data)))
     .catch((e) => console.log(e))
 }
-
-
-/*
-import axios from 'axios';
-import {getAllProducts, getProductsById} from './ProductSlice';
-
-export const getProducts = () => {
-return async function (dispatch) {
-    let results = await axios.get("http://localhost:3000/products");
-    return dispatch ({
-        type: 'GET_PRODUCTS',
-        payload: results.data,
-    }    );
-    }
-}
-
-export const getProductsById= (id) => {
-    return async function (dispatch) {
-        let results = await axios.get(`http://localhost:3000/products/${id}`);
-        return dispatch ({
-            type: 'GET_PRODUCTS_ID',
-            payload: results.data,
-        }    );
-        }
-}
-
-export const postProduct = () => {
-    
-}
-
-export const getTypeProducts= () => {
-    
-}
-
-export const getTrademarkProducts= () => {
-    
-}
-
-*/
 
 

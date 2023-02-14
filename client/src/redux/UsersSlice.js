@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-export const ProductSlice = createSlice({
-    name: 'productos',
+export const UserSlice = createSlice({
+    name: 'users',
     initialState: {
         users: [],
         detailUsers: {},
@@ -21,4 +21,4 @@ export const ProductSlice = createSlice({
     }
 })
 
-export default ProductSlice.reducer
+export default UserSlice.reducer
