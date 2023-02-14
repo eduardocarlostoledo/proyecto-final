@@ -13,9 +13,15 @@ module.exports = (sequelize) => {
             unique: true,
             allowNull: false
         },
+        image: {
+            type: DataTypes.TEXT
+        },
         price: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        description: {
+            type: DataTypes.TEXT
         }
     },{timestamps:false})
 }

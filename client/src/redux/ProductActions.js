@@ -29,4 +29,3 @@ export const getTrademarkProduct = () => (dispatch) => {
     .catch((e) => console.log(e))
 }
 
-

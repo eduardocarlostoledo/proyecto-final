@@ -1,9 +1,10 @@
 const {DataTypes} = require("sequelize")
 
 module.exports = (sequelize)=>{
-    sequelize.define('trademark',{
+    sequelize.define('brand',{
         id:{
             type:DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
         },
         name: {
