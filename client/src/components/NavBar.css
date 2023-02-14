@@ -1,10 +1,18 @@
 .NavDiv {
     display: flex;
-    justify-content: space-around;
-    background-color: rgb(80, 80, 80);
+    justify-content: flex-end;
+    background-color: #aa00ff;
+    width: 100%;
+    height:60px;
+    align-items: center;
+}
+
+.NavDiv2{
+    float: right;
 }
 
 .NavLink {
     padding: 20px;
     color: white;
+    text-decoration: none;
 }

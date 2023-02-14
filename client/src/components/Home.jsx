@@ -1,9 +1,12 @@
-import "./Home.css"
+import { Search } from "./Search";
+import './Home.css';
 
 export const Home = () => {
     return(
-        <div className="HomeDiv">
+        <div>
             <h1>Home</h1>
+            <br />
+            <Search/>
         </div>
     )
 }

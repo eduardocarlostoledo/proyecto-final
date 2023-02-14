@@ -4,15 +4,18 @@ import './NavBar.css';
 export const NavBar = () => {
     return(
         <div className='NavDiv'>
-            <Link to="/" className="NavLink">home</Link>
+            <div className='NavDiv2'>
+                <Link to="/" className="NavLink">home</Link>
 
-            <Link to="/Products" className="NavLink">products</Link>
+                <Link to="/Products" className="NavLink">products</Link>
 
-            <Link to="/BuildPc" className="NavLink">build pc</Link>
+                <Link to="/BuildPc" className="NavLink">build pc</Link>
 
-            <Link to="/Register" className="NavLink">Register</Link>
+                <Link to="/Register" className="NavLink">Register</Link>
 
-            <Link to="/Profile" className="NavLink">Profile</Link>
+                <Link to="/Profile" className="NavLink">Profile</Link>
+            </div>
         </div>
+        
     )
 }
