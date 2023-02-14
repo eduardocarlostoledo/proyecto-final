@@ -1,0 +1,23 @@
+.DivProducts {
+    background-color: rgb(80, 80, 80);
+    width: 95%;
+    height: 90vh;
+    margin: auto;
+    border-radius: 20px;
+    color: white;
+}
+
+.DivProducts h1 {
+    padding: 20px;
+}
+
+.DivCardsFilters {
+    display: flex;
+    
+}
+.DivCardsFilters h1 {
+    margin: auto;
+}
+.DivCardsFilters h2 {
+    margin-left: 15vh;
+}
