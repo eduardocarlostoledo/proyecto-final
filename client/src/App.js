@@ -14,15 +14,10 @@ function App() {
     <div className="App">
       <NavBar></NavBar>
       <Route exact path="/" component={Home} />
-
       <Route path="/Products" component={Products} />
-
       <Route path="/Detail" component={Detail} />
-
       <Route path="/BuildPc" component={BuildPc} />
-
       <Route path="/Register" component={Register} />
-
       <Route path="/Profile" component={Profile} />
     </div>
   );
