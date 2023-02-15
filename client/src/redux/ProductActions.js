@@ -9,12 +9,12 @@ export const getProducts = () => (dispatch) => {
     .catch((e) => console.log(e))
 }
 export const getProdById = (name) => (dispatch) => {
-    axios(`http://localhost:3001/products/${name}`)
+    axios(`http://localhost:3001/products/params/${name}`)
     .then((r) => dispatch(getProductsById(r.data)))
     .catch((e) => console.log(e))
 }
 export const postProd = () => (dispatch) => {
-    axios('http://localhost:3001/')
+    axios('http://localhost:3001/products')
     .then((r) => dispatch(postProduct(r.data)))
     .catch((e) => console.log(e))
 }

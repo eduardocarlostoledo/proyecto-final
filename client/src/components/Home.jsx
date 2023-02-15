@@ -33,10 +33,7 @@ export const Home = () => {
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-            </div>
-
-
-            
+            </div>         
             <div className="CardContainer">
                 <Card/>
             </div>

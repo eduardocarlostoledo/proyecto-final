@@ -51,9 +51,11 @@
 .btnR:hover { 
     background-color: rgb(102, 99, 99);
 }
+
 .btnR:active { 
     background-color: rgb(133, 31, 250);
 }
+
 
 .pack {
     margin-bottom: 15px;
