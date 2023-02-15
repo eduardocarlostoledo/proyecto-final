@@ -9,6 +9,7 @@ import { NavBar } from "./components/NavBar";
 import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
 import CreateProduct from "./components/CreateProduct";
+import { Login } from "./components/Login";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
 
       <Route path="/Detail" component={Detail} />
 
-      <Route path="/BuildPc" component={BuildPc} />
+      <Route path="/BuildPc" component={BuildPc} /> 
+
+      <Route path="/Login" component={Login} />
 
       <Route path="/Register" component={Register} />
 
