@@ -2,3 +2,33 @@
     background: rgb(65,9,121);
     background: linear-gradient(90deg, rgba(65,9,121,0.9136904761904762) 0%, rgba(193,4,244,1) 100%);
 }
+
+.DivCardsFilters {
+    display: flex;
+}
+
+.DivAllCards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.DivCard {
+    background-color: white;
+    border-radius: 10px;
+    width: 25%;
+    height: 200px;
+    padding: 50px 20px;
+    margin: 10px;
+    border: 2px solid black;
+}
+
+.DivCard img {
+    width: 40%;
+}
+
+.DivFilter {
+    padding: 100px;
+    background-color: white;
+    margin: 10px 20px;
+    border-radius: 10px;
+}
