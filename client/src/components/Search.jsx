@@ -1,4 +1,4 @@
-import './Search.css'
+import '../styles/Search.css'
 
 export const Search = () => {
 
@@ -23,6 +23,7 @@ export const Search = () => {
             <div>
                 <input className='InputBuscar' type='text' placeholder="Buscar..."/> 
                 <ion-icon name="search-outline"></ion-icon>
+               
                 <button className='SubmitBuscar' type="submit">Buscar</button>
             </div>
             <div>

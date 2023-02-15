@@ -1,6 +1,31 @@
 import axios from 'axios';
-import {getAllProducts, getProductsById} from './ProductSlice';
+
+import {getAllProducts, getProductsById, postProduct, getTypeProducts, getTrademarkProducts} from './ProductSlice';
 
 export const getProducts = () => (dispatch) => {
-    axios('http://localhost:3001/pr')
+    axios('http://localhost:3001/products')
+    .then((r) => dispatch(getAllProducts(r.data.results)))
+    .catch((e) => console.log(e))
 }
+export const getProdById = (id) => (dispatch) => {
+    axios(`http://localhost:3001/products/${id}`)
+    .then((r) => dispatch(getProductsById(r.data)))
+    .catch((e) => console.log(e))
+}
+export const postProd = () => (dispatch) => {
+    axios('http://localhost:3001/')
+    .then((r) => dispatch(postProduct(r.data)))
+    .catch((e) => console.log(e))
+}
+
+export const getTypeProduct = () => (dispatch) => {
+    axios('http://localhost:3001/typeproducts')
+    .then((r) => dispatch(getTypeProducts(r.data)))
+    .catch((e) => console.log(e))
+}
+export const getTrademarkProduct = () => (dispatch) => {
+    axios('http://localhost:3001/typeproducts')
+    .then((r) => dispatch(getTrademarkProducts(r.data)))
+    .catch((e) => console.log(e))
+}
+
