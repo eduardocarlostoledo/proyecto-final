@@ -8,6 +8,7 @@ import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
 import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
+import CreateProduct from "./components/CreateProduct";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
       <Route path="/BuildPc" component={BuildPc} />
 
       <Route path="/Register" component={Register} />
+
+      <Route path="/CreateProduct" component={CreateProduct} />
 
       <Route path="/Profile" component={Profile} />
     </div>

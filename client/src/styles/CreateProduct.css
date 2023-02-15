@@ -1,0 +1,6 @@
+.FormDiv {
+    display: flex;
+    flex-direction: column;
+    padding: 200px;
+    margin-top: 40px;
+}
