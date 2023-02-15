@@ -3,9 +3,10 @@ module.exports= (sequelize)=>{
     sequelize.define('type',{
         id:{
             type:DataTypes.INTEGER,
+            autoIncrement: true,
             primaryKey: true,
         },
-        nombre: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         }

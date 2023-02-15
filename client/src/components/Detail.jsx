@@ -1,4 +1,4 @@
-import './Detail.css';
+import '../styles/Detail.css';
 
 export const Detail = () => {
     return(

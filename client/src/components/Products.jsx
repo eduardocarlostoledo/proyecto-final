@@ -1,5 +1,5 @@
-import "./Products.css";
-import Json from "./Productos_PF.json"
+import "../styles/Products.css";
+import Card from './Card'
 
 export const Products = () => {
   return (
@@ -10,15 +10,7 @@ export const Products = () => {
         <h2>Filters</h2>
 
         </div>
-        <div className="DivAllCards">
-          { Json.map( (prod) => (
-            <div className="DivCard">
-              <img src={prod.image}></img>
-              <h2>{prod.name}</h2>
-              <h3>{prod.price}</h3>
-            </div>
-          ))}
-        </div>
+        <Card></Card>
       </div>
     </div>
   );
