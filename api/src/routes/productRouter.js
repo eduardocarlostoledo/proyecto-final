@@ -1,10 +1,12 @@
 const { Router } = require('express');
-const { postProduct,
-  getProducts,
-  getProductName,
-  getProductsByName,
-  getBrandProducts,
-  getTypeProducts,
+const { 
+        putProduct,
+        postProduct,
+        getProducts,
+        getProductName,
+        getProductsByName,
+        getBrandProducts,
+        getTypeProducts,
   } = require('../controllers/productController')
 
 const productRouter = Router()
@@ -60,7 +62,7 @@ productRouter.get("/", async (req, res) => {
 
 //Ruta GET de productos por Name, busca el producto con un nombre exactamente igual al que recibe por parametro. (Ruta para el detail)
 
-  productRouter.get("/params/:name", async (req, res) => {
+  productRouter.get("/:name", async (req, res) => {
     try {
       const result = await getProductName(req.params.name);
       result.length > 0 ? res.status(200).json({ data: result, message: "Producto solicitado" }) : res.status(404).json({ error: "Producto no encontrado" });
@@ -68,6 +70,13 @@ productRouter.get("/", async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   });
-  
 
+  productRouter.put("/:id", async (req, res) => {
+    try {
+      const product=await putProduct(req.body,req.params.id);
+      res.status(200).json(product)
+    } catch (error) {
+        res.status(400).json({error:error.message})
+    }
+  })
 module.exports = {productRouter}
