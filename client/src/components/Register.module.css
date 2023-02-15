@@ -5,6 +5,8 @@
     height: 470px;
     padding: 25px;
     margin: 15px;
+    box-shadow: 15px 15px 8px rgba(155, 147, 147, 0.75);
+    margin-top: 100px;
 }
 
 .ContainerAllForm { 
