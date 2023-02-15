@@ -8,19 +8,18 @@ import laptop from '../images/laptop.jpg'
 export const Home = () => {
     return(
         <div className="HomeContainer">
-            <h1>Home</h1>
             <div className='ContainerImages'>
                  {/* Acá esta el Boostrap */}
                 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                        <img src={laptop} class="d-block w-100" alt="" />
+                        <img src={laptop} class="d-block w-90" alt="" />
                         </div>
                         <div class="carousel-item">
-                        <img src={laptop} class="d-block w-100" alt="" />
+                        <img src={laptop} class="d-block w-90" alt="" />
                         </div>
                         <div class="carousel-item">
-                        <img src={laptop} class="d-block w-100" alt="" />
+                        <img src={laptop} class="d-block w-90" alt="" />
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
