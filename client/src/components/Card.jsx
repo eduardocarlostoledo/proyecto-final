@@ -13,7 +13,7 @@ export default function Card() {
           <p class="card_p_nombre">
             {prod.name}
           </p>
-          <strong class="card_strong_precio"> {prod.price}</strong>
+          <strong class="card_strong_precio"> $ {prod.price}</strong>
           <div class="card_contenedor_buttons">
             <button class="card_button_sumar">+</button>
             <p class="card_p_cantidad">1</p>
