@@ -1,8 +1,33 @@
-.LinkHome{
-    background: rgb(65,9,121);
-    background: linear-gradient(90deg, rgba(65,9,121,0.9136904761904762) 0%, rgba(193,4,244,1) 100%);
+.DivProducts{
+    margin-left: 3%;
+}
+.Products{
+    margin-top: 100px;
+}
+.Marcas{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 20px;
 }
 
+.MarcaContainer{
+    background-color: rgba(255, 255, 255, 0.397);
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.MarcaContainer:hover{
+    background-color: #aa00ff;
+}
 .DivCardsFilters {
     display: flex;
 }
@@ -29,6 +54,6 @@
 .DivFilter {
     padding: 100px;
     background-color: white;
-    margin: 10px 20px;
+    margin: 50px 20px;
     border-radius: 10px;
 }
