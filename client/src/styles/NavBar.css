@@ -7,6 +7,7 @@
     align-items: center;
     position: fixed;
     z-index: 999;
+    padding: 40px;
 }
 
 .NavDiv2{

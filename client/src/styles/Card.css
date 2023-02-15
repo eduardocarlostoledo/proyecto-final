@@ -7,7 +7,7 @@
     -webkit-box-shadow: 10px 10px 18px -14px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 18px -14px rgba(0,0,0,0.75);
     background-color: #fff;
-    margin-left: 3%;
+    margin-left: 5%;
     border-radius: 15px;
     display: grid;
     grid-template-areas: "img img img"
