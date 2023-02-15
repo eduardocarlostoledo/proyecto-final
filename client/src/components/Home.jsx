@@ -1,6 +1,8 @@
 import Card from './Card'
 import '../styles/Home.css';
-import laptop from '../images/laptop.jpg'
+import asus from '../images/asusMonitor.jpg'
+import Ryzen from '../images/Ryzen7mil.jpg'
+import samsung from '../images/samsungMonitores.jpg'
 
 
 
@@ -13,13 +15,13 @@ export const Home = () => {
                 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                        <img src={laptop} class="d-block w-90" alt="" />
+                        <img src={asus} class="d-block w-80" alt="" />
                         </div>
                         <div class="carousel-item">
-                        <img src={laptop} class="d-block w-90" alt="" />
+                        <img src={Ryzen} class="d-block w-80" alt="" />
                         </div>
                         <div class="carousel-item">
-                        <img src={laptop} class="d-block w-90" alt="" />
+                        <img src={samsung} class="d-block w-80" alt="" />
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">

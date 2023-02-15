@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 import {getAllProducts, getProductsById, postProduct, getTypeProducts, getTrademarkProducts} from './ProductSlice';
 
 export const getProducts = () => (dispatch) => {
