@@ -9,19 +9,19 @@ const ProductSlice = createSlice({
 
     reducers: {
         getAllProducts: (state, action) => {
-            return { ...state, productos: action.payload,}
+            state.productos = action.payload
         },
         getProductsById: (state, action) => {
-            return { ...state, detail: action.payload,}
+            state.detail = action.payload
         },
         postProduct: (state, action) => {
-            return { ...state, productos: action.payload,}
+            state.productos = action.payload
         },
         getTypeProducts: (state, action) => {
-            return { ...state, productos: action.payload,}
+            state.productos = action.payload
         },
         getTrademarkProducts: (state, action) => {
-            return { ...state, productos: action.payload,}
+            state.productos = action.payload
         }
     }
 })
