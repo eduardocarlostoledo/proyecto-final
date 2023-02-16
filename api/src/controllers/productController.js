@@ -8,7 +8,7 @@ const getTypeProducts = async() => {
   try {
     const addTypes = ["Cooler", "Power Supply", "Graphics Card","Processor", "SSD","HDD", "RAM", "Motherboard", "Mouse", "Headset", "Monitor", "PC Case", "Keyboard"]
     addTypes.map(async (t) => {
-      await Type.create({name: t}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
+      await Type.findOrCreate({where:{name: t}}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
     })
     const products = await Type.findAll();  
     return products;
@@ -24,7 +24,7 @@ const getBrandProducts = async() => {
   try {
     const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
     addBrand.map(async (b) => {
-      await Brand.create({name:b})
+      await Brand.findOrCreate({where:{name:b}})
     })
     const products = await Brand.findAll();
     return products;
