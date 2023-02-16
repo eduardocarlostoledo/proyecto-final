@@ -25,7 +25,7 @@ export default function CreateProduct() {
   //falta validar si existe
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postProd(product));
+    dispatch(createProduct(product));
   };
  
 return (
