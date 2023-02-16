@@ -38,12 +38,6 @@ import {
                 ...state,
                 productDetail:action.payload
             }
-            case CREATE_PRODUCT: return{
-                ...state,
-            } 
-            case UPDATE_PRODUCT: return{
-                ...state,
-            }
             case GET_ALL_BRANDS: return{
                 ...state,
                 brands:action.payload,
@@ -59,6 +53,12 @@ import {
             case GET_USER_BY_ID: return{
                 ...state,
                 userDetail:action.payload
+            }
+            case CREATE_PRODUCT: return{
+                ...state,
+            } 
+            case UPDATE_PRODUCT: return{
+                ...state,
             }
             case USER_REGISTER: return {
                 ...state

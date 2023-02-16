@@ -12,7 +12,7 @@ export const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProducts());
-  });
+  },[dispatch]);
   const products = useSelector((state) => state.products);
   return (
     <div className="HomeContainer">
