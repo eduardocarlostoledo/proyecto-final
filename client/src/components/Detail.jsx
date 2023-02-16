@@ -1,7 +1,7 @@
 import '../styles/Detail.css';
 import {React,useEffect} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import {getProductDetail,getAllBrands,getAllTypes } from '../redux/actions/ProductActions';
+import {getProductDetail,getAllBrands,getAllTypes } from '../redux/ProductActions';
 import {Link, useParams} from 'react-router-dom'
 
 export const Detail = () => {
@@ -13,10 +13,10 @@ export const Detail = () => {
     useEffect(()=>{dispatch(getAllTypes())},[]);
 
     const detail= useSelector(state=>state.productDetail)
-    const brand= useSelector((state)=>{return state.brands.find(b=>b.id===detail.brandId)})
-    const type= useSelector(state=>state.types.find(t=>t.id===detail.typeId));
+    const brand= useSelector((state)=>{return state.brands.find(b=>b.id===1)})
+    const type= useSelector(state=>state.types.find(t=>t.id===1));
 
-    
+
     return(
         <div className="DetailContainer">
             <h1>{name}</h1>

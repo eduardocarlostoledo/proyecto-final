@@ -20,7 +20,7 @@ const getUserId = async (userId) => {
     }
   };
 
-const postUser = async (user) => {
+  const postUser = async (user) => {
     const { name, lastname, email, image, password, phonenumber, country, city, address } = user
 
 if (!name || !lastname || !email || !image || !password || !phonenumber || !country || !city || !address)  throw Error('User data missing')

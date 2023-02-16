@@ -1,17 +1,18 @@
 const { Router } = require('express');
-const {putUser,postUser, getUsers, getUserId } = require("../controllers/usersController")
+const {putUser,postUser , getUsers, getUserId } = require("../controllers/usersController")
 const userRouter = Router()
 
 
 userRouter.post("/register", async (req, res) => {
-    try {
-        const user =await postUser(req.body);         
-        res.status(200).json({data: user, message:"Usuario Creado"})
-    } catch (error) {
-        res.status(400).json(error.message)
-    } 
- })
- userRouter.put("/:id", async (req, res) => {
+  try {
+      const user =await postUser(req.body);         
+      res.status(200).json({data: user, message:"Usuario Creado"})
+  } catch (error) {
+      res.status(400).json(error.message)
+  } 
+})
+
+userRouter.put("/:id", async (req, res) => {
   const {id}=req.params;
   try {
     const user =await putUser(req.body,id)
@@ -21,7 +22,7 @@ userRouter.post("/register", async (req, res) => {
   }
  })
 
- userRouter.get("/", async (req,res) => {
+  userRouter.get("/", async (req,res) => {
     try {
         const users = await getUsers();         
         res.status(200).json({data: users,message: "Listado de usuarios"})
