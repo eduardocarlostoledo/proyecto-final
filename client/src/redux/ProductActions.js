@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 import {getAllProducts, getProductsById, postProduct, getTypeProducts, getTrademarkProducts} from './ProductSlice';
 
 export const getProducts = () => (dispatch) => {
@@ -7,13 +8,13 @@ export const getProducts = () => (dispatch) => {
     .then((r) => dispatch(getAllProducts(r.data.results)))
     .catch((e) => console.log(e))
 }
-export const getProdById = (id) => (dispatch) => {
-    axios(`http://localhost:3001/products/${id}`)
+export const getProdById = (name) => (dispatch) => {
+    axios(`http://localhost:3001/products/params/${name}`)
     .then((r) => dispatch(getProductsById(r.data)))
     .catch((e) => console.log(e))
 }
 export const postProd = () => (dispatch) => {
-    axios('http://localhost:3001/')
+    axios('http://localhost:3001/products')
     .then((r) => dispatch(postProduct(r.data)))
     .catch((e) => console.log(e))
 }

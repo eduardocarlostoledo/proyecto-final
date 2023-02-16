@@ -9,13 +9,13 @@ export const UserSlice = createSlice({
 
     reducers: {
         getUsers: (state, action) => {
-            return { ...state, users: action.payload,}
+            state.users = action.payload
         },
         getUsersId: (state, action) => {
-            return { ...state, detailUsers: action.payload,}
+            state.detailUsers = action.payload
         },
         putUser: (state, action) => {
-            return { ...state, users: action.payload,}
+            state.users = action.payload
         },
         
     }

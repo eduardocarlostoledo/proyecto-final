@@ -29,6 +29,7 @@ export default function CreateProduct() {
   };
  
 return (
+  
     <div className="FormDiv">
         <h1>Form</h1>
       <form onSubmit={handleSubmit}>
