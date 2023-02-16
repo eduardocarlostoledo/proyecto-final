@@ -1,4 +1,5 @@
 const {User} = require('../db')
+const { encrypt, compare } = require('../helpers/bcrypt');
 
 const getUsers = async () => {
     try {
@@ -34,6 +35,51 @@ else {
 }
 }
 
+
+ const postUsers = async (req, res) => {
+  console.log("hola");
+  try {
+    const {name, lastname, email, password, } = req.body;
+    if (!name ||!lastname || !password || !email)
+      return res.json({ msg: 'Missing required fields' });
+    const userBD = await User.findOne({ where: { email : `${email}`} });
+    if (userBD) return res.json({ msg: 'The email already exists' });
+
+    const passwordHash = await encrypt(password);
+    await User.create({
+      name: name,
+      lastname: lastname,
+      password: passwordHash,
+      email: email.toLowerCase(),
+    });
+    return res.json({ msg: `User create succesfully` });
+  } catch (error) {
+    return res.json({ msg: `Error 404 - ${error}` });
+  }
+};
+
+ const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email : `${email}`} });
+    if (!user) return res.json({ msg: 'User not found' });
+
+    const checkPassword = await compare(password, user.password);
+
+    if (checkPassword) {
+      res.status(200).send({
+        data: user,
+      });
+    }
+    if (!checkPassword) {
+      return res.json({ msg: 'Invalid password' });
+    }
+  } catch (error) {
+    return res.json({ msg: `Error 404 - ${error}` });
+  }
+};
+
+
 module.exports = {
-    putUser, getUsers, getUserId
+    putUser, getUsers, getUserId, loginUser, postUsers
 }
