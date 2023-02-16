@@ -19,7 +19,7 @@ export const getUserById = (id) => async (dispatch) => {
 };
 
 export const userRegister =  (payload)=> async()=>{
-  return await axios.post("/users",payload)
+  return await axios.post("/users/register",payload)
 };
 export const updateUser =(payload)=> async()=>{
     return await axios.put("/users",payload)
