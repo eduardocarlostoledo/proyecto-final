@@ -16,8 +16,8 @@
                         "buttons compra compra";
     grid-template-columns: 55px;
     grid-template-rows: 70%, 20px, 20px, 30%;
-    width: 19vw;
-    height: 53vh;
+    width: 300px;
+    height: 400px;
     font-family: 'DM Sans', sans-serif;
     margin-top: 5%;
 }
@@ -39,6 +39,9 @@
 .contenedor_card  img{
     width: 100%;
     transition: 1s; 
+}
+.NameProduct{
+    font-size: 18px;
 }
 .card_contenedor_img{
     overflow: hidden;

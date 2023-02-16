@@ -3,11 +3,25 @@ import '../styles/Home.css';
 import asus from '../images/asusMonitor.jpg'
 import Ryzen from '../images/Ryzen7mil.jpg'
 import samsung from '../images/samsungMonitores.jpg'
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getAllProducts } from '../redux/actions/ProductActions';
+import { useEffect } from 'react';
 
 
 
 /** Coloque un diseño de Boostrap para las Imagenes */
 export const Home = () => {
+
+    const dispatch=useDispatch()
+    
+    const products=useSelector(state=>state.products)
+
+    useEffect(()=>{
+        dispatch(getAllProducts())
+    },[dispatch]);
+    
+
     return(
         <div className="HomeContainer">
             <div className='ContainerImages'>
@@ -35,8 +49,16 @@ export const Home = () => {
                 </div>
             </div>         
             <div className="CardContainer">
-                <Card/>
+                {products?.map((p) => (
+                    <Card
+                        id={p.id}
+                        name={p.name}
+                        price={p.price}
+                        image={p.image}
+                    />))}
             </div>
         </div>
     )
 }
+
+

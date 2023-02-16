@@ -4,8 +4,18 @@ import Cooler from '../images/Cooler.png'
 import Samsung from '../images/Samsung.png'
 import intel from '../images/intel.png'
 import nvidia from '../images/nvidia.png'
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getAllProducts } from "../redux/actions/ProductActions";
 
 export const Products = () => {
+  const dispatch=useDispatch()
+    useEffect(()=>{
+      dispatch(getAllProducts())
+    },[dispatch]);
+    const products=useSelector(state=>state.products)
+
   return (
     <div className="DivProducts">
       <div className="Products">
@@ -32,7 +42,15 @@ export const Products = () => {
               <h2>Filters</h2>
             </div>
           
-          <Card/>
+            <div className="CardContainer">
+                {products?.map((p) => (
+                    <Card
+                        id={p.id}
+                        name={p.name}
+                        price={p.price}
+                        image={p.image}
+                    />))}
+            </div>
         </div>
       </div>
     </div>

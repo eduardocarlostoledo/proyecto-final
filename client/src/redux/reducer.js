@@ -24,48 +24,54 @@ import {
         userDetail:{}
     }
     
-    const rootReducer=(state=initialState,action)=>{
-        switch(action.type){
-            case GET_ALL_PRODUCTS: return{
-                ...state,
-                products: action.payload,
-            }
-            case GET_ALL_PRODUCTS_NAME: return{
-                ...state,
-                products: action.payload,
-            }
-            case GET_PRODUCT_DETAIL: return {
-                ...state,
-                productDetail:action.payload
-            }
-            case CREATE_PRODUCT: return{
-                ...state,
-            } 
-            case UPDATE_PRODUCT: return{
-                ...state,
-            }
-            case GET_ALL_BRANDS: return{
-                ...state,
-                brands:action.payload,
-            }
-            case GET_ALL_TYPES: return {
-                ...state,
-                types:action.payload
-            }
-            case GET_ALL_USERS: return{
-                ...state,
-                users:action.payload
-            }
-            case GET_USER_BY_ID: return{
-                ...state,
-                userDetail:action.payload
-            }
-            case USER_REGISTER: return {
-                ...state
-            }
-            case UPDATE_USER: return {
-                ...state
-            }
+    const rootReducer = (state=initialState,action) => {
+
+        switch(action.type) {
+
+            case GET_ALL_PRODUCTS: 
+                
+                return{ ...state, products: action.payload, }
+
+            case GET_ALL_PRODUCTS_NAME: 
+                
+                return{ ...state, products: action.payload, }
+
+            case GET_PRODUCT_DETAIL: 
+            
+                return { ...state, productDetail:action.payload }
+
+            case CREATE_PRODUCT: 
+            
+                return { ...state, } 
+
+            case UPDATE_PRODUCT: 
+            
+                return{ ...state, }
+
+            case GET_ALL_BRANDS: 
+            
+                return{ ...state, brands:action.payload, }
+
+            case GET_ALL_TYPES: 
+            
+                return { ...state, types:action.payload }
+
+            case GET_ALL_USERS: 
+            
+                return{ ...state, users:action.payload }
+
+            case GET_USER_BY_ID: 
+            
+                return{ ...state, userDetail:action.payload }
+
+            case USER_REGISTER: 
+            
+                return { ...state }
+
+            case UPDATE_USER: 
+            
+                return { ...state }
+                
             default: return {...state}
         }
     }
