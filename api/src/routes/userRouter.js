@@ -12,7 +12,7 @@ userRouter.put("/register", (req, res) => {
     } 
  })
 
- userRouter.get("/", (req,res) => {
+ userRouter.get("/users", (req,res) => {
     try {
         const users = getUsers();         
         res.status(200).json(users, "Listado de usuarios")
@@ -21,7 +21,7 @@ userRouter.put("/register", (req, res) => {
     } 
  })
 
- userRouter.get("/:id", async (req, res) => {
+ userRouter.get("/users/:id", async (req, res) => {
     const userId = req.params.id;
     try {
       const result = await getUserId(userId);
