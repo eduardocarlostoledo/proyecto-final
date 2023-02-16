@@ -26,7 +26,7 @@ export const getAllProductsName =(name)=>async (dispatch)=>{
 }
 
 export const getProductDetail = (name) => async (dispatch) => {
-  return await axios.get(`products/${name}`).then(r=>
+  return await axios.get(`products/params/${name}`).then(r=>
     dispatch({type: GET_PRODUCT_DETAIL, payload:{...r.data.data[0]}}))
 };
 
@@ -35,7 +35,7 @@ export const createProduct =  (payload)=> async()=>{
 };
 
 export const updateProduct= (payload)=> async()=>{
-    return await axios.put("/products",payload)
+    return await axios.put("/products/:id",payload)
 };
 
 export const getAllBrands = () => async (dispatch) => {

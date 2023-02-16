@@ -22,6 +22,6 @@ export const userRegister =  (payload)=> async()=>{
   return await axios.post("/users/register",payload)
 };
 export const updateUser =(payload)=> async()=>{
-    return await axios.put("/users",payload)
+    return await axios.put("/users/:id",payload)
 };
 
