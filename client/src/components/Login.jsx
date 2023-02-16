@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import styles from "./Login.module.css";
+import styles from "../styles/Login.module.css";
 import { Link } from "react-router-dom"
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';

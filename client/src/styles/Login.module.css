@@ -2,11 +2,12 @@
     background-color: rgba(255, 255, 255, 0.945);
     margin-top: 30px;
     width: 490px;
-    height: 470px;
+    height: 450px;
     padding: 25px;
     margin: 15px;
     box-shadow: 15px 15px 8px rgba(155, 147, 147, 0.75);
     margin-top: 100px;
+    border-radius: 8px;
 }
 
 .ContainerAllForm { 
@@ -63,20 +64,17 @@
 }
 
 .down {
-    margin-top: 10px;
+    margin-top: 15px;
     text-align: center;
 }
 
-.inputs:focus {
-    border-color: rgb(0, 0, 0);
-    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
+.icon { 
+    margin-right: 5px;
+    margin-bottom: 7px;
+    font-size: 25px;
 }
-.name:focus {
-    border-color: rgb(0, 0, 0);
-    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
 
-}
-.lastname:focus {
+.inputs:focus {
     border-color: rgb(0, 0, 0);
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
 }

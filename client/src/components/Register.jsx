@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import styles from "./Register.module.css";
+import styles from "../styles/Register.module.css";
 import { Link } from 'react-router-dom';
 
 
@@ -49,6 +49,9 @@ function validate(input) {
     if (input.password.length < 5) {
         errors.password = "Min 5 caracteres";
     }
+    if (input.passwordConfirm !== input.password) {
+        errors.passwordConfirm = "passwords must match";
+    }
     if (input.email && !regexEmail.test(input.email)) {
         errors.email = "insert email valid";
     }
@@ -66,6 +69,7 @@ export const Register = () => {
         lastname: "",
         email: "",
         password: "",
+        passwordConfirm: "",
     });
 
 
@@ -113,6 +117,12 @@ export const Register = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control name='password' value={input.password} onChange={e => handleChange(e)} className={styles.inputs} type="password" placeholder="Password" />
                     {(errors.password && input.password.length > 0 ) && (<p className={styles.spanError}>{errors.password}</p>)}
+                </Form.Group>
+
+                <Form.Group className={styles.pack} controlId="formBasicPasswordConfirm">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control name='passwordConfirm' value={input.passwordConfirm} onChange={e => handleChange(e)} className={styles.inputs} type="password" placeholder="Password" />
+                    {(errors.passwordConfirm && input.passwordConfirm.length > 0 ) && (<p className={styles.spanError}>{errors.passwordConfirm}</p>)}
                 </Form.Group>
 
 
