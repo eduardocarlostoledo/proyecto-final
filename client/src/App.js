@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route } from "react-router-dom";
-
+import axios from "axios";
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
@@ -10,16 +10,17 @@ import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
 import CreateProduct from "./components/CreateProduct";
 import { Login } from "./components/Login";
+axios.defaults.baseURL='http://localhost:3001/';
 
 function App() {
   return (
     <div className="App">
-      <NavBar></NavBar>
+      <NavBar />
       <Route exact path="/" component={Home} />
 
       <Route path="/Products" component={Products} />
 
-      <Route path="/Detail" component={Detail} />
+      <Route path="/Products/:name" component={Detail} />
 
       <Route path="/BuildPc" component={BuildPc} /> 
 

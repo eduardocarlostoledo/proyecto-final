@@ -2,18 +2,17 @@ import React from "react";
 import Json from "./Productos_PF.json";
 import "../styles/Card.css";
 
-export default function Card() {
+export default function Card ({name,price,image}) {
   return (
     <div className="DivAllCards">
-      {Json.map((prod) => (
         <div class="contenedor_card">
           <div class="card_contenedor_img">
-            <img src={prod.image} alt="" />
+            <img src={image} alt="" />
           </div>
           <p class="card_p_nombre">
-            {prod.name}
+            {name}
           </p>
-          <strong class="card_strong_precio"> $ {prod.price}</strong>
+          <strong class="card_strong_precio"> $ {price}</strong>
           <div class="card_contenedor_buttons">
             <button class="card_button_sumar">+</button>
             <p class="card_p_cantidad">1</p>
@@ -21,7 +20,6 @@ export default function Card() {
           </div>
           <button class="card_button_comprar">comprar</button>
         </div>
-      ))}
     </div>
   );
 }

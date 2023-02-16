@@ -62,7 +62,7 @@ productRouter.get("/", async (req, res) => {
 
 //Ruta GET de productos por Name, busca el producto con un nombre exactamente igual al que recibe por parametro. (Ruta para el detail)
 
-  productRouter.get("/params/:name", async (req, res) => {
+  productRouter.get("/:name", async (req, res) => {
     try {
       const result = await getProductName(req.params.name);
       result.length > 0 ? res.status(200).json({ data: result, message: "Producto solicitado" }) : res.status(404).json({ error: "Producto no encontrado" });
