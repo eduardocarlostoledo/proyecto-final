@@ -23,8 +23,6 @@ function App() {
 
       <Route path="/BuildPc" component={BuildPc} /> 
 
-      <Route path="/Login" component={Login} />
-
       <Route path="/Register" component={Register} />
 
       <Route path="/Login" component={Login} />
