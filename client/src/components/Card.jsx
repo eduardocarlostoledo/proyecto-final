@@ -2,6 +2,7 @@ import React from "react";
 import Json from "./Productos_PF.json";
 import "../styles/Card.css";
 
+
 export default function Card({ name, price, image }) {
   return (
     <div className="DivAllCards">
@@ -22,6 +23,7 @@ export default function Card({ name, price, image }) {
         </div>
         <button class="card_button_comprar">comprar</button>
       </div>
+
     </div>
   );
 }
