@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postProd  } from "../redux/actions/ProductActions";
+import { createProduct  } from "../../src/redux/ProductActions";
 import '../styles/CreateProduct.css';
 
 export default function CreateProduct() {
@@ -25,7 +25,7 @@ export default function CreateProduct() {
   //falta validar si existe
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postProd(product));
+    dispatch(createProduct(product));
   };
  
 return (
