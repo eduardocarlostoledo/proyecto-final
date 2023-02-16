@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-export const ProductSlice = createSlice({
+const ProductSlice = createSlice({
     name: 'productos',
     initialState: {
         productos: [],
@@ -25,5 +25,5 @@ export const ProductSlice = createSlice({
         }
     }
 })
-
+export const {getAllProducts, getProductsById, postProduct, getTypeProducts, getTrademarkProducts} = ProductSlice.actions;
 export default ProductSlice.reducer
