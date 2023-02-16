@@ -125,27 +125,6 @@ const putProduct = async (product,id) => {
 }
 
 
-// PUT  de productos, edita un producto ya creado
-
-const putProduct = async (product,id) => {
-  const { name, price,description,image,brand,type} = product;
-
-  if (!name || !price || !brand || !type)  throw Error('Product data missing')
-  else {
-    const updatedProduct = await Product.update({name,price,image,description},{where:{id}});
-
-    await Brand.findOrCreate({where:{name:brand}})
-    await Type.findOrCreate({where:{name:type}})
-
-    const marca=await Brand.findOne({where:{name:brand}})
-    const tipo=await Type.findOne({where:{name:type}})
-
-    marca.addProduct(updatedProduct);
-    tipo.addProduct(updatedProduct);
-
-    return "Product updated";
-  }
-}
 
 
 module.exports = {

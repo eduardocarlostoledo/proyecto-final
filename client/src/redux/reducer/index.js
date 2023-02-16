@@ -5,15 +5,15 @@ GET_PRODUCT_DETAIL,
 CREATE_PRODUCT,
 UPDATE_PRODUCT,
 GET_ALL_BRANDS,
-GET_ALL_TYPES
-} from "../actions/ProductActions";
+GET_ALL_TYPES,
+                } from '../actions/ProductActions'
 
 import{
     GET_ALL_USERS,
     GET_USER_BY_ID,
     USER_REGISTER,
-    UPDATE_USER
-} from "../actions/UsersActions";
+    UPDATE_USER,
+                    } from "../actions/UsersActions";
 
 const initialState= {
     products: [],

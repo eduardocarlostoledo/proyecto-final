@@ -6,14 +6,14 @@ import {
     UPDATE_PRODUCT,
     GET_ALL_BRANDS,
     GET_ALL_TYPES
-    } from "./ProductActions";
+    } from './actions/ProductActions'
     
     import{
         GET_ALL_USERS,
         GET_USER_BY_ID,
         USER_REGISTER,
         UPDATE_USER
-    } from "./UsersActions";
+    } from './actions/UsersActions';
     
     const initialState= {
         products: [],
