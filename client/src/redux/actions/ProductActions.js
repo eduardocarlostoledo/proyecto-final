@@ -1,12 +1,15 @@
 import axios from 'axios';
+import {getAllProducts, getProductsById, postProduct, getTypeProducts, getTrademarkProducts} from '../slices/ProductSlice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import {getAllProducts, getProductsById, postProduct, getTypeProducts, getTrademarkProducts} from './ProductSlice';
+
 
 export const getProducts = () => (dispatch) => {
     axios('http://localhost:3001/products')
-    .then((r) => dispatch(getAllProducts(r.data.results)))
+    .then((r) => dispatch(getAllProducts(r.data.data)))
     .catch((e) => console.log(e))
 }
+
 export const getProdById = (name) => (dispatch) => {
     axios(`http://localhost:3001/products/params/${name}`)
     .then((r) => dispatch(getProductsById(r.data)))
@@ -28,4 +31,3 @@ export const getTrademarkProduct = () => (dispatch) => {
     .then((r) => dispatch(getTrademarkProducts(r.data)))
     .catch((e) => console.log(e))
 }
-
