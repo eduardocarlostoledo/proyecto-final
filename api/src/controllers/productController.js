@@ -82,24 +82,29 @@ const postProduct = async (product) => {
   const { name, price, type, brand, image, description } = product;
   if (!name || !price || !brand || !type) throw Error("Mandatory data missing");
   else {
-    const newProduct = await Product.create({
-      name,
-      price,
-      description,
-      image,
-    });
-
-    Brand.findOrCreate({where:{name:brand}})
-
-    Type.findOrCreate({where:{name:type}})
-
-    const marca=await Brand.findOne({where:{name:brand}})
-    const tipo=await Type.findOne({where:{name:type}})
-
-    marca.addProduct(newProduct);
-    tipo.addProduct(newProduct);
-
-    return "succesfully!";
+    try {
+      const newProduct = await Product.create({
+        name,
+        price,
+        description,
+        image,
+      });
+  
+      Brand.findOrCreate({where:{name:brand}})
+  
+      Type.findOrCreate({where:{name:type}})
+  
+      const marca=await Brand.findOne({where:{name:brand}})
+      const tipo=await Type.findOne({where:{name:type}})
+  
+      marca.addProduct(newProduct);
+      tipo.addProduct(newProduct);
+  
+      return "succesfully!";
+    } catch (error) {
+      throw new Error("Error: " + error.message);
+    }
+    
   }
 };
 // PUT  de productos, edita un producto ya creado
