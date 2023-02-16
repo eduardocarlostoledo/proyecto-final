@@ -51,7 +51,7 @@ export const getAllProducts = () => async (dispatch) => {
 
 export const getAllProductsName =(name)=>async (dispatch)=>{
   try {
-    return await axios(`/products?name=${name}`).then((r)=>
+    return await axios(`/products/params/${name}`).then((r)=>
       dispatch({type:GET_ALL_PRODUCTS_NAME, payload: r.data}))
   } catch (error) {
     console.log(error)
@@ -59,7 +59,7 @@ export const getAllProductsName =(name)=>async (dispatch)=>{
 }
 
 export const getProductDetail = (name) => async (dispatch) => {
-  return await axios.get(`products/${name}`).then(r=>
+  return await axios.get(`/products/params/${name}`).then(r=>
     dispatch({type: GET_PRODUCT_DETAIL, payload:{...r.data.data[0]}}))
 };
 
