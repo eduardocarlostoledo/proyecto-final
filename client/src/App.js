@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route } from "react-router-dom";
-
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
@@ -10,6 +9,8 @@ import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
 import CreateProduct from "./components/CreateProduct";
 import { Login } from "./components/Login";
+import axios from "axios";
+axios.defaults.baseURL='http://localhost:3001/';
 
 function App() {
   return (
