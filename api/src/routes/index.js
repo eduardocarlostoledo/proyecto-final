@@ -14,6 +14,7 @@ router.use('/products', productRouter)
 router.use('/register', userRouter)
 
 
+
 // router.use('/users', userRouter)
 
 module.exports = router;
