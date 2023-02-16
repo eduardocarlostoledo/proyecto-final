@@ -10,7 +10,6 @@ import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
 import { Login } from "./components/Login"
 import CreateProduct from "./components/CreateProduct";
-import { Login } from "./components/Login";
 
 function App() {
   return (
@@ -28,7 +27,6 @@ function App() {
 
       <Route path="/Register" component={Register} />
 
-      <Route path="/Login" component={Login} />
 
       <Route path="/CreateProduct" component={CreateProduct} />
 
