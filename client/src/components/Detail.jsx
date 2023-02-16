@@ -13,8 +13,8 @@ export const Detail = () => {
     useEffect(()=>{dispatch(getAllTypes())},[]);
 
     const detail= useSelector(state=>state.productDetail)
-    const brand= useSelector((state)=>{return state.brands.find(b=>b.id===1)})
-    const type= useSelector(state=>state.types.find(t=>t.id===1));
+    const brand= useSelector((state)=>{return state.brands.find(b=>b.id===detail.brandId)})
+    const type= useSelector(state=>state.types.find(t=>t.id===detail.typeId));
 
     
     return(
