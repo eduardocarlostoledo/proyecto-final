@@ -48,7 +48,7 @@ export const Home = () => {
                     </button>
                 </div>
             </div>         
-            <div className="CardContainer">
+            <div className='CardContainer'>
                 {products?.map((p) => (
                     <Card
                         id={p.id}

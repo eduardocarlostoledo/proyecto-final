@@ -19,27 +19,26 @@ export const Products = () => {
   return (
     <div className="DivProducts">
       <div className="Products">
-        <h1>Products</h1>
-        <div className="Marcas">
-            <div className="MarcaContainer">
-              <img src={Cooler} width='100px' alt="" />
-            </div>
-            <div className="MarcaContainer">
-              <img src={Samsung} width='100px' alt="" />
-            </div >
-            <div className="MarcaContainer">
-              <img src={intel} width='50px' alt="" />
-            </div>
-            <div className="MarcaContainer">
-              <img src={nvidia} width='50px' alt="" />
-            </div>
-            <div className="MarcaContainer">
-              <img src={Cooler} width='100px' alt="" />
-            </div>
-          </div>
         <div className="DivCardsFilters">
             <div className="DivFilter">
-              <h2>Filters</h2>
+            <h2>Filters</h2>
+              <div className="Marcas">
+                  <div className="MarcaContainer">
+                    <img src={Cooler} width='50px' alt="" />
+                  </div>
+                  <div className="MarcaContainer">
+                    <img src={Samsung} width='50px' alt="" />
+                  </div >
+                  <div className="MarcaContainer">
+                    <img src={intel} width='30px' alt="" />
+                  </div>
+                  <div className="MarcaContainer">
+                    <img src={nvidia} width='30px' alt="" />
+                  </div>
+                  <div className="MarcaContainer">
+                    <img src={Cooler} width='50px' alt="" />
+                  </div>
+                </div>
             </div>
           
             <div className="CardContainer">
