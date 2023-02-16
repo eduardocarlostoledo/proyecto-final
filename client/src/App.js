@@ -8,6 +8,7 @@ import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
 import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
+import {Login}
 import CreateProduct from "./components/CreateProduct";
 
 function App() {
@@ -21,8 +22,6 @@ function App() {
       <Route path="/Detail" component={Detail} />
 
       <Route path="/BuildPc" component={BuildPc} /> 
-
-      <Route path="/Login" component={Login} />
 
       <Route path="/Register" component={Register} />
 
