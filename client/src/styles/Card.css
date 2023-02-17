@@ -28,6 +28,7 @@
 .CardsContainer img{
     width: 200px;
     margin-top: 10px;
+    transition: all .5s;
 }
 
 .CardsContainer:hover img{
