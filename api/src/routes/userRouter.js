@@ -1,5 +1,7 @@
 const { Router } = require('express');
-const {putUser,postUser , getUsers, getUserId } = require("../controllers/usersController")
+
+const { putUser, getUsers, getUserId, loginUser, postUsers } = require("../controllers/usersController")
+
 const userRouter = Router()
 
 
@@ -44,6 +46,10 @@ userRouter.put("/:id", async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   });
+
+
+  userRouter.post('/register', postUsers)
+  userRouter.post('/login', loginUser)
 
 
 module.exports = {userRouter}
