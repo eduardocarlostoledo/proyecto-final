@@ -8,14 +8,16 @@ import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
 import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
-import CreateProduct from "./components/CreateProduct";
 import { Login } from "./components/Login";
+import CreateProduct from "./components/CreateProduct";
 axios.defaults.baseURL='http://localhost:3001/';
+
 
 function App() {
   return (
     <div className="App">
       <NavBar />
+    
       <Route exact path="/" component={Home} />
 
       <Route path="/Products" component={Products} />
@@ -25,8 +27,6 @@ function App() {
       <Route path="/BuildPc" component={BuildPc} /> 
 
       <Route path="/Register" component={Register} />
-
-      <Route path="/Login" component={Login} />
 
       <Route path="/CreateProduct" component={CreateProduct} />
 
