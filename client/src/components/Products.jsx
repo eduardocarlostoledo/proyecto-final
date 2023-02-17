@@ -26,18 +26,20 @@ import { useSelector } from "react-redux";
 import { getAllProducts } from "../redux/actions/ProductActions";
 
 export const Products = () => {
-  const dispatch=useDispatch()
-    useEffect(()=>{
+
+    const dispatch = useDispatch()
+    const products = useSelector((state) => state.products)
+    
+    useEffect(() => {
       dispatch(getAllProducts())
     },[dispatch]);
-    const products=useSelector(state=>state.products)
 
   return (
     <div className="DivProducts">
       <div className="Products">
         <div className="DivCardsFilters">
             <div className="DivFilter">
-            <h2>Filters</h2>
+              <h2>Filters</h2>
               <div className="Marcas">
                   <div className="MarcaContainer">
                     <img src={Cooler} width='50px' alt="" />
@@ -99,7 +101,7 @@ export const Products = () => {
                   <div className="MarcaContainer">
                     <img src={AudioT} width='40px' alt="" />
                   </div>
-                </div>
+              </div>
             </div>
           
             <div className="CardContainer">

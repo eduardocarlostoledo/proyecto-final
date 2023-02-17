@@ -10,6 +10,7 @@ export default function Card({name, image, price}) {
                 <img src={image} alt=""/>
             </div>
             <div className="Precio">
+                <p><hr /></p>
                 <strong>${price}</strong>
             </div>
             <div className="ContainerButtons">
