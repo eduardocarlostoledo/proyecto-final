@@ -18,3 +18,7 @@
 .ContainerImages{
     margin-top: 80px;
 }
+
+.ContainerImages {
+    width: 100%;
+}
