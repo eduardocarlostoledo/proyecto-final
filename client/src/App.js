@@ -8,9 +8,8 @@ import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
 import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
-import { Login } from "./components/Login"
-import CreateProduct from "./components/CreateProduct";
 import { Login } from "./components/Login";
+import CreateProduct from "./components/CreateProduct";
 axios.defaults.baseURL='http://localhost:3001/';
 
 

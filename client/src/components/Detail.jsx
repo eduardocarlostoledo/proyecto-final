@@ -15,15 +15,8 @@ export const Detail = () => {
   useEffect(() => {
     dispatch(getProductDetail(Name));
   }, [dispatch]);
-  // useEffect(()=>{dispatch(getAllBrands())},[]);
-  // useEffect(()=>{dispatch(getAllTypes())},[]);
 
   const detail = useSelector((state) => state.productDetail);
-  console.log(detail);
-  const brand = useSelector((state) => {
-    return state.brands.find((b) => b.id === 1);
-  });
-  const type = useSelector((state) => state.types.find((t) => t.id === 1));
 
   return (
     <div className="DetailContainer">
@@ -44,8 +37,6 @@ export const Detail = () => {
         <h1>{Name}</h1>
         <p>{detail.description}</p>
         <h2>$ {detail.price}</h2>
-        {/* <h2>{brand.name}</h2>  */}
-        {/* <h2>{type.name}</h2>  */}
       </div>
     </div>
   );
