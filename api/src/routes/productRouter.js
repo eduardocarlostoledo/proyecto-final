@@ -38,7 +38,6 @@ productRouter.get("/types", async (req, res) => {
 productRouter.get("/brands", async (req, res) => {
   try {
       const products = await getBrandProducts();
-    // }
     res.status(200).json({ data: products, message: "Listado de productos por marca" });
   } catch (error) {
     res.status(400).json({ error: error.message });
