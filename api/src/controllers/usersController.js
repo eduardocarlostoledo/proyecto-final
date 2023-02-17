@@ -21,19 +21,19 @@ const getUserId = async (userId) => {
     }
   };
 
-  const postUser = async (user) => {
-    const { name, lastname, email, image, password, phonenumber, country, city, address } = user
+//   const postUser = async (user) => {
+//     const { name, lastname, email, image, password, phonenumber, country, city, address } = user
 
-if (!name || !lastname || !email || !image || !password || !phonenumber || !country || !city || !address)  throw Error('User data missing')
-else {
-    try {
-        const changeUser = await User.create({ name, lastname, email, image, password, phonenumber, country, city, address })
-        return changeUser
-    } catch (error) {
-        throw Error(error.message)
-    }
-}
-}
+// if (!name || !lastname || !email || !image || !password || !phonenumber || !country || !city || !address)  throw Error('User data missing')
+// else {
+//     try {
+//         const changeUser = await User.create({ name, lastname, email, image, password, phonenumber, country, city, address })
+//         return changeUser
+//     } catch (error) {
+//         throw Error(error.message)
+//     }
+// }
+// }
 const putUser = async (user, id) => {
   const { name, lastname, email, image, password, phonenumber, country, city, address } = user
 
@@ -95,5 +95,5 @@ else {
 
 
 module.exports = {
-    putUser, getUsers, getUserId, loginUser, postUsers
+    putUser, getUsers, getUserId, loginUser, postUsers, 
 }
