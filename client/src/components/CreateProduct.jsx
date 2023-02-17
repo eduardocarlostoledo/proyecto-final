@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createProduct  } from "../../src/redux/ProductActions";
+import { createProduct } from "../redux/actions/ProductActions";
 import '../styles/CreateProduct.css';
 
 export default function CreateProduct() {

@@ -113,7 +113,7 @@ const getProductName = async (product) => {
 
 const postProduct = async (product) => {
   const { name, price, type, brand, image, description } = product;
-  if (!name || !price || !brand || !type) throw Error("Mandatory data missing");
+  if (!name || !price || !type || !brand || !description) throw Error("Mandatory data missing");
   else {
     try {
       const newProduct = await Product.create({
@@ -121,50 +121,18 @@ const postProduct = async (product) => {
         price,
         description,
         image,
+        typeId: type,
+        brandId: brand,
       });
-  
-      Brand.findOrCreate({where:{name:brand}})
-  
-      Type.findOrCreate({where:{name:type}})
-  
-      const marca=await Brand.findOne({where:{name:brand}})
-      const tipo=await Type.findOne({where:{name:type}})
-  
-      marca.addProduct(newProduct);
-      tipo.addProduct(newProduct);
-  
-      return "succesfully!";
+
+      return newProduct;
     } catch (error) {
-      throw new Error("Error: " + error.message);
+      throw Error(error.message);
     }
-    
   }
 };
-// PUT  de productos, edita un producto ya creado
-
-const putProduct = async (product,id) => {
-  const { name, price,description,image,brand,type} = product;
-
-  if (!name || !price || !brand || !type)  throw Error('Product data missing')
-  else {
-    const updatedProduct = await Product.update({name,price,image,description},{where:{id}});
-
-    await Brand.findOrCreate({where:{name:brand}})
-    await Type.findOrCreate({where:{name:type}})
-
-    const marca=await Brand.findOne({where:{name:brand}})
-    const tipo=await Type.findOne({where:{name:type}})
-
-    marca.addProduct(updatedProduct);
-    tipo.addProduct(updatedProduct);
-
-    return "Product updated";
-  }
-}
-
 
 module.exports = {
-  putProduct,
   postProduct,
   getProducts,
   getProductName,

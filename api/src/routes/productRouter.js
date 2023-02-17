@@ -1,7 +1,5 @@
 const { Router } = require('express');
-const { 
-  putProduct,
-  postProduct,
+const { postProduct,
   getProducts,
   getProductName,
   getProductsByName,
@@ -69,17 +67,6 @@ productRouter.get("/", async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   });
-
-    //Ruta PUT de productos, para editar los productos, recibe un req.body como un POST y un id por params para editar el producto con ese id
-
-    productRouter.put("/:id", async (req, res) => {
-      try {
-        const product=await putProduct(req.body,req.params.id);
-        res.status(200).json(product)
-      } catch (error) {
-          res.status(400).json({error:error.message})
-      }
-    })
   
 
 module.exports = {productRouter}
