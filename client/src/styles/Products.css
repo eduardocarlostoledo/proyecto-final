@@ -18,7 +18,7 @@
     background-color: rgb(255, 255, 255);
     width: 50px;
     height: 50px;
-    border-radius: 30px;
+    border-radius: 15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -27,7 +27,7 @@
 }
 
 .MarcaContainer:hover{
-    background-color: #aa00ff;
+    background-color: #e7b8ff;
 }
 .DivCardsFilters {
     display: flex;
@@ -45,4 +45,5 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-transform: uppercase;
 }

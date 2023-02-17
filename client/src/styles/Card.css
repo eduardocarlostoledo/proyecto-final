@@ -20,14 +20,14 @@
     justify-content: space-between;
     gap: 40px;
     width: 300px;
-    height: 500px;
+    height: 350px;
     font-family: 'DM Sans', sans-serif;
     
 }
 
 .CardsContainer img{
-    width: 100px;
-    margin-top: 20px;
+    width: 200px;
+    margin-top: 10px;
 }
 
 .CardsContainer:hover img{
@@ -45,17 +45,15 @@
 
 .NameProduct{
     font-size: 16px;
+    margin-top: 50px;
 }
 
-.Description p{
-    font-size: 14px;
-    margin: 40px;
-    margin-top: -20px;
-}
+
 
 .Precio{
     font-size: 24px;
     margin-left: 40px;
+    transform: translateY(-40px);
 }
 
 .ContainerButtons{
@@ -65,6 +63,9 @@
     justify-content: space-around;
     gap: 40px;
     margin-left: 40px;
+    margin-top: -80px;
+    margin-bottom: 30px;
+    z-index: 2;
 }
 .CardButtons{
     display: flex;
@@ -93,7 +94,7 @@
     background-color: white;
     color: black;
     border: solid 1px violet;
-    
+    margin-top: -40px;
 }
 
 .ButtonComprar:hover{

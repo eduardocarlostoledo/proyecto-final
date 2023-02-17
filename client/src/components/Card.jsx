@@ -9,9 +9,8 @@ export default function Card({name, image, price}) {
                 <h1 className="NameProduct"><b>{name}</b></h1>
                 <img src={image} alt=""/>
             </div>
-            <div className="Description">
-                <p>descripcion corta Lorem ipsum dolor sit amet consectetur adint recusand</p>
-                <strong class="Precio">${price}</strong>
+            <div className="Precio">
+                <strong>${price}</strong>
             </div>
             <div className="ContainerButtons">
                 <div class="CardButtons">
