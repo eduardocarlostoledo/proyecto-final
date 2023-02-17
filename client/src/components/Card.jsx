@@ -6,8 +6,8 @@ export default function Card({name, image, price}) {
     return (
         <div class="CardsContainer">
             <div class="ContainerImage">
-                <h1 className="NameProduct"><b>{name}</b></h1>
                 <img src={image} alt=""/>
+                <h1 className="NameProduct"><b>{name}</b></h1>
             </div>
             <div className="Precio">
                 <p><hr /></p>

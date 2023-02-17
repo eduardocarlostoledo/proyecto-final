@@ -20,14 +20,15 @@
     justify-content: space-between;
     gap: 40px;
     width: 300px;
-    height: 400px;
+    height: 420px;
     font-family: 'DM Sans', sans-serif;
     
 }
 
 .CardsContainer img{
     width: 200px;
-    margin-top: 10px;
+    margin-top: 80px;
+    margin-bottom: 20px;
 }
 
 .CardsContainer:hover img{
@@ -45,7 +46,7 @@
 
 .NameProduct{
     font-size: 16px;
-    margin-top: 50px;
+    z-index: 2;
 }
 
 

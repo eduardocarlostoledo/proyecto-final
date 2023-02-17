@@ -24,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getAllProducts } from "../redux/actions/ProductActions";
+import { Filters } from "./Filters";
 
 export const Products = () => {
 
@@ -102,7 +103,7 @@ export const Products = () => {
                     <img src={AudioT} width='40px' alt="" />
                   </div>
               </div>
-              
+              <Filters/>
             </div>
           
             <div className="CardContainer">
