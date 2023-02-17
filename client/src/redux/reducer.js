@@ -66,7 +66,10 @@ import {
             case UPDATE_USER: return {
                 ...state
             }
-            default: return {...state}
+            default: 
+                return {
+                ...state
+            }
         }
     }
     
