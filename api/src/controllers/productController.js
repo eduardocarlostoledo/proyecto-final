@@ -8,7 +8,7 @@ const getTypeProducts = async() => {
   try {
     const addTypes = ["Cooler", "Power Supply", "Graphics Card","Processor", "SSD","HDD", "RAM", "Motherboard", "Mouse", "Headset", "Monitor", "PC Case", "Keyboard"]
     addTypes.map(async (t) => {
-      await Type.create({name: t}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
+      await Type.findOrCreate({where:{name: t}}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
     })
     const products = await Type.findAll();  
     return products;
@@ -24,7 +24,7 @@ const getBrandProducts = async() => {
   try {
     const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
     addBrand.map(async (b) => {
-      await Brand.create({name:b})
+      await Brand.findOrCreate({where:{name: b}})
     })
     const products = await Brand.findAll();
     return products;
@@ -38,13 +38,25 @@ const getBrandProducts = async() => {
 const getProductsByName = async (productName) => {
   try {
     const products = await Product.findAll({
+      include: [Type,Brand],
       where: {
         name: {
           [Op.iLike]: `%${productName}%`,
         },
       },
     });
-    return products;
+    const result = products.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+        image:p.image,
+        price:p.price,
+        description: p.description,
+        type: p.type.name,
+        brand: p.brand.name
+      }
+    })
+    return result;
   } catch (error) {
     throw new Error("Error retrieving product by Name: " + error.message);
   }
@@ -55,9 +67,19 @@ const getProductsByName = async (productName) => {
 
 const getProducts = async () => {
     try {
-      const allProducts = await Product.findAll();
-      console.log(allProducts)
-      return allProducts;
+      const allProducts = await Product.findAll({include: [Type,Brand]});
+      const result = allProducts.map((p) => {
+        return {
+          id: p.id,
+          name: p.name,
+          image:p.image,
+          price:p.price,
+          description: p.description,
+          type: p.type.name,
+          brand: p.brand.name
+        }
+      })
+      return result;
     } catch (error) {
       throw new Error("Error retrieving products: " + error.message);
     }
@@ -68,7 +90,18 @@ const getProducts = async () => {
 
 const getProductName = async (product) => {
   try {
-    const result = await Product.findAll({where:{name:product}});
+    const products = await Product.findAll({include: [Type,Brand],where:{name:product}});
+    const result = products.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+        image:p.image,
+        price:p.price,
+        description: p.description,
+        type: p.type.name,
+        brand: p.brand.name
+      }
+    })
     if (result) return result;
     throw new Error("Product not found with exact name: " + product);
   } catch (error) {
