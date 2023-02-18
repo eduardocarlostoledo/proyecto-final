@@ -27,3 +27,39 @@
     margin-left: 40px;
     margin-right: 40px;
 }
+
+.FooterContainer{
+    background-color: #7200ca;
+    margin-top: 60px;
+}
+
+.Footer{
+    width: 100%;
+    max-width: 120rem;
+    padding: 0 60px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.FooterContent{
+    margin-bottom: 20px;
+}
+
+.Description{
+    color: white;
+}
+
+.ContainerRedes{
+    display: flex;
+    flex-direction:row-reverse;
+    justify-content: space-between;
+    color: white;
+}
+
+.Redes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+    margin-left: 400px;
+}
