@@ -18,9 +18,27 @@ export const getUserById = (id) => async (dispatch) => {
     dispatch({type: GET_USER_BY_ID, payload:{...r.data.data}}))
 };
 
-export const userRegister =  (payload)=> async()=>{
-  return await axios.post("/users",payload)
+// export const userRegister =  (payload) => async()=>{ 
+//   return await axios.post("/users",payload)
+// };
+
+// export const updateUser =(payload)=> async()=>{
+//     return await axios.put("/users",payload)
+// };
+
+
+export function userRegister(payload) { 
+  return async function(dispatch){
+      const response = await axios.post(`http://localhost:3001/users/register/`,payload);
+      return response;
+  };
 };
-export const updateUser =(payload)=> async()=>{
-    return await axios.put("/users",payload)
+
+
+
+export function userLogin(payload) { 
+  return async function(dispatch){
+      const response = await axios.post(`http://localhost:3001/users/login/`,payload);
+      return response;
+  };
 };
