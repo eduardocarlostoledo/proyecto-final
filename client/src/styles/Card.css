@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Great+Vibes&family=Parisienne&display=swap');
 
 
@@ -7,7 +6,9 @@
     -webkit-box-shadow: 10px 10px 18px -14px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 18px -14px rgba(0,0,0,0.75);
     background-color: #fff;
-    margin-left: 5%;
+    margin-left: 3%;
+    padding-left: 20px;
+    padding-right: 40px;
     border-radius: 15px;
     display: grid;
     grid-template-areas: "img img img"
@@ -76,18 +77,137 @@ font-size: 1.8vh;
 /* margin-top: 25%; */
 
 }
+.card_button_sumar:hover, .card_button_restar:hover{
+    background-color: #e7b8ff;
+    border: 1px solid #e7b8ff;
+}
 
 .card_button_comprar{
-    width: 12vw;
-    height: 6vh;
+    width: 120px;
+    height: 40px;
     border-radius: 15px;
     border: none;
     grid-area: compra;
     margin-top: 0;
-    margin-left: 15%;
+    margin-left: 30%;
     margin-bottom: 10%;
+}
+
+.card_button_comprar:hover{
+    background-color: #e7b8ff;
+    color: rgb(53, 0, 53);
 }
 
 .DivAllCards {
     display: flex;
 }
+/* @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Great+Vibes&family=Parisienne&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    top: 0;
+}
+.CardsContainer{
+    margin-top: 100px;
+    padding-top: 20px;
+    width: 300px;
+    height: 400px;
+    box-shadow: 10px 10px 18px -14px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 10px 10px 18px -14px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 18px -14px rgba(0,0,0,0.75);
+    background-color: #fff;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 300px;
+    height: 420px;
+    font-family: 'DM Sans', sans-serif;
+    
+}
+
+.CardsContainer img{
+    width: 200px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    flex: 25%;
+}
+
+.CardsContainer:hover img{
+    transform: scale(1.2);
+}
+.ContainerImage{
+    width: 200px;
+    
+}
+
+.NameProduct{
+    font-size: 16px;
+    z-index: 2;
+}
+
+
+
+.Precio{
+    font-size: 24px;
+    margin-left: 40px;
+    transform: translateY(-40px);
+}
+
+.Precio p{
+    width: 200px;
+}
+
+.ContainerButtons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 40px;
+    margin-left: 40px;
+    margin-top: -80px;
+    margin-bottom: 30px;
+    z-index: 2;
+}
+.CardButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+.CardButtons button{
+    background-color: white;
+    border: none;
+}
+.CardButtons button:hover{
+    color: rgb(206, 4, 206);
+    border-radius: 40px;
+}
+.Cantidad{
+    font-size: 18px;
+}
+.ButtonComprar{
+    border-radius: 20px;
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    color: black;
+    border: solid 1px violet;
+    margin-top: -40px;
+}
+
+.ButtonComprar:hover{
+    background-color: blueviolet;
+    color: white;
+}
+ */

@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT
         },
         price: {
-            type: DataTypes.DOUBLE,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         description: {

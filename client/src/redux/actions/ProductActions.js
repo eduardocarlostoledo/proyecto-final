@@ -9,7 +9,7 @@ export const GET_ALL_TYPES= 'GET_ALL_TYPES';
 
 export const getAllProducts = () => async (dispatch) => {
     try {
-        return await axios('/products').then(r=>
+        return await axios('http://localhost:3001/products').then(r=>
             dispatch({type: GET_ALL_PRODUCTS, payload:r.data}))
     } catch (error) {
             console.log(error)
@@ -18,7 +18,8 @@ export const getAllProducts = () => async (dispatch) => {
 
 export const getAllProductsName =(name)=>async (dispatch)=>{
   try {
-    return await axios(`/products?name=${name}`).then((r)=>
+    return await axios(`http://localhost:3001/products?name=${name}`).then((r)=>
+
       dispatch({type:GET_ALL_PRODUCTS_NAME, payload: r.data}))
   } catch (error) {
     console.log(error)
@@ -26,21 +27,23 @@ export const getAllProductsName =(name)=>async (dispatch)=>{
 }
 
 export const getProductDetail = (name) => async (dispatch) => {
-  return await axios.get(`products/params/${name}`).then(r=>
+
+  return await axios.get(`http://localhost:3001/products/params/${name}`).then(r=>
+
     dispatch({type: GET_PRODUCT_DETAIL, payload:{...r.data.data[0]}}))
 };
 
 export const createProduct =  (payload)=> async()=>{
-  return await axios.post("/products",payload)
+  return await axios.post("http://localhost:3001/products",payload)
 };
 
 export const updateProduct= (payload)=> async()=>{
-    return await axios.put("/products/:id",payload)
+    return await axios.put("http://localhost:3001/products/:id",payload)
 };
 
 export const getAllBrands = () => async (dispatch) => {
     try {
-        return await axios('/products/brands').then(r=>
+        return await axios('http://localhost:3001/products/brands').then(r=>
             dispatch({type: GET_ALL_BRANDS, payload:r.data.data}))
     } catch (error) {
             console.log(error)
@@ -49,14 +52,9 @@ export const getAllBrands = () => async (dispatch) => {
 
 export const getAllTypes = () => async (dispatch) => {
     try {
-        return await axios('/products/types').then(r=>
+        return await axios('http://localhost:3001/products/types').then(r=>
             dispatch({type: GET_ALL_TYPES, payload:r.data.data}))
     } catch (error) {
             console.log(error)
     }
 }
-
-
-
-
-

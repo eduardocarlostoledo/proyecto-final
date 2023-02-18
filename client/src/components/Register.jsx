@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-
 import styles from "../styles/Register.module.css";
 import { Link } from 'react-router-dom';
-
+import { useDispatch } from "react-redux";
+import { userRegister } from '../redux/actions/UsersActions';
 
 
 
@@ -12,8 +12,8 @@ function validate(input) {
 
     let errors = {};
     const regexName = /^([a-zA-Z ]+)$/i;
-    const regexNumber = /^[0-9]*$/i;
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    // const regexNumber = /^[0-9]*$/i;
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
 
     if (input.name && !regexName.test(input.name)) {
       errors.name = "can't include special characters or numbers";
@@ -64,6 +64,7 @@ function validate(input) {
 
 
 export const Register = () => {
+    const dispatch = useDispatch();
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
         name: "",
@@ -84,9 +85,25 @@ export const Register = () => {
             [e.target.name]: e.target.value
         }));
     };
+
+
+    function handleSubmit(e) {
+        e.preventDefault();
+            dispatch(userRegister(input));
+            alert("User created successfully");
+            setInput({
+                name: "",
+                lastname: "",
+                email: "",
+                password: "",
+                passwordConfirm: "",
+            });
+          }
+
+    
     return (
         <div className={styles.ContainerAllForm}>
-            <Form className={styles.ContainerAll}>
+            <Form className={styles.ContainerAll} onSubmit={e => handleSubmit(e)}>
                 <div className={styles.register}>
                     <h2>Register</h2>
                 </div>
