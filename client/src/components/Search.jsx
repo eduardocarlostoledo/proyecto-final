@@ -22,8 +22,6 @@ export const Search = () => {
         <div className='SearchButton'>
             <div>
                 <input className='InputBuscar' type='text' placeholder="Buscar..."/> 
-                <ion-icon name="home-outline"></ion-icon>
-               
                 <button className='SubmitBuscar' type="submit">Buscar</button>
             </div>
             <div>

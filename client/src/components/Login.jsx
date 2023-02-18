@@ -1,15 +1,17 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from "../styles/Login.module.css";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { userLogin } from '../redux/actions/UsersActions';
 
 
 function validate(input) {
 
     let errors = {};
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
 
     if (!input.password) {
         errors.password = "password is required";
@@ -33,11 +35,10 @@ function validate(input) {
 
 
 export const Login = () => {
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
-        name: "",
-        lastname: "",
         email: "",
         password: "",
     });
@@ -53,9 +54,23 @@ export const Login = () => {
             [e.target.name]: e.target.value
         }));
     };
+
+
+    
+    function handleSubmit(e) {
+        e.preventDefault();
+            dispatch(userLogin(input));
+            alert("Login successfully");
+            setInput({
+                email: "",
+                password: ""
+            });
+            navigate("/Profile")
+          }
+
     return (
         <div className={styles.ContainerAllForm}>
-            <Form className={styles.ContainerAll}>
+            <Form className={styles.ContainerAll} onSubmit={e => handleSubmit(e)}>
             <div className={styles.register}>
                 <h2>Login</h2>
             </div>

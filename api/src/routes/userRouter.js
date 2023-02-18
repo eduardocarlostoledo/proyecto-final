@@ -1,18 +1,17 @@
 const { Router } = require('express');
 
-const { putUser, getUsers, getUserId, loginUser, postUsers } = require("../controllers/usersController")
+const { putUser, getUsers, getUserId, loginUser, postUsers, deleteUser } = require("../controllers/usersController")
 
 const userRouter = Router()
 
+//////////////////////////////// CREAR USUARIO /////////////////////////////////////// 
+userRouter.post('/register', postUsers) // users/register
 
-userRouter.post("/register", async (req, res) => {
-  try {
-      const user =await postUser(req.body);         
-      res.status(200).json({data: user, message:"Usuario Creado"})
-  } catch (error) {
-      res.status(400).json(error.message)
-  } 
-})
+//////////////////////////////// INICIAR SESSION  /////////////////////////////////////// 
+
+userRouter.post('/login', loginUser)
+
+//////////////////////////////// MODIFICAR USUARIO  /////////////////////////////////////// 
 
 userRouter.put("/:id", async (req, res) => {
   const {id}=req.params;
@@ -24,6 +23,9 @@ userRouter.put("/:id", async (req, res) => {
   }
  })
 
+
+ //////////////////////////////// TRAER TODOS LOS USUARIOS  ////////////////////////////////
+
   userRouter.get("/", async (req,res) => {
     try {
         const users = await getUsers();         
@@ -32,6 +34,8 @@ userRouter.put("/:id", async (req, res) => {
         res.status(400).json(error.message)
     } 
  })
+
+ //////////////////////////////// TRAER USUARIO POR PARAMETRO ////////////////////////////////
 
  userRouter.get("/:id", async (req, res) => {
     const userId = req.params.id;
@@ -47,9 +51,8 @@ userRouter.put("/:id", async (req, res) => {
     }
   });
 
+ //////////////////////////////// BORRAR USUARIO ////////////////////////////////
 
-  userRouter.post('/register', postUsers)
-  userRouter.post('/login', loginUser)
-
+ userRouter.delete('/delete/:id', deleteUser)
 
 module.exports = {userRouter}
