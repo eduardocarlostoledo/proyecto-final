@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getAllProducts } from "../redux/actions/ProductActions";
 import { Filters } from "./Filters";
+import { Footer } from "./Footer";
 
 export const Products = () => {
 
@@ -117,6 +118,7 @@ export const Products = () => {
             </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

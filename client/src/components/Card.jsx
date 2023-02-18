@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import Json from "./Productos_PF.json";
+
 import "../styles/Card.css"
 
 export default function Card({name, image, price}) {

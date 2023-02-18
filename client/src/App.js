@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
@@ -15,21 +15,29 @@ function App() {
   return (
     <div className="App">
       <NavBar></NavBar>
-      <Route exact path="/" component={Home} />
+      <Routes>
+        <Route exact path="/" element={<Home/>} />
 
-      <Route path="/Products" component={Products} />
+        <Route path="/Products" element={<Products/>} />
 
-      <Route path="/detail/:Name" component={Detail} />
+        <Route path="/detail/:Name" element={<Detail/>} />
 
-      <Route path="/BuildPc" component={BuildPc} /> 
+        <Route path="/BuildPc" element={<BuildPc/>} /> 
 
-      <Route path="/Register" component={Register} />
+        <Route path="/Register" element={<Register/>} />
+
+        <Route path="/Login" element={<Login/>} />
+
+        <Route path="/CreateProduct" element={<CreateProduct/>} />
+
 
       <Route path="/Login" component={Login} />
 
       <Route path="/CreateProduct" component={CreateProduct} />
 
-      <Route path="/Profile" component={Profile} />
+
+        <Route path="/Profile" element={<Profile/>} />
+      </Routes>
     </div>
   );
 }
