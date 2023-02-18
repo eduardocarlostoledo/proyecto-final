@@ -12,8 +12,8 @@ function validate(input) {
 
     let errors = {};
     const regexName = /^([a-zA-Z ]+)$/i;
-    const regexNumber = /^[0-9]*$/i;
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    // const regexNumber = /^[0-9]*$/i;
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
 
     if (input.name && !regexName.test(input.name)) {
       errors.name = "can't include special characters or numbers";

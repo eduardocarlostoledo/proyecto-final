@@ -11,7 +11,7 @@ import { userLogin } from '../redux/actions/UsersActions';
 function validate(input) {
 
     let errors = {};
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
 
     if (!input.password) {
         errors.password = "password is required";
