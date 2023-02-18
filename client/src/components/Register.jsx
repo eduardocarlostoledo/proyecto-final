@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import styles from "../styles/Register.module.css";
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { userRegister } from "../redux/UsersActions"
+import { userRegister } from '../redux/actions/UsersActions';
 
 
 
