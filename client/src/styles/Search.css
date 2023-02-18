@@ -7,15 +7,25 @@
 }
 
 .InputBuscar{
-    width: 400px;
-    padding: 10px;
-    margin-right: 10px;
+    width: 200px;
+    height: 30px;
+    margin-right: 30px;
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+}
+.InputBuscar:hover{
+    background-color:  #e7b8ff;
 }
 
 .SubmitBuscar{
     width: 100px;
-    padding: 10px;
+    height: 30px;
     border-radius: 20px;
     border: none;
-    margin-left: 10px;
+    margin-left: 30px;
+}
+
+.SubmitBuscar:hover{
+    background-color: #e7b8ff;
 }
