@@ -6,7 +6,10 @@
     gap: 20px;
 }
 .FormDiv label{
-    
+    background-color: #e7b8ff;
+    padding: 7px;
+    margin: 5px;
+    border-radius: 5px;
 }
 
 .FormDiv div {
