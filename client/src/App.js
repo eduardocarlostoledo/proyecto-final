@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <NavBar></NavBar>
       <Routes>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" element={<Home/>} />
 
         <Route path="/Products" element={<Products/>} />
 
@@ -26,13 +26,13 @@ function App() {
 
         <Route path="/Register" element={<Register/>} />
 
-        <Route path="/Login" component={Login} />
+        <Route path="/Login" element={<Login/>} />
 
-        <Route path="/CreateProduct" component={CreateProduct} />
+        <Route path="/CreateProduct" element={<CreateProduct/>} />
 
-        <Route path="/CreateProduct" component={CreateProduct} />
+        <Route path="/CreateProduct" element={<CreateProduct/>} />
 
-        <Route path="/Profile" componet={Profile} />
+        <Route path="/Profile" element={<Profile/>} />
       </Routes>
     </div>
   );
