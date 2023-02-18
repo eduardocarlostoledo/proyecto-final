@@ -30,7 +30,11 @@ function App() {
 
         <Route path="/CreateProduct" element={<CreateProduct/>} />
 
-        <Route path="/CreateProduct" element={<CreateProduct/>} />
+
+      <Route path="/Login" component={Login} />
+
+      <Route path="/CreateProduct" component={CreateProduct} />
+
 
         <Route path="/Profile" element={<Profile/>} />
       </Routes>

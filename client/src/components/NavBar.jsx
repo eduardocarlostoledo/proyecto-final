@@ -14,6 +14,8 @@ export const NavBar = () => {
 
                 <Link to="/BuildPc" className="NavLink">build pc</Link>
 
+                <Link to="/CreateProduct" className="NavLink">Create Product</Link>
+
                 <Link to="/Register" className="NavLink">Register</Link>
 
                 <Link to="/Profile" className="NavLink">Profile</Link>
