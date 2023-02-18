@@ -1,4 +1,5 @@
 import '../styles/Search.css'
+import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 export const Search = () => {
 
@@ -21,10 +22,9 @@ export const Search = () => {
     return (
         <div className='SearchButton'>
             <div>
-                <input className='InputBuscar' type='text' placeholder="Buscar..."/> 
-                <ion-icon name="home-outline"></ion-icon>
-               
-                <button className='SubmitBuscar' type="submit">Buscar</button>
+                <input className='InputBuscar' type='text' placeholder="Search..." /> 
+                {/* <ion-icon name="home-outline"></ion-icon> */}
+                <button className='SubmitBuscar' type="submit"> < HiMagnifyingGlass className="icon"/></button>
             </div>
             <div>
                 
