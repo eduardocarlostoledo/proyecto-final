@@ -24,7 +24,7 @@ const getBrandProducts = async() => {
   try {
     const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
     addBrand.map(async (b) => {
-      await Brand.findOrCreate({where:{name: b}})
+      await Brand.findOrCreate({where:{name:b}})
     })
     const products = await Brand.findAll();
     return products;
