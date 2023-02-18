@@ -3,6 +3,19 @@
     flex-direction: column;
     padding: 200px;
     margin-top: 40px;
+    gap: 20px;
 }
-.FormDiv label {
+.FormDiv label{
+    
+}
+
+.FormDiv div {
+    padding: 20px;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.SelectsDiv {
+    display: flex;
+    justify-content: space-around;
 }

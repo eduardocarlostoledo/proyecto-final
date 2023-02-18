@@ -28,6 +28,8 @@ function App() {
 
       <Route path="/Register" component={Register} />
 
+      <Route path="/Login" component={Login} />
+
       <Route path="/CreateProduct" component={CreateProduct} />
 
       <Route path="/Profile" component={Profile} />
