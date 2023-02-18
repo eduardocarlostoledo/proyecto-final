@@ -2,7 +2,7 @@ import { applyMiddleware, createStore } from 'redux';
 
 import thunk from 'redux-thunk';
 
-import rootReducer from './reducer';
+import rootReducer from '../reducer';
 
 const store = createStore(
     rootReducer,
@@ -10,4 +10,3 @@ const store = createStore(
 );
 
 export default store;
-

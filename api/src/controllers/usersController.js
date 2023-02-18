@@ -21,7 +21,6 @@ const getUserId = async (userId) => {
   }
 };
 
-
 const putUser = async (user, id) => {
   const { name, lastname, email, image, password, phonenumber, country, city, address } = user
 

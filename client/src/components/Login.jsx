@@ -5,12 +5,13 @@ import { Link, useNavigate } from "react-router-dom"
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { userLogin } from "../redux/UsersActions"
+import { userLogin } from '../redux/actions/UsersActions';
+
 
 function validate(input) {
 
     let errors = {};
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
 
     if (!input.password) {
         errors.password = "password is required";

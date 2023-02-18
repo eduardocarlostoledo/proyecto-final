@@ -1,6 +1,6 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import axios from "axios";
+import { Route, Routes} from "react-router-dom";
+
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
@@ -8,32 +8,36 @@ import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
 import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
-import { Login } from "./components/Login";
+import {Login} from "./components/Login"
 import CreateProduct from "./components/CreateProduct";
-axios.defaults.baseURL='http://localhost:3001/';
-
 
 function App() {
   return (
     <div className="App">
-      <NavBar />
-    <Routes>
-      <Route path="/" element={< Home />} />
+      <NavBar></NavBar>
+      <Routes>
+        <Route exact path="/" element={<Home/>} />
 
-      <Route path="/Products" element={<Products/>} />
+        <Route path="/Products" element={<Products/>} />
 
-      <Route path="/detail/:Name" element={<Detail/>} />
+        <Route path="/detail/:Name" element={<Detail/>} />
 
-      <Route path="/BuildPc" element={<BuildPc/>} /> 
+        <Route path="/BuildPc" element={<BuildPc/>} /> 
 
-      <Route path="/Register" element={<Register/>} />
+        <Route path="/Register" element={<Register/>} />
 
-      <Route path="/Login" element={<Login/>} />
+        <Route path="/Login" element={<Login/>} />
 
-      <Route path="/CreateProduct" element={<CreateProduct/>} />
+        <Route path="/CreateProduct" element={<CreateProduct/>} />
 
-      <Route path="/Profile" element={<Profile/>} />
-      </ Routes >
+
+      <Route path="/Login" component={Login} />
+
+      <Route path="/CreateProduct" component={CreateProduct} />
+
+
+        <Route path="/Profile" element={<Profile/>} />
+      </Routes>
     </div>
   );
 }
