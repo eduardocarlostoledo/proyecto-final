@@ -1,12 +1,23 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createProduct } from "../redux/actions/ProductActions";
-import JsonMarcas from "./Marcas.json";
-import JsonTypes from "./Componentes.json";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBrands, getAllTypes } from "../redux/actions/ProductActions";
+// import { createProduct } from "../redux/actions/ProductActions";
+// import JsonMarcas from "./Marcas.json";
+// import JsonTypes from "./Componentes.json";
 
 import "../styles/CreateProduct.css";
 
 export default function CreateProduct() {
+
+  const brands = useSelector((state) => state.brands)
+  const type = useSelector((state) => state.types)
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBrands())
+    dispatch(getAllTypes())
+  },[dispatch])
+
   const [product, setProduct] = useState({
     name: "",
     image: "",
@@ -17,7 +28,6 @@ export default function CreateProduct() {
   });
   const [errores, setErrores] = useState({});
 
-  const dispatch = useDispatch();
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -48,6 +58,19 @@ export default function CreateProduct() {
     })
 
   }
+
+  const handleSelect = (e) => {
+    setErrores(validarFormulario({...product, type: [...product.type, e.target.value]}))
+    setProduct({...product, type: [...product.type, e.target.value]})
+    console.log(product)
+    
+}
+const handleSelectBrand = (e) => {
+  setErrores(validarFormulario({...product, brand: [...product.type, e.target.value]}))
+    setProduct({ ...product, brand: [...product.brand, e.target.value]})
+    console.log(product)
+     
+}
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -143,43 +166,31 @@ export default function CreateProduct() {
               name="brand"
               multiple
               value={product.brand}
-              onChange={(e) => handleChangeCheck(e)}
+              onChange={(e) => handleSelectBrand(e)}
             >
               <option value="" disabled selected>
                 Select a brand product
               </option>
-              {JsonMarcas.map((marca) => (
-                <option
-                  type="checkbox"
-                  name="brand"
-                  value={marca.id}
-                  onChange={(e) => handleChangeCheck(e)}
-                >
-                  {marca.name}
-                </option>
+              {brands.map((marca, index) => (
+                <option key={index} value={marca.id}>{marca.name}</option>
               ))}
             </select>
-
+            {/* {countries.map((c, index)=>(
+                                    <option key={index} value={c.id}>{c.name}</option>  //ordenar por orden alfabetico
+                                ))} */}
             <label>
               Type:
               <select
                 name="type"
                 multiple
                 value={product.brand}
-                onChange={(e) => handleChangeCheck(e)}
+                onChange={(e) => handleSelect(e)}
               >
                 <option value="" disabled selected>
                   Select a hardware product
                 </option>
-                {JsonTypes.map((type) => (
-                  <option
-                    type="checkbox"
-                    name="brand"
-                    value={type.id}
-                    onChange={(e) => handleChangeCheck(e)}
-                  >
-                    {type.nombre}
-                  </option>
+                {type.map((type, index) => (
+                  <option key={index} value={type.id}>{type.name}</option>
                 ))}
               </select>
             </label>
