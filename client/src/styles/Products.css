@@ -1,6 +1,4 @@
-.DivProducts{
-    margin-left: 3%;
-}
+
 .Products{
     margin-top: 100px;
 }
@@ -46,6 +44,7 @@
     flex-direction: column;
     align-items: center;
     text-transform: uppercase;
+    margin-left: 40px;
 }
 .CardContainer{
     margin-top: 88px;
