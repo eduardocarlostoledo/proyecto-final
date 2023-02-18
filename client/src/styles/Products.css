@@ -47,3 +47,9 @@
     align-items: center;
     text-transform: uppercase;
 }
+.CardContainer{
+    margin-top: 88px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px
+}

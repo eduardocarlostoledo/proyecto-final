@@ -10,7 +10,7 @@
 
 
 
-.ContainerImages{
+/* .ContainerImages{
     margin-top: 80px;
 }
 
@@ -26,6 +26,20 @@
     justify-content: space-between;
     margin-left: 40px;
     margin-right: 40px;
+} */
+.CardContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.ContainerImages{
+    margin-top: 80px;
+}
+
+.ContainerImages {
+    width: 100%;
 }
 
 .FooterContainer{
