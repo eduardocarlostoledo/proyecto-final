@@ -34,6 +34,8 @@ function validate(input) {
 
 
 export const Login = () => {
+    const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
+    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [errors, setErrors] = useState({})
@@ -58,6 +60,20 @@ export const Login = () => {
     
     function handleSubmit(e) {
         e.preventDefault();
+        if (!input.password || !input.email) {
+             return alert('Missing required fields')
+        }
+
+        if (input.email && input.email.length > 0 && input.email !== "") {
+            if (!regexEmail.test(input.email)) {
+                return alert("Email invalid")
+            }
+          }
+          if (input.password && input.password.length > 0 && input.password != "") {
+            if (!regexPassword.test(input.password)) {
+                return alert("Password invalid")
+            }
+          }
             dispatch(userLogin(input));
             alert("Login successfully");
             setInput({

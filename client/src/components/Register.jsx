@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import styles from "../styles/Register.module.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { userRegister } from "../redux/UsersActions"
 
@@ -12,6 +12,7 @@ function validate(input) {
 
     let errors = {};
     const regexName = /^([a-zA-Z ]+)$/i;
+    const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
     const regexNumber = /^[0-9]*$/i;
     const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
@@ -44,11 +45,11 @@ function validate(input) {
     }
     
     if (input.password.length > 12) {
-        errors.password = "Max 12 caracteres";
+        errors.password = "Max 20 caracteres";
     }
     
     if (input.password.length < 5) {
-        errors.password = "Min 5 caracteres";
+        errors.password = "Min 8 Caracteress, 1 Mayusc, 1 Minus";
     }
     if (input.passwordConfirm !== input.password) {
         errors.passwordConfirm = "passwords must match";
@@ -64,6 +65,11 @@ function validate(input) {
 
 
 export const Register = () => {
+    const navigate = useNavigate();
+    const regexName = /^([a-zA-Z ]+)$/i;
+    const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
+    const regexNumber = /^[0-9]*$/i;
+    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
@@ -89,6 +95,38 @@ export const Register = () => {
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (!input.name || !input.lastname || !input.password || !input.email) {
+            return alert('Missing required fields')
+        }
+
+        if (input.email && input.email.length > 0 && input.email != "") {
+            if (!regexEmail.test(input.email)) {
+                return alert("Email invalid")
+            }
+          }
+
+          if (input.name && input.name.length > 0 && input.name != "") {
+            if (!regexName.test(input.name)) {
+                return alert("Name invalid")
+            }
+          }
+          if (input.lastname && input.lastname.length > 0 && input.lastname != "") {
+            if (!regexName.test(input.lastname)) {
+                return alert("Lastname invalid")
+            }
+          }
+        
+          if (input.password && input.password.length > 0 && input.password != "") {
+            if (!regexPassword.test(input.password)) {
+                return alert("Password invalid")
+            }
+          }
+
+          if (input.password !== input.passwordConfirm) {
+            return alert("Passwords must match")
+          }
+
+
             dispatch(userRegister(input));
             alert("User created successfully");
             setInput({
@@ -98,6 +136,7 @@ export const Register = () => {
                 password: "",
                 passwordConfirm: "",
             });
+            navigate("/Login")
           }
 
     
