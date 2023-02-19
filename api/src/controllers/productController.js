@@ -24,7 +24,7 @@ const getBrandProducts = async() => {
   try {
     const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
     addBrand.map(async (b) => {
-      await Brand.findOrCreate({where:{name:b}})
+      await Brand.findOrCreate({where:{name: b}})
     })
     const products = await Brand.findAll();
     return products;
@@ -113,7 +113,7 @@ const getProductName = async (product) => {
 
 // const postProduct = async (product) => {
 //   const { name, price, type, brand, image, description } = product;
-//   if (!name || !price || !type || !brand || !description || !image) throw Error("Mandatory data missing");
+//   if (!name || !price || !type || !brand || !description) throw Error("Mandatory data missing");
 //   else {
 //     try {
 //       const newProduct = await Product.create({
@@ -131,8 +131,6 @@ const getProductName = async (product) => {
 //     }
 //   }
 // };
-
-//EDU
 
 const postProduct = async (product) => {
   const { name, price, type, brand, image, description } = product;

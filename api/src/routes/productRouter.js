@@ -12,16 +12,7 @@ const productRouter = Router()
 
 // Ruta POST de Productos, va a ser utilizada por el administrador.
 
-// productRouter.post('/', async (req,res) => {
-//     try {
-//         const product = await postProduct(req.body)
-//         res.status(200).json(product)
-//     } catch (error) {
-//         res.status(400).json(error.message)
-//     }
-// })
 
-//edu
 productRouter.post('/', async (req,res) => {
   try {
     let product = req.body;
@@ -38,7 +29,7 @@ productRouter.post('/', async (req,res) => {
 productRouter.get("/types", async (req, res) => {
   try {
       const products = await getTypeProducts();
-    res.status(200).json({ data: products});
+    res.status(200).json(products);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -49,8 +40,8 @@ productRouter.get("/types", async (req, res) => {
 
 productRouter.get("/brands", async (req, res) => {
   try {
-      const products = await getBrandProducts();
-    res.status(200).json({ data: products});
+    const products = await getBrandProducts();
+    res.status(200).json(products);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -71,7 +62,7 @@ productRouter.get("/", async (req, res) => {
 
 //Ruta GET de productos por Name, busca el producto con un nombre exactamente igual al que recibe por parametro. (Ruta para el detail)
 
-  productRouter.get("/params/:name", async (req, res) => {
+  productRouter.get("/:name", async (req, res) => {
     try {
       const result = await getProductName(req.params.name);
       result.length > 0 ? res.status(200).json({ data: result, message: "Producto solicitado" }) : res.status(404).json({ error: "Producto no encontrado" });
