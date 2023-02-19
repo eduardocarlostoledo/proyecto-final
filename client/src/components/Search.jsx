@@ -1,28 +1,12 @@
 import '../styles/Search.css'
+import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 export const Search = () => {
-
-    /*
-    const dispatch = useDispatch()
-    const [name, setName] = useState('')
-    const handleInputChange = (e) => {
-        e.preventDefault();
-        setName(e.target.value); // ver el tema del currentPage
-        console.log(name)
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        dispatch(getNameProduct(name))
-        
-    }
-
-    */
     return (
         <div className='SearchButton'>
             <div>
-                <input className='InputBuscar' type='text' placeholder="Buscar..."/> 
-                <button className='SubmitBuscar' type="submit">Buscar</button>
+                <input className='InputBuscar' type='text' placeholder="Search..." /> 
+                <button className='SubmitBuscar' type="submit"> < HiMagnifyingGlass className="icon"/></button>
             </div>
             <div>
                 
@@ -30,6 +14,3 @@ export const Search = () => {
         </div>
     )
 }
-
-/* En input--> onChange={(e) => handleInputChange(e)} */
-/* En button --> onClick={(e) => handleSubmit(e)} */

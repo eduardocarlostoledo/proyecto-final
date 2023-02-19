@@ -1,5 +1,3 @@
-
-
 import axios from "axios";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_ALL_PRODUCTS_NAME="GET_ALL_PRODUCTS_NAME"
@@ -32,8 +30,24 @@ export const getProductDetail = (name) => async (dispatch) => {
     dispatch({type: GET_PRODUCT_DETAIL, payload:{...r.data.data[0]}}))
 };
 
-export const createProduct =  (payload)=> async()=>{
-  return await axios.post("http://localhost:3001/products",payload)
+export const createProduct = (product) => {
+  return async (dispatch) => {
+    console.log("/products", product);
+    try {
+      const response = await fetch("http://localhost:3001/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(product),
+      });
+      console.log("POST PRODUCT FETCH RESPONSE", response);
+      const data = await response.json();
+      dispatch({ type: "POST_DOG", payload: data });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 };
 
 export const updateProduct= (payload)=> async()=>{
@@ -41,19 +55,19 @@ export const updateProduct= (payload)=> async()=>{
 };
 
 export const getAllBrands = () => async (dispatch) => {
-    try {
-        return await axios('http://localhost:3001/products/brands').then(r=>
-            dispatch({type: GET_ALL_BRANDS, payload:r.data.data}))
-    } catch (error) {
-            console.log(error)
-    }
+  try {
+      return await axios('http://localhost:3001/brands').then(r=>
+          dispatch({type: "GET_ALL_BRANDS", payload:r.data}))
+  } catch (error) {
+          console.log(error)
+  }
 }
 
 export const getAllTypes = () => async (dispatch) => {
-    try {
-        return await axios('http://localhost:3001/products/types').then(r=>
-            dispatch({type: GET_ALL_TYPES, payload:r.data.data}))
-    } catch (error) {
-            console.log(error)
-    }
+  try {
+      return await axios('http://localhost:3001/types').then(r=>
+          dispatch({type: "GET_ALL_TYPES", payload:r.data}))
+  } catch (error) {
+          console.log(error)
+  }
 }

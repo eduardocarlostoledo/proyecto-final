@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createProduct } from "../redux/actions/ProductActions";
-
 import "../styles/CreateProduct.css";
 
 export default function CreateProduct() {
@@ -60,6 +59,17 @@ export default function CreateProduct() {
             name="description"
             placeholder="..."
             value={product.description}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          Image:
+          <input
+            type="Url"
+            name="image"
+            placeholder="..."
+            value={product.image}
             onChange={handleChange}
           />
         </label>

@@ -3,7 +3,7 @@
     justify-content: space-between;
     background-color: #7200ca;
     width: 100%;
-    height:60px;
+    height: 60px;
     align-items: center;
     position: fixed;
     z-index: 999;
@@ -11,12 +11,83 @@
     top: 0;
 }
 
-.NavDiv2{
-    float: right;
+
+.logo {
+    height: 60px;
+    width: 150px;
+    background-color: #7200ca;
 }
 
-.NavLink {
-    padding: 20px;
+.ContainerImg {
+    height: 60px;
+    width: 150px;
+}
+
+.ContainerInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonNav {
+    width: 80px;
+    height: 40px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(83, 32, 117);
     color: white;
-    text-decoration: none;
+    user-select: none;
+}
+
+
+.BuildAndProducts {
+    margin-left: -30px;
+}
+
+.BuildAndProducts button {
+    width: 120px;
+    height: 40px;
+    margin: 5px;
+    border: none;
+    font-size: 26px;
+    border-radius: 10px;
+    background-color: #7200ca;
+    color: white;
+    user-select: none;
+}
+
+
+.BuildAndProducts button:hover {
+    color: #12f8a0;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.BtnUser {
+    width: 80px;
+    height: 40px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(83, 32, 117);
+    color: white;
+    user-select: none;
+}
+
+.BtnUser:hover {
+    color: #12f8a0;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.CartContainer {
+    margin-right: -22px;
+    margin-left: 9px;
+    background-color: #7200ca;
+    border: none;
+}
+
+.Cart {
+    font-size: 30px;
+    color: white;
 }
