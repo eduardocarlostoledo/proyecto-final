@@ -4,36 +4,36 @@ import { getAllBrands, getAllTypes } from "../redux/actions/ProductActions";
 
 import "../styles/CreateProduct.css";
 
-// const validate = (product) => {
+const validate = (product) => {
     
-//     let error = {};
+    let error = {};
   
-//     if(!/[A-Za-z0-9]/.test(product.name)){
-//         error.name = 'El nombre del producto solo admite letras, numeros y espacios'     
-//     }if(!product.name){
-//         error.name = 'Debe ingresar un nombre de producto' 
-//     }
-//     if (!product.image) { error.image = "La imagen es obligatoria"; }
+    if(!/[A-Za-z0-9]/.test(product.name)){
+        error.name = 'El nombre del producto solo admite letras, numeros y espacios'     
+    }if(!product.name){
+        error.name = 'Debe ingresar un nombre de producto' 
+    }
+    if (!product.image) { error.image = "La imagen es obligatoria"; }
   
-//     if (!product.price > 0 || isNaN(Number(product.price))) {
-//         error.price = "El precio debe ser un número"; //ver para que sea mayor a 0
-//     }
+    if (!product.price > 0 || isNaN(Number(product.price))) {
+        error.price = "El precio debe ser un número"; //ver para que sea mayor a 0
+    }
   
-//     if (!product.description) {
-//         error.description = "La descripción es obligatoria";
-//     }
+    if (!product.description) {
+        error.description = "La descripción es obligatoria";
+    }
   
-//     if (product.brand.length === 0) {
-//         error.brand = "Debes seleccionar al menos una marca";
-//     }
+    if (product.brand.length === 0) {
+        error.brand = "Debes seleccionar al menos una marca";
+    }
   
-//     if (product.type.length === 0) {
-//         error.type = "Debes seleccionar al menos un tipo";
-//     }
+    if (product.type.length === 0) {
+        error.type = "Debes seleccionar al menos un tipo";
+    }
   
-//     return error;
+    return error;
     
-// }
+}
 
 export default function CreateProduct() {
 
@@ -71,16 +71,16 @@ export default function CreateProduct() {
     const handleChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value,});
         console.log(product)
-        // setError(validate({...product, [e.target.name]: e.target.value,}))
+        setError(validate({...product, [e.target.name]: e.target.value,}))
     };
 
     const handleSelectBrands = (e) => {
-        // setError(validate({ ...product, brand: [...product.brand, e.target.value]})) 
+        setError(validate({ ...product, brand: [...product.brand, e.target.value]})) 
         setProduct({ ...product, brand: [...product.brand, e.target.value]})
         console.log(product) 
     }
     const handleSelectTypes = (e) => {
-        // setError(validate({ ...product, type: [...product.type, e.target.value]})) 
+        setError(validate({ ...product, type: [...product.type, e.target.value]})) 
         setProduct({ ...product, type: [...product.type, e.target.value]})
         console.log(product) 
     }
@@ -92,7 +92,7 @@ export default function CreateProduct() {
 
             e.preventDefault();
             console.log(product)
-            // setError(validate({...product, [e.target.name] : e.target.value}))
+            setError(validate({...product, [e.target.name] : e.target.value}))
             dispatch(CreateProduct(product));
             
             alert('Producto creado')
@@ -134,15 +134,15 @@ export default function CreateProduct() {
                     <input type="url://" name="image" placeholder="Coloque una image" value={product.image} onChange={handleChange}/>
                     {error.image && (<p>{error.image}</p>)}
                 </div>
-                <label>
+                {/* <label>
                 Brand:
                 <input type="text" name="brand" placeholder="..." value={product.brand} onChange={handleChange}/>
                 </label>
                 <label>
                 Type:
                 <input type="text" name="type" placeholder="..." value={product.type} onChange={handleChange} />
-                </label>
-                {/* <div>
+                </label> */}
+                <div>
                     <label>Brands</label>
                     <select name="brand" onChange={(e) => handleSelectBrands(e)}>
                         <option value="brand">All</option>
@@ -161,7 +161,7 @@ export default function CreateProduct() {
                         ))}
                     </select>
                     {error.type && (<p>{error.type}</p>)}
-                </div> */}
+                </div>
                 <button type="submit">Create Product</button>
             </form>
         </div>
