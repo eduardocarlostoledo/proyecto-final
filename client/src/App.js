@@ -9,7 +9,7 @@ import { NavBar } from "./components/NavBar";
 import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
 import {Login} from "./components/Login"
-import CreateProduct from "./components/CreateProduct";
+import {CreateProducts} from "./components/CreateProduct";
 
 function App() {
   return (
@@ -28,12 +28,12 @@ function App() {
 
         <Route path="/Login" element={<Login/>} />
 
-        <Route path="/CreateProduct" element={<CreateProduct/>} />
+        <Route path="/CreateProduct" element={<CreateProducts/>} />
 
 
       <Route path="/Login" component={Login} />
 
-      <Route path="/CreateProduct" component={CreateProduct} />
+      <Route path="/CreateProduct" component={CreateProducts} />
 
 
         <Route path="/Profile" element={<Profile/>} />
