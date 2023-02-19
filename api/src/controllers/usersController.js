@@ -57,6 +57,7 @@ const postUsers = async (req, res) => {
   const regexName = /^([a-zA-Z ]+)$/i;
   const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
   const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+ 
   try {
     const { name, lastname, email, password, } = req.body;
 
