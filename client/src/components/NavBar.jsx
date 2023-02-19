@@ -8,10 +8,11 @@ export const NavBar = () => {
     return (
         <div className='NavDiv'>
         <div className="BuildAndProducts">
-        <Link to="/"><button><ion-icon name="home-outline"></ion-icon> Home </button></Link>
-        <Link to="/Products"><button>Products</button></Link>
-        <Link to="/BuildPc"><button>Build PC</button></Link>
-            </div>
+            <Link to="/"><button><ion-icon name="home-outline"></ion-icon> Home </button></Link>
+            <Link to="/Products"><button>Products</button></Link>
+            <Link to="/BuildPc"><button>Build PC</button></Link>
+            <Link to="/CreateProduct"><button>Create</button></Link>
+        </div>
         <div className="ContainerSearch">
             <Search />
         </div>
