@@ -7,6 +7,8 @@
 }
 
 .InputBuscar {
+<<<<<<< HEAD
+=======
     width: 400px;
     padding: 10px;
     margin-right: 10px;
@@ -21,6 +23,7 @@
 }
 
 .InputBuscar {
+>>>>>>> 14d91b492414892257774640633287f1ba3e0c88
     width: 450px;
     min-width: 250px;
     height: 40px;
@@ -38,6 +41,7 @@
 .SubmitBuscar {
     width: 80px;
     height: 40px;
+    padding-top: 10px;
     margin: 5px;
     border: none;
     border-radius: 10px;
@@ -48,4 +52,6 @@
 
 .icon {
     font-size: 25px;
+    margin-bottom: 5px;
 }
+
