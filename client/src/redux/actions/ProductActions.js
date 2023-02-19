@@ -30,6 +30,17 @@ export const getProductDetail = (name) => async (dispatch) => {
     dispatch({type: GET_PRODUCT_DETAIL, payload:{...r.data.data[0]}}))
 };
 
+
+// export const createProduct =  (payload)=> async()=>{
+//   return await axios.post("http://localhost:3001/products",payload)
+// };
+// export function createProduct(payload) { 
+//   return async function(dispatch){
+//       const response = await axios.post("http://localhost:3001/products",payload);
+//       return response;
+//   };
+// };
+
 export const createProduct = (product) => {
   return async (dispatch) => {
     console.log("/products", product);
@@ -41,33 +52,51 @@ export const createProduct = (product) => {
         },
         body: JSON.stringify(product),
       });
-      console.log("POST PRODUCT FETCH RESPONSE", response);
+
+      console.log("CREATE_PRODUCT", response);
       const data = await response.json();
-      dispatch({ type: "POST_DOG", payload: data });
+      dispatch({ type: "CREATE_PRODUCT", payload: data });
+
     } catch (error) {
       console.error(error);
     }
   };
 };
 
+
 export const updateProduct= (payload)=> async()=>{
     return await axios.put("/products",payload)
 };
 
-export const getAllBrands = () => async (dispatch) => {
-  try {
-      return await axios('http://localhost:3001/brands').then(r=>
-          dispatch({type: "GET_ALL_BRANDS", payload:r.data}))
-  } catch (error) {
-          console.log(error)
+// export const getAllBrands = () => async (dispatch) => {
+//     try {
+//         return await axios.get('http://localhost:3001/products/brands').then(r=>
+//             dispatch({type: GET_ALL_BRANDS, payload:r.data.data}))
+//     } catch (error) {
+//             console.log(error)
+//     }
+// }
+
+// export const getAllTypes = () => async (dispatch) => {
+//     try {
+//         return await axios.get('http://localhost:3001/products/types').then(r=>
+//             dispatch({type: GET_ALL_TYPES, payload:r.data.data}))
+//     } catch (error) {
+//             console.log(error)
+//     }
+// }
+export const getAllBrands = () => {
+  return async function(dispatch){
+    const json = await axios.get('http://localhost:3001/products/brands')
+    return dispatch({type: GET_ALL_BRANDS, payload: json.data})
   }
 }
 
-export const getAllTypes = () => async (dispatch) => {
-  try {
-      return await axios('http://localhost:3001/types').then(r=>
-          dispatch({type: "GET_ALL_TYPES", payload:r.data}))
-  } catch (error) {
-          console.log(error)
+
+export const getAllTypes = () => {
+  return async function(dispatch){
+    const json = await axios.get('http://localhost:3001/products/types')
+    return dispatch({type: GET_ALL_TYPES, payload: json.data})
   }
 }
+
