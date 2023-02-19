@@ -60,6 +60,7 @@ function validate(input) {
   return errors;
 }
 
+
 export const CreateProducts = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -74,8 +75,8 @@ export const CreateProducts = () => {
     image: "",
     price: "",
     description: "",
-    brand: [],
-    type: [],
+    brand: "",
+    type: "",
   });
 
   function handleChange(e) {
@@ -234,6 +235,92 @@ export const CreateProducts = () => {
           </Button>
         </div>
       </Form>
+=======
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setProduct({
+      ...product,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  //falta validar si existe
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createProduct(product));
+  };
+
+  return (
+    <div className="FormDiv">
+      <h1>Form</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Product:
+          <input
+            type="text"
+            name="name"
+            placeholder="..."
+            value={product.name}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Price:
+          <input
+            type="text"
+            name="price"
+            placeholder="..."
+            value={product.price}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Description:
+          <input
+            type="text"
+            name="description"
+            placeholder="..."
+            value={product.description}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          Image:
+          <input
+            type="Url"
+            name="image"
+            placeholder="..."
+            value={product.image}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          Brand:
+          <input
+            type="text"
+            name="brand"
+            placeholder="..."
+            value={product.brand}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Type:
+          <input
+            type="text"
+            name="type"
+            placeholder="..."
+            value={product.type}
+            onChange={handleChange}
+          />
+        </label>
+
+        <button type="submit"> Agree </button>
+      </form>
+
     </div>
   );
 };

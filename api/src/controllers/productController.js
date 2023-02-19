@@ -111,19 +111,53 @@ const getProductName = async (product) => {
 
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 
+// const postProduct = async (product) => {
+//   const { name, price, type, brand, image, description } = product;
+//   if (!name || !price || !type || !brand || !description) throw Error("Mandatory data missing");
+//   else {
+//     try {
+//       const newProduct = await Product.create({
+//         name,
+//         price,
+//         description,
+//         image,
+//         typeId: type,
+//         brandId: brand,
+//       });
+
+//       return newProduct;
+//     } catch (error) {
+//       throw Error(error.message);
+//     }
+//   }
+// };
+
 const postProduct = async (product) => {
   const { name, price, type, brand, image, description } = product;
-  if (!name || !price || !type || !brand || !description) throw Error("Mandatory data missing");
+  console.log(product.name, "POST")
+  if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
   else {
     try {
-      const newProduct = await Product.create({
-        name,
-        price,
-        description,
-        image,
-        typeId: type,
-        brandId: brand,
+      const newType = await Type.create({
+        name: product.type,
       });
+      console.log(product.type, "POST")
+
+      const newBrand = await Brand.create({
+        name: product.brand,
+      });
+      console.log(product.brand, "POST")
+
+      const newProduct = await Product.create({
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        image: product.image,
+        typeId: newType.id,
+        brandId: newBrand.id,
+      });
+
+      console.log(product.name, newProduct, "POSTOK")
 
       return newProduct;
     } catch (error) {
