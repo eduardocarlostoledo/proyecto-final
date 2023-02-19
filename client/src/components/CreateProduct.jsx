@@ -1,265 +1,157 @@
-// import React, { useEffect, useState } from "react";
-// import { useNavigate } from 'react-router-dom';
-// import { useDispatch, useSelector } from "react-redux";
-// import { createProduct, getAllBrands, getAllTypes } from "../redux/actions/ProductActions";
-// // import { createProduct } from "../redux/actions/ProductActions";
-// // import JsonMarcas from "./Marcas.json";
-// // import JsonTypes from "./Componentes.json";
-
-// import "../styles/CreateProduct.css";
-
-// export default function CreateProduct() {
-
-//     const brands = useSelector((state) => state.brands)
-//     const type = useSelector((state) => state.types)
-//     const history = useNavigate()
-
-//   const dispatch = useDispatch();
-//     useEffect(() => {
-//       dispatch(getAllBrands())
-//       dispatch(getAllTypes())
-//     },[dispatch])
-
-//   const [product, setProduct] = useState({
-//     name: "",
-//     image: "",
-//     price: "",
-//     description: "",
-//     brand: [],
-//     type: [],
-//   });
-//   const [errores, setErrores] = useState({});
-
-
-//   function handleChange(event) {
-//     const { name, value, type, checked } = event.target;
-//     console.log("tipo", name, "id", value);
-//     console.log(product.brand);
-//     const errores = validarFormulario(product);
-//     setErrores(errores);
-//     setProduct((prevProduct) => ({
-//       ...prevProduct,
-//       [name]:
-//         type === "checkbox"
-//           ? checked
-//             ? [...prevProduct[name], value]
-//             : prevProduct[name].filter((item) => item !== value)
-//           : value,
-//     }));
-//   }
-
-//   function handleChangeCheck(event) {
-//     event.preventDefault();
-//     const {id,Check} = event.target;
-//     console.log(event.target);
-//     if (!product.brand.includes(id)) return setProduct({...product,"brand":[...product.brand,id]});
-//     console.log(product);
-//     setProduct({
-//       ...product,
-//       "brand": !product.brand.filter((element) => element !== id)
-//     })
-
-//   }
-
-//   const handleSelect = (e) => {
-//     setErrores(validarFormulario({...product, type: [...product.type, e.target.value]}))
-//     setProduct({...product, type: [...product.type, e.target.value]})
-//     console.log(product)
-    
-// }
-// const handleSelectBrand = (e) => {
-//   setErrores(validarFormulario({...product, brand: [...product.type, e.target.value]}))
-//     setProduct({ ...product, brand: [...product.brand, e.target.value]})
-//     console.log(product)
-     
-// }
-
-// function handleSubmit(event) {
-//   event.preventDefault();
-//   const errores = validarFormulario(product);
-//   setErrores(errores);
-//   console.log(product);
-//   dispatch(createProduct(product))
-//   console.log('Envio de producto!', product)
-//   alert('Producto creado')
-      
-//   setProduct({
-//     name: "",
-//         image: "",
-//         price: "",
-//         description: "",
-//         brand: [],
-//         type: [],
-//       });
-//   console.log(errores);
-//   // if (Object.keys(errores).length === 0) {
-//   //   console.log("Datos del formulario:", product);
-//   // }
-// }
-
-//   // function handleSubmit(e) {
-//   //   if(!product.name || !product.image || !product.price || !product.description || !product.brand.length || !product.type.length){
-//   //     alert('No se puede crear')
-//   //   } else {
-
-//   //     e.preventDefault();
-//   //     console.log(product)
-      
-//   //     setErrores(errores);
-//   //     console.log(product)
-//   //     alert('Producto creado')
-      
-//   //     setProduct({
-//   //       name: "",
-//   //       image: "",
-//   //       price: "",
-//   //       description: "",
-//   //       brand: [],
-//   //       type: [],
-//   //     });
-//   //     if (Object.keys(errores).length === 0) {
-//   //       console.log("Datos del formulario:", product);
-//   //     }
-       
-//   //   }
-//   // }
-
-//   
-
-//   return (
-//     <div className="FormDiv">
-//       <h1>Form</h1>
-//       <div>
-//         <form onSubmit={(e) => handleSubmit(e)}>
-//           <label>
-//             Product:
-//             <input
-//               type="text"
-//               name="name"
-//               placeholder="..."
-//               value={product.name}
-//               onChange={handleChange}
-//             />
-//             {errores.name && <p>{errores.name}</p>}
-//           </label>
-//           <label>
-//             Image:
-//             <input
-//               type="text"
-//               name="image"
-//               placeholder="..."
-//               value={product.image}
-//               onChange={handleChange}
-//             />
-//           </label>
-//           <label>
-//             Price:
-//             <input
-//               type="number"
-//               name="price"
-//               placeholder="..."
-//               value={product.price}
-//               onChange={handleChange}
-//             />
-//           </label>
-//           <label>
-//             Description:
-//             <input
-//               type="text"
-//               name="description"
-//               placeholder="..."
-//               value={product.description}
-//               onChange={handleChange}
-//             />
-//           </label>
-
-//           <div className="SelectsDiv"> 
-//             <label>Brand</label>
-//             <select name="brand" onChange={(e) => handleSelectBrand(e)}>
-//               {/* <option value="" disabled selected> Select a brand product</option> */}
-//               {brands.map((marca, index) => (
-//                 <option key={index} value={marca.id}>{marca.name}</option>
-//               ))}
-//             </select>
-//           </div>
-//           <div className="SelectsDiv">  
-//             <label>Type</label>
-//               <select name="type" onChange={(e) => handleSelect(e)}>
-//                 {/* <option value="" disabled selected>Select a hardware product</option> */}
-//                 {type.map((type, index) => (
-//                   <option key={index} value={type.id}>{type.name}</option>
-//                 ))}
-//               </select>
-            
-
-//           </div>
-//           <button type="submit"> Comprar </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-import React, { useState } from "react";
-import { useDispatch} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector} from "react-redux";
+import { getAllBrands, getAllTypes } from "../redux/actions/ProductActions";
 
 import "../styles/CreateProduct.css";
 
+const validate = (product) => {
+    
+    const error = {};
+  
+    if(!/[A-Za-z0-9]/.test(product.name)){
+        error.name = 'El nombre del producto solo admite letras, numeros y espacios'     
+    }if(!product.name){
+        error.name = 'Debe ingresar un nombre de producto' 
+    }
+    if (!product.image) { error.image = "La imagen es obligatoria"; }
+  
+    if (!product.price > 0 || isNaN(Number(product.price))) {
+        error.price = "El precio debe ser un número"; //ver para que sea mayor a 0
+    }
+  
+    if (!product.description) {
+        error.description = "La descripción es obligatoria";
+    }
+  
+    if (!Array.isArray(product.brand) || !product.brand.length) {
+        error.brand = "Debes seleccionar al menos una marca";
+    }
+  
+    if (!Array.isArray(product.type) || !product.type.length) {
+        error.type = "Debes seleccionar al menos un tipo";
+    }
+  
+    return error;
+    
+}
 
 export default function CreateProduct() {
-  const [product, setProduct] = useState({
-    name: "",
-    image: "",
-    price: "",
-    description: "",
-    brand: "",
-    type: "",
-  });
 
-  const dispatch = useDispatch();
+    const [error, setError] = useState({})
 
-  const handleChange = (e) => {
-    setProduct({
-      ...product,
-      [e.target.name]: e.target.value,
+    const [product, setProduct] = useState({
+        name: "",
+        image: "",
+        price: "",
+        description: "",
+        brand: [],
+        type: [],
     });
-    console.log(product)
-  };
 
-  //falta validar si existe
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(CreateProduct(product));
-    console.log(product)
-  };
+    
 
-  return (
-    <div className="FormDiv">
-      <h1>Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Product:
-          <input type="text" name="name" placeholder="..." value={product.name} onChange={handleChange}/>
-        </label>
-        <label>Price:
-          <input type="text" name="price" placeholder="..." value={product.price} onChange={handleChange}/>
-        </label>
-        <label>Description:
-          <input type="text" name="description" placeholder="..." value={product.description} onChange={handleChange}/>
-        </label>
+    const dispatch = useDispatch();
+    const brands = useSelector((state) => state.brands)
+    const types = useSelector((state) => state.types)
 
-        <label> Image:
-          <input type="url://" name="image" placeholder="..." value={product.image} onChange={handleChange}/>
-        </label>
+    useEffect(() => {
+        dispatch(getAllBrands())
+        dispatch(getAllTypes())
+    },[dispatch])
 
-        <label>
-          Brand:
-          <input type="text" name="brand" placeholder="..." value={product.brand} onChange={handleChange}/>
-        </label>
-        <label>
-          Type:
-          <input type="text" name="type" placeholder="..." value={product.type} onChange={handleChange} />
-        </label>
-        <button type="submit"> Agree </button>
-      </form>
-    </div>
-  );
+    const handleChange = (e) => {
+        setError(validate({...product, [e.target.name]: e.target.value,}))
+        setProduct({ ...product, [e.target.name]: e.target.value,});
+        console.log(product)
+    };
+
+    const handleSelectBrands = (e) => {
+        setError(validate({ ...product, brand: [...product.brand, e.target.value]})) 
+        setProduct({ ...product, brand: [...product.brand, e.target.value]})
+        console.log(product) 
+    }
+    const handleSelectTypes = (e) => {
+        setError(validate({ ...product, type: [...product.type, e.target.value]})) 
+        setProduct({ ...product, type: [...product.type, e.target.value]})
+        console.log(product) 
+    }
+    
+    const handleSubmit = (e) => {
+        if(!product.name && !product.image && !product.price && !product.description && !product.brand.length && !product.type.length){
+            alert('No se puede crear')
+        } else {
+
+            e.preventDefault();
+            console.log(product)
+            setError(validate({...product, [e.target.name] : e.target.value}))
+            dispatch(CreateProduct(product));
+            console.log(product)
+            alert('Producto creado')
+
+            setProduct({
+                name: "",
+                image: "",
+                price: "",
+                description: "",
+                brand: [],
+                type: [],
+            })
+            //history.push('/Home')
+        }
+    };
+
+    return (
+        <div className="FormDiv">
+        <h1>Form</h1>
+        <form onSubmit={(e) => handleSubmit(e)}>
+            <div>
+                <label>Difficulty</label>
+                <input type='text' name="name" placeholder="..." value={product.name} onChange={(e) => handleChange(e)}></input>                            
+                {error.name && (<p>{error.name}</p>)}
+            </div>
+            <div>
+                <label>Price</label>
+                <input type="text" name="price" placeholder="..." value={product.price} onChange={(e) => handleChange(e)}/>
+                {error.price && (<p>{error.price}</p>)}
+            </div>
+            <div>
+                <label>Description</label>
+                <input type="text" name="description" placeholder="..." value={product.description} onChange={(e) => handleChange(e)}/>
+                {error.description && (<p>{error.description}</p>)}
+            </div>
+            <div>
+                <label>Image</label>
+                <input type="url://" name="image" placeholder="..." value={product.image} onChange={handleChange}/>
+                {error.image && (<p>{error.image}</p>)}
+            </div>
+            {/* <label>
+            Brand:
+            <input type="text" name="brand" placeholder="..." value={product.brand} onChange={handleChange}/>
+            </label>
+            <label>
+            Type:
+            <input type="text" name="type" placeholder="..." value={product.type} onChange={handleChange} />
+            </label> */}
+            <div>
+                <label>Brands</label>
+                <select name="brand" onChange={(e) => handleSelectBrands(e)}>
+                    <option value="brand">All</option>
+                    {brands.map((b, index) => (
+                        <option key={index} value={b.id}>{b.name}</option>
+                    ))}
+                </select>
+            </div>
+            <div>
+                <label>Types</label>
+                <select name="type" onChange={(e) => handleSelectTypes(e)}>
+                    <option value="type">All</option>
+                    {types.map((t, index) => (
+                        <option key={index} value={t.id}>{t.name}</option>
+                    ))}
+                </select>
+            </div>
+            <button type="submit"> Agree </button>
+        </form>
+        </div>
+    );
 }
