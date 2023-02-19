@@ -1,193 +1,326 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createProduct } from "../redux/actions/ProductActions";
-import JsonMarcas from "./Marcas.json";
-import JsonTypes from "./Componentes.json";
+import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import styles from "../styles/Register.module.css";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllBrands,
+  getAllTypes,
+  createProduct,
+} from "../redux/actions/ProductActions";
 
-import "../styles/CreateProduct.css";
+function validate(input) {
+  let errors = {};
+  const regexName = /^([a-zA-Z ]+)$/i;
+  const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-export default function CreateProduct() {
-  const [product, setProduct] = useState({
+  if (input.name && !regexName.test(input.name)) {
+    errors.name = "can't include special characters or numbers";
+  }
+  if (!input.name) {
+    errors.name = "Name is required";
+  }
+  if (input.name.length > 15) {
+    errors.name = "Max 12 caracteres";
+  }
+  if (input.name.length < 2) {
+    errors.name = "Min 2 caracteres";
+  }
+  if (input.lastname && !regexName.test(input.lastname)) {
+    errors.lastname = "can't include special characters";
+  }
+  if (!input.lastname) {
+    errors.lastname = "lastname is required";
+  }
+  if (input.lastname.length > 15) {
+    errors.lastname = "Max 12 caracteres";
+  }
+  if (input.lastname.length < 2) {
+    errors.lastname = "Min 2 caracteres";
+  }
+  if (!input.password) {
+    errors.password = "password is required";
+  }
+  if (input.password.length > 12) {
+    errors.password = "Max 12 caracteres";
+  }
+  if (input.password.length < 5) {
+    errors.password = "Min 5 caracteres";
+  }
+  if (input.passwordConfirm !== input.password) {
+    errors.passwordConfirm = "passwords must match";
+  }
+  if (input.email && !regexEmail.test(input.email)) {
+    errors.email = "insert email valid";
+  }
+  if (!input.email) {
+    errors.email = "email is required";
+  }
+  return errors;
+}
+
+
+export const CreateProducts = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBrands());
+    dispatch(getAllTypes());
+  }, [dispatch]);
+  const brands = useSelector((state) => state.brands.data);
+  const types = useSelector((state) => state.types.data);
+  const [errors, setErrors] = useState({});
+  const [input, setInput] = useState({
     name: "",
     image: "",
     price: "",
     description: "",
-    brand: [],
-    type: [],
+    brand: "",
+    type: "",
   });
-  const [errores, setErrores] = useState({});
 
+  function handleChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+    // setErrors(
+    //   validate({
+    //     ...input,
+    //     [e.target.name]: e.target.value,
+    //   })
+    // );
+  }
+
+  function handleSelectBrand(e) {
+    console.log("perfecto", input.brand);
+    input.brand.includes(e.target.value)
+      ? alert("equal temperaments cannot be added")
+      : setInput({
+          ...input,
+          brand: [...input.brand, e.target.value], //si quiero muchos ponerlo asi [...input.Country,e.target.value]
+        });
+  }
+  function handleSelectType(e) {
+    console.log("perfecto", input.type);
+    input.type.includes(e.target.value)
+      ? alert("equal temperaments cannot be added")
+      : setInput({
+          ...input,
+          type: [...input.type, e.target.value], //si quiero muchos ponerlo asi [...input.Country,e.target.value]
+        });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(createProduct(input));
+    alert("User created successfully");
+    setInput({
+      name: "",
+      image: "",
+      price: "",
+      description: "",
+      brand: [],
+      type: [],
+    });
+  }
+
+  return (
+    <div className={styles.ContainerAllForm}>
+      <Form className={styles.ContainerAll} onSubmit={(e) => handleSubmit(e)}>
+        <div className={styles.register}>
+          <h2>Create product</h2>
+        </div>
+
+        <Form.Group className={styles.pack} controlId="formBasicEmail">
+          <Form.Label>Name Product</Form.Label>
+          <Form.Control
+            name="name"
+            onChange={(e) => handleChange(e)}
+            value={input.name}
+            className={styles.inputs}
+            type="text"
+            placeholder="Name Product"
+          />
+          {/* {errors.email && input.email.length > 0 && (
+            <p className={styles.spanError}>{errors.email}</p>
+          )} */}
+        </Form.Group>
+
+        <Form.Group className={styles.pack} controlId="formBasicEmail">
+          <Form.Label>image Product</Form.Label>
+          <Form.Control
+            name="image"
+            onChange={(e) => handleChange(e)}
+            value={input.image}
+            className={styles.inputs}
+            type="text"
+            placeholder="image Product"
+          />
+          {/* {errors.email && input.email.length > 0 && (
+            <p className={styles.spanError}>{errors.email}</p>
+          )} */}
+        </Form.Group>
+
+        <Form.Group className={styles.pack} controlId="formBasicEmail">
+          <Form.Label>price</Form.Label>
+          <Form.Control
+            name="price"
+            onChange={(e) => handleChange(e)}
+            value={input.price}
+            className={styles.inputs}
+            type="text"
+            placeholder="price"
+          />
+          {/* {errors.email && input.email.length > 0 && (
+            <p className={styles.spanError}>{errors.email}</p>
+          )} */}
+        </Form.Group>
+
+        <Form.Group className={styles.pack} controlId="formBasicEmail">
+          <Form.Label>description</Form.Label>
+          <Form.Control
+            name="description"
+            onChange={(e) => handleChange(e)}
+            value={input.description}
+            className={styles.inputs}
+            type="text"
+            placeholder="description"
+          />
+          {/* {errors.email && input.email.length > 0 && (
+            <p className={styles.spanError}>{errors.email}</p>
+          )} */}
+        </Form.Group>
+
+        <div className={styles.hola}>
+          <Form.Select
+            onChange={(e) => handleSelectType(e)}
+            aria-label="Default select example"
+          >
+            <option>Types select menu</option>
+            {types &&
+              types.map((types, index) => (
+                <option key={index} value={types.id}>
+                  {types.name}
+                </option>
+              ))}
+          </Form.Select>
+
+          <Form.Select
+            onChange={(e) => handleSelectBrand(e)}
+            aria-label="Default select example"
+          >
+            <option>Brands select menu</option>
+            {brands &&
+              brands.map((brand, index) => (
+                <option key={index} value={brand.id}>
+                  {brand.name}
+                </option>
+              ))}
+          </Form.Select>
+          {/* {input.brand.length !== 0 && (
+              <div >
+                <ul >
+                  <li >
+                    {input.brand.map((el) => el + " ,")}
+                  </li>
+                </ul>
+              </div>
+            )} */}
+        </div>
+
+        <div className={styles.containerBtn}>
+          <Button className={styles.btnR} type="submit">
+            Create Product
+          </Button>
+        </div>
+      </Form>
+=======
   const dispatch = useDispatch();
 
-  function handleChange(event) {
-    const { name, value, type, checked } = event.target;
-    console.log("tipo", name, "id", value);
-    console.log(product.brand);
-    const errores = validarFormulario(product);
-    setErrores(errores);
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]:
-        type === "checkbox"
-          ? checked
-            ? [...prevProduct[name], value]
-            : prevProduct[name].filter((item) => item !== value)
-          : value,
-    }));
-  }
-
-  function handleChangeCheck(event) {
-    event.preventDefault();
-    const {id,Check} = event.target;
-    console.log(event.target);
-    if (!product.brand.includes(id)) return setProduct({...product,"brand":[...product.brand,id]});
-    console.log(product);
+  const handleChange = (e) => {
     setProduct({
       ...product,
-      "brand": !product.brand.filter((element) => element !== id)
-    })
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const errores = validarFormulario(product);
-    setErrores(errores);
-    console.log(product);
-    console.log(errores);
-    if (Object.keys(errores).length === 0) {
-      console.log("Datos del formulario:", product);
-    }
-  }
-
-  function validarFormulario({ name, image, price, description, brand, type }) {
-    const errores = {};
-
-    if (!name.trim()) {
-      errores.name = "El nombre es obligatorio";
-    }
-
-    if (!image.trim()) {
-      errores.image = "La imagen es obligatoria";
-    }
-
-    if (!price.trim() || isNaN(Number(price))) {
-      errores.price = "El precio debe ser un número";
-    }
-
-    if (!description.trim()) {
-      errores.description = "La descripción es obligatoria";
-    }
-
-    if (!Array.isArray(brand) || !brand.length) {
-      errores.brand = "Debes seleccionar al menos una marca";
-    }
-
-    if (!Array.isArray(type) || !type.length) {
-      errores.type = "Debes seleccionar al menos un tipo";
-    }
-
-    return errores;
-  }
+  //falta validar si existe
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createProduct(product));
+  };
 
   return (
     <div className="FormDiv">
       <h1>Form</h1>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Product:
-            <input
-              type="text"
-              name="name"
-              placeholder="..."
-              value={product.name}
-              onChange={handleChange}
-            />
-            {errores.name && <p>{errores.name}</p>}
-          </label>
-          <label>
-            Image:
-            <input
-              type="text"
-              name="image"
-              placeholder="..."
-              value={product.image}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Price:
-            <input
-              type="number"
-              name="price"
-              placeholder="..."
-              value={product.price}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Description:
-            <input
-              type="text"
-              name="description"
-              placeholder="..."
-              value={product.description}
-              onChange={handleChange}
-            />
-          </label>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Product:
+          <input
+            type="text"
+            name="name"
+            placeholder="..."
+            value={product.name}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Price:
+          <input
+            type="text"
+            name="price"
+            placeholder="..."
+            value={product.price}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Description:
+          <input
+            type="text"
+            name="description"
+            placeholder="..."
+            value={product.description}
+            onChange={handleChange}
+          />
+        </label>
 
-          <div className="SelectsDiv">
-            Brand:
-            <select
-              name="brand"
-              multiple
-              value={product.brand}
-              onChange={(e) => handleChangeCheck(e)}
-            >
-              <option value="" disabled selected>
-                Select a brand product
-              </option>
-              {JsonMarcas.map((marca) => (
-                <option
-                  type="checkbox"
-                  name="brand"
-                  value={marca.id}
-                  onChange={(e) => handleChangeCheck(e)}
-                >
-                  {marca.name}
-                </option>
-              ))}
-            </select>
+        <label>
+          Image:
+          <input
+            type="Url"
+            name="image"
+            placeholder="..."
+            value={product.image}
+            onChange={handleChange}
+          />
+        </label>
 
-            <label>
-              Type:
-              <select
-                name="type"
-                multiple
-                value={product.brand}
-                onChange={(e) => handleChangeCheck(e)}
-              >
-                <option value="" disabled selected>
-                  Select a hardware product
-                </option>
-                {JsonTypes.map((type) => (
-                  <option
-                    type="checkbox"
-                    name="brand"
-                    value={type.id}
-                    onChange={(e) => handleChangeCheck(e)}
-                  >
-                    {type.nombre}
-                  </option>
-                ))}
-              </select>
-            </label>
+        <label>
+          Brand:
+          <input
+            type="text"
+            name="brand"
+            placeholder="..."
+            value={product.brand}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Type:
+          <input
+            type="text"
+            name="type"
+            placeholder="..."
+            value={product.type}
+            onChange={handleChange}
+          />
+        </label>
 
-          </div>
-          <button type="submit"> Agree </button>
-        </form>
-      </div>
+        <button type="submit"> Agree </button>
+      </form>
+
     </div>
   );
-}
+};
