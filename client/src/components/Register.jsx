@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import styles from "../styles/Register.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { userRegister } from "../redux/UsersActions"
+import { userRegister } from '../redux/actions/UsersActions';
 
 
 
@@ -12,9 +12,14 @@ function validate(input) {
 
     let errors = {};
     const regexName = /^([a-zA-Z ]+)$/i;
+<<<<<<< HEAD
     const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
     const regexNumber = /^[0-9]*$/i;
     const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+=======
+    // const regexNumber = /^[0-9]*$/i;
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
+>>>>>>> 14d91b492414892257774640633287f1ba3e0c88
 
     if (input.name && !regexName.test(input.name)) {
       errors.name = "can't include special characters or numbers";

@@ -1,6 +1,4 @@
-.DivProducts{
-    margin-left: 3%;
-}
+
 .Products{
     margin-top: 100px;
 }
@@ -38,7 +36,7 @@
 
 .DivFilter {
     padding: 20px;
-    width: 600px;
+    width: 300px;
     background-color: white;
     margin-top: 100px;
     border-radius: 10px;
@@ -46,4 +44,11 @@
     flex-direction: column;
     align-items: center;
     text-transform: uppercase;
+    margin-left: 40px;
+}
+.CardContainer{
+    margin-top: 88px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px
 }
