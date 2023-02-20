@@ -57,7 +57,6 @@ export const Home = () => {
                         image={p.image}
                     />))}
             </div>
-            <Footer/>
         </div>
     )
 }
