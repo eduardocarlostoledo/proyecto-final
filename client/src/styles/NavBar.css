@@ -1,4 +1,4 @@
-/* .NavDiv {
+ .NavDiv {
     display: flex;
     justify-content: space-between;
     background-color: #7200ca;
@@ -31,7 +31,7 @@
 .buttonNav {
     width: 80px;
     height: 40px;
-    margin: 5px;
+    margin: 10px;
     border: none;
     border-radius: 10px;
     background-color: rgb(83, 32, 117);
@@ -49,8 +49,8 @@
     height: 40px;
     margin: 5px;
     border: none;
-    font-size: 24px;
-    /* border-radius: 10px; */
+    font-size: 18px;
+    border-radius: 10px; 
     background-color: #7200ca;
     color: white;
     user-select: none;

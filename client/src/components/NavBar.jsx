@@ -33,9 +33,10 @@ export const NavBar = () => {
     return (
         <div className='NavDiv'>
         <div className="BuildAndProducts">
-        <Link to="/"><button><ion-icon className="iconHome" name="home-outline"></ion-icon>HOME</button></Link>
-        <Link to="/Products"><button>PRODUCTS</button></Link>
-        <Link to="/BuildPc"><button>BUILD PC</button></Link>
+        <Link to="/"><button><ion-icon className="iconHome" name="home-outline"></ion-icon> Home</button></Link>
+        <Link to="/Products"><button>Products</button></Link>
+        <Link to="/BuildPc"><button>Build PC</button></Link>
+        <Link to="/CreateProduct"><button>Create</button></Link>
             </div>
         <div className="ContainerSearch">
             <Search />
