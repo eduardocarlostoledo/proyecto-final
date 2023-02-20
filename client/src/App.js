@@ -31,10 +31,6 @@ function App() {
 
         <Route path="/CreateProduct" element={<CreateProducts/>} />
 
-        <Route path="/Login" component={Login} />
-
-        <Route path="/CreateProduct" component={CreateProducts} />
-
         <Route path="/Profile" element={<Profile/>} />
       </Routes>
       <Footer/>
