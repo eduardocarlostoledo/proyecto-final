@@ -13,6 +13,7 @@ const productRouter = Router()
 // Ruta POST de Productos, va a ser utilizada por el administrador.
 
 
+
 productRouter.post('/', async (req,res) => {
   try {
     let product = req.body;
@@ -23,13 +24,23 @@ productRouter.post('/', async (req,res) => {
     return res.status(400).send({ error: error.message });
   }
 });
+  
 
 // Ruta GET para traer todos los tipos de productos.
 
+// productRouter.get("/types", async (req, res) => {
+//   try {
+//       const products = await getTypeProducts();
+//     res.status(200).json({ data: products});
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
+
 productRouter.get("/types", async (req, res) => {
   try {
-      const products = await getTypeProducts();
-    res.status(200).json(products);
+    const products = await getTypeProducts();
+    res.status(200).json(products); //cambio el retorno para q sea mas limpio dejo copia arriba
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -38,8 +49,17 @@ productRouter.get("/types", async (req, res) => {
 
 // Ruta GET para traer todos las marcas de productos.
 
+// productRouter.get("/brands", async (req, res) => {
+//   try {
+//       const products = await getBrandProducts();
+//     res.status(200).json({ data: products});
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
+
 productRouter.get("/brands", async (req, res) => {
-  try {
+  try {   
     const products = await getBrandProducts();
     res.status(200).json(products);
   } catch (error) {

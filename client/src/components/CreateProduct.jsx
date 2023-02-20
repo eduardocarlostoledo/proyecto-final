@@ -1,10 +1,76 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createProduct } from "../redux/actions/ProductActions";
-import "../styles/CreateProduct.css";
+import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import styles from "../styles/Register.module.css";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllBrands,
+  getAllTypes,
+  createProduct,
+} from "../redux/actions/ProductActions";
 
-export default function CreateProduct() {
-  const [product, setProduct] = useState({
+function validate(input) {
+  let errors = {};
+  const regexName = /^([a-zA-Z ]+)$/i;
+  const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+  if (input.name && !regexName.test(input.name)) {
+    errors.name = "can't include special characters or numbers";
+  }
+  if (!input.name) {
+    errors.name = "Name is required";
+  }
+  if (input.name.length > 15) {
+    errors.name = "Max 12 caracteres";
+  }
+  if (input.name.length < 2) {
+    errors.name = "Min 2 caracteres";
+  }
+  if (input.lastname && !regexName.test(input.lastname)) {
+    errors.lastname = "can't include special characters";
+  }
+  if (!input.lastname) {
+    errors.lastname = "lastname is required";
+  }
+  if (input.lastname.length > 15) {
+    errors.lastname = "Max 12 caracteres";
+  }
+  if (input.lastname.length < 2) {
+    errors.lastname = "Min 2 caracteres";
+  }
+  if (!input.password) {
+    errors.password = "password is required";
+  }
+  if (input.password.length > 12) {
+    errors.password = "Max 12 caracteres";
+  }
+  if (input.password.length < 5) {
+    errors.password = "Min 5 caracteres";
+  }
+  if (input.passwordConfirm !== input.password) {
+    errors.passwordConfirm = "passwords must match";
+  }
+  if (input.email && !regexEmail.test(input.email)) {
+    errors.email = "insert email valid";
+  }
+  if (!input.email) {
+    errors.email = "email is required";
+  }
+  return errors;
+}
+
+
+export const CreateProducts = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBrands());
+    dispatch(getAllTypes());
+  }, [dispatch]);
+  const brands = useSelector((state) => state.brands.data);
+  const types = useSelector((state) => state.types.data);
+  const [errors, setErrors] = useState({});
+  const [input, setInput] = useState({
     name: "",
     image: "",
     price: "",
@@ -13,90 +79,162 @@ export default function CreateProduct() {
     type: "",
   });
 
-  const dispatch = useDispatch();
-
-  const handleChange = (e) => {
-    setProduct({
-      ...product,
+  function handleChange(e) {
+    setInput({
+      ...input,
       [e.target.name]: e.target.value,
     });
-  };
+    // setErrors(
+    //   validate({
+    //     ...input,
+    //     [e.target.name]: e.target.value,
+    //   })
+    // );
+  }
 
-  //falta validar si existe
-  const handleSubmit = (e) => {
+  function handleSelectBrand(e) {
+    console.log("perfecto", input.brand);
+    input.brand.includes(e.target.value)
+      ? alert("equal temperaments cannot be added")
+      : setInput({
+          ...input,
+          brand: [...input.brand, e.target.value], //si quiero muchos ponerlo asi [...input.Country,e.target.value]
+        });
+  }
+  function handleSelectType(e) {
+    console.log("perfecto", input.type);
+    input.type.includes(e.target.value)
+      ? alert("equal temperaments cannot be added")
+      : setInput({
+          ...input,
+          type: [...input.type, e.target.value], //si quiero muchos ponerlo asi [...input.Country,e.target.value]
+        });
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createProduct(product));
-  };
+    dispatch(createProduct(input));
+    alert("User created successfully");
+    setInput({
+      name: "",
+      image: "",
+      price: "",
+      description: "",
+      brand: [],
+      type: [],
+    });
+  }
 
   return (
-    <div className="FormDiv">
-      <h1>Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Product:
-          <input
-            type="text"
+    <div className={styles.ContainerAllForm}>
+      <Form className={styles.ContainerAll} onSubmit={(e) => handleSubmit(e)}>
+        <div className={styles.register}>
+          <h2>Create product</h2>
+        </div>
+
+        <Form.Group className={styles.pack} controlId="formBasicEmail">
+          <Form.Label>Name Product</Form.Label>
+          <Form.Control
             name="name"
-            placeholder="..."
-            value={product.name}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Price:
-          <input
+            onChange={(e) => handleChange(e)}
+            value={input.name}
+            className={styles.inputs}
             type="text"
-            name="price"
-            placeholder="..."
-            value={product.price}
-            onChange={handleChange}
+            placeholder="Name Product"
           />
-        </label>
-        <label>
-          Description:
-          <input
-            type="text"
-            name="description"
-            placeholder="..."
-            value={product.description}
-            onChange={handleChange}
-          />
-        </label>
+          {/* {errors.email && input.email.length > 0 && (
+            <p className={styles.spanError}>{errors.email}</p>
+          )} */}
+        </Form.Group>
 
-        <label>
-          Image:
-          <input
-            type="Url"
+        <Form.Group className={styles.pack} controlId="formBasicEmail">
+          <Form.Label>image Product</Form.Label>
+          <Form.Control
             name="image"
-            placeholder="..."
-            value={product.image}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label>
-          Brand:
-          <input
+            onChange={(e) => handleChange(e)}
+            value={input.image}
+            className={styles.inputs}
             type="text"
-            name="brand"
-            placeholder="..."
-            value={product.brand}
-            onChange={handleChange}
+            placeholder="image Product"
           />
-        </label>
-        <label>
-          Type:
-          <input
-            type="text"
-            name="type"
-            placeholder="..."
-            value={product.type}
-            onChange={handleChange}
-          />
-        </label>
+          {/* {errors.email && input.email.length > 0 && (
+            <p className={styles.spanError}>{errors.email}</p>
+          )} */}
+        </Form.Group>
 
-        <button type="submit"> Agree </button>
-      </form>
-    </div>
-  );
-}
+        <Form.Group className={styles.pack} controlId="formBasicEmail">
+          <Form.Label>price</Form.Label>
+          <Form.Control
+            name="price"
+            onChange={(e) => handleChange(e)}
+            value={input.price}
+            className={styles.inputs}
+            type="text"
+            placeholder="price"
+          />
+          {/* {errors.email && input.email.length > 0 && (
+            <p className={styles.spanError}>{errors.email}</p>
+          )} */}
+        </Form.Group>
+
+        <Form.Group className={styles.pack} controlId="formBasicEmail">
+          <Form.Label>description</Form.Label>
+          <Form.Control
+            name="description"
+            onChange={(e) => handleChange(e)}
+            value={input.description}
+            className={styles.inputs}
+            type="text"
+            placeholder="description"
+          />
+          {/* {errors.email && input.email.length > 0 && (
+            <p className={styles.spanError}>{errors.email}</p>
+          )} */}
+        </Form.Group>
+
+        <div className={styles.hola}>
+          <Form.Select
+            onChange={(e) => handleSelectType(e)}
+            aria-label="Default select example"
+          >
+            <option>Types select menu</option>
+            {types &&
+              types.map((types, index) => (
+                <option key={index} value={types.id}>
+                  {types.name}
+                </option>
+              ))}
+          </Form.Select>
+
+          <Form.Select
+            onChange={(e) => handleSelectBrand(e)}
+            aria-label="Default select example"
+          >
+            <option>Brands select menu</option>
+            {brands &&
+              brands.map((brand, index) => (
+                <option key={index} value={brand.id}>
+                  {brand.name}
+                </option>
+              ))}
+          </Form.Select>
+          {/* {input.brand.length !== 0 && (
+              <div >
+                <ul >
+                  <li >
+                    {input.brand.map((el) => el + " ,")}
+                  </li>
+                </ul>
+              </div>
+            )} */}
+        </div>
+
+        <div className={styles.containerBtn}>
+          <Button className={styles.btnR} type="submit">
+            Create Product
+          </Button>
+        </div>
+      </Form>
+      </div>
+  )
+          };
