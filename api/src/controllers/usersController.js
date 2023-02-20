@@ -152,29 +152,6 @@ const deleteUser = async (req, res) => {
 
 
 
-//////////////// COPIA /////////////////////////
-// const postUsers = async (req, res) => {
-//   const infoUser = {}
-//   try {
-//     const { name, lastname, email, password, } = req.body;
-//     if (!name || !lastname || !password || !email)
-//       return res.json({ msg: 'Missing required fields' });
-//       const userBD = await User.findOne({ where: { email: `${email}` } });
-//       if (userBD) return res.json({ msg: 'The email already exists' });
-
-//     const passwordHash = await encrypt(password);
-//     await User.create({
-//       name: name,
-//       lastname: lastname,
-//       password: passwordHash,
-//       email: email.toLowerCase(),
-//     });
-//     return res.json({ msg: `User create succesfully` });
-//   } catch (error) {
-//     return res.json({ msg: `Error 404 - ${error}` });
-//   }
-// };
-
 module.exports = {
   putUser, getUsers, getUserId, loginUser, postUsers, deleteUser
 }

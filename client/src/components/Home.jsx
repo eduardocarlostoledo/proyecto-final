@@ -130,7 +130,6 @@ export const Home = () => {
                     <a href="#" className="btnHome mgt60">Load More</a>
                 </div>
             </section>
-
         </div>
     )
 }
