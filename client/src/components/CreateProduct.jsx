@@ -66,8 +66,8 @@ export const CreateProducts = () => {
     dispatch(getAllBrands());
     dispatch(getAllTypes());
   }, [dispatch]);
-  const brands = useSelector((state) => state.brands.data);
-  const types = useSelector((state) => state.types.data);
+  const brands = useSelector((state) => state.brands);
+  const types = useSelector((state) => state.types);
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
