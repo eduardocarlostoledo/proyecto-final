@@ -26,6 +26,7 @@ export const Search = () => {
     return (
         <div className='SearchButton'>
             <div>
+                
                 <input className='InputBuscar' type='text' placeholder="Search..." onChange={(e) => handleInputChange(e)}/> 
                 <button className='SubmitBuscar' type="submit" onClick={(e) => handleSubmit(e)}> < HiMagnifyingGlass className="icon"/></button>
             </div>
