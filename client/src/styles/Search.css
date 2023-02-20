@@ -7,45 +7,19 @@
 }
 
 .InputBuscar {
-    width: 400px;
-    padding: 10px;
+
+    width: 250px;
+    height: 35px;
     margin-right: 10px;
+    border-radius: 20px;
+    border: none;
+    text-align: center;
 }
 
 .SubmitBuscar {
-    width: 100px;
-    height: 30px;
+    width: 60px;
+    height: 35px;
     border-radius: 20px;
     border: none;
     margin-left: 10px;
-}
-
-.InputBuscar {
-    width: 450px;
-    min-width: 250px;
-    height: 40px;
-    margin: 5px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border: none;
-    border-radius: 10px;
-    background-color: white;
-    font-size: 21px;
-}
-
-.SubmitBuscar {
-    width: 80px;
-    height: 40px;
-    margin: 5px;
-    border: none;
-    border-radius: 10px;
-    background-color: rgb(26, 160, 194);
-    color: white;
-    user-select: none;
-}
-
-.icon {
-    font-size: 25px;
 }
