@@ -14,10 +14,13 @@ export const Detail = () => {
 
   const detail = useSelector((state) => state.productDetail);
   console.log(detail);
-//   const brand = useSelector((state) => {
-//     return state.brands.find((b) => b.id === 1);
-//   });
-//   const type = useSelector((state) => state.types.find((t) => t.id === 1));
+  // const brand = useSelector((state) => {
+  //   return state.brands.find((b) => b.id === detail.id);
+  // });
+  // console.log("brand",brand);
+  // const type = useSelector((state) => state.types.find((t) => t.id === detail.id));
+  // console.log("type",type);
+
 
   return (
     <div className="DetailContainer">
@@ -35,9 +38,13 @@ export const Detail = () => {
       </Link>
       <img src={detail.image} alt='img'/>
       <div className="DataDiv">
+        <div className="TypeBrandDiv">
+        <p>{detail.type}</p>
+        <p>{detail.brand}</p>
+        </div>
         <h1>{Name}</h1>
-        <p>{detail.description}</p>
         <h2>$ {detail.price}</h2>
+        <p>{detail.description}</p>
       </div>
     </div>
   );

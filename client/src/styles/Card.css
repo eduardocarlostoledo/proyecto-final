@@ -17,10 +17,11 @@
                         "buttons compra compra";
     grid-template-columns: 55px;
     grid-template-rows: 70%, 20px, 20px, 30%;
-    width: 19vw;
-    height: 53vh;
+    width: 300px;
+    height: 400px;
     font-family: 'DM Sans', sans-serif;
     margin-top: 5%;
+    position: relative;
 }
 
 .contenedor_card:hover img{
@@ -32,29 +33,37 @@
 .card_p_nombre{
     grid-area: nombre;
     margin-left: 4%;
-    margin-right: 3%;
-    font-size: 2.1vh;
+    margin-right: 2%;
+    font-size: 16px;
     margin-top: 0;
+    text-align: justify;
 }
 
 .contenedor_card  img{
     width: 100%;
+    display: flex;
+    justify-content: center;
     transition: 1s; 
 }
-.card_contenedor_img{
-    overflow: hidden;
-    width: 90%;
+
+.LinkImage {
+    display: flex;
+    justify-content: center;
+    width: 80%;
     grid-area: img;
     margin-top: 20%;
     margin-left: 10%;
+    margin-bottom: 20px;
 }
+
+
 .card_p_cantidad{
     margin-left: 1vw;
     margin-right: 1vw;
 }
 
 .card_strong_precio{
-    font-size: 3.5vh;
+    font-size: 18px;
     grid-area: precio;
     margin-right: 60%;
     margin-top: 3%;
@@ -74,8 +83,6 @@ height: 3vh;
 border: 1px solid black;
 background-color: inherit;
 font-size: 1.8vh;
-/* margin-top: 25%; */
-
 }
 .card_button_sumar:hover, .card_button_restar:hover{
     background-color: #e7b8ff;
@@ -99,7 +106,10 @@ font-size: 1.8vh;
 }
 
 .DivAllCards {
-    display: flex;
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: 22rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 }
 /* @import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Great+Vibes&family=Parisienne&display=swap');
 

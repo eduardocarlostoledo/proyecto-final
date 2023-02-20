@@ -1,0 +1,80 @@
+.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: aquamarine;
+    font-size: 6vh;
+    padding-left: 2%;
+    padding-bottom: 5%;
+    padding-top: 0;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 5%;
+}
+
+.contenedor_profile{
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    margin-left: 30%;
+    border-radius: 15px;
+
+}
+.div_name{
+    width: 500px;
+    display: flex;
+    margin-top: 2%;
+    margin-left: 2%;
+    background-color:#fff;
+    border-radius: 15px;
+
+}
+
+.h3_name{
+margin-left: 5%;
+}
+
+.h3_lastname{
+    margin-left: 3%;  
+}
+
+.div_name p{
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 7%;
+}
+
+.div_info{
+    background-color: #fff;
+    width: 500px;
+    margin-top: 3%;
+    border-radius: 15px;
+    margin-left: 2%;
+    height: 300px;
+}
+
+.div_info p{
+    font-size: 2.5vh;
+    margin-left: 5%;
+}
+
+.div_info > div{
+    margin-left: 7%;
+    display: grid;
+    width: 100%;
+    grid-template-areas: "icono parrafo";
+    grid-template-columns: 20px;
+}
+
+.div_info > div > p{
+    grid-area: parrafo;
+}
+
+.icono{
+    grid-area: icono;
+}
+
+.div_info > h3{
+    margin-left: 20%;
+    margin-bottom: 6%;
+}
