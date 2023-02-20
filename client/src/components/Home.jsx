@@ -57,7 +57,7 @@ export const Home = () => {
                         image={p.image}
                     />))}
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </div>
     )
 }

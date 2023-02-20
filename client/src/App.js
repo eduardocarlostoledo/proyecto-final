@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route, Routes} from "react-router-dom";
-
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
@@ -10,6 +9,7 @@ import { Register } from "./components/Register";
 import { Profile } from "./components/Profile";
 import {Login} from "./components/Login"
 import CreateProduct from "./components/CreateProduct";
+import { Footer } from "./components/Footer";
 
 function App() {
   return (
@@ -38,6 +38,7 @@ function App() {
 
         <Route path="/Profile" element={<Profile/>} />
       </Routes>
+      <Footer/>
     </div>
   );
 }

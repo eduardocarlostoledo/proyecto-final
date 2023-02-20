@@ -1,193 +1,193 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createProduct } from "../redux/actions/ProductActions";
-import JsonMarcas from "./Marcas.json";
-import JsonTypes from "./Componentes.json";
+// import React, { useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { createProduct } from "../redux/actions/ProductActions";
+// import JsonMarcas from "./Marcas.json";
+// import JsonTypes from "./Componentes.json";
 
-import "../styles/CreateProduct.css";
+// import "../styles/CreateProduct.css";
 
-export default function CreateProduct() {
-  const [product, setProduct] = useState({
-    name: "",
-    image: "",
-    price: "",
-    description: "",
-    brand: [],
-    type: [],
-  });
-  const [errores, setErrores] = useState({});
+// export default function CreateProduct() {
+//   const [product, setProduct] = useState({
+//     name: "",
+//     image: "",
+//     price: "",
+//     description: "",
+//     brand: [],
+//     type: [],
+//   });
+//   const [errores, setErrores] = useState({});
 
-  const dispatch = useDispatch();
+//   const dispatch = useDispatch();
 
-  function handleChange(event) {
-    const { name, value, type, checked } = event.target;
-    console.log("tipo", name, "id", value);
-    console.log(product.brand);
-    const errores = validarFormulario(product);
-    setErrores(errores);
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]:
-        type === "checkbox"
-          ? checked
-            ? [...prevProduct[name], value]
-            : prevProduct[name].filter((item) => item !== value)
-          : value,
-    }));
-  }
+//   function handleChange(event) {
+//     const { name, value, type, checked } = event.target;
+//     console.log("tipo", name, "id", value);
+//     console.log(product.brand);
+//     const errores = validarFormulario(product);
+//     setErrores(errores);
+//     setProduct((prevProduct) => ({
+//       ...prevProduct,
+//       [name]:
+//         type === "checkbox"
+//           ? checked
+//             ? [...prevProduct[name], value]
+//             : prevProduct[name].filter((item) => item !== value)
+//           : value,
+//     }));
+//   }
 
-  function handleChangeCheck(event) {
-    event.preventDefault();
-    const {id,Check} = event.target;
-    console.log(event.target);
-    if (!product.brand.includes(id)) return setProduct({...product,"brand":[...product.brand,id]});
-    console.log(product);
-    setProduct({
-      ...product,
-      "brand": !product.brand.filter((element) => element !== id)
-    })
+//   function handleChangeCheck(event) {
+//     event.preventDefault();
+//     const {id,Check} = event.target;
+//     console.log(event.target);
+//     if (!product.brand.includes(id)) return setProduct({...product,"brand":[...product.brand,id]});
+//     console.log(product);
+//     setProduct({
+//       ...product,
+//       "brand": !product.brand.filter((element) => element !== id)
+//     })
 
-  }
+//   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const errores = validarFormulario(product);
-    setErrores(errores);
-    console.log(product);
-    console.log(errores);
-    if (Object.keys(errores).length === 0) {
-      console.log("Datos del formulario:", product);
-    }
-  }
+//   function handleSubmit(event) {
+//     event.preventDefault();
+//     const errores = validarFormulario(product);
+//     setErrores(errores);
+//     console.log(product);
+//     console.log(errores);
+//     if (Object.keys(errores).length === 0) {
+//       console.log("Datos del formulario:", product);
+//     }
+//   }
 
-  function validarFormulario({ name, image, price, description, brand, type }) {
-    const errores = {};
+//   function validarFormulario({ name, image, price, description, brand, type }) {
+//     const errores = {};
 
-    if (!name.trim()) {
-      errores.name = "El nombre es obligatorio";
-    }
+//     if (!name.trim()) {
+//       errores.name = "El nombre es obligatorio";
+//     }
 
-    if (!image.trim()) {
-      errores.image = "La imagen es obligatoria";
-    }
+//     if (!image.trim()) {
+//       errores.image = "La imagen es obligatoria";
+//     }
 
-    if (!price.trim() || isNaN(Number(price))) {
-      errores.price = "El precio debe ser un número";
-    }
+//     if (!price.trim() || isNaN(Number(price))) {
+//       errores.price = "El precio debe ser un número";
+//     }
 
-    if (!description.trim()) {
-      errores.description = "La descripción es obligatoria";
-    }
+//     if (!description.trim()) {
+//       errores.description = "La descripción es obligatoria";
+//     }
 
-    if (!Array.isArray(brand) || !brand.length) {
-      errores.brand = "Debes seleccionar al menos una marca";
-    }
+//     if (!Array.isArray(brand) || !brand.length) {
+//       errores.brand = "Debes seleccionar al menos una marca";
+//     }
 
-    if (!Array.isArray(type) || !type.length) {
-      errores.type = "Debes seleccionar al menos un tipo";
-    }
+//     if (!Array.isArray(type) || !type.length) {
+//       errores.type = "Debes seleccionar al menos un tipo";
+//     }
 
-    return errores;
-  }
+//     return errores;
+//   }
 
-  return (
-    <div className="FormDiv">
-      <h1>Form</h1>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Product:
-            <input
-              type="text"
-              name="name"
-              placeholder="..."
-              value={product.name}
-              onChange={handleChange}
-            />
-            {errores.name && <p>{errores.name}</p>}
-          </label>
-          <label>
-            Image:
-            <input
-              type="text"
-              name="image"
-              placeholder="..."
-              value={product.image}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Price:
-            <input
-              type="number"
-              name="price"
-              placeholder="..."
-              value={product.price}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            Description:
-            <input
-              type="text"
-              name="description"
-              placeholder="..."
-              value={product.description}
-              onChange={handleChange}
-            />
-          </label>
+//   return (
+//     <div className="FormDiv">
+//       <h1>Form</h1>
+//       <div>
+//         <form onSubmit={handleSubmit}>
+//           <label>
+//             Product:
+//             <input
+//               type="text"
+//               name="name"
+//               placeholder="..."
+//               value={product.name}
+//               onChange={handleChange}
+//             />
+//             {errores.name && <p>{errores.name}</p>}
+//           </label>
+//           <label>
+//             Image:
+//             <input
+//               type="text"
+//               name="image"
+//               placeholder="..."
+//               value={product.image}
+//               onChange={handleChange}
+//             />
+//           </label>
+//           <label>
+//             Price:
+//             <input
+//               type="number"
+//               name="price"
+//               placeholder="..."
+//               value={product.price}
+//               onChange={handleChange}
+//             />
+//           </label>
+//           <label>
+//             Description:
+//             <input
+//               type="text"
+//               name="description"
+//               placeholder="..."
+//               value={product.description}
+//               onChange={handleChange}
+//             />
+//           </label>
 
-          <div className="SelectsDiv">
-            Brand:
-            <select
-              name="brand"
-              multiple
-              value={product.brand}
-              onChange={(e) => handleChangeCheck(e)}
-            >
-              <option value="" disabled selected>
-                Select a brand product
-              </option>
-              {JsonMarcas.map((marca) => (
-                <option
-                  type="checkbox"
-                  name="brand"
-                  value={marca.id}
-                  onChange={(e) => handleChangeCheck(e)}
-                >
-                  {marca.name}
-                </option>
-              ))}
-            </select>
+//           <div className="SelectsDiv">
+//             Brand:
+//             <select
+//               name="brand"
+//               multiple
+//               value={product.brand}
+//               onChange={(e) => handleChangeCheck(e)}
+//             >
+//               <option value="" disabled selected>
+//                 Select a brand product
+//               </option>
+//               {JsonMarcas.map((marca) => (
+//                 <option
+//                   type="checkbox"
+//                   name="brand"
+//                   value={marca.id}
+//                   onChange={(e) => handleChangeCheck(e)}
+//                 >
+//                   {marca.name}
+//                 </option>
+//               ))}
+//             </select>
 
-            <label>
-              Type:
-              <select
-                name="type"
-                multiple
-                value={product.brand}
-                onChange={(e) => handleChangeCheck(e)}
-              >
-                <option value="" disabled selected>
-                  Select a hardware product
-                </option>
-                {JsonTypes.map((type) => (
-                  <option
-                    type="checkbox"
-                    name="brand"
-                    value={type.id}
-                    onChange={(e) => handleChangeCheck(e)}
-                  >
-                    {type.nombre}
-                  </option>
-                ))}
-              </select>
-            </label>
+//             <label>
+//               Type:
+//               <select
+//                 name="type"
+//                 multiple
+//                 value={product.brand}
+//                 onChange={(e) => handleChangeCheck(e)}
+//               >
+//                 <option value="" disabled selected>
+//                   Select a hardware product
+//                 </option>
+//                 {JsonTypes.map((type) => (
+//                   <option
+//                     type="checkbox"
+//                     name="brand"
+//                     value={type.id}
+//                     onChange={(e) => handleChangeCheck(e)}
+//                   >
+//                     {type.nombre}
+//                   </option>
+//                 ))}
+//               </select>
+//             </label>
 
-          </div>
-          <button type="submit"> Agree </button>
-        </form>
-      </div>
-    </div>
-  );
-}
+//           </div>
+//           <button type="submit"> Agree </button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// }
