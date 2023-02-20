@@ -149,7 +149,6 @@ export const Home = () => {
                     <a href="#" className="btn mgt60">Load More</a>
                 </div>
             </section>
-            <Footer/>
 
         </div>
     )

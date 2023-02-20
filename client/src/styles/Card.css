@@ -41,17 +41,22 @@
 
 .contenedor_card  img{
     width: 100%;
+    display: flex;
+    justify-content: center;
     transition: 1s; 
 }
-.card_contenedor_img{
-    overflow: hidden;
-    width: 14.5vw;
+
+.LinkImage {
+    display: flex;
+    justify-content: center;
+    width: 80%;
     grid-area: img;
     margin-top: 20%;
     margin-left: 10%;
     margin-bottom: 20px;
-    border-bottom: solid black 1px;
 }
+
+
 .card_p_cantidad{
     margin-left: 1vw;
     margin-right: 1vw;
@@ -78,8 +83,6 @@ height: 3vh;
 border: 1px solid black;
 background-color: inherit;
 font-size: 1.8vh;
-/* margin-top: 25%; */
-
 }
 .card_button_sumar:hover, .card_button_restar:hover{
     background-color: #e7b8ff;
