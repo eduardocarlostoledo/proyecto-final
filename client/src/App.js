@@ -33,7 +33,7 @@ function App() {
 
         <Route path="/Profile" element={<Profile/>} />
       </Routes>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
