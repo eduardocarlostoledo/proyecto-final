@@ -1,4 +1,4 @@
-.NavDiv {
+/* .NavDiv {
     display: flex;
     justify-content: space-between;
     background-color: #7200ca;
@@ -92,6 +92,7 @@
     font-size: 30px;
     color: white;
 }
+
 .Cart:hover {
  color: #12f8a0;
     opacity: 0.7;
