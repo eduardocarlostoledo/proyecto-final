@@ -103,27 +103,6 @@ section{
     background: black;
 }
 
-p{
-    color: black;
-    font-weight: 300;
-    text-align: justify;
-}
-
-.about .contentBx{
-    position: relative;
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 40px
-}
-
-.about .contentBx .content{
-    position: relative;
-}
-
-.about .contentBx .content .img{
-    min-height: 400px;
-}
 
 .post{
     position: relative;

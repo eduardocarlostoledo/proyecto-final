@@ -7,7 +7,8 @@ export default function Card({name, image, price}) {
       
         <div class="contenedor_card">
           <div class="card_contenedor_img">
-            <img src={image} alt=""/>
+            <img src={image} width="100px" alt=""/>
+            <hr />
           </div>
           <p class="card_p_nombre">{name}</p>
           
