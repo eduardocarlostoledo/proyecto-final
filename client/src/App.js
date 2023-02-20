@@ -6,6 +6,7 @@ import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
 import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
+import { Footer } from "./components/Footer";
 import { Register } from "./components/Register";
 import Profile  from "./components/Profile";
 import {Login} from "./components/Login"
@@ -14,7 +15,7 @@ import {CreateProducts} from "./components/CreateProduct";
 function App() {
   return (
     <div className="App">
-      <NavBar></NavBar>
+      <NavBar />
       <Routes>
         <Route exact path="/" element={<Home/>} />
 
@@ -36,6 +37,7 @@ function App() {
 
         <Route path="/Profile" element={<Profile/>} />
       </Routes>
+      <Footer />
     </div>
   );
 }
