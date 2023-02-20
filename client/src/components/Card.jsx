@@ -6,8 +6,8 @@ export default function Card({name, image, price}) {
     return (
         <div className="DivAllCards">
       
-        <div class="contenedor_card">
-          <Link to={`/detail/${name}`}>
+        <div className="contenedor_card">
+          <Link className="LinkImage" to={`/detail/${name}`}>
           <div class="card_contenedor_img">
             <img src={image} width="100px" alt=""/>
             <hr />
