@@ -60,6 +60,7 @@ function validate(input) {
   return errors;
 }
 
+
 export const CreateProducts = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -74,42 +75,41 @@ export const CreateProducts = () => {
     image: "",
     price: "",
     description: "",
-    brand: 0,
-    type: 0,
+    brand: "",
+    type: "",
   });
 
   function handleChange(e) {
-    console.log(e.target.name ,e.target.value);
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
+    // setErrors(
+    //   validate({
+    //     ...input,
+    //     [e.target.name]: e.target.value,
+    //   })
+    // );
   }
 
-  // function handleSelectBrand(e) {
-  //   console.log("perfecto", input.brand);
-  //   input.brand.includes(e.target.value)
-  //     ? alert("equal temperaments cannot be added")
-  //     : setInput({
-  //         ...input,
-  //         brand: [...input.brand, e.target.value], 
-  //       });
-  // }
-  // function handleSelectType(e) {
-  //   console.log("perfecto", input.type);
-  //   input.type.includes(e.target.value)
-  //     ? alert("equal temperaments cannot be added")
-  //     : setInput({
-  //         ...input,
-  //         type: [...input.type, e.target.value],
-  //       });
-  // }
+  function handleSelectBrand(e) {
+    console.log("perfecto", input.brand);
+    input.brand.includes(e.target.value)
+      ? alert("equal temperaments cannot be added")
+      : setInput({
+          ...input,
+          brand: [...input.brand, e.target.value], //si quiero muchos ponerlo asi [...input.Country,e.target.value]
+        });
+  }
+  function handleSelectType(e) {
+    console.log("perfecto", input.type);
+    input.type.includes(e.target.value)
+      ? alert("equal temperaments cannot be added")
+      : setInput({
+          ...input,
+          type: [...input.type, e.target.value], //si quiero muchos ponerlo asi [...input.Country,e.target.value]
+        });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -120,8 +120,8 @@ export const CreateProducts = () => {
       image: "",
       price: "",
       description: "",
-      brand: 0,
-      type: 0,
+      brand: [],
+      type: [],
     });
   }
 
@@ -194,8 +194,7 @@ export const CreateProducts = () => {
 
         <div className={styles.hola}>
           <Form.Select
-            name="type"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleSelectType(e)}
             aria-label="Default select example"
           >
             <option>Types select menu</option>
@@ -208,8 +207,7 @@ export const CreateProducts = () => {
           </Form.Select>
 
           <Form.Select
-            name="brand"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleSelectBrand(e)}
             aria-label="Default select example"
           >
             <option>Brands select menu</option>
@@ -237,6 +235,92 @@ export const CreateProducts = () => {
           </Button>
         </div>
       </Form>
+=======
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setProduct({
+      ...product,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  //falta validar si existe
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createProduct(product));
+  };
+
+  return (
+    <div className="FormDiv">
+      <h1>Form</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Product:
+          <input
+            type="text"
+            name="name"
+            placeholder="..."
+            value={product.name}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Price:
+          <input
+            type="text"
+            name="price"
+            placeholder="..."
+            value={product.price}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Description:
+          <input
+            type="text"
+            name="description"
+            placeholder="..."
+            value={product.description}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          Image:
+          <input
+            type="Url"
+            name="image"
+            placeholder="..."
+            value={product.image}
+            onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          Brand:
+          <input
+            type="text"
+            name="brand"
+            placeholder="..."
+            value={product.brand}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Type:
+          <input
+            type="text"
+            name="type"
+            placeholder="..."
+            value={product.type}
+            onChange={handleChange}
+          />
+        </label>
+
+        <button type="submit"> Agree </button>
+      </form>
+
     </div>
   );
 };

@@ -1,5 +1,3 @@
-
-
 import axios from "axios";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_ALL_PRODUCTS_NAME="GET_ALL_PRODUCTS_NAME"
@@ -32,6 +30,7 @@ export const getProductDetail = (name) => async (dispatch) => {
     dispatch({type: GET_PRODUCT_DETAIL, payload:{...r.data.data[0]}}))
 };
 
+
 // export const createProduct =  (payload)=> async()=>{
 //   return await axios.post("http://localhost:3001/products",payload)
 // };
@@ -41,6 +40,7 @@ export const getProductDetail = (name) => async (dispatch) => {
 //       return response;
 //   };
 // };
+
 export const createProduct = (product) => {
   return async (dispatch) => {
     console.log("/products", product);
@@ -52,9 +52,11 @@ export const createProduct = (product) => {
         },
         body: JSON.stringify(product),
       });
+
       console.log("CREATE_PRODUCT", response);
       const data = await response.json();
       dispatch({ type: "CREATE_PRODUCT", payload: data });
+
     } catch (error) {
       console.error(error);
     }
@@ -97,3 +99,4 @@ export const getAllTypes = () => {
     return dispatch({type: GET_ALL_TYPES, payload: json.data})
   }
 }
+
