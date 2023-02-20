@@ -9,7 +9,7 @@
     height: 50em;
     width: 90%;
     margin-bottom: 10rem;
-    background-color: #be58f145;
+    background-color: #ffffff;
     border-radius: 20px;
 }
 
@@ -27,6 +27,13 @@
     justify-content: flex-start;
     display: flex;
     flex-direction: column;
+    width: 45%;
+}
+.TypeBrandDiv{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+
 }
 
 @media only screen and (max-width: 1700px) {

@@ -6,16 +6,16 @@ import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
 import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
+import { Footer } from "./components/Footer";
 import { Register } from "./components/Register";
-import { Profile } from "./components/Profile";
+import Profile  from "./components/Profile";
 import {Login} from "./components/Login"
 import {CreateProducts} from "./components/CreateProduct";
-import { Footer } from "./components/Footer";
 
 function App() {
   return (
     <div className="App">
-      <NavBar/>
+      <NavBar />
       <Routes>
         <Route exact path="/" element={<Home/>} />
 
