@@ -8,7 +8,7 @@ import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { Register } from "./components/Register";
-import { Profile } from "./components/Profile";
+import Profile  from "./components/Profile";
 import {Login} from "./components/Login"
 import {CreateProducts} from "./components/CreateProduct";
 

@@ -45,6 +45,7 @@ export const NavBar = () => {
             <div className="LogAndSign">
             <Link to="/Login"><button className="BtnUser" >Log in</button></Link>
             <Link to="/Register"><button className="BtnUser">Sign up</button></Link>
+            <Link to="/Profile"><button className="BtnUser">Profile</button></Link>
             </div>
                <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
         </div>
