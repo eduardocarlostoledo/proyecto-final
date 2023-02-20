@@ -63,7 +63,7 @@
 .DivFilter {
     padding: 20px;
     width: 300px;
-    height: 600px;
+    height: 800px;
     background-color: white;
     margin-top: 100px;
     border-radius: 10px;
@@ -76,7 +76,6 @@
     text-transform: uppercase;
     margin-left: 20px;
     margin-right: 60px;
-    margin-bottom: 140px;
 }
 .CardContainer{
     margin-top: 88px;

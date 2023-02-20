@@ -28,7 +28,7 @@ section{
 }
 
 
-.btn{
+.btnHome{
     position: relative;
     display: inline-block;
     padding: 8px 20px;
@@ -44,7 +44,7 @@ section{
     transition: 0.25s;
 }
 
-.btn:hover{
+.btnHome:hover{
     color: white;
     background: black;
 }
