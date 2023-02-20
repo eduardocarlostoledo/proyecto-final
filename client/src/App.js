@@ -10,7 +10,6 @@ import { Register } from "./components/Register";
 import Profile  from "./components/Profile";
 import {Login} from "./components/Login"
 import {CreateProducts} from "./components/CreateProduct";
-import { Footer } from "./components/Footer";
 
 function App() {
   return (
