@@ -60,7 +60,6 @@ function validate(input) {
   return errors;
 }
 
-
 export const CreateProducts = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -75,41 +74,42 @@ export const CreateProducts = () => {
     image: "",
     price: "",
     description: "",
-    brand: "",
-    type: "",
+    brand: 0,
+    type: 0,
   });
 
   function handleChange(e) {
+    console.log(e.target.name ,e.target.value);
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
-    // setErrors(
-    //   validate({
-    //     ...input,
-    //     [e.target.name]: e.target.value,
-    //   })
-    // );
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   }
 
-  function handleSelectBrand(e) {
-    console.log("perfecto", input.brand);
-    input.brand.includes(e.target.value)
-      ? alert("equal temperaments cannot be added")
-      : setInput({
-          ...input,
-          brand: [...input.brand, e.target.value], //si quiero muchos ponerlo asi [...input.Country,e.target.value]
-        });
-  }
-  function handleSelectType(e) {
-    console.log("perfecto", input.type);
-    input.type.includes(e.target.value)
-      ? alert("equal temperaments cannot be added")
-      : setInput({
-          ...input,
-          type: [...input.type, e.target.value], //si quiero muchos ponerlo asi [...input.Country,e.target.value]
-        });
-  }
+  // function handleSelectBrand(e) {
+  //   console.log("perfecto", input.brand);
+  //   input.brand.includes(e.target.value)
+  //     ? alert("equal temperaments cannot be added")
+  //     : setInput({
+  //         ...input,
+  //         brand: [...input.brand, e.target.value], 
+  //       });
+  // }
+  // function handleSelectType(e) {
+  //   console.log("perfecto", input.type);
+  //   input.type.includes(e.target.value)
+  //     ? alert("equal temperaments cannot be added")
+  //     : setInput({
+  //         ...input,
+  //         type: [...input.type, e.target.value],
+  //       });
+  // }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -120,8 +120,8 @@ export const CreateProducts = () => {
       image: "",
       price: "",
       description: "",
-      brand: [],
-      type: [],
+      brand: 0,
+      type: 0,
     });
   }
 
@@ -194,7 +194,8 @@ export const CreateProducts = () => {
 
         <div className={styles.hola}>
           <Form.Select
-            onChange={(e) => handleSelectType(e)}
+            name="type"
+            onChange={(e) => handleChange(e)}
             aria-label="Default select example"
           >
             <option>Types select menu</option>
@@ -207,7 +208,8 @@ export const CreateProducts = () => {
           </Form.Select>
 
           <Form.Select
-            onChange={(e) => handleSelectBrand(e)}
+            name="brand"
+            onChange={(e) => handleChange(e)}
             aria-label="Default select example"
           >
             <option>Brands select menu</option>
@@ -235,6 +237,7 @@ export const CreateProducts = () => {
           </Button>
         </div>
       </Form>
-      </div>
-  )
-          };
+    </div>
+  );
+};
+

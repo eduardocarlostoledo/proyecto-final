@@ -45,7 +45,7 @@
 }
 .card_contenedor_img{
     overflow: hidden;
-    width: 100%;
+    width: 14.5vw;
     grid-area: img;
     margin-top: 20%;
     margin-left: 10%;

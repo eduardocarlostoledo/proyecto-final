@@ -150,6 +150,7 @@ export const Home = () => {
                 </div>
             </section>
             <Footer/>
+
         </div>
     )
 }
