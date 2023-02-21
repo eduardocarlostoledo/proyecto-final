@@ -6,6 +6,9 @@ export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const UPDATE_PRODUCT='UPDATE_PRODUCT';
 export const GET_ALL_BRANDS= 'GET_ALL_BRANDS';
 export const GET_ALL_TYPES= 'GET_ALL_TYPES';
+export const FILTER_BY_BRAND = 'FILTER_BY_BRAND';
+export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
+export const FILTER_PRECIO = "FILTER_PRECIO";
 
 export const getAllProducts = () => async (dispatch) => {
     try {
@@ -31,15 +34,7 @@ export const getProductDetail = (name) => async (dispatch) => {
 };
 
 
-// export const createProduct =  (payload)=> async()=>{
-//   return await axios.post("http://localhost:3001/products",payload)
-// };
-// export function createProduct(payload) { 
-//   return async function(dispatch){
-//       const response = await axios.post("http://localhost:3001/products",payload);
-//       return response;
-//   };
-// };
+
 
 export const createProduct = (product) => {
   return async (dispatch) => {
@@ -68,23 +63,7 @@ export const updateProduct= (payload)=> async()=>{
     return await axios.put("/products",payload)
 };
 
-// export const getAllBrands = () => async (dispatch) => {
-//     try {
-//         return await axios.get('http://localhost:3001/products/brands').then(r=>
-//             dispatch({type: GET_ALL_BRANDS, payload:r.data.data}))
-//     } catch (error) {
-//             console.log(error)
-//     }
-// }
 
-// export const getAllTypes = () => async (dispatch) => {
-//     try {
-//         return await axios.get('http://localhost:3001/products/types').then(r=>
-//             dispatch({type: GET_ALL_TYPES, payload:r.data.data}))
-//     } catch (error) {
-//             console.log(error)
-//     }
-// }
 export const getAllBrands = () => {
   return async function(dispatch){
     const json = await axios.get('http://localhost:3001/products/brands')
@@ -100,3 +79,14 @@ export const getAllTypes = () => {
   }
 }
 
+export const filterByBrands = (payload) => {
+  return { type: FILTER_BY_BRAND, payload }
+}
+
+export const filterByType = (payload) => {
+  return { type: FILTER_BY_TYPE, payload }
+}
+
+export const filterByPrice = (payload) => {
+  return { type: FILTER_PRECIO, payload}
+}

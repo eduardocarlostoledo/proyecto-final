@@ -153,9 +153,19 @@ const postProduct = async (product) => {
         price: product.price,
         description: product.description,
         image: product.image,
-        typeId: newType.id,
-        brandId: newBrand.id,
+        typeId: type,
+        brandId: type,
       });
+      /*
+      const newProduct = await Product.create({
+        name,
+        price,
+        description,
+        image,
+        typeId: type,
+        brandId: brand,
+      });
+      */
 
       console.log(product.name, newProduct, "POSTOK")
 

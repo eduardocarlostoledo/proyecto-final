@@ -15,17 +15,14 @@ export const NavBar = () => {
                 <Link to="/BuildPc"><button>Build PC</button></Link>
                 <Link to="/CreateProduct"><button>Create</button></Link>
             </div>
-        <div className="ContainerSearch">
-            <Search />
-        </div>
-        <div className="ContainerInfo">
-            <div className="LogAndSign">
-            <Link to="/Login"><button className="BtnLogSing" >Log in</button></Link>
-            <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
-            <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="Cart"/></button></Link>
+            <div className="ContainerInfo">
+                <div className="LogAndSign">
+                <Link to="/Login"><button className="BtnLogSing" >Log in</button></Link>
+                <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
+                <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="Cart"/></button></Link>
+                </div>
             </div>
-        </div>
     
-    </div>
+        </div>
     )
 }
