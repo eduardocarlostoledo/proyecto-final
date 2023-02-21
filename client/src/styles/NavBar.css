@@ -1,4 +1,5 @@
- .NavDiv {
+
+.NavDiv {
     display: flex;
     justify-content: space-between;
     background-color: #7200ca;
@@ -64,7 +65,7 @@
     cursor: pointer;
 }
 
-.BtnUser {
+.BtnLogSing {
     width: 80px;
     height: 40px;
     margin: 5px;
@@ -73,6 +74,18 @@
     background-color: rgb(83, 32, 117);
     color: white;
     user-select: none;
+    font-size: 20px;
+}
+
+.BtnUser {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: #7200ca;
+    color: white;
+    user-select: none;
+    transform: translateY(-2px);
 }
 
 .BtnUser:hover {
