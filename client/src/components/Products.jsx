@@ -23,17 +23,18 @@ import AudioT from '../images/AudioT.png'
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getAllProducts } from "../redux/actions/ProductActions";
+import { getAllProducts, getPage } from "../redux/actions/ProductActions";
 import { Filters } from "./Filters";
 import { Footer } from "./Footer";
 
 export const Products = () => {
 
     const dispatch = useDispatch()
-    const products = useSelector((state) => state.products)
+    const products = useSelector((state) => state.paginatedProducts)
     
     useEffect(() => {
-      dispatch(getAllProducts())
+      dispatch(getPage(1,'','',''))
+
     },[dispatch]);
 
   return (
