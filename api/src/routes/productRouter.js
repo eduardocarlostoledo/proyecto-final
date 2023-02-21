@@ -1,7 +1,5 @@
 const { Router } = require('express');
-const { 
-  putProduct,
-  postProduct,
+const { postProduct,
   getProducts,
   getProductName,
   getProductsByName,
@@ -14,21 +12,36 @@ const productRouter = Router()
 
 // Ruta POST de Productos, va a ser utilizada por el administrador.
 
+
+
 productRouter.post('/', async (req,res) => {
-    try {
-        const product = await postProduct(req.body)
-        res.status(200).json(product)
-    } catch (error) {
-        res.status(400).json(error.message)
-    }
-})
+  try {
+    const {image}=req.files;
+    let product = req.body;
+    console.log(product);
+    const newProduct = await postProduct(product, image);
+    res.status(201).send({ status: "OK", data: newProduct });
+  } catch (error) {
+    return res.status(400).send({ error: error.message });
+  }
+});
+  
 
 // Ruta GET para traer todos los tipos de productos.
 
+// productRouter.get("/types", async (req, res) => {
+//   try {
+//       const products = await getTypeProducts();
+//     res.status(200).json({ data: products});
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
+
 productRouter.get("/types", async (req, res) => {
   try {
-      const products = await getTypeProducts();
-    res.status(200).json({ data: products, message: "Listado de productos por tipo" });
+    const products = await getTypeProducts();
+    res.status(200).json(products); //cambio el retorno para q sea mas limpio dejo copia arriba
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -37,11 +50,19 @@ productRouter.get("/types", async (req, res) => {
 
 // Ruta GET para traer todos las marcas de productos.
 
+// productRouter.get("/brands", async (req, res) => {
+//   try {
+//       const products = await getBrandProducts();
+//     res.status(200).json({ data: products});
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
+
 productRouter.get("/brands", async (req, res) => {
-  try {
-      const products = await getBrandProducts();
-    // }
-    res.status(200).json({ data: products, message: "Listado de productos por marca" });
+  try {   
+    const products = await getBrandProducts();
+    res.status(200).json(products);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -70,17 +91,6 @@ productRouter.get("/", async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   });
-
-    //Ruta PUT de productos, para editar los productos, recibe un req.body como un POST y un id por params para editar el producto con ese id
-
-    productRouter.put("/:id", async (req, res) => {
-      try {
-        const product=await putProduct(req.body,req.params.id);
-        res.status(200).json(product)
-      } catch (error) {
-          res.status(400).json({error:error.message})
-      }
-    })
   
 
 module.exports = {productRouter}

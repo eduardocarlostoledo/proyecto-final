@@ -1,6 +1,7 @@
 const { Product, User, Type, Brand } = require("../db");
 const {Op} = require('sequelize')
-
+const {uploadImage}=require('../utils/cloudinary')
+const fs =require('fs-extra');
 
 // Obtiene los tipos de productos de la BDD
 
@@ -24,7 +25,7 @@ const getBrandProducts = async() => {
   try {
     const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
     addBrand.map(async (b) => {
-      await Brand.findOrCreate({where:{name:b}})
+      await Brand.findOrCreate({where:{name: b}})
     })
     const products = await Brand.findAll();
     return products;
@@ -38,13 +39,25 @@ const getBrandProducts = async() => {
 const getProductsByName = async (productName) => {
   try {
     const products = await Product.findAll({
+      include: [Type,Brand],
       where: {
         name: {
           [Op.iLike]: `%${productName}%`,
         },
       },
     });
-    return products;
+    const result = products.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+        image:p.image.secure_url,
+        price:p.price,
+        description: p.description,
+        type: p.type.name,
+        brand: p.brand.name
+      }
+    })
+    return result;
   } catch (error) {
     throw new Error("Error retrieving product by Name: " + error.message);
   }
@@ -55,9 +68,22 @@ const getProductsByName = async (productName) => {
 
 const getProducts = async () => {
     try {
-      const allProducts = await Product.findAll();
-      console.log(allProducts)
-      return allProducts;
+      const allProducts = await Product.findAll({include: [Type,Brand]});
+      const result = allProducts.map((p) => {
+        console.log(p.image);
+        return {
+          id: p.id,
+          name: p.name,
+          image:p.image.secure_url,
+          price:p.price,
+          description: p.description,
+          type: p.type.name,
+          brand: p.brand.name
+        }
+        
+      })
+
+      return result;
     } catch (error) {
       throw new Error("Error retrieving products: " + error.message);
     }
@@ -68,7 +94,18 @@ const getProducts = async () => {
 
 const getProductName = async (product) => {
   try {
-    const result = await Product.findAll({where:{name:product}});
+    const products = await Product.findAll({include: [Type,Brand],where:{name:product}});
+    const result = products.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+        image:p.image.secure_url,
+        price:p.price,
+        description: p.description,
+        type: p.type.name,
+        brand: p.brand.name
+      }
+    })
     if (result) return result;
     throw new Error("Product not found with exact name: " + product);
   } catch (error) {
@@ -78,60 +115,68 @@ const getProductName = async (product) => {
 
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 
-const postProduct = async (product) => {
-  const { name, price, type, brand, image, description } = product;
-  if (!name || !price || !brand || !type) throw Error("Mandatory data missing");
+// const postProduct = async (product) => {
+//   const { name, price, type, brand, image, description } = product;
+//   if (!name || !price || !type || !brand || !description) throw Error("Mandatory data missing");
+//   else {
+//     try {
+//       const newProduct = await Product.create({
+//         name,
+//         price,
+//         description,
+//         image,
+//         typeId: type,
+//         brandId: brand,
+//       });
+
+//       return newProduct;
+//     } catch (error) {
+//       throw Error(error.message);
+//     }
+//   }
+// };
+
+const postProduct = async (product,image) => {
+  const { name, price, type, brand, description } = product;
+  console.log(product.name, "POST")
+  if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
   else {
     try {
-      const newProduct = await Product.create({
-        name,
-        price,
-        description,
-        image,
+      const newType = await Type.create({
+        name: product.type,
       });
-  
-      Brand.findOrCreate({where:{name:brand}})
-  
-      Type.findOrCreate({where:{name:type}})
-  
-      const marca=await Brand.findOne({where:{name:brand}})
-      const tipo=await Type.findOne({where:{name:type}})
-  
-      marca.addProduct(newProduct);
-      tipo.addProduct(newProduct);
-  
-      return "succesfully!";
+      console.log(product.type, "POST")
+
+      const newBrand = await Brand.create({
+        name: product.brand,
+      });
+      console.log(product.brand, "POST")
+
+      //invoco la funcion para subir la imagen a cloudinary
+      const result=await uploadImage(image.tempFilePath)
+
+      const newProduct = await Product.create({
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        image:{public_id:result.public_id,secure_url:result.secure_url},
+        typeId: newType.id,
+        brandId: newBrand.id,
+      });
+
+      //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
+      await fs.unlink(image.tempFilePath)
+
+      console.log(product.name, newProduct, "POSTOK")
+
+      return newProduct;
     } catch (error) {
-      throw new Error("Error: " + error.message);
+      throw Error(error.message);
     }
-    
   }
 };
-// PUT  de productos, edita un producto ya creado
-
-const putProduct = async (product,id) => {
-  const { name, price,description,image,brand,type} = product;
-
-  if (!name || !price || !brand || !type)  throw Error('Product data missing')
-  else {
-    const updatedProduct = await Product.update({name,price,image,description},{where:{id}});
-
-    await Brand.findOrCreate({where:{name:brand}})
-    await Type.findOrCreate({where:{name:type}})
-
-    const marca=await Brand.findOne({where:{name:brand}})
-    const tipo=await Type.findOne({where:{name:type}})
-
-    marca.addProduct(updatedProduct);
-    tipo.addProduct(updatedProduct);
-
-    return "Product updated";
-  }
-}
-
 
 module.exports = {
-  putProduct,
   postProduct,
   getProducts,
   getProductName,

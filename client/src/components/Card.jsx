@@ -1,38 +1,30 @@
-import React from "react";
-import Json from "./Productos_PF.json";
-import "../styles/Card.css";
 
-export default function Card ({name,price,image}) {
-  return (
-    <div className="DivAllCards">
-        <div class="contenedor_card">
+import { Link } from "react-router-dom";
+import "../styles/Card.css"
+
+export default function Card({name, image, price}) {
+    return (
+        <div className="DivAllCards">
+      
+        <div className="contenedor_card">
+          <Link className="LinkImage" to={`/detail/${name}`}>
           <div class="card_contenedor_img">
-            <img src={image} alt="" />
+            <img className="Imagen" src={image} width="100px" alt=""/>
+            <hr />
           </div>
-          <p class="card_p_nombre">
-            {name}
-          </p>
+          </Link>
+          <p class="card_p_nombre">{name}</p>
+          
           <strong class="card_strong_precio"> $ {price}</strong>
-          <div class="card_contenedor_buttons">
-            <button class="card_button_sumar">+</button>
-            <p class="card_p_cantidad">1</p>
-            <button class="card_button_restar">-</button>
-          </div>
-          <button class="card_button_comprar">comprar</button>
+          {/* <div class="card_contenedor_buttons"> */}
+            {/* <button class="card_button_sumar">+</button>
+            <p class="card_p_cantidad">1</p> */}
+            {/* <button class="card_button_restar">-</button> */}
+          {/* </div>*/}
+          <button class="card_button_comprar">Add cart</button> 
         </div>
+
     </div>
   );
 }
-// <div class="contenedor_card">
-//     <div class="card_contenedor_img">
-//         <img src="https://www.adslzone.net/app/uploads-adslzone.net/2016/07/Intel.jpg" alt=""/>
-//     </div>
-//     <p class="card_p_nombre">descripcion corta Lorem ipsum dolor sit amet consectetur adint recusand</p>
-//     <strong class="card_strong_precio"> $1.200</strong>
-//     <div class="card_contenedor_buttons">
-//         <button class="card_button_sumar">+</button>
-//         <p class="card_p_cantidad">1</p>
-//         <button class="card_button_restar">-</button>
-//     </div>
-//     <button class="card_button_comprar">comprar</button>
-// </div>
+

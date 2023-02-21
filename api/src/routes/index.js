@@ -5,6 +5,7 @@ const {cartRouter}=require("./cartRouter.js")
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
+
 const router = Router();
 
 // Configurar los routers
@@ -12,5 +13,8 @@ const router = Router();
 router.use('/products', productRouter)
 router.use('/users', userRouter)
 router.use('/cart', cartRouter)
+
+
+// router.use('/users', userRouter)
 
 module.exports = router;
