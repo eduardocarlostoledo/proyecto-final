@@ -7,12 +7,13 @@ import {FaUserCircle} from 'react-icons/fa';
 
 export const NavBar = () => {
     return (
-        <div className='NavDiv'>
-        <div className="BuildAndProducts">
-        <Link to="/"><button><ion-icon className="iconHome" name="home-outline"></ion-icon> Home</button></Link>
-        <Link to="/Products"><button>Products</button></Link>
-        <Link to="/BuildPc"><button>Build PC</button></Link>
-        <Link to="/CreateProduct"><button>Create</button></Link>
+        <div className="NavDiv">
+           
+            <div className="BuildAndProducts">
+                <Link to="/"><button><ion-icon className="iconHome" name="home-outline"></ion-icon> Home</button></Link>
+                <Link to="/Products"><button>Products</button></Link>
+                <Link to="/BuildPc"><button>Build PC</button></Link>
+                <Link to="/CreateProduct"><button>Create</button></Link>
             </div>
         <div className="ContainerSearch">
             <Search />
@@ -25,6 +26,7 @@ export const NavBar = () => {
             <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="Cart"/></button></Link>
                <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
         </div>
+    
     </div>
     )
 }

@@ -9,20 +9,6 @@
 }
 
 
-.CardContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.ContainerImages {
-    width: 100%;
-}
-
-
-
-
 
 section{
     position: relative;
@@ -59,7 +45,7 @@ section{
 
 .btnHome:hover{
     color: white;
-    background: black;
+    background: #c251fb;
 }
 
 .title{
