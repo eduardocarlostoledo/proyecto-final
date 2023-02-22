@@ -13,7 +13,8 @@ import {
         GET_ALL_USERS,
         GET_USER_BY_ID,
         USER_REGISTER,
-        UPDATE_USER
+        UPDATE_USER,
+        GET_EMAIL,
     } from './actions/UsersActions';
     
     const initialState= {
@@ -23,7 +24,8 @@ import {
         types:[],
         productDetail:{},
         users: [],
-        userDetail:{}
+        userDetail:{},
+        emails : []
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -74,8 +76,16 @@ import {
             
                 return { ...state }
 
+        
+            case GET_EMAIL: 
+
+                return { ...state,
+                    emails : action.payload }
+
+
             case GET_PAGE:
                 return {...state, paginatedProducts:action.payload}
+
                 
             default: return {...state}
             

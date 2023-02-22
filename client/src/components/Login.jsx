@@ -70,7 +70,7 @@ export const Login = () => {
                 return alert("Email invalid")
             }
           }
-          if (input.password && input.password.length > 0 && input.password != "") {
+          if (input.password && input.password.length > 0 && input.password !== "") {
             if (!regexPassword.test(input.password)) {
                 return alert("Password invalid")
             }
