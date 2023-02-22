@@ -1,28 +1,3 @@
-// import { Link } from "react-router-dom";
-// import '../styles/NavBar.css';
-// import { Search } from "./Search";
-
-// export const NavBar = () => {
-//     return(
-//         <div className='NavDiv'>
-//             <Search/>
-//             <div className='NavDiv2'>
-
-//                 <Link to="/" className="NavLink">home</Link>
-
-//                 <Link to="/Products" className="NavLink">products</Link>
-
-//                 <Link to="/BuildPc" className="NavLink">build pc</Link>
-
-//                 <Link to="/Register" className="NavLink">Register</Link>
-
-//                 <Link to="/Profile" className="NavLink">Profile</Link>
-//             </div>
-//         </div>
-        
-//     )
-// }
-
 import { Link } from "react-router-dom";
 import '../styles/NavBar.css';
 import { Search } from "./Search";
@@ -46,8 +21,8 @@ export const NavBar = () => {
             <div className="LogAndSign">
             <Link to="/Login"><button className="BtnLogSing" >Log in</button></Link>
             <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
-            <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="Cart"/></button></Link>
             </div>
+            <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="Cart"/></button></Link>
                <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
         </div>
     </div>

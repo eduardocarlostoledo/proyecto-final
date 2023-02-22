@@ -5,14 +5,15 @@ import {
     CREATE_PRODUCT,
     UPDATE_PRODUCT,
     GET_ALL_BRANDS,
-    GET_ALL_TYPES
+    GET_ALL_TYPES,
     } from './actions/ProductActions'
     
     import{
         GET_ALL_USERS,
         GET_USER_BY_ID,
         USER_REGISTER,
-        UPDATE_USER
+        UPDATE_USER,
+        GET_EMAIL,
     } from './actions/UsersActions';
     
     const initialState= {
@@ -21,7 +22,8 @@ import {
         types:[],
         productDetail:{},
         users: [],
-        userDetail:{}
+        userDetail:{},
+        emails : []
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -71,6 +73,11 @@ import {
             case UPDATE_USER: 
             
                 return { ...state }
+        
+            case GET_EMAIL: 
+
+                return { ...state,
+                    emails : action.payload }
                 
             default: return {...state}
         }

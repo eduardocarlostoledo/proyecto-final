@@ -73,7 +73,8 @@
     background-color: rgb(83, 32, 117);
     color: white;
     user-select: none;
-    font-size: 20px;
+    font-size: 17px;
+    margin-top: 10px;
 }
 
 .BtnUser {
@@ -85,6 +86,7 @@
     background-color: #7200ca;
     color: white;
     user-select: none;
+    margin-right: -14px;
 }
 
 .BtnUser:hover {
