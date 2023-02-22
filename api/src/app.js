@@ -1,5 +1,11 @@
 const express = require('express');
 const routes = require('./routes/index.js');
+const cors = require("cors");
+const mercadopago = require("mercadopago");
+mercadopago.configure({
+	access_token: "TEST-2173554663380212-021616-6c499d124b985881a40b539254bb3afd-96768851",
+});
+
 
 require('./db.js');
 
@@ -17,6 +23,9 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
+server.use(cors());
+server.use(express.urlencoded({ extended: false }));
+
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
