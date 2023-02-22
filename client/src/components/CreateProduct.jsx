@@ -61,7 +61,9 @@ function validate(input) {
 }
 
 export const CreateProducts = () => {
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllBrands());
     dispatch(getAllTypes());
@@ -193,6 +195,7 @@ export const CreateProducts = () => {
         </Form.Group>
 
         <div className={styles.hola}>
+        
           <Form.Select
             name="type"
             onChange={(e) => handleChange(e)}
@@ -206,7 +209,7 @@ export const CreateProducts = () => {
                 </option>
               ))}
           </Form.Select>
-
+          
           <Form.Select
             name="brand"
             onChange={(e) => handleChange(e)}

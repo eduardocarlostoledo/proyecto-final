@@ -80,11 +80,11 @@ export const getAllTypes = () => {
 }
 
 export const filterByBrands = (payload) => {
-  return { type: FILTER_BY_BRAND, payload }
+  return { type: FILTER_BY_BRAND, payload}
 }
 
 export const filterByType = (payload) => {
-  return { type: FILTER_BY_TYPE, payload }
+  return { type: FILTER_BY_TYPE, payload}
 }
 
 export const filterByPrice = (payload) => {

@@ -64,7 +64,7 @@ export const Products = () => {
     /* Filtrado por Brands */    
     const handleFilterBrands = (e) => {
     
-            dispatch(getAllBrands(e.target.value))
+            dispatch(filterByBrands(e.target.value))
             console.log(e.target.value)
             setCurrentPage(1)
            
@@ -73,7 +73,7 @@ export const Products = () => {
     /* Filtrado por Types */
     const handleFilterTypes = (e) => {
         
-        dispatch(getAllTypes(e.target.value))
+        dispatch(filterByType(e.target.value))
         console.log(e.target.value)
         setCurrentPage(1) 
     }
@@ -102,29 +102,17 @@ export const Products = () => {
                         <div className="ContainerFilters">
                             
                             <select className="Filter" onChange={(e) => handleFilterBrands(e)}>
-                                <option value="All" name="brand">Por Brands</option>
-                                {/* {brand && brand.map((b, index) => ( 
-                                    <option key={index} value={b.id}>{b.name}</option>
-                                ))} */}
-                                
-                                <option value="Corsair">Corsair</option>
-                                <option value="Samsung">Samsung</option>
-                                <option value="Acer">Acer</option>
-                                <option value="EVGA">EVGA</option>
-                                <option value="ASUS">ASUS</option>
-                                <option value="Cooler Master">Cooler Master</option>
-                                <option value="HyperX">HyperX</option>
-                                <option value="Gigabyte">Gigabyte</option>
-                                <option value="Logitech">Logitech</option>
-                                <option value="Audio-Technica">Audio-Technica</option>
-                                <option value="Razer">Razer</option>
+                                <option value="All">Brands</option>
+                                {brand.map((b, index) => ( 
+                                    <option key={index} value={b.name}>{b.name}</option>
+                                ))}
                             </select>
                             
                             <select className="Filter" onChange={(e) => handleFilterTypes(e)}>
-                                <option value="All">Por tipo</option>
-                                {type && type.map((t, index) => {
-                                    return <option key={index} value={t.id}>{t.name}</option>
-                                })}
+                            <option value="All">Types</option>
+                                {type.map((t, index) => {
+                                    return <option key={index} value={t.name}>{t.name}</option>
+                                })} 
                             </select>
                             <select className="Filter" onChange={(e) => handleFilterPrice(e)}>
                                 <option value="All">Por Precio</option>

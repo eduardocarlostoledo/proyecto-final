@@ -6,10 +6,10 @@ const {Op} = require('sequelize')
 
 const getTypeProducts = async() => {
   try {
-    const addTypes = ["Cooler", "Power Supply", "Graphics Card","Processor", "SSD","HDD", "RAM", "Motherboard", "Mouse", "Headset", "Monitor", "PC Case", "Keyboard"]
-    addTypes.map(async (t) => {
-      await Type.findOrCreate({where:{name: t}}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
-    })
+    // const addTypes = ["Cooler", "Power Supply", "Graphics Card","Processor", "SSD","HDD", "RAM", "Motherboard", "Mouse", "Headset", "Monitor", "PC Case", "Keyboard"]
+    // addTypes.map(async (t) => {
+    //   await Type.findOrCreate({where:{name: t}}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
+    // })
     const products = await Type.findAll();  
     return products;
   } catch (error) {
@@ -22,10 +22,10 @@ const getTypeProducts = async() => {
 
 const getBrandProducts = async() => {
   try {
-    const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
-    addBrand.map(async (b) => {
-      await Brand.findOrCreate({where:{name: b}})
-    })
+    // const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
+    // addBrand.map(async (b) => {
+    //   await Brand.findOrCreate({where:{name: b}})
+    // })
     const products = await Brand.findAll();
     return products;
   } catch (error) {
@@ -153,19 +153,10 @@ const postProduct = async (product) => {
         price: product.price,
         description: product.description,
         image: product.image,
-        typeId: type,
-        brandId: type,
+        typeId: newType.id,
+        brandId: newBrand.id,
       });
-      /*
-      const newProduct = await Product.create({
-        name,
-        price,
-        description,
-        image,
-        typeId: type,
-        brandId: brand,
-      });
-      */
+    
 
       console.log(product.name, newProduct, "POSTOK")
 

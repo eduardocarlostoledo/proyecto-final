@@ -22,9 +22,7 @@ import {
         products: [],
         allProducts: [],
         brands:[],
-        allBrands: [],
         types:[],
-        allTypes:[],
         productDetail:{},
         users: [],
         userDetail:{}
@@ -92,25 +90,25 @@ import {
                 return { ...state }
 
             case FILTER_BY_BRAND:
-                const fBrands = state.allBrands;
+                const fBrands = state.allProducts;
                 const brandsFilter = action.payload === 'All' ? fBrands : fBrands.filter(el => el.brand === action.payload)
 
                 return {
                     ...state, 
-                    brands: brandsFilter
+                    products: brandsFilter
                 }
                 
 
             case FILTER_BY_TYPE:
-                const fTypes = state.allTypes;
-                const typesFilter = action.payload === 'All' ? fTypes : fTypes.filter(el => el.brand === action.payload)
+                const fTypes = state.allProducts;
+                const typesFilter = action.payload === 'All' ? fTypes : fTypes.filter(el => el.type === action.payload)
 
                 return {
                     ...state, 
-                    types: typesFilter
+                    products: typesFilter
                 }
             
-            case FILTER_PRECIO:
+            case FILTER_PRECIO: //funciona
 
                 let sortPrice;
                 if (action.payload === "all") sortPrice = state.allProducts;
