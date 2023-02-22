@@ -43,7 +43,7 @@ export const Detail = () => {
         <p>{detail.brand}</p>
         </div>
         <h1>{Name}</h1>
-        <h2>$ {detail.price}</h2>
+        <h2>USD$ {detail.price}</h2>
         <p>{detail.description}</p>
       </div>
     </div>

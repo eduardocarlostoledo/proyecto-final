@@ -116,3 +116,28 @@ font-size: 1.8vh;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     margin-bottom: 50px;
 }
+
+@media screen and (min-width: 1800px){
+    .DivAllCards{
+        margin-bottom: 200px;
+    }
+    .contenedor_card{
+       width: 450px;
+       height: 550px;
+       font-size: 17px;
+    }
+    .contenedor_card img{
+        transform: scale(1.2);
+    }
+    .contenedor_card:hover img{
+        transform: scale(1.5);
+    }
+    .card_button_comprar{
+        margin-left: 60%;
+        margin-bottom: 5%;
+    }
+    .card_p_nombre{
+        font-size: 25px;
+    }
+
+}

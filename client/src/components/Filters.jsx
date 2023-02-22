@@ -1,6 +1,28 @@
 import "../styles/Filters.css";
+import { useState } from "react";
+import {useSelector, useDispatch} from 'react-redux'
+import { getPage } from "../redux/actions/ProductActions";
+
 
 export const Filters = () => {
+    const dispatch = useDispatch()
+
+    const types = useSelector(store => store.types)
+    const brands = useSelector(store => store.brands)
+
+    const [filter, setFilter] = useState({
+        page:1,
+        type:'',
+        brand:'',
+        price:''  //puede ser a o d
+    })
+    
+    const paginatedHandler = (action,value) => {
+        console.log('me ejecute :)')
+        setFilter({...filter, [action]:value})
+        console.log(filter)
+        // dispatch(getPage(filter.page,filter.brand,filter.type,filter.price))
+    }
 
     
 
