@@ -1,0 +1,187 @@
+
+.Products{
+    margin-top: 100px;
+}
+.Marcas{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.MarcaContainer{
+    background-color: rgb(255, 255, 255);
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.MarcaContainer:hover{
+    background-color: #e7b8ff;
+}
+.DivCardsFilters {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+@media screen and (max-width: 680px){
+    .DivCardsFilters{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .CardContainer{
+        justify-content: center;
+    }
+    .DivFilter{
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 480px){
+    .DivCardsFilters{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .CardContainer{
+        justify-content: center;
+    }
+    .DivFilter{
+        justify-content: center;
+        transform: translateX(30px);
+    }
+}
+
+
+.DivFilter {
+    padding: 20px;
+    width: 300px;
+    height: 800px;
+    background-color: white;
+    margin-top: 100px;
+    border-radius: 10px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+    margin-left: 20px;
+    margin-right: 60px;
+}
+.CardContainer{
+    margin-top: 88px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.DivProducts{
+    margin-bottom: 280px;
+}
+
+.ContainerFilters{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    margin-top: 20px;  
+    margin-bottom: 20px;
+    gap: 30px;
+}
+
+.Filter{
+   width: 250px; 
+   height: 35px;
+   border-radius: 20px;
+   text-align: center;
+}
+
+.Filter option{
+    background-color: white;
+    color: #aa01ff;
+}
+
+.Filter:hover{
+   background-color: #e7b8ff;
+}
+
+.SearchButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-left: 20px;
+}
+
+.swal-overlay--show-modal {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.SubmitBuscar {
+    width: 60px;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    margin-left: 10px;
+}
+
+.InputB{
+    width: 150px;
+    height: 40px;
+    border-radius: 20px;
+    border: solid 1px black;
+    text-align: center;
+}
+
+.SubmitBuscar {
+    width: 40px;
+    height: 40px;
+    padding-top: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(26, 160, 194);
+    color: white;
+    user-select: none;
+}
+.SubmitB{
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #e7b8ff;
+    border-radius: 20px;
+}
+
+.SubmitB:hover{
+    background-color: black;
+    color: white;
+}
+
+.icon {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.Todos{
+    width: 200px;
+    height: 40px;
+    background-color: #e7b8ff;
+    border-radius: 20px;
+    border: none;
+}
+.Todos:hover{
+    background-color: black;
+    color: white;
+}
