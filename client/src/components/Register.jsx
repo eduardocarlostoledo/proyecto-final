@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import styles from "../styles/Register.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { userRegister , GetFiltersForEmail} from '../redux/actions/UsersActions';
+import { userRegister} from '../redux/actions/UsersActions';
 
 
 
@@ -67,7 +67,7 @@ function validate(input) {
 export const Register = () => {
     let users = useSelector((state) => state.emails.data)
     console.log(users);
-    // let emails = users.map(e => e.email)
+    let emails = users.map(e => e.email)
     // console.log(emails);
     const navigate = useNavigate();
     const regexName = /^([a-zA-Z ]+)$/i;
@@ -130,9 +130,9 @@ export const Register = () => {
             return alert("Passwords must match")
           }
 
-        //   if (emails.includes(input.email)) {
-        //     return alert('Email already exists')
-        // }
+          if (emails.includes(input.email)) {
+            return alert('Email already exists')
+        }
 
 
             dispatch(userRegister(input));
