@@ -1,7 +1,7 @@
 import '../styles/Search.css'
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+
 import { getAllProductsName } from '../redux/actions/ProductActions';
 import { useState } from 'react';
 

@@ -2,7 +2,6 @@ import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "../styles/Register.module.css";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllBrands,
@@ -70,7 +69,7 @@ export const CreateProducts = () => {
   }, [dispatch]);
   const brands = useSelector((state) => state.brands);
   const types = useSelector((state) => state.types);
-  const [errors, setErrors] = useState({});
+  const [, setErrors] = useState({}); //errors
   const [input, setInput] = useState({
     name: "",
     image: "",

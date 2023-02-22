@@ -41,6 +41,7 @@ export const Products = () => {
 
     const [name, setName] = useState('')
     
+    
     const handleInputChange = (e) => {
         e.preventDefault();
         setName(e.target.value);
@@ -52,6 +53,7 @@ export const Products = () => {
         e.preventDefault()
         dispatch(getAllProductsName(name))
         setCurrentPage(1);
+        setName('')
     }
 
     /* Click que trae todos los productos de nuevo */
@@ -61,12 +63,13 @@ export const Products = () => {
         dispatch(getAllProducts());
     }
 
-    /* Filtrado por Brands */    
+
     const handleFilterBrands = (e) => {
     
             dispatch(filterByBrands(e.target.value))
             console.log(e.target.value)
             setCurrentPage(1)
+            document.getElementById('filterBrandsSelect').value = 'All';
            
     }
 
@@ -76,6 +79,7 @@ export const Products = () => {
         dispatch(filterByType(e.target.value))
         console.log(e.target.value)
         setCurrentPage(1) 
+        document.getElementById('filterTypesSelect').value = 'All'
     }
 
     /* Filtrado por precio */
@@ -85,6 +89,7 @@ export const Products = () => {
         dispatch(filterByPrice(e.target.value));
         setCurrentPage(1);
         setPrice(`Price ${e.target.value}`)
+        document.getElementById('filterPriceSelect').value = 'All'
     }
 
     return (
@@ -95,29 +100,29 @@ export const Products = () => {
                         <h2>Filters</h2>
                         <Marcas/>
                         <button className="Todos" onClick={(e) => handleClick(e)}>Reload all Products</button>
-                        <div className="SearchButton">
+                        <div className="SearchButton" id="InputB">
                             <input className='InputB' type='text' placeholder="Search..." onChange={(e) => handleInputChange(e)}/> 
                             <button className='SubmitB' type="submit" onClick={(e) => handleSubmit(e)}> < HiMagnifyingGlass className="icon"/></button>
                         </div>
                         <div className="ContainerFilters">
                             
-                            <select className="Filter" onChange={(e) => handleFilterBrands(e)}>
-                                <option value="All">Brands</option>
+                            <select id="filterBrandsSelect" className="Filter" onChange={(e) => handleFilterBrands(e)}>
+                                <option value="All">All</option>
                                 {brand.map((b, index) => ( 
-                                    <option key={index} value={b.name}>{b.name}</option>
+                                    <option key={index} type="reset" value={b.name}>{b.name}</option>
                                 ))}
                             </select>
                             
-                            <select className="Filter" onChange={(e) => handleFilterTypes(e)}>
-                            <option value="All">Types</option>
+                            <select id="filterTypesSelect" className="Filter" onChange={(e) => handleFilterTypes(e)}>
+                                <option value="All">All</option>
                                 {type.map((t, index) => {
                                     return <option key={index} value={t.name}>{t.name}</option>
                                 })} 
                             </select>
-                            <select className="Filter" onChange={(e) => handleFilterPrice(e)}>
-                                <option value="All">Por Precio</option>
-                                <option value="ASC">Menor precio</option>
-                                <option value="DES">Mayor precio</option>
+                            <select id="filterPriceSelect" className="Filter" onChange={(e) => handleFilterPrice(e)}>
+                                <option value="All">All</option>
+                                <option value="ASC">Lower price</option>
+                                <option value="DES">Higher price</option>
                             </select>
                         </div>
                     </div>

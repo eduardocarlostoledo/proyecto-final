@@ -1,0 +1,50 @@
+.DetailContainer{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    margin-bottom: 0;
+    margin-top: 90px;
+    height: 50em;
+    width: 90%;
+    margin-bottom: 10rem;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+.DetailContainer img{
+    width: 500px;
+}
+
+.Link {
+    position: absolute;
+    top: 100px;
+    left: 120px;
+}
+
+.DataDiv {
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+.TypeBrandDiv{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+
+}
+
+@media only screen and (max-width: 1700px) {
+    .DetailContainer {
+        height: 35em;
+        width: 90%;
+    }
+    .DetailContainer img{
+        width: 450px;
+    }
+    .Link {
+        left: 90px;
+    }
+  }

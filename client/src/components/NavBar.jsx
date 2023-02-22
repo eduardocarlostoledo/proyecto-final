@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import '../styles/NavBar.css';
-import { Search } from "./Search";
-import { AiOutlineShoppingCart } from 'react-icons/ai';
 import {FaUserCircle} from 'react-icons/fa';
 
 
