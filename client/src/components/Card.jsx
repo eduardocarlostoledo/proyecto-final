@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import "../styles/Card.css"
+import AddToCart from "./AddCart"
 
 export default function Card({name, image, price}) {
     return (
@@ -22,6 +23,7 @@ export default function Card({name, image, price}) {
             {/* <button class="card_button_restar">-</button> */}
           {/* </div>*/}
           <button class="card_button_comprar">Add cart</button> 
+          <AddToCart name={name} image={image} price={price} />
         </div>
 
     </div>
