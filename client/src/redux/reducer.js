@@ -6,6 +6,7 @@ import {
     UPDATE_PRODUCT,
     GET_ALL_BRANDS,
     GET_ALL_TYPES,
+    GET_PAGE
     } from './actions/ProductActions'
     
     import{
@@ -18,6 +19,7 @@ import {
     
     const initialState= {
         products: [],
+        paginatedProducts: [],
         brands:[],
         types:[],
         productDetail:{},
@@ -73,13 +75,20 @@ import {
             case UPDATE_USER: 
             
                 return { ...state }
+
         
             case GET_EMAIL: 
 
                 return { ...state,
                     emails : action.payload }
+
+
+            case GET_PAGE:
+                return {...state, paginatedProducts:action.payload}
+
                 
             default: return {...state}
+            
         }
     }
     

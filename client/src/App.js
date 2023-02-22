@@ -1,5 +1,7 @@
 import "./App.css";
 import { Route, Routes} from "react-router-dom";
+
+import {useSelector, useDispatch} from 'react-redux'
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
@@ -22,6 +24,7 @@ function App() {
   },[dispatch])
 
 
+
   return (
     <div className="App">
       <NavBar />
@@ -40,9 +43,13 @@ function App() {
 
         <Route path="/CreateProduct" element={<CreateProducts/>} />
 
+      <Route path="/Login" component={Login} />
+
+      <Route path="/CreateProduct" component={CreateProducts} />
+
         <Route path="/Profile" element={<Profile/>} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

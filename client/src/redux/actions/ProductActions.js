@@ -6,6 +6,7 @@ export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const UPDATE_PRODUCT='UPDATE_PRODUCT';
 export const GET_ALL_BRANDS= 'GET_ALL_BRANDS';
 export const GET_ALL_TYPES= 'GET_ALL_TYPES';
+export const GET_PAGE = 'GET_PAGE'
 
 export const getAllProducts = () => async (dispatch) => {
     try {
@@ -100,3 +101,17 @@ export const getAllTypes = () => {
   }
 }
 
+// export const getPage = (page,brand,type,price) => async (dispatch) => {
+//   return await axios.get(`localhost:3001/filter?page=${page}&brand=${brand}&type=${type}&price=${price}`)
+//   .then(r => dispatch({ type : GET_PAGE, payload : r}))
+//   .catch(e => console.error(e))
+
+// }
+
+export const getPage = (page,brand,type,price) => {
+  return async function(dispatch) {
+    const json = await axios.get(`http://localhost:3001/filter?page=${page}&brand=${brand}&type=${type}&price=${price}`)
+    console.log(json)
+    return dispatch({type: GET_PAGE, payload: json.data})
+  }
+}
