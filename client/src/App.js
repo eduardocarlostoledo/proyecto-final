@@ -12,9 +12,17 @@ import { Register } from "./components/Register";
 import Profile  from "./components/Profile";
 import {Login} from "./components/Login"
 import {CreateProducts} from "./components/CreateProduct";
+import { GetFiltersForEmail } from "./redux/actions/UsersActions";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(GetFiltersForEmail())
+  },[dispatch])
+
 
 
   return (

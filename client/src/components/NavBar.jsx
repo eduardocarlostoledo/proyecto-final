@@ -22,8 +22,9 @@ export const NavBar = () => {
             <div className="LogAndSign">
             <Link to="/Login"><button className="BtnLogSing" >Log in</button></Link>
             <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
-            <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="Cart"/></button></Link>
             </div>
+            <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="Cart"/></button></Link>
+               <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
         </div>
     
     </div>
