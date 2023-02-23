@@ -1,0 +1,69 @@
+html {
+    min-height: 100%;
+    position: relative;
+  }
+  body {
+    margin: 0;
+    margin-bottom: 260px;
+  }
+.ContainerCart{
+    margin-top: 120px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin-left: 60px;
+    margin-right: 40px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.ContainerCart h2{
+    font-size:36px;
+    text-transform:initial;
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+
+.ContainerCart h3{
+    background-color: #e7b8ff;
+    color: black;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.NavCart{
+    text-align: center;
+    padding-top: 10px;  
+    background-color: white;
+    text-align:right;
+    padding: 20px;
+}
+
+.ListDesordenada{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.ListDesordenada li{
+    display:inline-flexbox;
+    flex-direction: column;
+    text-decoration: none;
+    list-style:none;
+}
+
+.ButtonCart{
+    color: black;
+    background: white;
+    border: 1px solid black;
+}
+.ButtonCart:hover{
+    color: white;
+    background: black;
+}
+

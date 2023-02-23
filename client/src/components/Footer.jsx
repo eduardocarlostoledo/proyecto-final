@@ -2,7 +2,7 @@ import '../styles/Footer.css';
 
 export const Footer = () => {
     return (
-        <div className='DivFooter'>
+        <div className='ContainerFooter'>
             <footer className='FooterContainer'>
                 <div className='Description'>
                     <h5>Soy Henry Grupo 9 @2023</h5>

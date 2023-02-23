@@ -2,7 +2,6 @@ import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "../styles/Register.module.css";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllBrands,
@@ -61,14 +60,16 @@ function validate(input) {
 }
 
 export const CreateProducts = () => {
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllBrands());
     dispatch(getAllTypes());
   }, [dispatch]);
   const brands = useSelector((state) => state.brands);
   const types = useSelector((state) => state.types);
-  const [errors, setErrors] = useState({});
+  const [, setErrors] = useState({}); //errors
   const [input, setInput] = useState({
     name: "",
     image: "",
@@ -211,6 +212,7 @@ export const CreateProducts = () => {
         </Form.Group>
 
         <div className={styles.hola}>
+        
           <Form.Select
             name="type"
             onChange={(e) => handleChange(e)}
@@ -226,7 +228,7 @@ export const CreateProducts = () => {
                 </option>
               ))}
           </Form.Select>
-
+          
           <Form.Select
             name="brand"
             onChange={(e) => handleChange(e)}

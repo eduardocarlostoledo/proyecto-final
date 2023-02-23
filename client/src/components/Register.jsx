@@ -3,8 +3,8 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import styles from "../styles/Register.module.css";
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import { userRegister} from '../redux/actions/UsersActions';
+import { useDispatch } from "react-redux";
+import { userRegister } from '../redux/actions/UsersActions';
 
 
 
@@ -14,7 +14,7 @@ function validate(input) {
     const regexName = /^([a-zA-Z ]+)$/i;
     // const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
     // const regexNumber = /^[0-9]*$/i;
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
 
     if (input.name && !regexName.test(input.name)) {
       errors.name = "can't include special characters or numbers";
@@ -65,14 +65,11 @@ function validate(input) {
 
 
 export const Register = () => {
-    let users = useSelector((state) => state.emails.data)
-    console.log(users);
-    let emails = users.map(e => e.email)
-    // console.log(emails);
     const navigate = useNavigate();
     const regexName = /^([a-zA-Z ]+)$/i;
     const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    // const regexNumber = /^[0-9]*$/i;
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
@@ -98,7 +95,6 @@ export const Register = () => {
 
     function handleSubmit(e) {
         e.preventDefault();
-
         if (!input.name || !input.lastname || !input.password || !input.email) {
             return alert('Missing required fields')
         }
@@ -129,10 +125,6 @@ export const Register = () => {
           if (input.password !== input.passwordConfirm) {
             return alert("Passwords must match")
           }
-
-          if (emails.includes(input.email)) {
-            return alert('Email already exists')
-        }
 
 
             dispatch(userRegister(input));
