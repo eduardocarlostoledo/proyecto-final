@@ -1,123 +1,145 @@
 import "../styles/Products.css";
-import Card from './Card'
-import Cooler from '../images/Cooler.png'
-import Samsung from '../images/Samsung.png'
-import intel from '../images/intel.png'
-import nvidia from '../images/nvidia.png'
-import Corsair from '../images/Corsair.png'
-import Asus from '../images/Asus.png'
-import Logitech from '../images/Logitech.png'
-import HyperX from '../images/HyperX.png'
-import Razer from '../images/Razer.png'
-import Steel from '../images/Steel.png'
-import Ryzen from '../images/Ryzen.png'
-import Aorus from '../images/Aorus.png'
-import Gigabyte from '../images/Gigabyte.png'
-import Seagate from '../images/Seagate.png'
-import Viper from '../images/Viper.png'
-import Msi from '../images/Msi.png'
-import Evga from '../images/Evga.png'
-import Acer from '../images/Acer.png'
-import Predator from '../images/Predator.png'
-import AudioT from '../images/AudioT.png'
+import { HiMagnifyingGlass } from 'react-icons/hi2';
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getAllProducts, getPage } from "../redux/actions/ProductActions";
-import { Filters } from "./Filters";
+import { filterByBrands, filterByPrice, filterByType, getAllBrands, getAllProducts, getAllProductsName, getAllTypes } from "../redux/actions/ProductActions";
+import Card from '../components/Card'
+import {Marcas} from '../components/Marcas'
+import Paginado from "./Paginado";
 
 export const Products = () => {
 
     const dispatch = useDispatch()
-    const products = useSelector((state) => state.paginatedProducts)
-    
-    useEffect(() => {
-      dispatch(getPage(1,'','',''))
+    const product = useSelector((state) => state.products)
+    const brand = useSelector((state) => state.brands)
+    const type = useSelector((state) => state.types)
 
+    useEffect(() => {
+      dispatch(getAllProducts())
     },[dispatch]);
 
-  return (
-    <div className="DivProducts">
-      <div className="Products">
-        <div className="DivCardsFilters">
-            <div className="DivFilter">
-                <h2>Filters</h2>
-                <div className="Marcas">
-                    <div className="MarcaContainer">
-                        <img src={Cooler} width='50px' alt="" />
+    useEffect(() => {
+        dispatch(getAllBrands())
+    },[dispatch])
+
+    useEffect(() => {
+        dispatch(getAllTypes())
+    },[dispatch])
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [charactersPerPage, ] = useState(9) //setCharactersPerPage
+    const indexOfLastCharacter = currentPage * charactersPerPage
+    const indexOfFirstCharacter = indexOfLastCharacter - charactersPerPage
+    const currentProducts = product.slice(indexOfFirstCharacter, indexOfLastCharacter)
+
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
+
+             /* search */
+
+    const [name, setName] = useState('')
+    
+    
+    const handleInputChange = (e) => {
+        e.preventDefault();
+        setName(e.target.value);
+        console.log(name)
+        setCurrentPage(1);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        dispatch(getAllProductsName(name))
+        setCurrentPage(1);
+    }
+
+    /* Click que trae todos los productos de nuevo */
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        dispatch(getAllProducts());
+    }
+
+    const handleFilterBrands = (e) => {
+        dispatch(filterByBrands(e.target.value))
+        setCurrentPage(1)
+    }
+
+    /* Filtrado por Types */
+    const handleFilterTypes = (e) => {
+        dispatch(filterByType(e.target.value))
+        setCurrentPage(1) 
+       
+    }
+
+    /* Filtrado por precio */
+
+    const [,setPrice] = useState('')
+    const handleFilterPrice = (e) => {
+        dispatch(filterByPrice(e.target.value));
+        setCurrentPage(1);
+        setPrice(`Price ${e.target.value}`)
+    }
+
+    return (
+        <div className="DivProducts">
+            <div className="Products">
+                <div className="DivCardsFilters">
+                    <div className="DivFilter">
+                        <h2>Filters</h2>
+                        <Marcas/>
+                        <button className="Todos" onClick={(e) => handleClick(e)}>Reload all Products</button>
+                        <div className="SearchButton" id="InputB">
+                            <input className='InputB' type='text' placeholder="Search..." onChange={(e) => handleInputChange(e)}/> 
+                            <button className='SubmitB' type="submit" onClick={(e) => handleSubmit(e)}> < HiMagnifyingGlass className="icon"/></button>
+                        </div>
+                        <div className="ContainerFilters">
+                            
+                            <select id="filterBrandsSelect" className="Filter" onChange={(e) => handleFilterBrands(e)}>
+                                <option value="All" defaultValue='default'>All Brands</option>
+                                {brand.map((b, index) => ( 
+                                    <option key={index} type="reset" value={b.name}>{b.name}</option>
+                                ))}
+                            </select>
+                            
+                            <select id="filterTypesSelect" className="Filter" onChange={(e) => handleFilterTypes(e)}>
+                                <option value="All" defaultValue='default'>All Types</option>
+                                {type.map((t, index) => {
+                                    return <option key={index} value={t.name}>{t.name}</option>
+                                })} 
+                            </select>
+                            
+                            <select id="filterPriceSelect" className="Filter" onChange={(e) => handleFilterPrice(e)}>
+                                <option value="all" disabled={true}>All price</option>
+                                <option value="ASC">Lower price</option>
+                                <option value="DES">Higher price</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className="MarcaContainer">
-                        <img src={Samsung} width='50px' alt="" />
-                    </div >
-                    <div className="MarcaContainer">
-                        <img src={intel} width='30px' alt="" />
+                    
+                
+                    <div className="CardContainer">
+                        {currentProducts?.map((p, index) => (
+                            <Card
+                            id={p.id}
+                            name={p.name}
+                            price={p.price}
+                            image={p.image}
+                            key={index}
+                        />
+                        ))}
                     </div>
-                    <div className="MarcaContainer">
-                        <img src={nvidia} width='30px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Corsair} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Asus} width='50px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Logitech} width='50px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={HyperX} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Razer} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Steel} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Ryzen} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Aorus} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Gigabyte} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Seagate} width='50px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Viper} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Msi} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Evga} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Acer} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={Predator} width='40px' alt="" />
-                    </div>
-                    <div className="MarcaContainer">
-                        <img src={AudioT} width='40px' alt="" />
-                    </div>
-              </div>
-              <Filters/>
-            </div>
-          
-            <div className="CardContainer">
-                {products?.map((p) => (
-                    <Card
-                        id={p.id}
-                        name={p.name}
-                        price={p.price}
-                        image={p.image}
-                    />))}
+                    
+                </div>
+                <Paginado
+                    charactersPerPage={charactersPerPage}
+                    product={product.length}
+                    paginado={paginado}
+
+                />
             </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };

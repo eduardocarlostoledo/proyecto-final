@@ -36,7 +36,7 @@ function validate(input) {
 
 export const Login = () => {
     const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const regexEmail = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/g
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [errors, setErrors] = useState({})

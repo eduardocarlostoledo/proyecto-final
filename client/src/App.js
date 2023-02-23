@@ -1,7 +1,5 @@
 import "./App.css";
 import { Route, Routes} from "react-router-dom";
-
-import {useSelector, useDispatch} from 'react-redux'
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
@@ -12,20 +10,16 @@ import { Register } from "./components/Register";
 import Profile  from "./components/Profile";
 import {Login} from "./components/Login"
 import {CreateProducts} from "./components/CreateProduct";
+<<<<<<< HEAD
 import {Cart} from "./components/Cart";
 import { GetFiltersForEmail } from "./redux/actions/UsersActions";
 import { useEffect } from "react";
 
+=======
+import Cart from "./components/Cart";
+>>>>>>> origin/develop
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(()=>{
-    dispatch(GetFiltersForEmail())
-  },[dispatch])
-
-
-
   return (
     <div className="App">
       <NavBar />
@@ -44,6 +38,7 @@ function App() {
 
         <Route path="/CreateProduct" element={<CreateProducts/>} />
 
+<<<<<<< HEAD
         <Route path="/Login" component={Login} />
 
         <Route path="/CreateProduct" component={CreateProducts} />
@@ -51,8 +46,14 @@ function App() {
         <Route path="/Profile" element={<Profile/>} />
 
         <Route path="/Cart" element={<Cart/>} />
+=======
+        <Route path="/Profile" element={<Profile/>} />
+
+        <Route path="/Cart" element={<Cart/>} />
+
+>>>>>>> origin/develop
       </Routes>
-      <Footer />
+      <Footer/>
     </div>
   );
 }

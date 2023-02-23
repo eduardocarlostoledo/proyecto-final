@@ -1,16 +1,15 @@
 const { Product, User, Type, Brand } = require("../db");
 const {Op} = require('sequelize')
-const {uploadImage}=require('../utils/cloudinary')
-const fs =require('fs-extra');
+
 
 // Obtiene los tipos de productos de la BDD
 
 const getTypeProducts = async() => {
   try {
-    const addTypes = ["Cooler", "Power Supply", "Graphics Card","Processor", "SSD","HDD", "RAM", "Motherboard", "Mouse", "Headset", "Monitor", "PC Case", "Keyboard"]
-    addTypes.map(async (t) => {
-      await Type.findOrCreate({where:{name: t}}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
-    })
+    // const addTypes = ["Cooler", "Power Supply", "Graphics Card","Processor", "SSD","HDD", "RAM", "Motherboard", "Mouse", "Headset", "Monitor", "PC Case", "Keyboard"]
+    // addTypes.map(async (t) => {
+    //   await Type.findOrCreate({where:{name: t}}) // !!! AÑADO LOS TYPES HARDCODEADOS, SOLO SIRVE EN EL DESARROLLO, CUANDO SE CAMBIE A "alter: true", HAY QUE COMENTAR DE LA LINEA 9 A LA 12
+    // })
     const products = await Type.findAll();  
     return products;
   } catch (error) {
@@ -23,10 +22,10 @@ const getTypeProducts = async() => {
 
 const getBrandProducts = async() => {
   try {
-    const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
-    addBrand.map(async (b) => {
-      await Brand.findOrCreate({where:{name: b}})
-    })
+    // const addBrand = ["Corsair", "EVGA", "Acer", "ASUS", "Samsung", "Cooler Master", "HyperX", "Gigabyte", "Logitech", "Audio-Technica", "Razer"]
+    // addBrand.map(async (b) => {
+    //   await Brand.findOrCreate({where:{name: b}})
+    // })
     const products = await Brand.findAll();
     return products;
   } catch (error) {
@@ -50,7 +49,7 @@ const getProductsByName = async (productName) => {
       return {
         id: p.id,
         name: p.name,
-        image:p.image.secure_url,
+        image:p.image,
         price:p.price,
         description: p.description,
         type: p.type.name,
@@ -73,7 +72,7 @@ const getProducts = async () => {
         return {
           id: p.id,
           name: p.name,
-          image:p.image.secure_url,
+          image:p.image,
           price:p.price,
           description: p.description,
           type: p.type.name,
@@ -96,7 +95,7 @@ const getProductName = async (product) => {
       return {
         id: p.id,
         name: p.name,
-        image:p.image.secure_url,
+        image:p.image,
         price:p.price,
         description: p.description,
         type: p.type.name,
@@ -112,69 +111,19 @@ const getProductName = async (product) => {
 
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 
-const postProduct = async (product,image) => {
- 
-  const { name, price, type, brand, description } = product;
-  // console.log(product.name, "POST")
-  if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
-  else {
-    try {
-      const newType = await Type.findOne({where:{name: product.type,}});
-      // console.log(product.type, "POST")
-
-      const newBrand = await Brand.findOne({where:{name: product.brand,}});
-      // console.log(product.brand, "POST")
-
-      //invoco la funcion para subir la imagen a cloudinary
-      const result=await uploadImage(image.tempFilePath)
-
-      const newProduct = await Product.create({
-        name: product.name,
-        price: product.price,
-        description: product.description,
-        image:{public_id:result.public_id,secure_url:result.secure_url},
-        typeId: newType.id,
-        brandId: newBrand.id,
-      });
-
-      //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
-      await fs.unlink(image.tempFilePath)
-
-      // console.log(product.name, newProduct, "POSTOK")
-
-      return newProduct;
-    } catch (error) {
-      throw Error(error.message);
-    }
-  }
-};
-
 // const postProduct = async (product) => {
 //   const { name, price, type, brand, image, description } = product;
-//   console.log(product.name, "POST")
-//   if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
+//   if (!name || !price || !type || !brand || !description) throw Error("Mandatory data missing");
 //   else {
 //     try {
-//       const newType = await Type.create({
-//         name: product.type,
-//       });
-//       console.log(product.type, "POST")
-
-//       const newBrand = await Brand.create({
-//         name: product.brand,
-//       });
-//       console.log(product.brand, "POST")
-
 //       const newProduct = await Product.create({
-//         name: product.name,
-//         price: product.price,
-//         description: product.description,
-//         image: product.image,
-//         typeId: newType.id,
-//         brandId: newBrand.id,
+//         name,
+//         price,
+//         description,
+//         image,
+//         typeId: type,
+//         brandId: brand,
 //       });
-
-//       console.log(product.name, newProduct, "POSTOK")
 
 //       return newProduct;
 //     } catch (error) {
@@ -182,6 +131,41 @@ const postProduct = async (product,image) => {
 //     }
 //   }
 // };
+
+const postProduct = async (product) => {
+  const { name, price, type, brand, image, description } = product;
+  console.log(product.name, "POST")
+  if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
+  else {
+    try {
+      const newType = await Type.create({
+        name: product.type,
+      });
+      console.log(product.type, "POST")
+
+      const newBrand = await Brand.create({
+        name: product.brand,
+      });
+      console.log(product.brand, "POST")
+
+      const newProduct = await Product.create({
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        image: product.image,
+        typeId: newType.id,
+        brandId: newBrand.id,
+      });
+    
+
+      console.log(product.name, newProduct, "POSTOK")
+
+      return newProduct;
+    } catch (error) {
+      throw Error(error.message);
+    }
+  }
+};
 
 module.exports = {
   postProduct,

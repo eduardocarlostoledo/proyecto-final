@@ -2,14 +2,12 @@ import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import styles from "../styles/Register.module.css";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllBrands,
   getAllTypes,
   createProduct,
 } from "../redux/actions/ProductActions";
-
 
 function validate(input) {
   let errors = {};
@@ -62,14 +60,16 @@ function validate(input) {
 }
 
 export const CreateProducts = () => {
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllBrands());
     dispatch(getAllTypes());
   }, [dispatch]);
   const brands = useSelector((state) => state.brands);
   const types = useSelector((state) => state.types);
-  const [errors, setErrors] = useState({});
+  const [, setErrors] = useState({}); //errors
   const [input, setInput] = useState({
     name: "",
     image: "",
@@ -98,6 +98,7 @@ export const CreateProducts = () => {
     setInput({ ...input, image: e.target.files[0]})
   }
 
+
   // function handleSelectBrand(e) {
   //   console.log("perfecto", input.brand);
   //   input.brand.includes(e.target.value)
@@ -119,6 +120,7 @@ export const CreateProducts = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     const data = new FormData()
     data.append("name", input.name)
     data.append("image", input.image)
@@ -130,6 +132,7 @@ export const CreateProducts = () => {
     dispatch(createProduct(data));
 
     alert("Product created successfully");
+
     setInput({
       name: "",
       image: "",
@@ -170,6 +173,7 @@ export const CreateProducts = () => {
             onChange={(e) =>handleChangeImage(e)}
             className={styles.inputs}
             type="file"
+
             placeholder="image Product"
           />
           {/* {errors.email && input.email.length > 0 && (
@@ -208,6 +212,7 @@ export const CreateProducts = () => {
         </Form.Group>
 
         <div className={styles.hola}>
+        
           <Form.Select
             name="type"
             onChange={(e) => handleChange(e)}
@@ -216,12 +221,14 @@ export const CreateProducts = () => {
             <option>Types select menu</option>
             {types &&
               types.map((types, index) => (
+
                 <option key={index} value={types.name}>
+
                   {types.name}
                 </option>
               ))}
           </Form.Select>
-
+          
           <Form.Select
             name="brand"
             onChange={(e) => handleChange(e)}
@@ -230,7 +237,9 @@ export const CreateProducts = () => {
             <option>Brands select menu</option>
             {brands &&
               brands.map((brand, index) => (
+
                 <option key={index} value={brand.name}>
+
                   {brand.name}
                 </option>
               ))}

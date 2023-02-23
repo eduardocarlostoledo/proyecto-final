@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { useSelector,useDispatch } from 'react-redux';
 import ItemCart from "./ItemCart";
 import { getCart,deleteCart } from '../redux/actions/CartActions';
@@ -10,14 +11,36 @@ export function Cart() {
   const cart=useSelector(state=>state.cart)
   const dispatch=useDispatch();
   useEffect(() => {dispatch(getCart())},[cart]);
+=======
+import mercadopago from "./mercadopago";
+import "../styles/Cart.css"
+
+function Cart() {
+  const [cartItems, setCartItems] = useState([]);
+  //const [preference, setPreference] = useState(null);
+  useEffect(() => {
+    fetch('http://localhost:3001/cart')
+      .then(response => response.json())
+      .then(data => setCartItems(data))
+      .catch(error => console.log(error));
+  }, []);
+
+>>>>>>> origin/develop
   /*
   const price = 4979.869999999999;
 const formattedPrice = price.toFixed(1);
   */
+<<<<<<< HEAD
   const price = cart.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
   const total = price.toFixed(1)
   const description = cart.map(e=>e.name)
   const quantity = cart.reduce((acc, item) => acc + item.amount, 0);
+=======
+  const price = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
+  const total = price.toFixed(1)
+  const description = cartItems.map(e=>e.name)
+  const quantity = cartItems.reduce((acc, item) => acc + item.amount, 0);
+>>>>>>> origin/develop
 
   const orderData = {
     quantity: quantity,
@@ -25,6 +48,7 @@ const formattedPrice = price.toFixed(1);
     price: total
   };
 
+<<<<<<< HEAD
   // function handleCheckout(e) {
   //   e.preventDefault();    
 
@@ -72,10 +96,73 @@ const formattedPrice = price.toFixed(1);
   //     }
   //   });
   // }
+=======
+  function handleCheckout(e) {
+    e.preventDefault();    
+
+    fetch("http://localhost:3001/pay/create_preference", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderData),    
+    })
+    .then(function (response) {
+        console.log("RESPONSE" , response)
+        return response.json();
+      })      
+    // .then(function (response) {
+       
+    //   const data =response.json();
+    //   setPreference(data)
+    //   console.log("SET PREFERENCE" , preference)
+    // })
+    .then(
+        function (preference) {
+        createCheckoutButton(preference.id);
+  
+        // $(".shopping-cart").fadeOut(500);
+        // setTimeout(() => {
+        //   $(".container_payment").show(500).fadeIn();
+        // }, 500);
+      })
+      .catch(function () {
+        alert("Unexpected error");
+        // $('#checkout-btn').attr("disabled", false);
+      });
+  }
+  // Create preference when click on checkout button
+  function createCheckoutButton(preferenceId) {
+    // Initialize the checkout
+    mercadopago.checkout({
+      preference: {
+        id: preferenceId
+      },
+      render: {
+        container: '#button-checkout', // Class name where the payment button will be displayed
+        label: 'Pay', // Change the payment button text (optional)
+      }
+    });
+  }
+
+  function deleteCart(prodId) {
+    fetch(`http://localhost:3001/cart/${prodId}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al eliminar el carrito');
+      }
+      // Actualizar la interfaz de usuario para reflejar que el carrito ha sido eliminado
+    })
+    .catch(error => console.error(error));
+  }
+>>>>>>> origin/develop
 
   return (
     <div className='ContainerCart'>    
        <h2>Shopping Cart</h2>
+<<<<<<< HEAD
             {cart.map(item => (
                 <ItemCart 
                   key={item.id}
@@ -87,12 +174,33 @@ const formattedPrice = price.toFixed(1);
             ))}
           <h3>Total: ${total}</h3>
           {/* <button className='ButtonCart' onClick={handleCheckout}>Checkout</button> */}
+=======
+        
+       <nav className='NavCart'>
+          <ul className='ListDesordenada'>
+            {cartItems.map(item => (
+              <li key={item.id}>
+                {item.name} - ${item.price}
+              </li>
+              
+              ))}
+
+          </ul>
+       </nav> 
+       
+          <h3>Total: ${total}</h3>
+          <button className='ButtonCart' onClick={handleCheckout}>Checkout</button>
+>>>>>>> origin/develop
        
        <div id="button-checkout"></div>
      </div>    
   );
 }
 
+<<<<<<< HEAD
+=======
+export default Cart;
+>>>>>>> origin/develop
 
 
 

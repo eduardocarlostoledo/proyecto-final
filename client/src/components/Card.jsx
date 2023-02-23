@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { addToCart } from "../redux/actions/CartActions";
 import "../styles/Card.css"
+import AddToCart from "./AddCart"
 
 export default function Card({name, image, price}) {
     return (
@@ -16,7 +17,11 @@ export default function Card({name, image, price}) {
           <p class="card_p_nombre">{name}</p>
           
           <strong class="card_strong_precio"> $ {price}</strong>
+<<<<<<< HEAD
           <button onClick={addToCart({name,image,price})}>add</button>
+=======
+          <AddToCart name={name} image={image} price={price} />
+>>>>>>> origin/develop
         </div>
 
     </div>
