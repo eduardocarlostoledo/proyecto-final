@@ -31,7 +31,6 @@ export const getProductDetail = (name) => async (dispatch) => {
     dispatch({type: GET_PRODUCT_DETAIL, payload:{...r.data.data[0]}}))
 };
 
-
  export const createProduct =  (payload)=> async()=>{
    return await axios.post("http://localhost:3001/products",payload)
  };
@@ -77,6 +76,7 @@ export const updateProduct= (payload)=> async()=>{
 //             console.log(error)
 //     }
 // }
+
 
 // export const getAllTypes = () => async (dispatch) => {
 //     try {

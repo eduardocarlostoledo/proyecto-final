@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
             secure_url:DataTypes.STRING
         },
         price: {
-            type: DataTypes.DOUBLE,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         description: {

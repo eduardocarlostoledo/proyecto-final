@@ -74,6 +74,7 @@ const getProducts = async () => {
           id: p.id,
           name: p.name,
           image:p.image.secure_url,
+          image:p.image,
           price:p.price,
           description: p.description,
           type: p.type.name,
@@ -112,6 +113,7 @@ const getProductName = async (product) => {
 
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 
+
 const postProduct = async (product,image) => {
  
   const { name, price, type, brand, description } = product;
@@ -141,6 +143,7 @@ const postProduct = async (product,image) => {
       await fs.unlink(image.tempFilePath)
 
       // console.log(product.name, newProduct, "POSTOK")
+
 
       return newProduct;
     } catch (error) {

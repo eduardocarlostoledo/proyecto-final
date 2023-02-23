@@ -10,7 +10,6 @@ import {
   createProduct,
 } from "../redux/actions/ProductActions";
 
-
 function validate(input) {
   let errors = {};
   const regexName = /^([a-zA-Z ]+)$/i;
@@ -98,6 +97,7 @@ export const CreateProducts = () => {
     setInput({ ...input, image: e.target.files[0]})
   }
 
+
   // function handleSelectBrand(e) {
   //   console.log("perfecto", input.brand);
   //   input.brand.includes(e.target.value)
@@ -119,6 +119,7 @@ export const CreateProducts = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     const data = new FormData()
     data.append("name", input.name)
     data.append("image", input.image)
@@ -130,6 +131,7 @@ export const CreateProducts = () => {
     dispatch(createProduct(data));
 
     alert("Product created successfully");
+
     setInput({
       name: "",
       image: "",
@@ -170,6 +172,7 @@ export const CreateProducts = () => {
             onChange={(e) =>handleChangeImage(e)}
             className={styles.inputs}
             type="file"
+
             placeholder="image Product"
           />
           {/* {errors.email && input.email.length > 0 && (
@@ -216,7 +219,9 @@ export const CreateProducts = () => {
             <option>Types select menu</option>
             {types &&
               types.map((types, index) => (
+
                 <option key={index} value={types.name}>
+
                   {types.name}
                 </option>
               ))}
@@ -230,7 +235,9 @@ export const CreateProducts = () => {
             <option>Brands select menu</option>
             {brands &&
               brands.map((brand, index) => (
+
                 <option key={index} value={brand.name}>
+
                   {brand.name}
                 </option>
               ))}
