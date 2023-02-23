@@ -1,3 +1,4 @@
+import { GET_CART } from './actions/CartActions';
 import {
     GET_ALL_PRODUCTS,
     GET_ALL_PRODUCTS_NAME,
@@ -21,6 +22,7 @@ import {
         paginatedProducts: [],
         brands:[],
         types:[],
+        cart:[],
         productDetail:{},
         users: [],
         userDetail:{},
@@ -68,9 +70,7 @@ import {
                 return { ...state }
 
             case UPDATE_USER: 
-            
                 return { ...state }
-
         
             case GET_EMAIL: 
 
@@ -81,7 +81,9 @@ import {
             case GET_PAGE:
                 return {...state, paginatedProducts:action.payload}
 
-                
+            case GET_CART: 
+                return{...state,cart:action.payload}
+
             default: return {...state}
             
         }

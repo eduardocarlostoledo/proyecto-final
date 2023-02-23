@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { addToCart } from "../redux/actions/CartActions";
 import "../styles/Card.css"
+import { Link } from "react-router-dom";
+import { addToCart, deleteProductToCart } from "../redux/actions/CartActions";
 
-export default function Card({name, image, price}) {
+export default function ItemCart({name, image, price, prodId,amount}) {
     return (
         <div className="DivAllCards">
       
@@ -14,12 +14,12 @@ export default function Card({name, image, price}) {
           </div>
           </Link>
           <p class="card_p_nombre">{name}</p>
-          
           <strong class="card_strong_precio"> $ {price}</strong>
-          <button onClick={addToCart({name,image,price})}>add</button>
+          <button onClick={deleteProductToCart(prodId)}>-</button>
+          <p>{amount}</p>
+          <button onClick={addToCart({name,image,price})}>+</button>
         </div>
 
     </div>
   );
 }
-

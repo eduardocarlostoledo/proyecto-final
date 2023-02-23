@@ -9,12 +9,8 @@ const {
 const cartRouter = Router()
 
 cartRouter.get('/', async (req,res) => {
-    try {
         const productsCart = await getProductsCart()
         res.status(200).json(productsCart)
-    } catch (error) {
-        res.status(400).json("No hay productos en el carrito")
-    }
 })
 
 cartRouter.post('/', async (req,res) => {
