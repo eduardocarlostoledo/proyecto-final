@@ -52,10 +52,17 @@ const deleteProductCart=async (prodId) => {
 
   return "Se quitó el producto del carrito";
 }
+const deleteCart=async () => {
+  const cart = await Cart.findAll();
+  if(!cart) throw Error("No hay productos en el carrito")
+  await Cart.drop();
+  return "El carrito se eliminó"
+}
 
   module.exports = {
     getProductsCart,
     addProductCart,
-    deleteProductCart
+    deleteProductCart,
+    deleteCart
   };
   

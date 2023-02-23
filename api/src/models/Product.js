@@ -14,7 +14,9 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         image: {
-            type: DataTypes.TEXT
+            type:DataTypes.JSON,
+            public_id: DataTypes.STRING,
+            secure_url:DataTypes.STRING
         },
         price: {
             type: DataTypes.INTEGER,
@@ -22,6 +24,11 @@ module.exports = (sequelize) => {
         },
         description: {
             type: DataTypes.TEXT
-        }
+        },
+        inCart:{
+             type:DataTypes.BOOLEAN,
+             allowNull:false,
+             defaultValue: false
+         }
     },{timestamps:false})
 }

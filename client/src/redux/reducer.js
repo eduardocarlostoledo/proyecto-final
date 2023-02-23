@@ -2,7 +2,6 @@ import {
     GET_ALL_PRODUCTS,
     GET_ALL_PRODUCTS_NAME,
     GET_PRODUCT_DETAIL,
-    CREATE_PRODUCT,
     UPDATE_PRODUCT,
     GET_ALL_BRANDS,
     GET_ALL_TYPES,
@@ -43,10 +42,6 @@ import {
             case GET_PRODUCT_DETAIL: 
             
                 return { ...state, productDetail:action.payload }
-
-            case CREATE_PRODUCT: 
-            
-                return { ...state, } 
 
             case UPDATE_PRODUCT: 
             
