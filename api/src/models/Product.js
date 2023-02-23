@@ -1,3 +1,4 @@
+
 const { DataTypes} = require('sequelize');
 
 module.exports = (sequelize) => {
@@ -24,10 +25,10 @@ module.exports = (sequelize) => {
         description: {
             type: DataTypes.TEXT
         },
-        // inCart:{
-        //     type:DataTypes.BOOLEAN,
-        //     allowNull:false,
-        //     defaultValue: false
-        // }
+        inCart:{
+             type:DataTypes.BOOLEAN,
+             allowNull:false,
+             defaultValue: false
+         }
     },{timestamps:false})
 }

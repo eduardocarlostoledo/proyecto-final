@@ -16,10 +16,9 @@ const productRouter = Router()
 
 productRouter.post('/', async (req,res) => {
   try {
-    const {image}=req.files;
     let product = req.body;
     console.log(product);
-    const newProduct = await postProduct(product, image);
+    const newProduct = await postProduct(product,req.files.image);
     res.status(201).send({ status: "OK", data: newProduct });
   } catch (error) {
     return res.status(400).send({ error: error.message });

@@ -10,6 +10,7 @@ import {
   createProduct,
 } from "../redux/actions/ProductActions";
 
+
 function validate(input) {
   let errors = {};
   const regexName = /^([a-zA-Z ]+)$/i;
@@ -92,6 +93,11 @@ export const CreateProducts = () => {
     );
   }
 
+  const handleChangeImage =(e) => {
+    console.log(e.target.files[0]);
+    setInput({ ...input, image: e.target.files[0]})
+  }
+
   // function handleSelectBrand(e) {
   //   console.log("perfecto", input.brand);
   //   input.brand.includes(e.target.value)
@@ -113,8 +119,17 @@ export const CreateProducts = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createProduct(input));
-    alert("User created successfully");
+    const data = new FormData()
+    data.append("name", input.name)
+    data.append("image", input.image)
+    data.append("price", input.price)
+    data.append("description", input.description)
+    data.append("brand", input.brand)
+    data.append("type", input.type)
+    
+    dispatch(createProduct(data));
+
+    alert("Product created successfully");
     setInput({
       name: "",
       image: "",
@@ -123,6 +138,7 @@ export const CreateProducts = () => {
       brand: 0,
       type: 0,
     });
+
   }
 
   return (
@@ -151,10 +167,9 @@ export const CreateProducts = () => {
           <Form.Label>image Product</Form.Label>
           <Form.Control
             name="image"
-            onChange={(e) => handleChange(e)}
-            value={input.image}
+            onChange={(e) =>handleChangeImage(e)}
             className={styles.inputs}
-            type="text"
+            type="file"
             placeholder="image Product"
           />
           {/* {errors.email && input.email.length > 0 && (
@@ -201,7 +216,7 @@ export const CreateProducts = () => {
             <option>Types select menu</option>
             {types &&
               types.map((types, index) => (
-                <option key={index} value={types.id}>
+                <option key={index} value={types.name}>
                   {types.name}
                 </option>
               ))}
@@ -215,7 +230,7 @@ export const CreateProducts = () => {
             <option>Brands select menu</option>
             {brands &&
               brands.map((brand, index) => (
-                <option key={index} value={brand.id}>
+                <option key={index} value={brand.name}>
                   {brand.name}
                 </option>
               ))}

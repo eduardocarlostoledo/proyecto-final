@@ -70,7 +70,6 @@ const getProducts = async () => {
     try {
       const allProducts = await Product.findAll({include: [Type,Brand]});
       const result = allProducts.map((p) => {
-        console.log(p.image);
         return {
           id: p.id,
           name: p.name,
@@ -80,9 +79,7 @@ const getProducts = async () => {
           type: p.type.name,
           brand: p.brand.name
         }
-        
       })
-
       return result;
     } catch (error) {
       throw new Error("Error retrieving products: " + error.message);
@@ -115,42 +112,18 @@ const getProductName = async (product) => {
 
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 
-// const postProduct = async (product) => {
-//   const { name, price, type, brand, image, description } = product;
-//   if (!name || !price || !type || !brand || !description) throw Error("Mandatory data missing");
-//   else {
-//     try {
-//       const newProduct = await Product.create({
-//         name,
-//         price,
-//         description,
-//         image,
-//         typeId: type,
-//         brandId: brand,
-//       });
-
-//       return newProduct;
-//     } catch (error) {
-//       throw Error(error.message);
-//     }
-//   }
-// };
-
 const postProduct = async (product,image) => {
+ 
   const { name, price, type, brand, description } = product;
-  console.log(product.name, "POST")
+  // console.log(product.name, "POST")
   if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
   else {
     try {
-      const newType = await Type.create({
-        name: product.type,
-      });
-      console.log(product.type, "POST")
+      const newType = await Type.findOne({where:{name: product.type,}});
+      // console.log(product.type, "POST")
 
-      const newBrand = await Brand.create({
-        name: product.brand,
-      });
-      console.log(product.brand, "POST")
+      const newBrand = await Brand.findOne({where:{name: product.brand,}});
+      // console.log(product.brand, "POST")
 
       //invoco la funcion para subir la imagen a cloudinary
       const result=await uploadImage(image.tempFilePath)
@@ -167,7 +140,7 @@ const postProduct = async (product,image) => {
       //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
       await fs.unlink(image.tempFilePath)
 
-      console.log(product.name, newProduct, "POSTOK")
+      // console.log(product.name, newProduct, "POSTOK")
 
       return newProduct;
     } catch (error) {
@@ -175,6 +148,40 @@ const postProduct = async (product,image) => {
     }
   }
 };
+
+// const postProduct = async (product) => {
+//   const { name, price, type, brand, image, description } = product;
+//   console.log(product.name, "POST")
+//   if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
+//   else {
+//     try {
+//       const newType = await Type.create({
+//         name: product.type,
+//       });
+//       console.log(product.type, "POST")
+
+//       const newBrand = await Brand.create({
+//         name: product.brand,
+//       });
+//       console.log(product.brand, "POST")
+
+//       const newProduct = await Product.create({
+//         name: product.name,
+//         price: product.price,
+//         description: product.description,
+//         image: product.image,
+//         typeId: newType.id,
+//         brandId: newBrand.id,
+//       });
+
+//       console.log(product.name, newProduct, "POSTOK")
+
+//       return newProduct;
+//     } catch (error) {
+//       throw Error(error.message);
+//     }
+//   }
+// };
 
 module.exports = {
   postProduct,

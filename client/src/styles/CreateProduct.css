@@ -22,3 +22,17 @@
     display: flex;
     justify-content: space-around;
 }
+
+.btnR{ 
+    color: white;
+    font-size: 23px;
+    background-color: gray;
+    width: 440px;
+    height: 45px;
+    margin-top: 15px;
+    border: none;
+
+}
+.btnR:hover { 
+    background-color: rgb(102, 99, 99);
+}

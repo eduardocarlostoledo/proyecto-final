@@ -2,10 +2,11 @@ import axios from "axios";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_ALL_PRODUCTS_NAME="GET_ALL_PRODUCTS_NAME"
 export const GET_PRODUCT_DETAIL = "GET_PRODUCT_DETAIL";
-export const CREATE_PRODUCT = "CREATE_PRODUCT";
+
 export const UPDATE_PRODUCT='UPDATE_PRODUCT';
 export const GET_ALL_BRANDS= 'GET_ALL_BRANDS';
 export const GET_ALL_TYPES= 'GET_ALL_TYPES';
+export const GET_PAGE = 'GET_PAGE'
 
 export const getAllProducts = () => async (dispatch) => {
     try {
@@ -31,9 +32,9 @@ export const getProductDetail = (name) => async (dispatch) => {
 };
 
 
-// export const createProduct =  (payload)=> async()=>{
-//   return await axios.post("http://localhost:3001/products",payload)
-// };
+ export const createProduct =  (payload)=> async()=>{
+   return await axios.post("http://localhost:3001/products",payload)
+ };
 // export function createProduct(payload) { 
 //   return async function(dispatch){
 //       const response = await axios.post("http://localhost:3001/products",payload);
@@ -41,27 +42,27 @@ export const getProductDetail = (name) => async (dispatch) => {
 //   };
 // };
 
-export const createProduct = (product) => {
-  return async (dispatch) => {
-    console.log("/products", product);
-    try {
-      const response = await fetch("http://localhost:3001/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      });
+// export const createProduct = (product) => {
+//   return async (dispatch) => {
+//     console.log("/products", product);
+//     try {
+//       const response = await fetch("http://localhost:3001/products", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(product),
+//       });
 
-      console.log("CREATE_PRODUCT", response);
-      const data = await response.json();
-      dispatch({ type: "CREATE_PRODUCT", payload: data });
+//       console.log("CREATE_PRODUCT", response);
+//       const data = await response.json();
+//       dispatch({ type: "CREATE_PRODUCT", payload: data });
 
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+// };
 
 
 export const updateProduct= (payload)=> async()=>{
@@ -100,3 +101,17 @@ export const getAllTypes = () => {
   }
 }
 
+// export const getPage = (page,brand,type,price) => async (dispatch) => {
+//   return await axios.get(`localhost:3001/filter?page=${page}&brand=${brand}&type=${type}&price=${price}`)
+//   .then(r => dispatch({ type : GET_PAGE, payload : r}))
+//   .catch(e => console.error(e))
+
+// }
+
+export const getPage = (page,brand,type,price) => {
+  return async function(dispatch) {
+    const json = await axios.get(`http://localhost:3001/filter?page=${page}&brand=${brand}&type=${type}&price=${price}`)
+    console.log(json)
+    return dispatch({type: GET_PAGE, payload: json.data})
+  }
+}

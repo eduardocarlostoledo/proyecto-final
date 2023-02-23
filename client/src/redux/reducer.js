@@ -2,26 +2,29 @@ import {
     GET_ALL_PRODUCTS,
     GET_ALL_PRODUCTS_NAME,
     GET_PRODUCT_DETAIL,
-    CREATE_PRODUCT,
     UPDATE_PRODUCT,
     GET_ALL_BRANDS,
-    GET_ALL_TYPES
+    GET_ALL_TYPES,
+    GET_PAGE
     } from './actions/ProductActions'
     
     import{
         GET_ALL_USERS,
         GET_USER_BY_ID,
         USER_REGISTER,
-        UPDATE_USER
+        UPDATE_USER,
+        GET_EMAIL,
     } from './actions/UsersActions';
     
     const initialState= {
         products: [],
+        paginatedProducts: [],
         brands:[],
         types:[],
         productDetail:{},
         users: [],
-        userDetail:{}
+        userDetail:{},
+        emails : []
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -39,10 +42,6 @@ import {
             case GET_PRODUCT_DETAIL: 
             
                 return { ...state, productDetail:action.payload }
-
-            case CREATE_PRODUCT: 
-            
-                return { ...state, } 
 
             case UPDATE_PRODUCT: 
             
@@ -71,8 +70,20 @@ import {
             case UPDATE_USER: 
             
                 return { ...state }
+
+        
+            case GET_EMAIL: 
+
+                return { ...state,
+                    emails : action.payload }
+
+
+            case GET_PAGE:
+                return {...state, paginatedProducts:action.payload}
+
                 
             default: return {...state}
+            
         }
     }
     
