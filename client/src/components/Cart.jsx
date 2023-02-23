@@ -12,8 +12,12 @@ function Cart() {
       .catch(error => console.log(error));
   }, []);
 
-
-  const total = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0);
+  /*
+  const price = 4979.869999999999;
+const formattedPrice = price.toFixed(1);
+  */
+  const price = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
+  const total = price.toFixed(1)
   const description = cartItems.map(e=>e.name)
   const quantity = cartItems.reduce((acc, item) => acc + item.amount, 0);
 
@@ -71,20 +75,34 @@ function Cart() {
     });
   }
 
-  
+  function deleteCart(prodId) {
+    fetch(`http://localhost:3001/cart/${prodId}`, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al eliminar el carrito');
+      }
+      // Actualizar la interfaz de usuario para reflejar que el carrito ha sido eliminado
+    })
+    .catch(error => console.error(error));
+  }
 
   return (
     <div className='ContainerCart'>    
        <h2>Shopping Cart</h2>
+        
        <nav className='NavCart'>
           <ul className='ListDesordenada'>
             {cartItems.map(item => (
               <li key={item.id}>
                 {item.name} - ${item.price}
               </li>
-            ))}
+              
+              ))}
+
           </ul>
-       </nav>
+       </nav> 
        
           <h3>Total: ${total}</h3>
           <button className='ButtonCart' onClick={handleCheckout}>Checkout</button>

@@ -53,7 +53,6 @@ export const Products = () => {
         e.preventDefault()
         dispatch(getAllProductsName(name))
         setCurrentPage(1);
-        setName('')
     }
 
     /* Click que trae todos los productos de nuevo */
@@ -63,23 +62,16 @@ export const Products = () => {
         dispatch(getAllProducts());
     }
 
-
     const handleFilterBrands = (e) => {
-    
-            dispatch(filterByBrands(e.target.value))
-            console.log(e.target.value)
-            setCurrentPage(1)
-            document.getElementById('filterBrandsSelect').value = 'All';
-           
+        dispatch(filterByBrands(e.target.value))
+        setCurrentPage(1)
     }
 
     /* Filtrado por Types */
     const handleFilterTypes = (e) => {
-        
         dispatch(filterByType(e.target.value))
-        console.log(e.target.value)
         setCurrentPage(1) 
-        document.getElementById('filterTypesSelect').value = 'All'
+       
     }
 
     /* Filtrado por precio */
@@ -89,7 +81,6 @@ export const Products = () => {
         dispatch(filterByPrice(e.target.value));
         setCurrentPage(1);
         setPrice(`Price ${e.target.value}`)
-        document.getElementById('filterPriceSelect').value = 'All'
     }
 
     return (
@@ -107,20 +98,21 @@ export const Products = () => {
                         <div className="ContainerFilters">
                             
                             <select id="filterBrandsSelect" className="Filter" onChange={(e) => handleFilterBrands(e)}>
-                                <option value="All">All</option>
+                                <option value="All" defaultValue='default'>All Brands</option>
                                 {brand.map((b, index) => ( 
                                     <option key={index} type="reset" value={b.name}>{b.name}</option>
                                 ))}
                             </select>
                             
                             <select id="filterTypesSelect" className="Filter" onChange={(e) => handleFilterTypes(e)}>
-                                <option value="All">All</option>
+                                <option value="All" defaultValue='default'>All Types</option>
                                 {type.map((t, index) => {
                                     return <option key={index} value={t.name}>{t.name}</option>
                                 })} 
                             </select>
+                            
                             <select id="filterPriceSelect" className="Filter" onChange={(e) => handleFilterPrice(e)}>
-                                <option value="All">All</option>
+                                <option value="all" disabled={true}>All price</option>
                                 <option value="ASC">Lower price</option>
                                 <option value="DES">Higher price</option>
                             </select>
