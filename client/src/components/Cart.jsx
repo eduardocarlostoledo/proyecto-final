@@ -85,8 +85,10 @@ function Cart() {
             ))}
           </ul>
        </nav>
-       <h3>Total: ${total}</h3>
-       <button className='ButtonCart' onClick={handleCheckout}>Checkout</button>
+       
+          <h3>Total: ${total}</h3>
+          <button className='ButtonCart' onClick={handleCheckout}>Checkout</button>
+       
        <div id="button-checkout"></div>
      </div>    
   );

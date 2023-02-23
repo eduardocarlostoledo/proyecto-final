@@ -7,8 +7,10 @@
     align-items: center;
     align-content: center;
     margin-left: 60px;
-    margin-right: 20px;
-
+    margin-right: 40px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px;
 }
 
 .ContainerCart h2{
@@ -50,9 +52,10 @@
 .ButtonCart{
     color: black;
     background: white;
-    border: none;
+    border: 1px solid black;
 }
 .ButtonCart:hover{
     color: white;
     background: black;
 }
+
