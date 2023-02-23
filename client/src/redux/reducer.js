@@ -8,16 +8,10 @@ import {
     GET_ALL_TYPES,
     FILTER_BY_BRAND,
     FILTER_BY_TYPE,
-    FILTER_PRECIO,
-    } from './actions/ProductActions'
+    FILTER_PRECIO, } from './actions/ProductActions'
     
-    import{
-        GET_ALL_USERS,
-        GET_USER_BY_ID,
-        USER_REGISTER,
-        UPDATE_USER
-    } from './actions/UsersActions';
-    
+import { GET_ALL_USERS, GET_USER_BY_ID, USER_REGISTER, UPDATE_USER } from './actions/UsersActions';
+
     const initialState= {
         products: [],
         allProducts: [],
@@ -25,7 +19,8 @@ import {
         types:[],
         productDetail:{},
         users: [],
-        userDetail:{}
+        userDetail:{},
+        carts: [],
 
     }
     
@@ -126,8 +121,7 @@ import {
                     ...state,
                     products: sortPrice,
                 };
-
-        
+             
     
             default: return {...state}
         }

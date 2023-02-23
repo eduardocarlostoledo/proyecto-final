@@ -93,21 +93,8 @@ font-size: 1.8vh;
     border: 1px solid #e7b8ff;
 }
 
-.card_button_comprar{
-    width: 120px;
-    height: 40px;
-    border-radius: 15px;
-    border: none;
-    grid-area: compra;
-    margin-top: 0;
-    margin-left: 30%;
-    margin-bottom: 10%;
-}
 
-.card_button_comprar:hover{
-    background-color: #e7b8ff;
-    color: rgb(53, 0, 53);
-}
+
 
 .DivAllCards {
     display: grid;
@@ -115,4 +102,33 @@ font-size: 1.8vh;
     grid-auto-rows: 22rem;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     margin-bottom: 50px;
+}
+
+
+.ButtonCart{
+    width: 120px;
+    height: 40px;
+    margin-top: -20px;
+    border-radius: 20px;
+    border: 1px solid violet;
+    background-color: #e7b8ff;
+    margin-left: 120px;
+}
+
+.ButtonCart:hover{
+    background-color: white;
+    color: #aa01fe;
+}
+
+.ButtonMessage{
+    
+    background-color: white;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+.ButtonMessage:hover{
+    background-color: white;
+    color: #aa01fe;
 }

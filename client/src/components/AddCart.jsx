@@ -15,14 +15,14 @@ function AddToCart(item) {
       body: JSON.stringify(newItem)
     })
       .then(response => response.json())
-      .then(data => setMessage('Item added to cart!'));
+      .then(data => setMessage('Added!'));
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <button type="submit">Add to cart</button>
-        {message && <p>{message}</p>}
+        <button className='ButtonCart' type="submit">Add to cart</button>
+        {message && <p className='ButtonMessage'>{message}</p>}
       </form>
     </div>
   );

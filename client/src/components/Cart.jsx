@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import mercadopago from "./mercadopago"
+import mercadopago from "./mercadopago";
+import "../styles/Cart.css"
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
   //const [preference, setPreference] = useState(null);
-
   useEffect(() => {
     fetch('http://localhost:3001/cart')
       .then(response => response.json())
       .then(data => setCartItems(data))
       .catch(error => console.log(error));
   }, []);
+
 
   const total = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0);
   const description = cartItems.map(e=>e.name)
@@ -70,22 +71,22 @@ function Cart() {
     });
   }
 
-
+  
 
   return (
-    <div>       
-       <h1>.</h1>
-       <h1>.</h1>
+    <div className='ContainerCart'>    
        <h2>Shopping Cart</h2>
-       <ul>
-         {cartItems.map(item => (
-           <li key={item.id}>
-             {item.name} - ${item.price}
-           </li>
-         ))}
-       </ul>
-       <p>Total: ${total}</p>
-       <button onClick={handleCheckout}>Checkout</button>
+       <nav className='NavCart'>
+          <ul className='ListDesordenada'>
+            {cartItems.map(item => (
+              <li key={item.id}>
+                {item.name} - ${item.price}
+              </li>
+            ))}
+          </ul>
+       </nav>
+       <h3>Total: ${total}</h3>
+       <button className='ButtonCart' onClick={handleCheckout}>Checkout</button>
        <div id="button-checkout"></div>
      </div>    
   );

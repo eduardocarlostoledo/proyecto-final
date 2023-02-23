@@ -127,7 +127,7 @@ export const Home = () => {
                     </div>
                 </div>
                 <div class="title">
-                    <button href="#" className="btnHome mgt60">Load More</button>
+                    <a href="#" className="btnHome mgt60">Load More</a>
                 </div>
             </section>
         </div>
