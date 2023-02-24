@@ -13,7 +13,6 @@ import { ChangeNav } from "../redux/actions/UsersActions";
 export const NavBar = () => {   
     let Nav = useSelector((state) => state.ChangeNav);
     // const [Active, setActive] = useState(JSON.parse(localStorage.getItem("UserActive")))
-  
 
     return (
         <div className="NavDiv">   
@@ -32,7 +31,7 @@ export const NavBar = () => {
             <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
             </div>  :  <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link> 
             }               
-               <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
+             <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
         </div>
     
     </div>
