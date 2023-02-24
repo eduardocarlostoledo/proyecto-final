@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes} from "react-router-dom";
-
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
@@ -14,16 +13,15 @@ import {Login} from "./components/Login"
 import {CreateProducts} from "./components/CreateProduct";
 import { GetFiltersForEmail } from "./redux/actions/UsersActions";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+
 
 function App() {
   const dispatch = useDispatch();
 
+
   useEffect(()=>{
     dispatch(GetFiltersForEmail())
   },[dispatch])
-
-
 
   return (
     <div className="App">

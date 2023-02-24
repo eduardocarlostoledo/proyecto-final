@@ -15,6 +15,8 @@ import {
         USER_REGISTER,
         UPDATE_USER,
         GET_EMAIL,
+        USER_ACTIVE,
+        CHANGE_NAV
     } from './actions/UsersActions';
     
     const initialState= {
@@ -25,7 +27,9 @@ import {
         productDetail:{},
         users: [],
         userDetail:{},
-        emails : []
+        emails : [],
+        UserActive : {},
+        ChangeNav : JSON.parse(localStorage.getItem("UserActive")),
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -86,10 +90,29 @@ import {
             case GET_PAGE:
                 return {...state, paginatedProducts:action.payload}
 
+                case USER_ACTIVE: 
+                const userActive = action.payload;
+                window.localStorage.removeItem("UserActive")
+                window.localStorage.setItem("UserActive", false)
+                const uss = localStorage.setItem("USUARIO", JSON.stringify(userActive))
+                return { ...state,
+                    ChangeNav: JSON.parse(localStorage.getItem("UserActive")),
+                    UserActive : JSON.parse(localStorage.getItem("USUARIO")) }
+
+
+                    // case  CHANGE_NAV:
+                    //     window.localStorage.removeItem("UserActive")
+                    //     window.localStorage.setItem("UserActive", true)
+                    //     return {
+                    //         ...state, 
+                    //         ChangeNav: JSON.parse(localStorage.getItem("UserActive")),
+                    //     }
+        
                 
             default: return {...state}
             
         }
+
     }
     
     export default rootReducer;

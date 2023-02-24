@@ -5,6 +5,7 @@ import styles from "../styles/Register.module.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { userRegister} from '../redux/actions/UsersActions';
+import swal from 'sweetalert';
 
 
 
@@ -65,7 +66,7 @@ function validate(input) {
 
 
 export const Register = () => {
-    let users = useSelector((state) => state.emails.data)
+    let users = useSelector((state) => state.emails.data || [])
     console.log(users);
     let emails = users.map(e => e.email)
     // console.log(emails);
@@ -100,43 +101,43 @@ export const Register = () => {
         e.preventDefault();
 
         if (!input.name || !input.lastname || !input.password || !input.email) {
-            return alert('Missing required fields')
+            return swal("Invalid", "Missing required fields!", "error");
         }
 
         if (input.email && input.email.length > 0 && input.email !== "") {
             if (!regexEmail.test(input.email)) {
-                return alert("Email invalid")
+                return swal("Invalid","Email invalid", "error")
             }
           }
 
           if (input.name && input.name.length > 0 && input.name !== "") {
             if (!regexName.test(input.name)) {
-                return alert("Name invalid")
+                return swal("Invalid","Name invalid", "error")
             }
           }
           if (input.lastname && input.lastname.length > 0 && input.lastname !== "") {
             if (!regexName.test(input.lastname)) {
-                return alert("Lastname invalid")
+                return swal("Invalid","Lastname invalid", "error")
             }
           }
         
           if (input.password && input.password.length > 0 && input.password !== "") {
             if (!regexPassword.test(input.password)) {
-                return alert("Password invalid")
+                return swal("Invalid","Password invalid", "error")
             }
           }
 
           if (input.password !== input.passwordConfirm) {
-            return alert("Passwords must match")
+            return swal("Invalid","Passwords must match", "error")
           }
 
           if (emails.includes(input.email)) {
-            return alert('Email already exists')
+            return swal("Invalid",'Email already exists', "error")
         }
 
 
             dispatch(userRegister(input));
-            alert("User created successfully");
+            swal("success",'User created successfully', "success")
             setInput({
                 name: "",
                 lastname: "",
