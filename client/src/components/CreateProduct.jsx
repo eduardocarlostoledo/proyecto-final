@@ -92,12 +92,6 @@ export const CreateProducts = () => {
     );
   }
 
-  const handleChangeImage =(e) => {
-    console.log(e.target.files[0]);
-    setInput({ ...input, image: e.target.files[0]})
-  }
-
-
   // function handleSelectBrand(e) {
   //   console.log("perfecto", input.brand);
   //   input.brand.includes(e.target.value)
@@ -119,19 +113,8 @@ export const CreateProducts = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    const data = new FormData()
-    data.append("name", input.name)
-    data.append("image", input.image)
-    data.append("price", input.price)
-    data.append("description", input.description)
-    data.append("brand", input.brand)
-    data.append("type", input.type)
-    
-    dispatch(createProduct(data));
-
-    alert("Product created successfully");
-
+    dispatch(createProduct(input));
+    alert("User created successfully");
     setInput({
       name: "",
       image: "",
@@ -140,7 +123,6 @@ export const CreateProducts = () => {
       brand: 0,
       type: 0,
     });
-
   }
 
   return (
@@ -169,10 +151,10 @@ export const CreateProducts = () => {
           <Form.Label>image Product</Form.Label>
           <Form.Control
             name="image"
-            onChange={(e) =>handleChangeImage(e)}
+            onChange={(e) => handleChange(e)}
+            value={input.image}
             className={styles.inputs}
-            type="file"
-
+            type="text"
             placeholder="image Product"
           />
           {/* {errors.email && input.email.length > 0 && (
@@ -219,9 +201,7 @@ export const CreateProducts = () => {
             <option>Types select menu</option>
             {types &&
               types.map((types, index) => (
-
-                <option key={index} value={types.name}>
-
+                <option key={index} value={types.id}>
                   {types.name}
                 </option>
               ))}
@@ -235,9 +215,7 @@ export const CreateProducts = () => {
             <option>Brands select menu</option>
             {brands &&
               brands.map((brand, index) => (
-
-                <option key={index} value={brand.name}>
-
+                <option key={index} value={brand.id}>
                   {brand.name}
                 </option>
               ))}

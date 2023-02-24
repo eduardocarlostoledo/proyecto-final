@@ -1,81 +1,176 @@
-.avatar{
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: aquamarine;
-    font-size: 6vh;
-    padding-left: 2%;
-    padding-bottom: 5%;
-    padding-top: 0;
-    margin-top: 2%;
-    margin-left: 2%;
-    margin-bottom: 5%;
-}
 
 .contenedor_profile{
+  margin-top: 30px;
+  width: 100%;
+  height: 130vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.Container {
+     width: 60%;
+     height: 330px;
+     display: flex;
+     justify-content: space-around;
+     user-select: none;
+     box-shadow: 15px 15px 8px rgba(155, 147, 147, 0.75);
+}
+
+
+.izquierda{ 
+    background-color: rgb(247, 247, 247);
+    height: 100%;
+    width: 30%;
+    border-right: 0.001em solid rgb(185, 179, 179);
+}
+
+
+.containerImg {
     display: flex;
-    flex-wrap: wrap;
-    width: 40%;
-    margin-left: 30%;
-    margin-top: 150px;
-    border-radius: 15px;
-    margin-top: 7%
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
-.div_name{
-    width: 500px;
+
+
+.ImagenProfile { 
+    width: 120px;
+    height: 120px;
+    border-radius: 50%
+}
+
+/* .ImagenProfile:active { 
+    width: 300px;
+    height: 200px;
+    border-radius: 50%
+} */
+
+
+.InfoUser {
+    padding-left: 20px;
+}
+
+.InfoUser-Name {
+   padding-left: 65px;
+}
+
+.InfoUser-Name h3 {
+    font-size: 24px;
+ }
+.derecha {
+    background-color:  rgb(247, 247, 247);
+    width: 70%;
+    height: 100%;
+    padding-left: 50px;
+    padding-top: 20px;
+
+}
+
+.modificar { 
+    background-color: rgb(247, 247, 247);
+    width: 70%;
+    height: 370px;
+    padding-left: 50px;
+    padding-top: 20px;
+    box-shadow: 15px 15px 8px rgba(155, 147, 147, 0.75);
+}
+
+.derecha h3 { 
+    font-size: 18px;
+}
+.derecha h4 { 
+    font-size: 20px;
+}
+
+.derecha a { 
+    text-decoration: none;
+}
+
+
+.hogar {
     display: flex;
-    margin-top: 2%;
-    margin-left: 2%;
-    background-color:#fff;
-    border-radius: 15px;
-
+    justify-content: space-between;
+}
+.hola {
+    margin-top: -50px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: rgb(35, 113, 202);
 }
 
-.h3_name{
-margin-left: 5%;
+.hola:hover { 
+    color:   rgb(6, 55, 110);
 }
 
-.h3_lastname{
-    margin-left: 3%;  
+
+.icono {
+    margin-right: 10px;
 }
 
-.div_name p{
+.prueba{ 
+    display: flex;
+    justify-content: space-around;
+}
+
+.sopapa {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 50px;
+}
+.inputs {
+    
+    border: 0.1em solid rgb(87, 84, 84);
+}
+.inputs:focus {
+    border-color: rgb(0, 0, 0);
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cancel {
+   margin-right: 8px;
+   color: white;
+   font-size: 23px;
+   background-color: gray;
+   width: 80px;
+   height: 35px;
+   margin-top: 15px;
+   border: none;
+   border-radius: 7px;
+}
+.modifi {
+    margin-right: -15px;
+    color: white;
+    font-size: 23px;
+    background-color: gray;
+    width: 80px;
+    height: 35px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 7px;
+}
+
+.modifi:hover { 
+    background-color: rgb(63, 55, 55);
+}
+
+.cancel:hover { 
+    background-color: rgb(63, 55, 55);
+}
+.logout { 
+    background-color: white;
+    border: none;
+    color:  rgb(35, 102, 179);
+    font-size: 19px;
+    padding-top: 50px;
     position: absolute;
-    margin-top: 3%;
-    margin-left: 7%;
 }
 
-.div_info{
-    background-color: #fff;
-    width: 500px;
-    margin-top: 3%;
-    border-radius: 15px;
-    margin-left: 2%;
-    height: 300px;
-}
-
-.div_info p{
-    font-size: 2.5vh;
-    margin-left: 5%;
-}
-
-.div_info > div{
-    margin-left: 7%;
-    display: grid;
-    width: 100%;
-    grid-template-areas: "icono parrafo";
-    grid-template-columns: 20px;
-}
-
-.div_info > div > p{
-    grid-area: parrafo;
-}
-
-.icono{
-    grid-area: icono;
-}
-
-.div_info > h3{
-    margin-left: 20%;
-    margin-bottom: 6%;
+.logout:hover { 
+    background-color: white;
+    border: none;
+    color: blue;
+    font-size: 19px;
 }

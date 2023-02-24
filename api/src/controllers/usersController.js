@@ -28,8 +28,8 @@ const putUser = async (user, id) => {
   if (!user) throw Error('User data missing')
   else {
     try {
-      const userBD = await User.findOne({ where: { email: `${email}` } });
-      if (userBD) throw Error('The email already exists')
+      // const userBD = await User.findOne({ where: { email: `${email}` } });
+      // if (userBD) throw Error('The email already exists')
       if (password) {
         const passwordHash = await encrypt(password);
         const changeUser = await User.update({ name, lastname, email, image, password: passwordHash, phonenumber, country, city, address }, { where: { id } })
@@ -117,17 +117,20 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email: `${email}` } });
-    if (!user) return res.json({ msg: 'User not found' });
+    if (!user) return res.json({ msg: 'User not found',success: false, });
 
     const checkPassword = await compare(password, user.password);
 
     if (checkPassword) {
       res.status(200).send({
         data: user,
+       success: true,
       });
     }
     if (!checkPassword) {
-      return res.json({ msg: 'Invalid password' });
+      return res.json({ msg: 'Invalid password', success: false, });
+
+
     }
   } catch (error) {
     return res.json({ msg: `Error 404 - ${error}` });

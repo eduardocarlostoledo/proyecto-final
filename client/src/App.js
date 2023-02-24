@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes} from "react-router-dom";
-
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { Home } from "./components/Home";
 import { Products } from "./components/Products";
 import { Detail } from "./components/Detail";
@@ -19,11 +18,10 @@ import { useEffect } from "react";
 function App() {
   const dispatch = useDispatch();
 
+
   useEffect(()=>{
     dispatch(GetFiltersForEmail())
   },[dispatch])
-
-
 
   return (
     <div className="App">

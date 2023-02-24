@@ -112,3 +112,16 @@
     opacity: 0.7;
     cursor: pointer;
 }
+
+.UserLogo {
+    margin-left: 18px;
+    margin-top: 7px;
+    font-size: 28px;
+    color: white;
+}
+
+.UserLogo:hover {
+    color: #12f8a0;
+       opacity: 0.7;
+       cursor: pointer;
+   }
