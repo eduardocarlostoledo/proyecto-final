@@ -3,6 +3,7 @@ import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../redux/actions/ProductActions";
 import { Link, useParams } from "react-router-dom";
+import AddToCart from "./AddToCart";
 
 export const Detail = () => {
   const { Name } = useParams();
@@ -46,6 +47,13 @@ export const Detail = () => {
         <h2>$ {detail.price}</h2>
         <p>{detail.description}</p>
       </div>
+      <AddToCart 
+      name={Name} 
+      price={detail.price}
+      description={detail.description}
+      image={detail.image} 
+      type={detail.type} 
+      brand={detail.brand}/>
     </div>
   );
 };

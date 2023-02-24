@@ -22,16 +22,18 @@ export const NavBar = () => {
                 <Link to="/BuildPc"><button>Build PC</button></Link>
                 <Link to="/CreateProduct"><button>Create</button></Link>
             </div>
-        <div className="ContainerSearch">
+        {/* <div className="ContainerSearch">
             <Search />
-        </div>
+        </div> */}
         <div className="ContainerInfo">
            { Nav ? <div className="LogAndSign">
             <Link to="/Login"><button className="BtnLogSing" >Log in</button></Link>
             <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
             </div>  :  <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link> 
-            }               
-             <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
+            }  
+            <Link to='/Cart'>
+                <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
+            </Link>             
         </div>
     
     </div>

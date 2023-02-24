@@ -6,7 +6,10 @@ import {
     UPDATE_PRODUCT,
     GET_ALL_BRANDS,
     GET_ALL_TYPES,
-    GET_PAGE
+    GET_PAGE,
+    FILTER_BY_BRAND,
+    FILTER_BY_TYPE,
+    FILTER_PRECIO,
     } from './actions/ProductActions'
     
     import{
@@ -21,6 +24,7 @@ import {
     
     const initialState= {
         products: [],
+        allProducts: [],
         paginatedProducts: [],
         brands:[],
         types:[],
@@ -38,7 +42,11 @@ import {
 
             case GET_ALL_PRODUCTS: 
                 
-                return{ ...state, products: action.payload, }
+                return{ 
+                    ...state, 
+                    products: action.payload, 
+                    allProducts: action.payload,
+                }
 
             case GET_ALL_PRODUCTS_NAME: 
                 
@@ -108,7 +116,44 @@ import {
                     //         ChangeNav: JSON.parse(localStorage.getItem("UserActive")),
                     //     }
         
-                
+                    case FILTER_BY_BRAND:
+                        const fBrands = state.allProducts;
+                        const brandsFilter = action.payload === 'All' ? fBrands : fBrands.filter(el => el.brand === action.payload)
+        
+                        return {
+                            ...state, 
+                            products: brandsFilter
+                        }
+                        
+        
+                    case FILTER_BY_TYPE:
+                        const fTypes = state.allProducts;
+                        const typesFilter = action.payload === 'All' ? fTypes : fTypes.filter(el => el.type === action.payload)
+        
+                        return {
+                            ...state, 
+                            products: typesFilter
+                        }
+                    
+                    case FILTER_PRECIO: //funciona
+        
+                        let sortPrice;
+                        if (action.payload === "all") sortPrice = state.allProducts;
+                        else
+                        sortPrice =
+                        action.payload === "ASC"
+                        ? state.products.sort(
+                            (a, b) => a.price - b.price
+                        )
+                        : state.products.sort(
+                            (a, b) => b.price - a.price
+                        );
+        
+                        return {
+                            ...state,
+                            products: sortPrice,
+                        };        
+            
             default: return {...state}
             
         }

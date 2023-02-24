@@ -6,7 +6,10 @@ export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const UPDATE_PRODUCT='UPDATE_PRODUCT';
 export const GET_ALL_BRANDS= 'GET_ALL_BRANDS';
 export const GET_ALL_TYPES= 'GET_ALL_TYPES';
-export const GET_PAGE = 'GET_PAGE'
+export const GET_PAGE = 'GET_PAGE';
+export const FILTER_BY_BRAND = 'FILTER_BY_BRAND';
+export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
+export const FILTER_PRECIO = 'FILTER_PRECIO';
 
 export const getAllProducts = () => async (dispatch) => {
     try {
@@ -114,4 +117,16 @@ export const getPage = (page,brand,type,price) => {
     console.log(json)
     return dispatch({type: GET_PAGE, payload: json.data})
   }
+}
+
+export const filterByBrands = (payload) => {
+  return { type: FILTER_BY_BRAND, payload}
+}
+
+export const filterByType = (payload) => {
+  return { type: FILTER_BY_TYPE, payload}
+}
+
+export const filterByPrice = (payload) => {
+  return { type: FILTER_PRECIO, payload}
 }

@@ -116,3 +116,10 @@ font-size: 1.8vh;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     margin-bottom: 50px;
 }
+
+
+.ButtonCart{
+    width: 100px;
+    height: 30px;
+    margin-left: 120px;
+}
