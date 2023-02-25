@@ -35,38 +35,16 @@ export const getProductDetail = (name) => async (dispatch) => {
 };
 
 
-// export const createProduct =  (payload)=> async()=>{
-//   return await axios.post("http://localhost:3001/products",payload)
-// };
+export const createProduct =  (payload)=> async(dispatch)=>{
+   return await axios.post("http://localhost:3001/products",payload).then(r=>
+   dispatch({type: CREATE_PRODUCT, payload}))
+};
 // export function createProduct(payload) { 
 //   return async function(dispatch){
 //       const response = await axios.post("http://localhost:3001/products",payload);
 //       return response;
 //   };
 // };
-
-export const createProduct = (product) => {
-  return async (dispatch) => {
-    console.log("/products", product);
-    try {
-      const response = await fetch("http://localhost:3001/products", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      });
-
-      console.log("CREATE_PRODUCT", response);
-      const data = await response.json();
-      dispatch({ type: "CREATE_PRODUCT", payload: data });
-
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
-
 
 export const updateProduct= (payload)=> async()=>{
     return await axios.put("/products",payload)

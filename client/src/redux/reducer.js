@@ -12,15 +12,21 @@ import {
     FILTER_PRECIO,
     } from './actions/ProductActions'
     
-    import{
-        GET_ALL_USERS,
-        GET_USER_BY_ID,
-        USER_REGISTER,
-        UPDATE_USER,
-        GET_EMAIL,
-        USER_ACTIVE,
-        CHANGE_NAV
+import{
+    GET_ALL_USERS,
+    GET_USER_BY_ID,
+    USER_REGISTER,
+    UPDATE_USER,
+    GET_EMAIL,
+    USER_ACTIVE,
+    CHANGE_NAV
     } from './actions/UsersActions';
+
+import {
+    GET_CART,
+    DELETE_PRODUCT_FROM_CART,
+    ADD_TO_CART,
+    } from './actions/CartActions';
     
     const initialState= {
         products: [],
@@ -29,6 +35,7 @@ import {
         brands:[],
         types:[],
         productDetail:{},
+        cart:[],
         users: [],
         userDetail:{},
         emails : [],
@@ -71,6 +78,17 @@ import {
             case GET_ALL_TYPES: 
             
                 return { ...state, types:action.payload }
+
+            case GET_CART: 
+                return{...state, cart:action.payload}
+
+            case DELETE_PRODUCT_FROM_CART:
+                return{
+                    ...state, }
+                
+            case ADD_TO_CART:
+                return {...state}
+            
 
             case GET_ALL_USERS: 
             

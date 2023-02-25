@@ -3,8 +3,7 @@ import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../redux/actions/ProductActions";
 import { Link, useParams } from "react-router-dom";
-import AddToCart from "./AddToCart";
-
+import { addToCart } from "../redux/actions/CartActions";
 export const Detail = () => {
   const { Name } = useParams();
   const dispatch = useDispatch();
@@ -14,15 +13,7 @@ export const Detail = () => {
   }, [dispatch, Name]);
 
   const detail = useSelector((state) => state.productDetail);
-  console.log(detail);
-  // const brand = useSelector((state) => {
-  //   return state.brands.find((b) => b.id === detail.id);
-  // });
-  // console.log("brand",brand);
-  // const type = useSelector((state) => state.types.find((t) => t.id === detail.id));
-  // console.log("type",type);
-
-
+ 
   return (
     <div className="DetailContainer">
       <Link className="Link" to="/">
@@ -46,14 +37,8 @@ export const Detail = () => {
         <h1>{Name}</h1>
         <h2>$ {detail.price}</h2>
         <p>{detail.description}</p>
+        <button onClick={addToCart({name:detail.name,image:detail.image,price:detail.price})}>Add to cart</button>
       </div>
-      <AddToCart 
-      name={Name} 
-      price={detail.price}
-      description={detail.description}
-      image={detail.image} 
-      type={detail.type} 
-      brand={detail.brand}/>
     </div>
   );
 };

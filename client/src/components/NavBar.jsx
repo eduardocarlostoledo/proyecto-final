@@ -4,16 +4,23 @@ import { Search } from "./Search";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import {FaUserCircle} from 'react-icons/fa';
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch} from "react-redux";
 import { ChangeNav } from "../redux/actions/UsersActions";
+import { getCart } from "../redux/actions/CartActions";
 
-
-
-
-export const NavBar = () => {   
+export const NavBar = () => { 
+    let cart =useSelector(state=>state.cart)
     let Nav = useSelector((state) => state.ChangeNav);
     // const [Active, setActive] = useState(JSON.parse(localStorage.getItem("UserActive")))
 
+    const dispatch=useDispatch();
+
+    const quantity = cart.reduce((acc, item) => acc + item.amount, 0);
+
+    useEffect(() => {
+        dispatch(getCart());
+    }, [cart]);
+    
     return (
         <div className="NavDiv">   
             <div className="BuildAndProducts">
@@ -33,7 +40,8 @@ export const NavBar = () => {
             }  
             <Link to='/Cart'>
                 <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
-            </Link>             
+            </Link> 
+            <p>{quantity}</p>            
         </div>
     
     </div>

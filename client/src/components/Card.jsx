@@ -1,9 +1,11 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart } from "../redux/actions/CartActions";
 import "../styles/Card.css"
-import AddToCart from "./AddToCart"
 
 export default function Card({name, image, price}) {
-    return (
+  const dispatch= useDispatch(); 
+  return (
         <div className="DivAllCards">
       
         <div className="contenedor_card">
@@ -16,9 +18,10 @@ export default function Card({name, image, price}) {
           <p class="card_p_nombre">{name}</p>
           
           <strong class="card_strong_precio"> $ {price}</strong>
-          <AddToCart name={name} image={image} price={price} />
+          <button onClick={()=>dispatch(addToCart({name,image,price}))}>Add to cart</button>
         </div>
 
     </div>
   );
 }
+

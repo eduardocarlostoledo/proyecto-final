@@ -28,7 +28,6 @@ const addProductCart = async (product) => {
 
 const getProductsCart = async () => {
       const productsCart = await Cart.findAll();
-      if(!productsCart.length)throw Error("No hay productos en el carrito")
       return productsCart;
 };
 
@@ -52,10 +51,17 @@ const deleteProductCart=async (prodId) => {
 
   return "Se quitó el producto del carrito";
 }
+const deleteCart=async () => {
+  const cart = await Cart.findAll();
+  if(!cart) throw Error("No hay productos en el carrito")
+  await Cart.drop();
+  return "El carrito se eliminó"
+}
 
   module.exports = {
     getProductsCart,
     addProductCart,
-    deleteProductCart
+    deleteProductCart,
+    deleteCart
   };
   
