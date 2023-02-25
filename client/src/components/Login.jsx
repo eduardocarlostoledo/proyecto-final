@@ -77,7 +77,6 @@ export const Login = () => {
                         email: "",
                         password: ""
                     });
-                    window.localStorage.setItem("UserActive", false)
                     navigate("/Profile")
                 }, 1300)
 

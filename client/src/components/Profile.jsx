@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom"
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
-import { PutUser, ChangeNav } from '../redux/actions/UsersActions';
+import { PutUser, deleteUserLocalStorage } from '../redux/actions/UsersActions';
 import swal from 'sweetalert';
 
 
@@ -38,10 +38,10 @@ export default function Profile() {
 
   function CerrarSes(e) {
     e.preventDefault();
+    // dispatch(deleteUserLocalStorage())
     setTimeout(() => {
+      dispatch(deleteUserLocalStorage())
       window.localStorage.removeItem("USUARIO")
-      // dispatch(ChangeNav())
-      window.localStorage.setItem("UserActive", true)
       navigate("/Login")
     }, 1300)
   }

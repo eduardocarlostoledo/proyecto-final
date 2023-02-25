@@ -77,3 +77,13 @@ export function PutUser(payload) {
       return response;
   };
 };
+
+
+export function deleteUserLocalStorage() { 
+
+  return  function(dispatch){
+      return dispatch({
+          type: "deleteUserLocalStorage"
+      });
+  };  
+  }

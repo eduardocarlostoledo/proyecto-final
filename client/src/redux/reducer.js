@@ -33,7 +33,7 @@ import {
         userDetail:{},
         emails : [],
         UserActive : {},
-        ChangeNav : JSON.parse(localStorage.getItem("UserActive")),
+        ChangeNav :  false,
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -100,21 +100,11 @@ import {
 
                 case USER_ACTIVE: 
                 const userActive = action.payload;
-                window.localStorage.removeItem("UserActive")
-                window.localStorage.setItem("UserActive", false)
                 const uss = localStorage.setItem("USUARIO", JSON.stringify(userActive))
                 return { ...state,
-                    ChangeNav: JSON.parse(localStorage.getItem("UserActive")),
+                    ChangeNav: true,
                     UserActive : JSON.parse(localStorage.getItem("USUARIO")) }
 
-
-                    // case  CHANGE_NAV:
-                    //     window.localStorage.removeItem("UserActive")
-                    //     window.localStorage.setItem("UserActive", true)
-                    //     return {
-                    //         ...state, 
-                    //         ChangeNav: JSON.parse(localStorage.getItem("UserActive")),
-                    //     }
         
                     case FILTER_BY_BRAND:
                         const fBrands = state.allProducts;
@@ -154,6 +144,11 @@ import {
                             products: sortPrice,
                         };        
             
+                        case "deleteUserLocalStorage":
+                        return { 
+                            ...state, 
+                            ChangeNav: false
+                        }
             default: return {...state}
             
         }

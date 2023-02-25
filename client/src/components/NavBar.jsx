@@ -26,7 +26,7 @@ export const NavBar = () => {
             <Search />
         </div> */}
         <div className="ContainerInfo">
-           { Nav ? <div className="LogAndSign">
+           { !Nav ? <div className="LogAndSign">
             <Link to="/Login"><button className="BtnLogSing" >Log in</button></Link>
             <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
             </div>  :  <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link> 
