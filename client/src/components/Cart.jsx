@@ -20,7 +20,7 @@ export default function Cart() {
     const quantity = cartItems.reduce((acc, item) => acc + item.amount, 0);
 
     const orderData = {
-        quantity: quantity,
+        quantity: 1,
         description: description.toString(),
         price: total
     };
@@ -83,7 +83,7 @@ export default function Cart() {
             <ul className='ListDesordenada'>
                 {cartItems.map(item => (
                 <li key={item.id}>
-                    {item.name} - ${item.price}
+                    {item.name} - ${item.price} - {item?.amount}
                 </li>
                 
                 ))}
