@@ -46,6 +46,17 @@ productRouter.get("/types", async (req, res) => {
   }
 });
 
+/* Ruta post para types */
+productRouter.post("/types", async (req, res) => {
+  const {name} = req.body;
+  try {   
+    const postProducts = await Type.findOrCreate({name});
+    res.status(200).json(postProducts);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 
 // Ruta GET para traer todos las marcas de productos.
 
@@ -62,6 +73,16 @@ productRouter.get("/brands", async (req, res) => {
   try {   
     const products = await getBrandProducts();
     res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+productRouter.post("/brands", async (req, res) => {
+  const {name} = req.body;
+  try {   
+    const postProducts = await Brand.findOrCreate({name});
+    res.status(200).json(postProducts);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

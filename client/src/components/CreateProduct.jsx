@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -46,10 +47,10 @@ function validate(input) {
         errors.price = "price is required";
     }
     if(!input.type.length){
-        errors.type = 'You must select at least one type'    
+        errors.type = 'Place the name of a type and select the same'    
     }
     if(!input.brand.length){
-        errors.brand = 'You must select at least one brand'    
+        errors.brand = 'Place the name of a brand and select the same'    
     }
     return errors;
 }
@@ -83,10 +84,6 @@ export const CreateProducts = () => {
         console.log(input)
     }
 
-
-
-    const navigate = useNavigate()
-
     
     const handleSubmit = (e) => {
 
@@ -106,9 +103,12 @@ export const CreateProducts = () => {
                 brand: [],
                 type: [],
             });
-            navigate('/Products')   
         }
     }
+
+    const [typeInput, setTypeInput] = useState('');
+    const [brandInput, setBrandInput] = useState('');
+
 
     return (
         <div className="container">
@@ -140,23 +140,34 @@ export const CreateProducts = () => {
                         <input className='input' type='text' value={input.description} name= 'description' placeholder="Description" onChange={(e) => handleChange(e)}></input>                 
                         {errors.description && (<p className='spanError'>{errors.description}</p>)}
                     </div>
-
-                    <div className="ContainerTypeBrand">
+                    <div>
                         <div className='name'>
-                            <select className='selectName' name='type' placeholder="Select Type" onChange={e=>handleChange(e)}>
-                                {types && types.map((types, index) => (
-                                    <option key={index} value={types.name}>{types.name}</option>
-                                ))}
-                            </select>    
-                            {errors.type && (<p className='spanSError'>{errors.type}</p>)}
+                            <label className='nameLabelMap'>New Type</label>
+                            <div className="ContainerTypeBrand">
+                                <input className='inputNew' type='text' value={typeInput} name='type' placeholder="Name Type" onChange={(e) => setTypeInput(e.target.value)}></input> 
+                                <select className='selectName' name='type' placeholder="Select Type" onChange={e=>handleChange(e)}>
+                                    <option value="" disabled selected>Select Type</option>
+                                    {types && types.map((type, index) => (
+                                        <option key={index} value={type.name}>{type.name}</option>
+                                    ))}
+                                    {typeInput && <option value={typeInput}>{typeInput}</option>}
+                                </select>
+                                {errors.type && (<p className='spanSError'>{errors.type}</p>)}
+                            </div>
                         </div>
                         <div className='name'>
-                            <select className='selectName' name='brand' placeholder="Select brand" onChange={e=>handleChange(e)}>
-                                {brands && brands.map((brands, index) => (
-                                    <option key={index} value={brands.name}>{brands.name}</option>
-                                ))}
-                            </select>    
-                            {errors.brand && (<p className='spanSError'>{errors.brand}</p>)}
+                            <label className='nameLabelMap'>New Brand</label>
+                            <div className="ContainerTypeBrand">
+                                <input className='inputNew' type='text' value={brandInput} name='brand' placeholder="Name Brand" onChange={(e) => setBrandInput(e.target.value)}></input> 
+                                <select className='selectName' name='brand' placeholder="Select Brand" onChange={e=>handleChange(e)}>
+                                    <option value="" disabled selected>Select Brand</option>
+                                    {brands && brands.map((brand, index) => (
+                                        <option key={index} value={brand.name}>{brand.name}</option>
+                                    ))}
+                                    {brandInput && <option value={brandInput}>{brandInput}</option>}
+                                </select>
+                                {errors.brand && (<p className='spanSError'>{errors.brand}</p>)}
+                            </div>
                         </div>
                     </div>
                     <button className='buttonCrear' type="submit">Create Product</button>                          
