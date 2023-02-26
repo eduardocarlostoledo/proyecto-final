@@ -5,6 +5,7 @@ const { postProduct,
   getProductsByName,
   getBrandProducts,
   getTypeProducts,
+  BuildSearch
   } = require('../controllers/productController')
 
 const productRouter = Router()
@@ -36,6 +37,16 @@ productRouter.post('/', async (req,res) => {
 //     res.status(400).json({ error: error.message });
 //   }
 // });
+productRouter.get("/BuildSearch", async (req, res) => {
+  try {
+    const {socket,type} = req.query
+    console.log(socket,type);
+    const products = await BuildSearch(socket,type);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 productRouter.get("/types", async (req, res) => {
   try {

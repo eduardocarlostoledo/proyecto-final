@@ -70,7 +70,8 @@ const getProducts = async () => {
           price:p.price,
           description: p.description,
           type: p.type.name,
-          brand: p.brand.name
+          brand: p.brand.name,
+          info_adicional: p.info_adicional
         }
       })
       return result;
@@ -105,7 +106,7 @@ const getProductName = async (product) => {
 
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 const postProduct = async (product) => {
-  const { name, price, type, brand, image, description } = product;
+  const { name, price, type, brand, image, description,info_adicional } = product;
   console.log(product.name, "POST")
   if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
   else {
@@ -129,6 +130,7 @@ const postProduct = async (product) => {
         image: product.image,
         typeId: typeData.id,
         brandId: brandData.id,
+        info_adicional
       });
     
 
@@ -141,6 +143,31 @@ const postProduct = async (product) => {
   }
 };
 
+const BuildSearch = async (socket) => {
+  try {
+    const products = await Product.findAll({
+      include: [Type,Brand],
+      where: {
+        "info_adicional.socket": socket,
+      },
+    });
+    const result = products.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+        image:p.image,
+        price:p.price,
+        description: p.description,
+        info_adicional: p.info_adicional,
+        type: p.type.name,
+        brand: p.brand.name
+      }
+    })
+    return result;
+  } catch (error) {
+    throw new Error("Error retrieving products by brand: " + error.message);
+  }
+};
 
 module.exports = {
   postProduct,
@@ -149,4 +176,5 @@ module.exports = {
   getProductsByName,
   getBrandProducts,
   getTypeProducts,
+  BuildSearch
 };
