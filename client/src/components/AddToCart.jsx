@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Card.css';
+import swal from 'sweetalert';
 
 function AddToCart(item) {
     const [message, setMessage] = useState('');
@@ -15,7 +16,7 @@ function AddToCart(item) {
         body: JSON.stringify(newItem)
         })
         .then(response => response.json())
-        .then(data => setMessage('Added!'));
+        .then(data => swal('Success', "Cart Added!", 'success'));
     };
 
     return (
