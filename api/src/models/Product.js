@@ -23,6 +23,9 @@ module.exports = (sequelize) => {
         description: {
             type: DataTypes.TEXT
         },
+        info_adicional: {
+            type:DataTypes.JSONB
+          },
         inCart:{
             type:DataTypes.BOOLEAN,
             allowNull:false,

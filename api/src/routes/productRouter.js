@@ -5,6 +5,7 @@ const { postProduct,
   getProductsByName,
   getBrandProducts,
   getTypeProducts,
+  BuildSearch
   } = require('../controllers/productController')
 
 const productRouter = Router()
@@ -25,6 +26,17 @@ productRouter.post('/', async (req,res) => {
   }
 });
   
+
+productRouter.get("/BuildSearch", async (req, res) => {
+  try {
+    const {socket,type} = req.query
+    console.log(socket,type);
+    const products = await BuildSearch(socket,type);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 // Ruta GET para traer todos los tipos de productos.
 
@@ -90,6 +102,8 @@ productRouter.get("/", async (req, res) => {
       res.status(400).json({ error: error.message });
     }
   });
+
+
   
 
 module.exports = {productRouter}
