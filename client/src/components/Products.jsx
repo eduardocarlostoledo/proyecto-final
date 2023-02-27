@@ -14,7 +14,7 @@ export const Products = () => {
     const product = useSelector((state) => state.products)
     const brand = useSelector((state) => state.brands)
     const type = useSelector((state) => state.types)
-
+    
     useEffect(() => {
       dispatch(getAllProducts())
     },[dispatch]);

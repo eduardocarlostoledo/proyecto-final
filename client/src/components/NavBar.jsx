@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import '../styles/NavBar.css';
-import { Search } from "./Search";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import {FaUserCircle} from 'react-icons/fa';
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { ChangeNav } from "../redux/actions/UsersActions";
-
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getCart } from "../redux/actions/CartActions";
 
 
 
@@ -14,6 +13,17 @@ export const NavBar = () => {
     let Nav = useSelector((state) => state.ChangeNav);
     // const [Active, setActive] = useState(JSON.parse(localStorage.getItem("UserActive")))
 
+    const dispatch = useDispatch();
+    let carts = useSelector((state) => state.cart)
+    const itemQuantity = carts.reduce((acc, item) => acc + item.amount, 0);
+    
+
+    useEffect(()=>{
+        dispatch(getCart())
+    },[dispatch])
+
+    
+    
     return (
         <div className="NavDiv">   
             <div className="BuildAndProducts">
@@ -32,8 +42,10 @@ export const NavBar = () => {
             </div>  :  <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link> 
             }  
             <Link to='/Cart'>
-                <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
-            </Link>             
+                <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" />{itemQuantity}</button>
+            </Link>      
+            
+            
         </div>
     
     </div>

@@ -1,3 +1,4 @@
+import { GET_CART } from './actions/CartActions';
 import {
     GET_ALL_PRODUCTS,
     GET_ALL_PRODUCTS_NAME,
@@ -34,6 +35,7 @@ import {
         emails : [],
         UserActive : {},
         ChangeNav :  false,
+        cart: [],
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -96,59 +98,71 @@ import {
 
 
             case GET_PAGE:
+
                 return {...state, paginatedProducts:action.payload}
 
-                case USER_ACTIVE: 
+            case USER_ACTIVE: 
+            
                 const userActive = action.payload;
                 const uss = localStorage.setItem("USUARIO", JSON.stringify(userActive))
                 return { ...state,
                     ChangeNav: true,
-                    UserActive : JSON.parse(localStorage.getItem("USUARIO")) }
+                    UserActive : JSON.parse(localStorage.getItem("USUARIO")) 
+                }
 
         
-                    case FILTER_BY_BRAND:
-                        const fBrands = state.allProducts;
-                        const brandsFilter = action.payload === 'All' ? fBrands : fBrands.filter(el => el.brand === action.payload)
+            case FILTER_BY_BRAND:
+                const fBrands = state.allProducts;
+                const brandsFilter = action.payload === 'All' ? fBrands : fBrands.filter(el => el.brand === action.payload)
         
-                        return {
-                            ...state, 
-                            products: brandsFilter
-                        }
-                        
+                return {
+                    ...state, 
+                    products: brandsFilter
+                }
+
         
-                    case FILTER_BY_TYPE:
-                        const fTypes = state.allProducts;
-                        const typesFilter = action.payload === 'All' ? fTypes : fTypes.filter(el => el.type === action.payload)
+            case FILTER_BY_TYPE:
+                const fTypes = state.allProducts;
+                const typesFilter = action.payload === 'All' ? fTypes : fTypes.filter(el => el.type === action.payload)
         
-                        return {
-                            ...state, 
-                            products: typesFilter
-                        }
+                return {
+                    ...state, 
+                    products: typesFilter
+                }
                     
-                    case FILTER_PRECIO: //funciona
+            case FILTER_PRECIO: //funciona
         
-                        let sortPrice;
-                        if (action.payload === "all") sortPrice = state.allProducts;
-                        else
-                        sortPrice =
-                        action.payload === "ASC"
-                        ? state.products.sort(
-                            (a, b) => a.price - b.price
-                        )
-                        : state.products.sort(
-                            (a, b) => b.price - a.price
-                        );
-        
-                        return {
-                            ...state,
-                            products: sortPrice,
-                        };        
+                let sortPrice;
+                if (action.payload === "all") sortPrice = state.allProducts;
+                else
+                sortPrice =
+                action.payload === "ASC"
+                ? state.products.sort(
+                    (a, b) => a.price - b.price
+                )
+                : state.products.sort(
+                    (a, b) => b.price - a.price
+                );
             
-                        case "deleteUserLocalStorage":
-                        return { 
-                            ...state, 
-                            ChangeNav: false
-                        }
+                return {
+                    ...state,
+                    products: sortPrice,
+                };        
+            
+            case "deleteUserLocalStorage":
+                return { 
+                    ...state, 
+                    ChangeNav: false
+                }
+
+                
+            case GET_CART: 
+
+                return{
+                    ...state,
+                    cart:action.payload
+                }
+                
             default: return {...state}
             
         }

@@ -1,23 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import mercadopago from "./mercadopago";
 import "../styles/Cart.css"
+import { useDispatch } from 'react-redux';
+import { deleteOneCart} from '../redux/actions/CartActions';
+import swal from 'sweetalert';
 
 export default function Cart() {
 
+    const dispatch = useDispatch();
+    
     const [cartItems, setCartItems] = useState([]);
-   
+
     useEffect(() => {
         fetch('http://localhost:3001/cart')
         .then(response => response.json())
-        .then(data => setCartItems(data))
-        .catch(error => console.log(error));
-    }, []);
+        .then(data => setCartItems([...data]))
+        .catch(error => swal('Carrito Vacio', "Carrito Vacio", 'error'));
+        
+    }, [cartItems]);
 
-    
     const price = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
     const total = price.toFixed(1)
+
     const description = cartItems.map(e=>e.name)
     const quantity = cartItems.reduce((acc, item) => acc + item.amount, 0);
+
+
+
 
     const orderData = {
         quantity: 1,
@@ -25,21 +34,21 @@ export default function Cart() {
         price: total
     };
 
-    function handleCheckout(e) {
-        e.preventDefault();    
+    const handleCheckout = (e) =>{
+        e.preventDefault();
 
         fetch("http://localhost:3001/pay/create_preference", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(orderData),    
+        body: JSON.stringify(orderData),
         })
         .then(function (response) {
             console.log("RESPONSE" , response)
             return response.json();
-        })      
-        
+        })
+
         .then(
             function (preference) {
             createCheckoutButton(preference.id);
@@ -48,8 +57,10 @@ export default function Cart() {
             alert("Unexpected error");
         });
     }
+
+
     // Create preference when click on checkout button
-    function createCheckoutButton(preferenceId) {
+    const createCheckoutButton = (preferenceId) => {
         // Initialize the checkout
         mercadopago.checkout({
         preference: {
@@ -62,44 +73,39 @@ export default function Cart() {
         });
     }
 
-    function deleteCart(prodId) {
-        fetch(`http://localhost:3001/cart/${prodId}`, {
-        method: 'DELETE'
-        })
-        .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al eliminar el carrito');
-        }
-        // Actualizar la interfaz de usuario para reflejar que el carrito ha sido eliminado
-        })
-        .catch(error => console.error(error));
+    const handleDeleteOne = (id) => {
+        dispatch(deleteOneCart(id))
     }
 
+
+
     return (
-        <div className='ContainerCart'>    
+        <div className='ContainerCart'>
         <h2>Shopping Cart</h2>
-            
+
         <nav className='NavCart'>
             <ul className='ListDesordenada'>
-                {cartItems.map(item => (
-                <li key={item.id}>
-                    {item.name} - ${item.price} - {item?.amount}
-                </li>
-                
-                ))}
+                {cartItems.length == 0 ? (
+                    <p>el carrito esta vacio</p>
+
+                ) : ( cartItems.map(item => (
+
+                    <li key={item.id}>
+                        {item.name} - ${item.price} - {item?.amount}
+                        <button onClick={() => handleDeleteOne(item.prodId)}>X</button>
+                    </li>
+
+                    ))
+                )}
 
             </ul>
-        </nav> 
-        
+        </nav>
+
         <h3>Total: ${total}</h3>
         <button className='ButtonCart' onClick={handleCheckout}>Checkout</button>
-        
+
         <div id="button-checkout"></div>
-        </div>    
+        </div>
     );
 }
-
-
-
-
 
