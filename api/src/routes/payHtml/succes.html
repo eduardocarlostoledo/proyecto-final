@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>            
+  <head>
+    <title>Mi página HTML</title>
+    <link rel="stylesheet" type="text/css" href="../payStyles/succes.css">
+  </head>
+  <body>
+    <div class="contenedor_succes">
+      <a href="http://localhost:3000/"><svg class='succes_svg' width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path style="fill:#232326" d="M24 12.001H2.914l5.294-5.295-.707-.707L1 12.501l6.5 6.5.707-.707-5.293-5.293H24v-1z" data-name="Left"/></svg></a>
+        <h1 class="succes_h1">Payment Successful</h1>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_xXsXXnglKn4YmVFVx39Pd-0LgWqhiUVk5g&usqp=CAU" alt="" class='succes_img'>
+        <a href="http://localhost:3000/Products" class="succes_a">Keep Buying</a>
+        <p class="succes_p">COMPUTER STORE</p>
+        <ul class="succes_ul">          
+          <li class="succes_li">Payment ID: ${paymentId}</li>
+          <li class="succes_li">Status: ${status}</li>
+          <li class="succes_li">Merchant Order ID: ${merchantOrderId}</li>
+      </ul>
+    </div>
+  </body>
+</html>
