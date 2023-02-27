@@ -10,18 +10,30 @@ import { getCart } from "../redux/actions/CartActions";
 
 
 export const NavBar = () => {   
-    let Nav = useSelector((state) => state.ChangeNav);
-    // const [Active, setActive] = useState(JSON.parse(localStorage.getItem("UserActive")))
 
-    const dispatch = useDispatch();
-    let carts = useSelector((state) => state.cart)
-    const itemQuantity = carts.reduce((acc, item) => acc + item.amount, 0);
+    let Nav = useSelector((state) => state.ChangeNav);
     
 
-    useEffect(()=>{
-        dispatch(getCart())
-    },[dispatch])
+    const dispatch = useDispatch();
+    // let carts = useSelector((state) => state.cart)
+    // const itemQuantity = carts.reduce((acc, item) => acc + item.amount, 0);
+    
 
+    // useEffect(()=>{
+    //     dispatch(getCart())
+    // },[dispatch])
+    const [cartQuantity, setCartQuantity] = useState(0);
+    const carts = useSelector((state) => state.cart);
+    const itemQuantity = cartQuantity;
+    useEffect(() => {
+        dispatch(getCart());
+        setCartQuantity(carts.reduce((acc, item) => acc + item.amount, 0));
+    }, [dispatch, carts]);
+    
+    useEffect(() => {
+        setCartQuantity(carts.reduce((acc, item) => acc + item.amount, 0));
+    }, [carts]);
+      
     
     
     return (
@@ -44,6 +56,7 @@ export const NavBar = () => {
             <Link to='/Cart'>
                 <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" />{itemQuantity}</button>
             </Link>      
+            
             
             
         </div>
