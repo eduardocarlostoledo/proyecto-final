@@ -2,6 +2,8 @@ import Steps from "./BuildPc-steps";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/BuildPc.css";
+import swal from "sweetalert";
+
 
 function Component({ name, price, image }) {
   return (
@@ -92,8 +94,46 @@ export const BuildPc = () => {
       ...input,
       [item.type]:item
     })
-    setPrice(Price + item.price)
+    let valor = Math.floor(Price + item.price)
+    console.log(valor);
+    setPrice(valor)
   }
+
+  const handleStep = (property) => {
+    if(property === "Processor") setbutton(false)
+    setComplete(false)
+    setType(property)
+    let shouldChange = false;
+    for (const key in input) {
+      if (key === property) {
+        shouldChange = true;
+      }
+      if (shouldChange) {
+        input[key] = '';
+      }
+    }
+  }
+
+  const addMapCart = () => {
+    console.log("add map cart");
+    for (const key in input) {
+      console.log(key, "ESTA ES LA LLAVE");
+      handleAddCart(input[key])
+    }
+  }
+
+  const handleAddCart = (item) => {
+    const newItem = { name: item.name, image: item.image, price: item.price };
+    fetch('http://localhost:3001/cart', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newItem)
+    })
+    .then(response => response.json())
+    .then(data => swal('Success', "Cart Added!", 'success'));
+};
 
   const filterProcess = (marca) => {
     setbutton(true)
@@ -105,6 +145,7 @@ export const BuildPc = () => {
       <Steps 
       input={input}
       price={Price}
+      handleStep={handleStep}
       ></Steps>
       <div className="ButtonsAndCards">
         <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Amd")}>Amd</button>
@@ -137,7 +178,7 @@ export const BuildPc = () => {
           </div>
           <div className={Complete ? "Priceh2" : "displaynone" }>
               <h2>Total price of assembly: $USD {Price}</h2>
-
+              <button onClick={() => addMapCart()}>Add to cart</button>
           </div>
 
       </div>

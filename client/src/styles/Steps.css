@@ -24,6 +24,7 @@
     transition: 0.5s;
 }
 .type_img_select {
+    cursor: pointer;
     width: 80px;
     height: 80px;
     object-fit: contain;
