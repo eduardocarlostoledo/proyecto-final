@@ -2,7 +2,8 @@ const { Router } = require('express');
 const { 
     getProductsCart,
     addProductCart,
-    deleteProductCart
+    deleteProductCart,
+    deleteAllCart,
   } = require('../controllers/cartController')
 
 const cartRouter = Router()
@@ -27,10 +28,19 @@ cartRouter.post('/', async (req,res) => {
 
 cartRouter.delete('/:prodId', async (req,res) => {
     try {
-        const deleteProduct=await deleteProductCart(req.params.prodId)
+        const deleteProduct = await deleteProductCart(req.params.prodId)
         res.status(200).json(deleteProduct)
     } catch (error) {
         res.status(400).json(error.message) 
+    }
+})
+
+cartRouter.delete('/', async (req,res) => {
+    try {
+        const deleteProduct = await deleteAllCart()
+        res.status(200).json(deleteProduct)
+    } catch (error) {
+        res.status(400).json({message:'All Cart delete'}) 
     }
 })
 

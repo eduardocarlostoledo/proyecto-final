@@ -1,4 +1,4 @@
-import { GET_CART } from './actions/CartActions';
+import { GET_CART, GET_UPDATE, UPDATE} from './actions/CartActions';
 import {
     GET_ALL_PRODUCTS,
     GET_ALL_PRODUCTS_NAME,
@@ -36,6 +36,7 @@ import {
         UserActive : {},
         ChangeNav :  false,
         cart: [],
+        update: false,
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -162,6 +163,18 @@ import {
                     ...state,
                     cart:action.payload
                 }
+
+            case GET_UPDATE:
+                
+                return{
+                    ...state,
+                }
+            case UPDATE:
+                return {
+                    ...state,
+                    update: action.payload,
+                }
+            
                 
             default: return {...state}
             

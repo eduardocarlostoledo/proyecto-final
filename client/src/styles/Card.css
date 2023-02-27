@@ -80,15 +80,15 @@
     margin-top: 10%;
 }
 
-.card_button_sumar, .card_button_restar{
+.Sumar, .Restar{
 border-radius: 50%;
-width: 1.5vw;
-height: 3vh;
+width: 2vw;
+height: 4vh;
 border: 1px solid black;
 background-color: inherit;
 font-size: 1.8vh;
 }
-.card_button_sumar:hover, .card_button_restar:hover{
+.Sumar:hover, .Restar:hover{
     background-color: #e7b8ff;
     border: 1px solid #e7b8ff;
 }
@@ -122,6 +122,13 @@ font-size: 1.8vh;
     width: 100px;
     height: 30px;
     margin-left: 120px;
+}
+
+.ContainerSumRest{
+    margin-left: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
 }
 
 

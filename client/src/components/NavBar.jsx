@@ -5,7 +5,8 @@ import {FaUserCircle} from 'react-icons/fa';
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCart } from "../redux/actions/CartActions";
+import { getCart, getUpdate } from "../redux/actions/CartActions";
+import { update } from "../redux/actions/CartActions";
 
 
 
@@ -15,25 +16,16 @@ export const NavBar = () => {
     
 
     const dispatch = useDispatch();
-    // let carts = useSelector((state) => state.cart)
-    // const itemQuantity = carts.reduce((acc, item) => acc + item.amount, 0);
+    const up = useSelector((state) => state.update)
     
-
-    // useEffect(()=>{
-    //     dispatch(getCart())
-    // },[dispatch])
-    const [cartQuantity, setCartQuantity] = useState(0);
     const carts = useSelector((state) => state.cart);
-    const itemQuantity = cartQuantity;
-    useEffect(() => {
-        dispatch(getCart());
-        setCartQuantity(carts.reduce((acc, item) => acc + item.amount, 0));
-    }, [dispatch, carts]);
+    const itemQuantity = carts.reduce((acc, item) => acc + item.amount, 0);
     
     useEffect(() => {
-        setCartQuantity(carts.reduce((acc, item) => acc + item.amount, 0));
-    }, [carts]);
-      
+        dispatch(getUpdate())
+        dispatch(getCart());
+        dispatch(update(false))
+    }, [up]);
     
     
     return (

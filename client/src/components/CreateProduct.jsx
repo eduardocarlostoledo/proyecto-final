@@ -40,11 +40,14 @@ function validate(input) {
     if (input.description.length < 10) {
         errors.description = "Min 10 caracteres";
     }
-    if(!input.image){
+    if(!input.image){//combinar con lo de clau
         errors.image = 'Image not placed'
     }
     if (!input.price) {
         errors.price = "price is required";
+    }
+    if (isNaN(input.price)) {
+        errors.price = "Number or Decimal";
     }
     if(!input.type.length){
         errors.type = 'Place the name of a type and select the same'    
@@ -132,7 +135,7 @@ export const CreateProducts = () => {
 
                     <div className='name'>
                         <label className='nameLabel'>Price</label>
-                        <input className='input' type='text' value={input.price} name = 'price' placeholder="Price" onChange={(e) => handleChange(e)}></input>                  
+                        <input className='input' type='number' value={input.price} name = 'price' placeholder="Price" onChange={(e) => handleChange(e)}></input>                  
                         {errors.price && (<p className='spanError'>{errors.price}</p>)}
                     </div>
                     <div className='name'>
