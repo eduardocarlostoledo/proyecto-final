@@ -37,14 +37,6 @@ cartRouter.delete('/:prodId', async (req,res) => {
     }
 })
 
-// cartRouter.delete('/', async (req,res) => {
-//     try {
-//         const deleteProduct = await deleteAllCart()
-//         res.status(200).json(deleteProduct)
-//     } catch (error) {
-//         res.status(400).json({message:'All Cart delete'}) 
-//     }
-// })
 
 cartRouter.delete('/', async (req, res) => {
     try {
