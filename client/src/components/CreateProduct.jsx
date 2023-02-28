@@ -40,9 +40,12 @@ function validate(input) {
     if (input.description.length < 10) {
         errors.description = "Min 10 characters";
     }
-    if(!input.image){//combinar con lo de clau
-        errors.image = 'Image not placed'
-    }
+    if (isNaN(input.stock)) 
+        errors.stock= "Stock has to be a number"
+
+    if(!input.stock) 
+        errors.stock="Stock is required";
+  
     if (!input.price) {
         errors.price = "price is required";
     }
@@ -153,8 +156,8 @@ export const CreateProducts = () => {
                     </div>
                     <div className='name'>
                         <label className='nameLabel'>Stock</label>
-                        <input className='input' type='number' value={input.price} name = 'stock' placeholder="Stock" onChange={(e) => handleChange(e)} required={true}></input>                  
-                        {errors.price && (<p className='spanError'>{errors.price}</p>)}
+                        <input className='input' type='number' value={input.stock} name = 'stock' placeholder="Stock" onChange={(e) => handleChange(e)} required={true}></input>                  
+                        {errors.stock && (<p className='spanError'>{errors.stock}</p>)}
                     </div>
                     <div>
                         <div className='name'>
