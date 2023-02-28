@@ -1,7 +1,9 @@
 const { Cart,Product } = require("../db");
 
 const addProductCart = async (product) => {
-    const { name, image, price } = product;
+  
+    const { name, image, price, userId } = product;
+    console.log("ADDPRODUCTCART CONTROLLER" , name, image, price, userId)
     //busco el producto que coincida con el name 
     const prod=await Product.findOne({where:{name}});
 
@@ -9,16 +11,22 @@ const addProductCart = async (product) => {
     if(!prod) throw Error ("El producto no existe");
 
     //si los atributos enviados por body existen...
-    if(name && image && price ){
+    if(name && image && price && userId){
         //si el producto no esta en el carrito lo agrego, y cambio el atributo in Cart del product a true
         if(!prod.inCart) {
-          await Cart.create({ prodId:prod.id,name, image, price, amount: 1 })
+          await Cart.create({ 
+            prodId:prod.id,name, 
+            userId, 
+            image, 
+            price, 
+            amount: 1 })
+
           await prod.update({inCart:true})
         }
         //si el prooducto ya esta en el carrito actualizo la cantidad de ese producto 
         else {
           const cart=await Cart.findOne({where:{name}})
-          await cart.update({amount:cart.amount+1})
+          await Cart.update({amount:cart.amount+1})
         } 
     } 
     else throw Error ("Faltan datos para añadir el producto al carrito")
