@@ -91,10 +91,10 @@ body{
 .BotonCheckout{
     margin-top: -140px;
     margin-bottom: 160px;
-    margin-left: -60px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    margin-right: 140px;
 }
 

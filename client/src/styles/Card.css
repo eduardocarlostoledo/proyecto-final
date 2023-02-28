@@ -82,9 +82,9 @@
 
 .Sumar, .Restar{
 border-radius: 50%;
-width: 2vw;
-height: 4vh;
-border: 1px solid black;
+width: 4vw;
+height: 6.5vh;
+border: none;
 background-color: inherit;
 font-size: 1.8vh;
 }
@@ -125,10 +125,11 @@ font-size: 1.8vh;
 }
 
 .ContainerSumRest{
-    margin-left: 40px;
+    margin-left: 30px;
     display: flex;
     flex-direction: row;
     gap: 60px;
+    margin-bottom: 20px;
 }
 
 
