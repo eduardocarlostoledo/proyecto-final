@@ -6,7 +6,7 @@ import ItemCart from './ItemCart';
 
 export default function Cart() {
 
-    
+    const [userCart, setCartUser] = useState([]);
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {

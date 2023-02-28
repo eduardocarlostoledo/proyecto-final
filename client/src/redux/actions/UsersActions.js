@@ -52,6 +52,8 @@ export function GetFiltersForEmail () {
 };
 
 export function UserActive (payload) { 
+  // console.log("USERACTIVEACTIONSUSERS", 
+  // "ID:",payload.data.id, "NAME", payload.data.name, "EMAIL", payload.data.email)
   return  function(dispatch){
       return dispatch({
           type: USER_ACTIVE,
