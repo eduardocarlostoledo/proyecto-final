@@ -1,7 +1,8 @@
+import React from "react";
 import "../styles/Card.css"
 import { Link } from "react-router-dom";
 import { useDispatch} from "react-redux";
-import { addToCart, deleteOneCart ,update} from "../redux/actions/CartActions";
+import { addToCart, deleteAllFromCart, deleteOneCart ,update} from "../redux/actions/CartActions";
 
 export default function ItemCart({name, image, price, amount,prodId}) {
 
@@ -16,6 +17,8 @@ export default function ItemCart({name, image, price, amount,prodId}) {
         dispatch(deleteOneCart(prodId))
         dispatch(update(true)) //elimina va restando
     }
+
+ 
 
     return (
         <div className="DivAllCards">  

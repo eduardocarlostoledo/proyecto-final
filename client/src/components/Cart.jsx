@@ -1,14 +1,11 @@
 import React, { useState, useEffect} from 'react';
 import mercadopago from "./mercadopago";
-import "../styles/Cart.css"
-import { useDispatch } from 'react-redux';
-import { deleteAllFromCart} from '../redux/actions/CartActions';
+import "../styles/Cart.css";
 import swal from 'sweetalert';
 import ItemCart from './ItemCart';
 
 export default function Cart() {
 
-    const dispatch = useDispatch();
     
     const [cartItems, setCartItems] = useState([]);
 
@@ -91,34 +88,20 @@ export default function Cart() {
     }
     
     
-    // const handleDeleteAllCart = () => {
-    //     dispatch(deleteAllFromCart())
-    //     setCartItems([]);
-    // }
-    const handleUpdateCart = () => {
-        fetch('http://localhost:3001/cart')
-          .then(response => response.json())
-          .then(data => setCartItems([...data]))
-          .catch(error => swal('Error', "Error al actualizar el carrito", 'error'));
-      }
-      
+    
       
 
 
     return (
         <div className='ContainerCart'>
             <h2 className='h2'>Shopping Cart</h2>
-            <button onClick={handleUpdateCart}>Actualizar carrito</button>
+            
             <div className='NavCart'>
                     {cartItems.length == 0 ? (
                         <p>el carrito esta vacio</p>
 
                     ) : ( cartItems.map(item => (
                         <div >
-                            {/* <li key={item.id}>
-                        {item.name} - ${item.price} - {item?.amount}
-                        <button onClick={() => handleDeleteOne(item.prodId)}>X</button>
-                    </li> */}
                             <ItemCart
                                 name= {item.name}
                                 price= {item.price}
@@ -127,6 +110,7 @@ export default function Cart() {
                                 prodId= {item.prodId}
                                 key={item.id}
                             />
+                            
                             
                         </div>
 

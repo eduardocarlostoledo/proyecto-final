@@ -5,12 +5,11 @@ export const Footer = () => {
         <div className='DivFooter'>
             <footer className='FooterContainer'>
                 <div className='Description'>
-                    <h5>Soy Henry Grupo 9 @2023</h5>
-                    <p>Los Alumnos que participan son los siguientes: Radwanski Lucia Daniela, Eduardo Carlos Toledo, Liam Perez Lupia, Laia Perez Lupia, Leandro kronsteiner, Franco Chaparro y Claudio Bernal.</p>
+                    <h5>Soy Henry</h5>
+                    <p>El <b>Grupo 9</b> lo integran las siguientes personas: Radwanski Lucia Daniela, Eduardo Carlos Toledo, Liam Perez Lupia, Laia Perez Lupia, Leandro kronsteiner, Franco Chaparro y Claudio Bernal.</p>
                 </div>
                         
                 <div className='ContainerRedes'>
-                    <h4>Síguenos</h4>
                     <div className='Redes'>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#e7b8ff" class="bi bi-instagram" viewBox="0 0 16 16">

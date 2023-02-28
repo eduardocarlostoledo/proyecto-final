@@ -1,12 +1,16 @@
 import "../styles/Detail.css";
-import { React, useEffect } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../redux/actions/ProductActions";
 import { Link, useParams } from "react-router-dom";
 import AddToCart from "./AddToCart";
+import Cart from "./Cart";
+import ItemCart from "./ItemCart";
 
 export const Detail = () => {
   const { Name } = useParams();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,13 +18,9 @@ export const Detail = () => {
   }, [dispatch, Name]);
 
   const detail = useSelector((state) => state.productDetail);
-  console.log(detail);
-  // const brand = useSelector((state) => {
-  //   return state.brands.find((b) => b.id === detail.id);
-  // });
-  // console.log("brand",brand);
-  // const type = useSelector((state) => state.types.find((t) => t.id === detail.id));
-  // console.log("type",type);
+  const isInCart = detail.inCart;
+  
+
 
 
   return (
@@ -47,13 +47,20 @@ export const Detail = () => {
         <h2>$ {detail.price}</h2>
         <p>{detail.description}</p>
       </div>
-      <AddToCart 
+      {!isInCart && <AddToCart 
       name={Name} 
       price={detail.price}
       description={detail.description}
       image={detail.image} 
       type={detail.type} 
-      brand={detail.brand}/>
+      brand={detail.brand}/>}
+      {isInCart && 
+        <div>
+          <p>This product is already in your cart</p>
+          <p>Amount:</p>
+          
+          
+        </div>}
     </div>
   );
 };
