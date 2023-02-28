@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const payRouter = Router()
 const mercadopago = require("mercadopago");
-
+const axios=require("axios")
 payRouter.post("/create_preference", (req, res) => {
     console.log(req.body)
         let preference = {
@@ -32,12 +32,12 @@ payRouter.post("/create_preference", (req, res) => {
     });
 
     
-    payRouter.get('/feedback/success', function (req, res) {
+    payRouter.get('/feedback/success', async function (req, res) {
         const paymentId = req.query.payment_id;
         const status = req.query.status;
         const merchantOrderId = req.query.merchant_order_id;
-    
-    
+
+
             res.send(`
             <!DOCTYPE html>
             <html>            
@@ -61,6 +61,7 @@ payRouter.post("/create_preference", (req, res) => {
               </body>
             </html>
             `)
+          await axios.delete("http://localhost:3001/cart")
     })
     payRouter.get('/feedback/pending', function (req, res) {
         res.send(`

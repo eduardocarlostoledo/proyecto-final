@@ -8,12 +8,14 @@ import AddToCart from "./AddToCart";
 export const Detail = () => {
   const { Name } = useParams();
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const detail = useSelector((state) => state.productDetail);
+  const product=cart.find(p=>p.name===Name);
 
   useEffect(() => {
     dispatch(getProductDetail(Name));
   }, [dispatch, Name]);
-
-  const detail = useSelector((state) => state.productDetail);
+  
   console.log(detail);
   // const brand = useSelector((state) => {
   //   return state.brands.find((b) => b.id === detail.id);
@@ -47,13 +49,18 @@ export const Detail = () => {
         <h2>$ {detail.price}</h2>
         <p>{detail.description}</p>
       </div>
+
+      {!detail.inCart?
       <AddToCart 
-      name={Name} 
-      price={detail.price}
-      description={detail.description}
-      image={detail.image} 
-      type={detail.type} 
-      brand={detail.brand}/>
+        name={Name} 
+        price={detail.price}
+        image={detail.image} 
+      />
+      : <>
+          <p>This product is already in your cart</p>
+          <p>Amount: {product.amount}</p>
+        </>
+         }
     </div>
   );
 };

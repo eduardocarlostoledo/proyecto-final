@@ -20,13 +20,13 @@ export const NavBar = () => {
     
     const carts = useSelector((state) => state.cart);
     const itemQuantity = carts.reduce((acc, item) => acc + item.amount, 0);
+    console.log(itemQuantity);
     
     useEffect(() => {
         dispatch(getUpdate())
-        dispatch(getCart());
+        dispatch(getCart())
         dispatch(update(false))
     }, [up]);
-    
     
     return (
         <div className="NavDiv">   
@@ -48,9 +48,7 @@ export const NavBar = () => {
             <Link to='/Cart'>
                 <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" />{itemQuantity}</button>
             </Link>      
-            
-            
-            
+        
         </div>
     
     </div>

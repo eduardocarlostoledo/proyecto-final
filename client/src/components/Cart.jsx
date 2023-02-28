@@ -1,22 +1,19 @@
 import React, { useState, useEffect} from 'react';
 import mercadopago from "./mercadopago";
-import "../styles/Cart.css"
-import { useDispatch } from 'react-redux';
-import { deleteAllFromCart} from '../redux/actions/CartActions';
+import "../styles/Cart.css";
 import swal from 'sweetalert';
 import ItemCart from './ItemCart';
+import { useDispatch } from 'react-redux';
+import { update } from '../redux/actions/CartActions';
 
 export default function Cart() {
-
-    const dispatch = useDispatch();
-    
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:3001/cart')
         .then(response => response.json())
         .then(data => setCartItems([...data]))
-        .catch(error => swal('Carrito Vacio', "Carrito Vacio", 'error'));
+        .catch(error =>swal('Carrito Vacio', "Carrito Vacio", 'error') );
         
     }, [cartItems]);
 
@@ -24,10 +21,6 @@ export default function Cart() {
     const total = price.toFixed(1)
 
     const description = cartItems.map(e=>e.name)
-    const quantity = cartItems.reduce((acc, item) => acc + item.amount, 0);
-
-
-
 
     const orderData = {
         quantity: 1,
@@ -74,27 +67,30 @@ export default function Cart() {
         });
     }
 
-    
-    const handleDeleteAllCart = () => {
-        dispatch(deleteAllFromCart())
+    const handleDeleteAllCart = async () => {
+        try {
+            // Hacer una petición DELETE al servidor para eliminar todo el contenido del carrito
+            await fetch('http://localhost:3001/cart', {
+                method: 'DELETE'
+            });
+            // Actualizar el estado local del carrito para que se muestre vacío
+            setCartItems([]);
+        } catch (error) {
+            // Si hay un error, mostrar una alerta
+            swal('Error', 'No se pudo eliminar el carrito', 'error');
+        }
     }
-
-
 
     return (
         <div className='ContainerCart'>
             <h2 className='h2'>Shopping Cart</h2>
-
+            
             <div className='NavCart'>
                     {cartItems.length == 0 ? (
                         <p>el carrito esta vacio</p>
 
                     ) : ( cartItems.map(item => (
                         <div >
-                            {/* <li key={item.id}>
-                        {item.name} - ${item.price} - {item?.amount}
-                        <button onClick={() => handleDeleteOne(item.prodId)}>X</button>
-                    </li> */}
                             <ItemCart
                                 name= {item.name}
                                 price= {item.price}
@@ -102,8 +98,8 @@ export default function Cart() {
                                 image= {item.image}
                                 prodId= {item.prodId}
                                 key={item.id}
-                            />
-                            
+                                handleDeleteAllCart={handleDeleteAllCart}
+                            /> 
                         </div>
 
                         ))
@@ -121,4 +117,3 @@ export default function Cart() {
         </div>
     );
 }
-

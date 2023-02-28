@@ -1,20 +1,23 @@
 import "../styles/Card.css"
 import { Link } from "react-router-dom";
-import { useDispatch} from "react-redux";
-import { addToCart, deleteOneCart ,update} from "../redux/actions/CartActions";
+import { useDispatch, useSelector} from "react-redux";
+import { addToCart, deleteOneCart ,getCart,update} from "../redux/actions/CartActions";
 
-export default function ItemCart({name, image, price, amount,prodId}) {
+export default function ItemCart({name, image, price, amount,prodId,handleDeleteAllCart}) {
 
     const dispatch=useDispatch();
+    const cart= useSelector((state) => state.cart);
 
     const handleAdd=()=>{
         dispatch(addToCart({name, image,  price}))
         dispatch(update(true)) //2 a 3
     }
     
-    const handleDelete=()=>{
+    const handleDelete=()=>{  
+        dispatch(getCart())    
+        if(amount===1 && cart.length===1)  handleDeleteAllCart()
         dispatch(deleteOneCart(prodId))
-        dispatch(update(true)) //elimina va restando
+        dispatch(update(true))//elimina va restando
     }
 
     return (

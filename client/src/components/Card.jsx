@@ -3,7 +3,7 @@ import "../styles/Card.css"
 import AddToCart from "./AddToCart"
 
 export default function Card({name, image, price}) {
-
+  
   return (
         <div className="DivAllCards">
       

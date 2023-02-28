@@ -13,7 +13,7 @@ cartRouter.get('/', async (req,res) => {
         const productsCart = await getProductsCart()
         res.status(200).json(productsCart)
     } catch (error) {
-        res.status(400).send({message: "No hay productos en el carrito"})
+        res.status(400).send(error.message)
     }
 })
 
@@ -40,7 +40,7 @@ cartRouter.delete('/', async (req,res) => {
         const deleteProduct = await deleteAllCart()
         res.status(200).json(deleteProduct)
     } catch (error) {
-        res.status(400).json({message:'All Cart delete'}) 
+        res.status(400).json(error.message) 
     }
 })
 
