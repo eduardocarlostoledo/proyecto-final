@@ -4,7 +4,9 @@ const {
     addProductCart,
     deleteProductCart,
     deleteAllCart,
-  } = require('../controllers/cartController')
+} = require('../controllers/cartController')
+
+const { Cart,Product } = require("../db");
 
 const cartRouter = Router()
 
@@ -35,13 +37,30 @@ cartRouter.delete('/:prodId', async (req,res) => {
     }
 })
 
-cartRouter.delete('/', async (req,res) => {
+// cartRouter.delete('/', async (req,res) => {
+//     try {
+//         const deleteProduct = await deleteAllCart()
+//         res.status(200).json(deleteProduct)
+//     } catch (error) {
+//         res.status(400).json({message:'All Cart delete'}) 
+//     }
+// })
+
+cartRouter.delete('/', async (req, res) => {
     try {
-        const deleteProduct = await deleteAllCart()
-        res.status(200).json(deleteProduct)
+      /* Eliminar todo el contenido del carrito */
+      await Cart.destroy({ where: {} });
+  
+      /* Actualizar la columna 'inCart' de todos los productos a false */
+      await Product.update({ inCart: false }, { where: {} });
+  
+      /* Devolver una respuesta exitosa */
+      return res.status(200).json({ message: 'El carrito ha sido eliminado' });
     } catch (error) {
-        res.status(400).json({message:'All Cart delete'}) 
+      console.error(error);
+      // Devolver una respuesta con error en caso de fallo
+      return res.status(500).json({ message: 'Error al eliminar el carrito' });
     }
-})
+  });
 
 module.exports={cartRouter};
