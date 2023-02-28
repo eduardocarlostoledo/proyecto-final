@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/BuildPc.css";
 import swal from "sweetalert";
+import Card from "./Card";
 
 
 function Component({ name, price, image }) {
@@ -153,27 +154,36 @@ export const BuildPc = () => {
 
         <div className={Complete ? "displaynone" : "AllCards" }>
         {data ? ( data.map((item) => (
-              <div onClick={(e) => handleSelect(e,item)} className="Card">
-                <button  className="Buttons">
-                {item.name}
-                {item.price}
-                <img src={item.image}></img>
-                {item.description}
-                </button>
-              </div>
+
+          <div onClick={(e) => handleSelect(e,item)} className="Card"> 
+              <Card 
+               name={item.name}
+               price={item.price}
+               image={item.image}
+               isForBuildPc={true}
+               key={item.id}
+              />
+          </div>
+              // {/* //   <button  className="Buttons">
+              // //   {item.name}
+              // //   {item.price}
+              // //   <img src={item.image}></img>
+              // //   {item.description}
+              // //   </button> */}
+              // {/* // </div> */}
             ))
         ) : (
           <p>Loading...</p>
           )}
           </div>
-          <div className={Complete ? "CompleteCards" : "displaynone" }>
-            <Component {...input.Processor} ></Component>
-            <Component {...input.Motherboard} ></Component>
-            <Component {...input.RAM} ></Component>
-            <Component {...input.GraphicsCard} ></Component>
-            <Component {...input.storage} ></Component>
-            <Component {...input.PowerSupply} ></Component>
-            <Component {...input.case} ></Component>
+          <div className={Complete ? "" : "displaynone" }>
+            <Card {...input.Processor} isForBuildPc={true} />
+            <Card {...input.Motherboard} isForBuildPc={true} />
+            <Card {...input.RAM} isForBuildPc={true} />
+            <Card {...input.GraphicsCard} isForBuildPc={true} />
+            <Card {...input.storage} isForBuildPc={true} />
+            <Card {...input.PowerSupply} isForBuildPc={true} />
+            <Card {...input.case} isForBuildPc={true} />
 
           </div>
           <div className={Complete ? "Priceh2" : "displaynone" }>
