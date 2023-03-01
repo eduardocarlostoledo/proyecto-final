@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../redux/actions/ProductActions";
 import { Link, useParams } from "react-router-dom";
 import AddToCart from "./AddToCart";
+import { getCart } from "../redux/actions/CartActions";
 
 export const Detail = () => {
   const { Name } = useParams();
@@ -13,8 +14,12 @@ export const Detail = () => {
   const product=cart.find(p=>p.name===Name);
 
   useEffect(() => {
-    dispatch(getProductDetail(Name));
+    dispatch(getProductDetail(Name));    
   }, [dispatch, Name]);
+
+  useEffect(() => {
+    dispatch(getCart());    
+  }, []);
   
   console.log(detail);
   // const brand = useSelector((state) => {
@@ -58,7 +63,8 @@ export const Detail = () => {
       />
       : <>
           <p>This product is already in your cart</p>
-          <p>Amount: {product.amount}</p>
+          <p>Amount: {product?.amount}</p> 
+          {/* EL ? EVITA QUE ROMPA LA WEB DE DETAIL POST DELETE CAR POST PAYMENT */}
         </>
          }
     </div>
