@@ -14,7 +14,7 @@ import {CreateProducts} from "./components/CreateProduct";
 import { GetFiltersForEmail } from "./redux/actions/UsersActions";
 import { useEffect } from "react";
 import Cart from "./components/Cart";
-import Orders from "./components/Expedition";
+import Orders from "./components/Orders";
 
 
 function App() {
