@@ -1,6 +1,15 @@
 .DivBuild {
    display: flex;
-   align-items: center;
+   align-items: flex-start;
+}
+
+.card_button {
+   border:none;
+   background-color: #0000;
+}
+
+.build_logo{
+   width: 50px;
 }
 
 .ButtonsAndCards {
@@ -20,12 +29,19 @@
 }
 
 .button {
-   padding: 10px;
+   padding: 5px;
+   width: 120px;
+   border-radius: 15px;
    font-size: 25px;
    margin-left: 25px;
    border: none;
-   background: linear-gradient(55deg, rgba(255, 139, 31, 0.39), rgba(77, 184, 255, 0.39));
+   background-color: #7200ca;
 }
+
+.button:active {
+   background-color: #5b00a0;
+}
+
 
 .Buttons {
    width: 300px;

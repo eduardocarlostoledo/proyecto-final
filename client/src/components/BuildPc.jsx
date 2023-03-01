@@ -2,6 +2,9 @@ import Steps from "./BuildPc-steps";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/BuildPc.css";
+import Card from "./Card";
+import AMD_img from '../images/AMD_Logo.png'
+import Intel_img from '../images/Intel_Logo.png'
 
 function Component({ name, price, image }) {
   return (
@@ -107,19 +110,18 @@ export const BuildPc = () => {
       price={Price}
       ></Steps>
       <div className="ButtonsAndCards">
-        <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Amd")}>Amd</button>
-        <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Intel")}>Intel</button>
+        <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Amd")}><img src={AMD_img} className='build_logo'/></button>
+        <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Intel")}><img src={Intel_img} className='build_logo'/></button>
 
         <div className={Complete ? "displaynone" : "AllCards" }>
         {data ? ( data.map((item) => (
-              <div onClick={(e) => handleSelect(e,item)} className="Card">
-                <button  className="Buttons">
-                {item.name}
+                <button onClick={(e) => handleSelect(e,item)} className='card_button'>
+                {/* {item.name}
                 {item.price}
                 <img src={item.image}></img>
-                {item.description}
+                {item.description} */}
+                <Card name={item.name} image={item.image} price={item.price} isForBuildPC={true}/>
                 </button>
-              </div>
             ))
         ) : (
           <p>Loading...</p>
