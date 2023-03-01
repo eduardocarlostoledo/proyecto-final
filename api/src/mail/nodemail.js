@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer')
 
-enviarMail = async () => {
+enviarMail = async (producto, precio, email) => {
+
+    let cantidades = producto.split(',')
 
     const config = {
         host: 'smtp.gmail.com',
@@ -12,10 +14,14 @@ enviarMail = async () => {
     }
 
     const mensaje = {
-        from: 'laiamiaperezlupia@gmail.com',
+        from: 'computer.store.orinal@gmail.com',
         to: 'laiperez1020@gmail.com',
-        subject: 'probando nodemail' ,
-        text: 'prueba exitosa con nodemail'
+        subject: 'compra realizada de forma exitosa!' ,
+        text: `muchas gracias por comprar en Computer Store a continuacion adjunto el detalle de su compra:
+        producto/s: ${producto}
+        cantidad de productos: ${cantidades.length}
+        compra total: ${precio}
+                `
     }
 
     const transport = nodemailer.createTransport(config)

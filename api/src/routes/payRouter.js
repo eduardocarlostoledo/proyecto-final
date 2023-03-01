@@ -5,7 +5,7 @@ const {deleteAllCart} = require('../controllers/cartController')
 const enviarMail = require('../mail/nodemail')
 
 payRouter.post("/create_preference", (req, res) => {
-  enviarMail();
+  enviarMail(req.body.description, req.body.price );
     console.log(req.body)
         let preference = {
             items: [
@@ -88,6 +88,7 @@ payRouter.post("/create_preference", (req, res) => {
     })
     
     payRouter.get('/feedback/failure', function (req, res) {
+      enviarMail();
 
         res.send(`
         <!DOCTYPE html>
