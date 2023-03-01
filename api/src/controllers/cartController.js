@@ -66,6 +66,7 @@ const deleteAllCart=async () => {
 } 
 
   module.exports = {
+    deleteAllCart,
     getProductsCart,
     addProductCart,
     deleteProductCart,
