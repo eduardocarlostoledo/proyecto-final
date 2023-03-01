@@ -14,6 +14,7 @@ import {CreateProducts} from "./components/CreateProduct";
 import { GetFiltersForEmail } from "./redux/actions/UsersActions";
 import { useEffect } from "react";
 import Cart from "./components/Cart";
+import {OrderUsers} from "./components/OrderUsers"
 
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
         <Route path="/Profile" element={<Profile/>} />
 
         <Route path="/Cart" element={<Cart/>} />
+
+        <Route path="/Order" element={<OrderUsers/>}/>
         
       </Routes>
       <Footer />
