@@ -23,7 +23,7 @@ const getUserId = async (userId) => {
 };
 
 const putUser = async (user, id) => {
-  const { name, lastname, email, image, password, phonenumber, country, city, address } = user
+  const { name, lastname, email, image, password, phonenumber, country, city, address, admin , status } = user
 
   if (!user) throw Error('User data missing')
   else {
@@ -32,7 +32,7 @@ const putUser = async (user, id) => {
       // if (userBD) throw Error('The email already exists')
       if (password) {
         const passwordHash = await encrypt(password);
-        const changeUser = await User.update({ name, lastname, email, image, password: passwordHash, phonenumber, country, city, address }, { where: { id } })
+        const changeUser = await User.update({ admin , status , name, lastname, email, image, password: passwordHash, phonenumber, country, city, address }, { where: { id } })
         return changeUser
       }
 
