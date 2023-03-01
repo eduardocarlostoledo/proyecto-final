@@ -3,16 +3,22 @@ import '../styles/NavBar.css';
 import { Search } from "./Search";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import {FaUserCircle} from 'react-icons/fa';
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { ChangeNav } from "../redux/actions/UsersActions";
+import { useEffect } from "react";
+// import { ChangeNav } from "../redux/actions/UsersActions";
 
 
 
 
 export const NavBar = () => {   
     let Nav = useSelector((state) => state.ChangeNav);
+    console.log(Nav, "soy NAV");
     // const [Active, setActive] = useState(JSON.parse(localStorage.getItem("UserActive")))
+
+    // useEffect(()=>{
+
+    // }, [Nav])
 
     return (
         <div className="NavDiv">   
@@ -26,10 +32,12 @@ export const NavBar = () => {
             <Search />
         </div>
         <div className="ContainerInfo">
-           { Nav ? <div className="LogAndSign">
+           { !Nav ? <div className="LogAndSign">
             <Link to="/Login"><button className="BtnLogSing" >Log in</button></Link>
             <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
-            </div>  :  <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link> 
+            </div> 
+             : 
+             <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link> 
             }               
              <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" /></button>
         </div>

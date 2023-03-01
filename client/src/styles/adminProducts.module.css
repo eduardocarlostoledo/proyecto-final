@@ -1,0 +1,65 @@
+.ContainerAll {
+    width: 100%;
+    height: 650px;
+    background-color: red;
+    margin-top: 80px;
+}
+
+.ContainerTop {
+    width: 100%;
+    height: 80px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.Menu {
+    z-index: 5;
+    margin-top: 20px;
+    width: 100px;
+}
+
+.MenuBtn {
+    z-index: 5;
+    width: 100px;
+    border-radius: 2px;
+    border: 1px solid rgb(121, 88, 46);
+}
+
+
+.MenuOption div { 
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+
+.MenuOption div:hover { 
+    background-color: rgb(72, 88, 230);
+    color: white;
+}
+
+.Containerinfo { 
+    width: 100%;
+    height: 375px;
+    background-color: rgb(121, 88, 46);
+    z-index: 1;
+}
+
+.Info {
+    display: flex;
+    justify-content: space-between;
+    background-color: aliceblue;
+    z-index: 1;
+}
+
+
+.Containerinfo h6 {
+    margin-left: 15px;
+}
+
+.footeradmin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import styles from "../styles/admin.module.css";
+import styles from "../styles/adminProducts.module.css";
 import { getAllUsers } from "../redux/actions/UsersActions";
 import { useDispatch, useSelector } from 'react-redux';
 import {BsFillPeopleFill} from "react-icons/bs"
 import {MdProductionQuantityLimits, MdPowerSettingsNew }from "react-icons/md"
 import {AiFillSetting} from "react-icons/ai"
 import {TfiReload} from "react-icons/tfi"
-import { Link } from 'react-router-dom';
 
-export const PanelAdmin = () => {
+
+
+export const AdminProducts = () => {
     const userActive = JSON.parse(localStorage.getItem("USUARIO"))
     useEffect(()=> {
         dispatch(getAllUsers())
@@ -43,9 +44,9 @@ export const PanelAdmin = () => {
           <div className={styles.Menu}>
           <button className={styles.MenuBtn} onClick={()=> setus(!uss)}>Menu</button>
           {uss && <div className={styles.MenuOption}>
-      <div><AiFillSetting></AiFillSetting> Settings</div>  
+     <div><AiFillSetting></AiFillSetting> Settings</div>  
       <div><BsFillPeopleFill></BsFillPeopleFill> Users</div>  
-    <Link to={"/Admin/Products"}> <div > <MdProductionQuantityLimits></MdProductionQuantityLimits> Products</div>  </Link> 
+      <div> <MdProductionQuantityLimits></MdProductionQuantityLimits> Products</div>  
       <div> <MdPowerSettingsNew></MdPowerSettingsNew> Log out</div> </div>
     }
          </div>
@@ -77,14 +78,14 @@ export const PanelAdmin = () => {
         <div className={styles.Containerinfo}>
             <div className={styles.Info}>
                 <h3>N</h3>
-                <h3 className={styles.go}>Name</h3>
-                <h3 className={styles.go}>LastName</h3>
+                <h3>Name</h3>
+                <h3>LastName</h3>
                 <h3>Email</h3>
-                <h3 className={styles.goa}>Phone</h3>
-                <h3 className={styles.goa}>City</h3>
-                <h3 className={styles.goa}>Country</h3>
-                <h3 className={styles.goa}>Address</h3>  
-                <h3 className={styles.goa}>Status</h3>  
+                <h3>Phone</h3>
+                <h3>City</h3>
+                <h3>Country</h3>
+                <h3>Address</h3>  
+                <h3>Status</h3>  
             </div>
         <div className={styles.Info}>
             <h6>1</h6>

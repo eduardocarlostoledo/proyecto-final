@@ -35,8 +35,8 @@ function validate(input) {
 
 
 export const Login = () => {
-    const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    // const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
+    // const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [errors, setErrors] = useState({})
@@ -77,7 +77,7 @@ export const Login = () => {
                         email: "",
                         password: ""
                     });
-                    window.localStorage.setItem("UserActive", false)
+                    // window.localStorage.setItem("UserActive", false)
                     navigate("/Profile")
                 }, 1300)
 

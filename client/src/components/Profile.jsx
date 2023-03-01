@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom"
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
-import { PutUser, ChangeNav } from '../redux/actions/UsersActions';
+import { PutUser, deleteUserLocalStorage } from '../redux/actions/UsersActions';
 import swal from 'sweetalert';
 
 
@@ -38,10 +38,11 @@ export default function Profile() {
 
   function CerrarSes(e) {
     e.preventDefault();
+    dispatch(deleteUserLocalStorage())
     setTimeout(() => {
       window.localStorage.removeItem("USUARIO")
       // dispatch(ChangeNav())
-      window.localStorage.setItem("UserActive", true)
+      // window.localStorage.setItem("UserActive", true)
       navigate("/Login")
     }, 1300)
   }
@@ -108,7 +109,7 @@ export default function Profile() {
             </div>
           </div>
         </div>
-        {Panel ? <div className="derecha">
+         {Panel ? <div className="derecha">
           <div className="hogar">
             <h1>{userActive.name} {userActive.lastname}</h1>
             <button onClick={() => setPanel(false)} className="hola"><IoSettingsOutline className="setting"></IoSettingsOutline></button>
@@ -165,6 +166,12 @@ export default function Profile() {
             </Form>
           </div>
         }
+
+
+
+          
+
+
       </div>
     </div>
   )
