@@ -8,14 +8,15 @@ export const USER_ACTIVE="USER_ACTIVE";
 export const CHANGE_NAV="CHANGE_NAV";
 
 
-export const getAllUsers = () => async (dispatch) => {
-    try {
-        return await axios('/users').then(r=>
-            dispatch({type: GET_ALL_USERS, payload:r.data.data}))
-    } catch (error) {
-            console.log(error)
-    }
-}
+export function getAllUsers () { 
+  return async function(dispatch){
+      let json = await axios.get("http://localhost:3001/users")
+      return dispatch({
+          type:  GET_ALL_USERS,
+          payload: json.data.data
+      });
+  };
+};
 
 export const getUserById = (id) => async (dispatch) => {
   return await axios(`/users/${id}`).then(r=>
