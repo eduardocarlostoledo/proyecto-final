@@ -65,11 +65,9 @@ const deleteAllCart=async () => {
   return "El carrito se eliminó"
 } 
 
-
   module.exports = {
     getProductsCart,
     addProductCart,
     deleteProductCart,
-    deleteAllCart,
   };
   

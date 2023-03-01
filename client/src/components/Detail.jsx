@@ -1,13 +1,17 @@
 import "../styles/Detail.css";
-import { React, useEffect } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetail } from "../redux/actions/ProductActions";
 import { Link, useParams } from "react-router-dom";
 import AddToCart from "./AddToCart";
 import { getCart } from "../redux/actions/CartActions";
 
+
+
 export const Detail = () => {
   const { Name } = useParams();
+
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const detail = useSelector((state) => state.productDetail);
@@ -16,6 +20,7 @@ export const Detail = () => {
   useEffect(() => {
     dispatch(getProductDetail(Name));    
   }, [dispatch, Name]);
+
 
   useEffect(() => {
     dispatch(getCart());    
@@ -28,6 +33,7 @@ export const Detail = () => {
   // console.log("brand",brand);
   // const type = useSelector((state) => state.types.find((t) => t.id === detail.id));
   // console.log("type",type);
+
 
 
   return (
@@ -67,6 +73,7 @@ export const Detail = () => {
           {/* EL ? EVITA QUE ROMPA LA WEB DE DETAIL POST DELETE CAR POST PAYMENT */}
         </>
          }
+
     </div>
   );
 };

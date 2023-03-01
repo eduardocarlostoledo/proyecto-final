@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { update } from '../redux/actions/CartActions';
 
 export default function Cart() {
+
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
@@ -75,11 +76,13 @@ export default function Cart() {
             });
             // Actualizar el estado local del carrito para que se muestre vacío
             setCartItems([]);
+
         } catch (error) {
             // Si hay un error, mostrar una alerta
             swal('Error', 'No se pudo eliminar el carrito', 'error');
         }
     }
+
 
     return (
         <div className='ContainerCart'>
@@ -98,8 +101,10 @@ export default function Cart() {
                                 image= {item.image}
                                 prodId= {item.prodId}
                                 key={item.id}
+
                                 handleDeleteAllCart={handleDeleteAllCart}
                             /> 
+
                         </div>
 
                         ))
