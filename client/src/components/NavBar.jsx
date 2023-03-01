@@ -35,6 +35,7 @@ export const NavBar = () => {
                 <Link to="/Products"><button>Products</button></Link>
                 <Link to="/BuildPc"><button>Build PC</button></Link>
                 <Link to="/CreateProduct"><button>Create</button></Link>
+                <Link to="/Orders"><button>Orders</button></Link> 
             </div>
         {/* <div className="ContainerSearch">
             <Search />
