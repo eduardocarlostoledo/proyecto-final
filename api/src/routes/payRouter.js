@@ -2,8 +2,10 @@ const { Router } = require('express');
 const payRouter = Router()
 const mercadopago = require("mercadopago");
 const {deleteAllCart} = require('../controllers/cartController')
+const enviarMail = require('../mail/nodemail')
 
 payRouter.post("/create_preference", (req, res) => {
+  enviarMail();
     console.log(req.body)
         let preference = {
             items: [
@@ -64,6 +66,7 @@ payRouter.post("/create_preference", (req, res) => {
 
     })
     payRouter.get('/feedback/pending', function (req, res) {
+
         res.send(`
         <!DOCTYPE html>
         <html>
@@ -85,6 +88,7 @@ payRouter.post("/create_preference", (req, res) => {
     })
     
     payRouter.get('/feedback/failure', function (req, res) {
+
         res.send(`
         <!DOCTYPE html>
 	<html>
