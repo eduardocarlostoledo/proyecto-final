@@ -8,8 +8,8 @@ enviarMail = async (producto, precio, email) => {
         host: 'smtp.gmail.com',
         port: 587,
         auth: {
-            user: 'laiamiaperezlupia@gmail.com',
-            pass: 'hzdyvzxqaogwzsrh'
+            user: 'computer.store.original@gmail.com',
+            pass: 'ahqdrlukahufvbnt'
         }
     }
 
