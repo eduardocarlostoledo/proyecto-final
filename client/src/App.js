@@ -8,6 +8,7 @@ import { BuildPc } from "./components/BuildPc";
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { Register } from "./components/Register";
+import { PanelAdmin } from "./components/PanelAdmin";
 import Profile  from "./components/Profile";
 import {Login} from "./components/Login"
 import {CreateProducts} from "./components/CreateProduct";
@@ -45,7 +46,8 @@ function App() {
         <Route path="/Profile" element={<Profile/>} />
 
         <Route path="/Cart" element={<Cart/>} />
-        
+
+        <Route path="/admin" element={<PanelAdmin />} />
       </Routes>
       <Footer />
     </div>
