@@ -5,8 +5,7 @@ const { postOrder } = require("../controllers/orderController");
 const { deleteAllCart } = require('../controllers/cartController')
 const enviarMail = require('../mail/nodemail')
 
-payRouter.post("/create_preference", (req, res) => {
-  enviarMail(req.body.description, req.body.price );
+payRouter.post("/create_preference", (req, res) => {    
     console.log(req.body)
         let preference = {
             items: [
@@ -43,6 +42,7 @@ payRouter.get('/feedback/success', async function (req, res) {
   const userId = req.query.userId;
   const newOrder = postOrder(userId, paymentId, statusId, merchantOrderId);
   console.log(newOrder, "FEEDBACK SUCCESS ORDEN REGISTRADA OK");
+  enviarMail(userId, paymentId, statusId, merchantOrderId);
   res.send(`
             <!DOCTYPE html>
             <html>            
@@ -76,6 +76,7 @@ payRouter.get('/feedback/pending', function (req, res) {
   const userId = req.query.userId;
   const newOrder = postOrder(userId, paymentId, statusId, merchantOrderId);
   console.log(newOrder, "FEEDBACK PENDING ORDEN REGISTRADA OK");
+  enviarMail(userId, paymentId, statusId, merchantOrderId);
   res.send(`
         <!DOCTYPE html>
         <html>
@@ -96,43 +97,14 @@ payRouter.get('/feedback/pending', function (req, res) {
       `)
     })
     
-
-payRouter.get('/feedback/failure', function (req, res) {
-  enviarMail();
+payRouter.get('/feedback/failure', function (req, res) {  
   const paymentId = req.query.payment_id;
   const statusId = req.query.status;
   const merchantOrderId = req.query.merchant_order_id;
   const userId = req.query.userId;
   const newOrder = postOrder(userId, paymentId, statusId, merchantOrderId);
   console.log(newOrder, "FEEDBACK FAILURE ORDEN REGISTRADA OK");
-  res.send(`
-        <!DOCTYPE html>
-          <html>
-            <head>
-            <title>Mi página HTML</title>
-            <link rel="stylesheet" type="text/css" href="./payStyles/failure.css">
-            </head>
-            <body>
-            <div class="contenedor_failure">
-              <a href="http://localhost:3000/"><svg class='failure_svg' width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path style="fill:#232326" d="M24 12.001H2.914l5.294-5.295-.707-.707L1 12.501l6.5 6.5.707-.707-5.293-5.293H24v-1z" data-name="Left"/></svg></a>
-              <h1 class="failure_h1"> Failure Pay!</h1>
-              <img class="failure_img" src="https://static.vecteezy.com/system/resources/thumbnails/017/178/563/small/cross-check-icon-symbol-on-transparent-background-free-png.png" alt="">
-              <a href="http://localhost:3000/Products" class="failure_a">Keep Buying</a>
-              <p class="failure_p">COMPUTER STORE</p>
-            </div>
-            </body>
-        </html>
-      `)
-})
-
-payRouter.get('/feedback/failure', function (req, res) {
-  enviarMail();
-  const paymentId = req.query.payment_id;
-  const statusId = req.query.status;
-  const merchantOrderId = req.query.merchant_order_id;
-  const userId = req.query.userId;
-  const newOrder = postOrder(userId, paymentId, statusId, merchantOrderId);
-  console.log(newOrder, "FEEDBACK FAILURE ORDEN REGISTRADA OK");
+  enviarMail(userId, paymentId, statusId, merchantOrderId);
   res.send(`
         <!DOCTYPE html>
           <html>

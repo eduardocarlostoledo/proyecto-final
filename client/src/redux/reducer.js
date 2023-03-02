@@ -1,4 +1,5 @@
 import { GET_CART, GET_UPDATE, UPDATE} from './actions/CartActions';
+import { ADD_ALL_ORDERS, GET_ALL_SHOPPING } from './actions/OrderActions';
 import {
     GET_ALL_PRODUCTS,
     GET_ALL_PRODUCTS_NAME,
@@ -37,6 +38,8 @@ import {
         ChangeNav :  false,
         cart: [],
         update: false,
+        order: [],
+        shopping: []
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -174,8 +177,17 @@ import {
                     ...state,
                     update: action.payload,
                 }
+            case ADD_ALL_ORDERS: 
+                return{
+                    ...state, 
+                    order: action.payload,
+                }
             
-                
+            case GET_ALL_SHOPPING: 
+                return{
+                    ...state,
+                    shopping: action.payload,
+                }
             default: return {...state}
             
         }
