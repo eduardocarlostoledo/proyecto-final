@@ -46,8 +46,7 @@ body {
     color: #333;
     margin-bottom: 10px;
     margin-top: 10px;
-    
-    margin-left: 40px;
+    margin-left: 10px;
 }
 
 .input{
@@ -107,7 +106,7 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     color: #333;
-    margin-left: 40px;
+    margin-left: 10px;
     margin-top: 10px;
 }
 
@@ -155,7 +154,7 @@ body {
 }
 
 .buttonCrear{
-    width: 480px;
+    width: 680px;
     height: 40px;
     border: none;
     border-radius: 5px;

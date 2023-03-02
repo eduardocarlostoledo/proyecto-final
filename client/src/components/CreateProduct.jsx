@@ -189,6 +189,11 @@ export const CreateProducts = () => {
                             </div>
                         </div>
                     </div>
+                    {input.type=="Processor" || input.type=="Motherboard" && 
+                        <div>
+                            <label>Socket</label>
+                        </div>
+                    }
                     <button className='buttonCrear' type="submit">Create Product</button>                          
                 </form>               
         </div>
