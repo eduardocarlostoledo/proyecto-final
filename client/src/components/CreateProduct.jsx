@@ -31,7 +31,7 @@ function validate(input) {
         errors.description = "can't include special characters";
     }
     if (!input.description) {
-        errors.description = "lastname is required";
+        errors.description = "Description is required";
     }
     if (input.description.length > 45) {
         errors.description = "Max 45 characters";
@@ -43,6 +43,8 @@ function validate(input) {
         errors.stock= "Stock has to be a number"
 
     if(!input.stock) 
+        errors.stock="Stock is required";
+    if(input.stock.length >= 0) 
         errors.stock="Stock is required";
   
     if (!input.price) {
@@ -93,6 +95,16 @@ export const CreateProducts = () => {
     const handleChangeImage =(e) => {
         setInput({ ...input, image: e.target.files[0]})
     }
+
+    const handleSocketChange = (event) => {
+        const { value } = event.target;
+        console.log(value)
+        setInput((input) => ({
+          ...input,
+          "info_adicional": {"socket": value},
+        }));
+        console.log(input, 'ACA ESTA EL INPUT MOTHERBOARD O PROCESS')
+    };
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -106,15 +118,18 @@ export const CreateProducts = () => {
             data.append("description", input.description)
             data.append("brand", input.brand)
             data.append("type", input.type)
-
-            setErrors(validate({...input, [e.target.name] : e.target.value}))
+            data.append("info_adicional", input.info_adicional.socket)
+            
+            setErrors(validate(input))
             dispatch(createProduct(data));
+            console.log(input)
             swal('hello', "Created product", 'success');
             setInput({
                 name: "",
                 image: "",
                 price: "",
                 description: "",
+                stock: "",
                 brand: [],
                 type: [],
                 info_adicional:{ "socket" : ""}
@@ -190,6 +205,13 @@ export const CreateProducts = () => {
                             </div>
                         </div>
                     </div>
+                    {(input.type === "Processor" || input.type === "Motherboard") && 
+                        <div>
+                            <label>Socket</label>
+                            <input type="text" name="socket" value={input.info_adicional.socket} onChange={(e) => handleSocketChange(e)} />
+                        </div>
+                    }
+                    
                     <button className='buttonCrear' type="submit">Create Product</button>                          
                 </form>
             </div>                  
