@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import "../styles/CreateProduct.css";
 import swal from 'sweetalert';
 
@@ -82,6 +81,7 @@ export const CreateProducts = () => {
         stock:"",
         brand: [],
         type: [],
+        info_adicional:{ "socket" : ""}
     });
 
     const handleChange = (e) => {
@@ -117,6 +117,7 @@ export const CreateProducts = () => {
                 description: "",
                 brand: [],
                 type: [],
+                info_adicional:{ "socket" : ""}
             });
         }
     }
@@ -139,7 +140,7 @@ export const CreateProducts = () => {
 
 
                     <div className='name'>
-                        <label className='nameLabel'>Image</label>
+                        <label className='nameLabel'><i class="bi bi-image-fill"></i> Image</label>
                         <input className='input' type='file' name= 'image' placeholder="Image Product" onChange={(e) => handleChangeImage(e)} required={true}></input>                   
                     </div>
 
