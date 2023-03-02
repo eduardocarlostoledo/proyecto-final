@@ -6,14 +6,14 @@ const postOrder = async (order) => {
         paymentId,
         statusId, 
         merchantOrderId    
-        } = order
+    } = order
         
-console.log("POST CONTROLLER ORDER", 
-userId, 
-paymentId,
-statusId, 
-merchantOrderId    
-);   
+    console.log("POST CONTROLLER ORDER", 
+        userId, 
+        paymentId,
+        statusId, 
+        merchantOrderId    
+    );   
     try {
         const newOrder = await Order.create({ 
             userId, 
@@ -27,7 +27,7 @@ merchantOrderId
         return newOrder
     } catch (error) {
         throw Error(error.message);
-      }  
+    }  
     
 };
 

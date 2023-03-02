@@ -67,7 +67,7 @@ export const OrderUsers = () => {
       ];
 
   return (
-    <div style={{marginTop: "160px"}}>
+    <div style={{marginTop: "100px", padding: "60px"}}>
 
         <Table  columns={columns} dataSource={orders}/>
     </div>

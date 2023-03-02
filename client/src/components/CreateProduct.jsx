@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import "../styles/CreateProduct.css";
 import swal from 'sweetalert';
 
@@ -82,6 +81,7 @@ export const CreateProducts = () => {
         stock:"",
         brand: [],
         type: [],
+        info_adicional:{ "socket" : ""}
     });
 
     const handleChange = (e) => {
@@ -128,7 +128,7 @@ export const CreateProducts = () => {
     return (
         <div className="container">
                     
-            <div className='containerForm'>
+            
             <h1 className='title'>Create Product</h1>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className='name'>
@@ -139,8 +139,8 @@ export const CreateProducts = () => {
 
 
                     <div className='name'>
-                        <label className='nameLabel'>Image</label>
-                        <input className='input' type='file' name= 'image' placeholder="Image Product" onChange={(e) => handleChangeImage(e)} required={true}></input>                   
+                        <label className='nameLabel'><i class="bi bi-image-fill"></i> Image</label>
+                        <input className='inputImage' type='file' name= 'image' placeholder="Image Product" onChange={(e) => handleChangeImage(e)} required={true}></input>                   
                     </div>
 
 
@@ -190,8 +190,7 @@ export const CreateProducts = () => {
                         </div>
                     </div>
                     <button className='buttonCrear' type="submit">Create Product</button>                          
-                </form>
-            </div>                  
+                </form>               
         </div>
     );
 };
