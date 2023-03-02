@@ -19,34 +19,35 @@ export default function Cart() {
 
     const price = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
     const total = price.toFixed(1)
-
     const description = cartItems.map(e=>e.name)
+<<<<<<< Updated upstream
     const quantity = cartItems.reduce((acc, item) => acc + item.amount, 0);
 
 
 
+=======
+    const cartUserId = cartItems.filter(e=>e.cartUserId)
+>>>>>>> Stashed changes
 
     const orderData = {
         quantity: 1,
         description: description.toString(),
-        price: total
+        price: total,        
+        buyer: cartUserId
     };
 
     const handleCheckout = (e) =>{
         e.preventDefault();
-
         fetch("http://localhost:3001/pay/create_preference", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(orderData),
-        })
-        .then(function (response) {
-            console.log("RESPONSE" , response)
+        body: JSON.stringify(orderData),        
+        })                
+        .then(function (response) {          
             return response.json();
         })
-
         .then(
             function (preference) {
             createCheckoutButton(preference.id);
@@ -55,7 +56,6 @@ export default function Cart() {
             alert("Unexpected error");
         });
     }
-
 
     // Create preference when click on checkout button
     const createCheckoutButton = (preferenceId) => {
@@ -108,10 +108,18 @@ export default function Cart() {
                                 amount= {item?.amount}
                                 image= {item.image}
                                 prodId= {item.prodId}
+                                cartUserId= {item.cartUserId}
                                 key={item.id}
+<<<<<<< Updated upstream
                             />
                             
                             
+=======
+
+                                handleDeleteAllCart={handleDeleteAllCart}
+                            />                            
+
+>>>>>>> Stashed changes
                         </div>
 
                         ))

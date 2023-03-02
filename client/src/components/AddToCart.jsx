@@ -2,7 +2,11 @@ import React, {useState } from 'react';
 import '../styles/Card.css';
 import swal from 'sweetalert';
 import { useDispatch } from 'react-redux';
+<<<<<<< Updated upstream
 //import { update } from '../redux/actions/CartActions';
+=======
+import { update } from '../redux/actions/CartActions';
+>>>>>>> Stashed changes
 import { useSelector } from 'react-redux';
 import { UserActive } from '../redux/actions/UsersActions';
 
@@ -13,16 +17,29 @@ export default function AddToCart (item){
     const userActiveOwnerOfCart = useSelector(state => state.UserActive);
     
 
+    const userActiveOwnerOfCart = useSelector(state => state.UserActive.id);
+    
+
     const handleSubmit = e => {
+<<<<<<< Updated upstream
         e.preventDefault();        
         console.log("USERACTIVE.DATA.ID", userActiveOwnerOfCart.id)
+=======
+        e.preventDefault();
+>>>>>>> Stashed changes
         const newItem = { 
             name: item.name, 
             image: item.image, 
             price: item.price, 
+<<<<<<< Updated upstream
             userId: userActiveOwnerOfCart.id, 
              };
             
+=======
+            cartUserId: userActiveOwnerOfCart };
+
+        console.log("NEW ITEM ADDTOCART USERID:", newItem.cartUserId)
+>>>>>>> Stashed changes
         fetch('http://localhost:3001/cart', {
             method: 'POST',
             headers: {
