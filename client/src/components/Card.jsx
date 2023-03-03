@@ -8,14 +8,14 @@ export default function Card({name, image, price, isForBuildPc}) {
       
         <div className="contenedor_card">
           <Link className="LinkImage" to={isForBuildPc ? "" : `/detail/${name}`}>
-          <div class="card_contenedor_img">
+          <div className="card_contenedor_img">
             <img className="Imagen" src={image} width="100px" alt=""/>
             <hr />
           </div>
           </Link>
           <p className="card_p_nombre">{name}</p>
           
-          <strong class="card_strong_precio"> $ {price}</strong>
+          <strong className="card_strong_precio"> $ {price}</strong>
          {!isForBuildPc && <AddToCart name={name} image={image} price={price} />}
         </div>
 
