@@ -155,7 +155,7 @@ export const CreateProducts = () => {
 
 
                     <div className='name'>
-                        <label className='nameLabel'><i class="bi bi-image-fill"></i> Image</label>
+                        <label className='nameLabel'><i className="bi bi-image-fill"></i> Image</label>
                         <input className='input' type='file' name= 'image' placeholder="Image Product" onChange={(e) => handleChangeImage(e)} required={true}></input>                   
                     </div>
 
