@@ -48,7 +48,8 @@ const getProductsByName = async (productName) => {
         price:p.price,
         description: p.description,
         type: p.type.name,
-        brand: p.brand.name
+        brand: p.brand.name,
+        stock: p.stock,
       }
     })
     return result;
@@ -72,7 +73,8 @@ const getProducts = async () => {
           description: p.description,
           type: p.type.name,
           brand: p.brand.name,
-          info_adicional: p.info_adicional
+          info_adicional: p.info_adicional,
+          stock: p.stock,
         }
       })
       return result;
@@ -96,7 +98,8 @@ const getProductName = async (product) => {
         description: p.description,
         type: p.type.name,
         brand: p.brand.name,
-        inCart:p.inCart
+        inCart:p.inCart,
+        stock: p.stock,
       }
     })
     if (result) return result;
@@ -168,7 +171,8 @@ const BuildSearch = async (socket) => {
         description: p.description,
         info_adicional: p.info_adicional,
         type: p.type.name,
-        brand: p.brand.name
+        brand: p.brand.name,
+        stock: p.stock,
       }
     })
     return result;
