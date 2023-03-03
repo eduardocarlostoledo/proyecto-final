@@ -47,7 +47,28 @@ const putUser = async (user, id) => {
 }
 
 
+const postUserGoogle = async (req, res) => { 
+  try {
+    const { name, lastname, email, image} = req.body;
+    if (!name || !lastname || !email) return res.json({ msg: 'Missing required fields', success: false  });
 
+    const userBD = await User.findOne({ where: { email: `${email}` } });
+    if (userBD) {
+      return res.json({ msg: 'The email already exists', success: false  });
+    }
+    await User.create({
+      name: name,
+      lastname: lastname,
+      email: email,
+      image: image,
+      password: "XDRWQDFF11asedfa123"
+    });
+    return res.json({ msg: `User create succesfully`, success: true });
+
+  } catch (error) {
+     return res.json({ msg: `Error 404 - ${error}` });
+  }
+}
 
 
 
@@ -103,7 +124,7 @@ const postUsers = async (req, res) => {
       name: name,
       lastname: lastname,
       password: infoUser.password,
-      email: email.toLowerCase(),
+      email: email,
     });
     return res.json({ msg: `User create succesfully` });
   } catch (error) {
@@ -124,7 +145,7 @@ const loginUser = async (req, res) => {
     if (checkPassword) {
       res.status(200).send({
         data: user,
-       success: true,
+        success: true,
       });
     }
     if (!checkPassword) {
@@ -156,5 +177,5 @@ const deleteUser = async (req, res) => {
 
 
 module.exports = {
-  putUser, getUsers, getUserId, loginUser, postUsers, deleteUser
+  putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle
 }

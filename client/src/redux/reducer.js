@@ -22,7 +22,8 @@ import {
         UPDATE_USER,
         GET_EMAIL,
         USER_ACTIVE,
-        CHANGE_NAV
+        CHANGE_NAV,
+        ChangeNav
     } from './actions/UsersActions';
     
     const initialState= {
@@ -189,6 +190,12 @@ import {
                     ...state,
                     shopping: action.payload,
                 }
+
+            case CHANGE_NAV: 
+            return { 
+                ...state, 
+                ChangeNav: true
+            }
             
                 
             default: return {...state}

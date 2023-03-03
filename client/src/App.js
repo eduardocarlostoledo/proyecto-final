@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import Cart from "./components/Cart";
 import {AdminProducts} from "./components/AdminProducts"
 import {OrderUsers} from "./components/OrderUsers";
+import { AdminUsers } from "./components/AdminUsers";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
         <Route path="admin/Products" element={<AdminProducts />} />
 
         <Route path="/Order" element={<OrderUsers/>}/>
+        
+        <Route path="/admin/users" element={<AdminUsers />} />
+
       </Routes>
      {location.pathname === "/admin/settings" || location.pathname === "/admin/Users" || location.pathname === "/admin/Products" ? null : <Footer />}
     </div>

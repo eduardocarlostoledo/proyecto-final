@@ -88,3 +88,12 @@ export function deleteUserLocalStorage() {
       });
   };  
   }
+
+
+  export function postUsersGoogle(payload) { 
+    return async function(dispatch){
+        const response = await axios.post(`http://localhost:3001/users/google/`,payload);
+        return response;
+    };
+  };
+  
