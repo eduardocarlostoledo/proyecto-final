@@ -20,16 +20,11 @@ export default function Cart() {
     const price = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
     const total = price.toFixed(1)
     const description = cartItems.map(e=>e.name)
-<<<<<<< Updated upstream
-    const quantity = cartItems.reduce((acc, item) => acc + item.amount, 0);
-
-
-
-=======
     const cartUserId = cartItems.filter(e=>e.cartUserId)
->>>>>>> Stashed changes
 
     const orderData = {
+
+        
         quantity: 1,
         description: description.toString(),
         price: total,        
@@ -110,16 +105,10 @@ export default function Cart() {
                                 prodId= {item.prodId}
                                 cartUserId= {item.cartUserId}
                                 key={item.id}
-<<<<<<< Updated upstream
-                            />
-                            
-                            
-=======
 
                                 handleDeleteAllCart={handleDeleteAllCart}
                             />                            
 
->>>>>>> Stashed changes
                         </div>
 
                         ))
