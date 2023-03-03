@@ -62,12 +62,12 @@
 
 .CompleteCards {
    display: flex;
-   flex-direction: row;
+   /* flex-direction: row; */
    flex-wrap: wrap;
    justify-content: center;
 }
 
-.CompleteCards div {
+/* .CompleteCards div {
    background-color: white;
    width: 200px;
    margin: 20px;
@@ -77,16 +77,16 @@
    flex-direction: column;
    justify-content: space-between;
    align-items: center;
-}
-.CompleteCards img {
+} */
+/* .CompleteCards img {
    width: 60%;
    height: 40%;
-}
-.CompleteCards h2 {
+} */
+/* .CompleteCards h2 {
    font-size: 15px;
    padding: 10px;
    margin: 10px;
-}
+} */
 
 .Priceh2 {
    display: flex;

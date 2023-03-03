@@ -128,13 +128,13 @@ export const BuildPc = () => {
           )}
           </div>
           <div className={Complete ? "CompleteCards" : "displaynone" }>
-            <Component {...input.Processor} ></Component>
-            <Component {...input.Motherboard} ></Component>
-            <Component {...input.RAM} ></Component>
-            <Component {...input.GraphicsCard} ></Component>
-            <Component {...input.storage} ></Component>
-            <Component {...input.PowerSupply} ></Component>
-            <Component {...input.case} ></Component>
+            <Card {...input.Processor} isForBuildPC={true}></Card>
+            <Card {...input.Motherboard} isForBuildPC={true}></Card>
+            <Card {...input.RAM} isForBuildPC={true}></Card>
+            <Card {...input.GraphicsCard} isForBuildPC={true}></Card>
+            <Card {...input.storage} isForBuildPC={true}></Card>
+            <Card {...input.PowerSupply} isForBuildPC={true}></Card>
+            <Card {...input.case} isForBuildPC={true}></Card>
 
           </div>
           <div className={Complete ? "Priceh2" : "displaynone" }>
