@@ -3,12 +3,8 @@ const payRouter = Router()
 const mercadopago = require("mercadopago");
 
 payRouter.post("/create_preference", (req, res) => {
-<<<<<<< Updated upstream
-    console.log(req.body)
-=======
   enviarMail(req.body.description, req.body.price ); //como acomodarlo 
     console.log("PAYROUTER POST PREFERENCE REQ BODY", req.body)
->>>>>>> Stashed changes
         let preference = {
             items: [
                 {
@@ -42,14 +38,9 @@ payRouter.post("/create_preference", (req, res) => {
         const paymentId = req.query.payment_id;
         const statusId = req.query.status;
         const merchantOrderId = req.query.merchant_order_id;
-<<<<<<< Updated upstream
-    
-    
-=======
         const cartUserId = req.query.cartUserId || null;
         const newOrder = postOrder(cartUserId, paymentId, statusId, merchantOrderId);
         console.log(paymentId,statusId,merchantOrderId,cartUserId[0], "FEEDBACK SUCCESS ORDEN REGISTRADA OK");
->>>>>>> Stashed changes
             res.send(`
             <!DOCTYPE html>
             <html>            
@@ -75,15 +66,12 @@ payRouter.post("/create_preference", (req, res) => {
             `)
     })
     payRouter.get('/feedback/pending', function (req, res) {
-<<<<<<< Updated upstream
-=======
       const paymentId = req.query.payment_id;
       const statusId = req.query.status;
       const merchantOrderId = req.query.merchant_order_id;
       const cartUserId = req.query.cartUserId || null;
       const newOrder = postOrder(cartUserId, paymentId, statusId, merchantOrderId);
       console.log(newOrder, "FEEDBACK PENDING ORDEN REGISTRADA OK");
->>>>>>> Stashed changes
         res.send(`
         <!DOCTYPE html>
         <html>
@@ -105,8 +93,6 @@ payRouter.post("/create_preference", (req, res) => {
     })
     
     payRouter.get('/feedback/failure', function (req, res) {
-<<<<<<< Updated upstream
-=======
       const paymentId = req.query.payment_id;
       const statusId = req.query.status;
       const merchantOrderId = req.query.merchant_order_id;
@@ -115,7 +101,6 @@ payRouter.post("/create_preference", (req, res) => {
       console.log(newOrder, "FEEDBACK FAILURE ORDEN REGISTRADA OK");
       enviarMail();
 
->>>>>>> Stashed changes
         res.send(`
         <!DOCTYPE html>
 	<html>

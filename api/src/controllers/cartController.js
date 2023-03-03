@@ -1,13 +1,7 @@
 const { Cart,Product } = require("../db");
 
 const addProductCart = async (product) => {
-<<<<<<< Updated upstream
-  
-    const { name, image, price, userId } = product;
-    console.log("ADDPRODUCTCART CONTROLLER" , name, image, price, userId)
-=======
     const { name, image, price, cartUserId } = product;
->>>>>>> Stashed changes
     //busco el producto que coincida con el name 
     const prod=await Product.findOne({where:{name}});
 
@@ -18,17 +12,7 @@ const addProductCart = async (product) => {
     if(name && image && price && userId){
         //si el producto no esta en el carrito lo agrego, y cambio el atributo in Cart del product a true
         if(!prod.inCart) {
-<<<<<<< Updated upstream
-          await Cart.create({ 
-            prodId:prod.id,name, 
-            userId, 
-            image, 
-            price, 
-            amount: 1 })
-
-=======
           await Cart.create({ prodId:prod.id,name, image, price, cartUserId, amount: 1,order:Date.now() })
->>>>>>> Stashed changes
           await prod.update({inCart:true})
         }
         //si el prooducto ya esta en el carrito actualizo la cantidad de ese producto 

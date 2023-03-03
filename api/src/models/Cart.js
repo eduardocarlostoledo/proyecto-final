@@ -6,15 +6,9 @@ module.exports = (sequelize)=>{
             type:DataTypes.INTEGER,
             allowNull:false,
         },
-<<<<<<< Updated upstream
-        userId:{
-            type:DataTypes.INTEGER,
-            allowNull:false,
-=======
         cartUserId:{
             type:DataTypes.INTEGER,
             allowNull:false
->>>>>>> Stashed changes
         },
         name:{
             type:DataTypes.STRING,
@@ -31,13 +25,10 @@ module.exports = (sequelize)=>{
         price:{
             type: DataTypes.DOUBLE,
             allowNull: false
-<<<<<<< Updated upstream
-=======
         },       
         order: {
             type: DataTypes.BIGINT,
             allowNull: false,
             defaultValue: 0
->>>>>>> Stashed changes
         }
     },{timestamps:false})}
