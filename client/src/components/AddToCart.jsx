@@ -6,6 +6,7 @@ import { update } from '../redux/actions/CartActions';
 
 
 export default function AddToCart (item){
+    //este es un mensaje de prueba 
 
     const [message, setMessage] = useState('');
     const dispatch =  useDispatch()
