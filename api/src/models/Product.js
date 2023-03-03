@@ -26,11 +26,11 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT
         },
         stock:{
-            type:DataTypes.INTEGER,
-            // allowNull: false,
-            validate:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
                 min: 1,
-                max: 1000
+                max: 1000,
             }
         },
         info_adicional: {

@@ -109,8 +109,8 @@ const getProductName = async (product) => {
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 const postProduct = async (product,image) => {
   const { name, price, type, brand, description,info_adicional, stock} = product;
-  console.log(product.name, "POST")
-  if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
+  console.log(product.stock, "POST")
+  if (!name || !price || !type || !brand || !description || !image || !stock) throw Error("Mandatory data missing");
   else {
     try {
       const [typeData, createdType] = await Type.findOrCreate({
@@ -135,14 +135,14 @@ const postProduct = async (product,image) => {
         image:{public_id:result.public_id,secure_url:result.secure_url},
         typeId: typeData.id,
         brandId: brandData.id,
-        info_adicional:product.info_adicional,
-        stock:product.stock
+        info_adicional: product.info_adicional,
+        stock: product.stock,
       });
       
       //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
       await fs.unlink(image.tempFilePath)
 
-      console.log(product.name, newProduct, "POSTOK")
+      console.log(product.stock, newProduct, "POSTOK")
 
       return newProduct;
     } catch (error) {

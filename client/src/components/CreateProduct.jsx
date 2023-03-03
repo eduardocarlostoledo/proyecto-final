@@ -44,11 +44,14 @@ function validate(input) {
 
     if(!input.stock) 
         errors.stock="Stock is required";
-    if(input.stock.length < 0 || input.stock.length > 1000) 
+    if(input.stock < 1 || input.stock > 1000) 
         errors.stock="Stock is required";
   
     if (!input.price) {
         errors.price = "price is required";
+    }
+    if (isNaN(input.price)) {
+        errors.price = "Number or Decimal";
     }
     if (isNaN(input.price)) {
         errors.price = "Number or Decimal";
@@ -80,7 +83,7 @@ export const CreateProducts = () => {
         image: "",
         price: "",
         description: "",
-        stock:"",
+        stock: 1,
         brand: [],
         type: [],
         info_adicional:{ "socket" : ""}
@@ -111,6 +114,7 @@ export const CreateProducts = () => {
         if(!input.name || !input.image || !input.price || !input.description || !input.type.length || !input.brand.length) {
             return swal('Hello', 'Cannot create product', 'error')
         } else {
+            
             const data = new FormData()
             data.append("name", input.name)
             data.append("image", input.image)
@@ -118,18 +122,19 @@ export const CreateProducts = () => {
             data.append("description", input.description)
             data.append("brand", input.brand)
             data.append("type", input.type)
+            data.append("stock", input.stock)
             data.append("info_adicional", input.info_adicional.socket)
             
             setErrors(validate(input))
             dispatch(createProduct(data));
-            console.log(input)
+            console.log(data)
             swal('hello', "Created product", 'success');
             setInput({
                 name: "",
                 image: "",
                 price: "",
                 description: "",
-                stock: "",
+                stock: 1,
                 brand: [],
                 type: [],
                 info_adicional:{ "socket" : ""}
@@ -139,6 +144,16 @@ export const CreateProducts = () => {
 
     const [typeInput, setTypeInput] = useState('');
     const [brandInput, setBrandInput] = useState('');
+    const [selectedType, setSelectedType] = useState('');
+    const [selectedBrand, setSelectedBrand] = useState('');
+
+    const handleChangeStock = (e) => {
+        const { name, value } = e.target;
+        setInput({
+            ...input,
+            [name]: name === "stock" ? parseInt(value) : value,
+          });
+    }
 
 
     return (
@@ -162,7 +177,7 @@ export const CreateProducts = () => {
 
                     <div className='name'>
                         <label className='nameLabel'>Price</label>
-                        <input className='input' type='number' value={input.price} name = 'price' placeholder="Price" onChange={(e) => handleChange(e)} required={true}></input>                  
+                        <input className='input' type='number' value={input.price} min="1" name = 'price' placeholder="Price" onChange={(e) => handleChange(e)} required={true}></input>                  
                         {errors.price && (<p className='spanError'>{errors.price}</p>)}
                     </div>
                     <div className='name'>
@@ -172,7 +187,7 @@ export const CreateProducts = () => {
                     </div>
                     <div className='name'>
                         <label className='nameLabel'>Stock</label>
-                        <input className='input' type='number' value={input.stock} name = 'stock' placeholder="Stock" onChange={(e) => handleChange(e)} required={true}></input>                  
+                        <input className='input' type='number' value={input.stock} min="1" max="1000" name = 'stock' placeholder="Stock" onChange={(e) => handleChangeStock(e)} required={true}></input>                  
                         {errors.stock && (<p className='spanError'>{errors.stock}</p>)}
                     </div>
                     <div>
@@ -205,6 +220,7 @@ export const CreateProducts = () => {
                             </div>
                         </div>
                     </div>
+
                     {(input.type === "Processor" || input.type === "Motherboard") && 
                         <div>
                             <label>Socket</label>
