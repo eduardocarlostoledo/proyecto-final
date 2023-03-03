@@ -27,7 +27,11 @@ module.exports = (sequelize) => {
         },
         stock:{
             type:DataTypes.INTEGER,
-            alowNull:false,
+            // allowNull: false,
+            validate:{
+                min: 1,
+                max: 1000
+            }
         },
         info_adicional: {
             type:DataTypes.JSONB

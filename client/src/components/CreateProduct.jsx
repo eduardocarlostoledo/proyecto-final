@@ -44,7 +44,7 @@ function validate(input) {
 
     if(!input.stock) 
         errors.stock="Stock is required";
-    if(input.stock.length >= 0) 
+    if(input.stock.length < 0 || input.stock.length > 1000) 
         errors.stock="Stock is required";
   
     if (!input.price) {
