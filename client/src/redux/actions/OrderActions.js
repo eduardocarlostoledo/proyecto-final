@@ -27,9 +27,9 @@ export const orderById = (id) => {
     }
 }
 
-export const orderByUser = (userId) => {
+export const orderByUser = (cartUserId) => {
     return async function (dispatch) {
-        const orderUser = await axios.get(`http://localhost:3001/order/${userId}`)
+        const orderUser = await axios.get(`http://localhost:3001/order/${cartUserId}`)
         return dispatch({type: ORDER_BY_USER, payload: orderUser.data})
     }
 }

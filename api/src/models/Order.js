@@ -7,20 +7,20 @@ module.exports = (sequelize)=>{
             autoIncrement: true,            
             primaryKey: true,
         },
-        userId:{
+        cartUserId:{
             type:DataTypes.INTEGER,
             allowNull:false,
         },
         paymentId:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.TEXT,
             allowNull:false
         },        
         statusId:{
-            type:DataTypes.STRING,
+            type:DataTypes.TEXT,
             allowNull:false,
         },
         merchantOrderId:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.TEXT,
             allowNull: false
         }
     },{timestamps:false})}

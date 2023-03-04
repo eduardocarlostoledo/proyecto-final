@@ -1,49 +1,90 @@
-const { Router } = require('express');
-const payRouter = Router()
+const { Router } = require("express");
+const payRouter = Router();
 const mercadopago = require("mercadopago");
-const {deleteAllCart} = require('../controllers/cartController')
-const enviarMail = require('../mail/nodemail')
+const { deleteAllCart } = require("../controllers/cartController");
+const enviarMail = require("../mail/nodemail");
 const { postOrder } = require("../controllers/orderControllers");
+const { Cart } = require("../db");
+
+let arrayPreference = {}
 
 payRouter.post("/create_preference", (req, res) => {
-  enviarMail(req.body.description, req.body.price ); //como acomodarlo 
-    console.log(req.body)
-        let preference = {
-            items: [
-                {
-                    title: req.body.description,
-                    unit_price: Number(req.body.price),
-                    quantity: Number(req.body.quantity),
-                }
-            ],		
-            back_urls: {
-                "success": "http://localhost:3001/pay/feedback/success",
-                "failure": "http://localhost:3001/pay/feedback/failure",
-                "pending": "http://localhost:3001/pay/feedback/pending"
-            },
-            auto_return: "approved",
-        };console.log("PREFERENCE", preference)
-    
-        mercadopago.preferences.create(preference)
-            .then(function (response) {
-                res.send({
-                    id: response.body.id
-                })
-                console.log("MERCADOPAGO.PREFERENCES.CREATE", response.body.id);
-            }).catch(function (error) {
-                console.log(error);
-            });
-    });
+  
+  enviarMail(req.body.description, req.body.price ); //como acomodarlo
 
+  arrayPreference = 
+    {
+      title: req.body.description,
+      unit_price: Number(req.body.price),
+      quantity: Number(req.body.quantity),
+      category_id: String(req.body.category_id[0].cartUserId),
+    }  
+
+  console.log("LLEGA PREFERENCIA PUSH ARRAY", arrayPreference);  
+  console.log("LLEGA PREFERENCIA", req.body);  
+  console.log("LLEGA PREFERENCIA", req.body.category_id[0].cartUserId);
+  let preference = {
+    items: [
+      {
+        title: req.body.description,
+        unit_price: Number(req.body.price),
+        quantity: Number(req.body.quantity),
+        category_id: String(req.body.category_id[0].cartUserId),
+      },
+    ],
+    back_urls: {
+      success: "http://localhost:3001/pay/feedback/success",
+      failure: "http://localhost:3001/pay/feedback/failure",
+      pending: "http://localhost:3001/pay/feedback/pending",
+    },
+    auto_return: "approved",
+  };
+  console.log("PREFERENCE", preference);
+
+  mercadopago.preferences
+    .create(preference)
+    .then(function (response) {
+      res.send({
+        id: response.body.id,
+        data: response.body.items
+      });     
+
+      console.log("MERCADOPAGO.PREFERENCES.CREATE", response.body);
+      console.log("MERCADOPAGO.PREFERENCES.CREATE", response.body.items);     
+      
+    })   
+
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
+payRouter.get("/feedback/success", async function (req, res) {  
+  console.log("FEEDBACK SUCCESS", arrayPreference );
+  try {
+    const {
+      payment_id: paymentId,
+      status: statusId,
+      merchant_order_id: merchantOrderId,
+    } = req.query;
+    const cartUserId = arrayPreference.category_id;
+
+    const newOrder = await postOrder(
+      cartUserId,
+      paymentId,
+      statusId,
+      merchantOrderId
+    );
+    console.log(
+      paymentId,
+      statusId,
+      cartUserId,
+      merchantOrderId,
+      "FEEDBACK SUCCESS ORDEN REGISTRADA OK"
+    );
+    console.log(newOrder, "FEEDBACK SUCCESS ORDEN REGISTRADA OK");
     
-    payRouter.get('/feedback/success', async function (req, res) {
-        const paymentId = req.query.payment_id;
-        const status = req.query.status;
-        const merchantOrderId = req.query.merchant_order_id;
-        const userId = req.query.userId;
-        const newOrder = postOrder(userId, paymentId, statusId, merchantOrderId);
-        console.log(newOrder, "FEEDBACK SUCCESS ORDEN REGISTRADA OK");
-            res.send(`
+    res.send(`
             <!DOCTYPE html>
             <html>            
               <head>
@@ -59,24 +100,47 @@ payRouter.post("/create_preference", (req, res) => {
                     <p class="succes_p">COMPUTER STORE</p>
                     <ul class="succes_ul">          
                       <li class="succes_li">Payment ID: ${paymentId}</li>
-                      <li class="succes_li">Status: ${status}</li>
+                      <li class="succes_li">Status: ${statusId}</li>
                       <li class="succes_li">Merchant Order ID: ${merchantOrderId}</li>
                   </ul>
                 </div>
               </body>
             </html>
-            `)
-            await deleteAllCart() // esto elimina el carrito al realizar una compra exitosa
+            `);
+    await deleteAllCart(); // esto elimina el carrito al realizar una compra exitosa
 
-    })
-    payRouter.get('/feedback/pending', function (req, res) {
-      const paymentId = req.query.payment_id;
-      const statusId = req.query.status;
-      const merchantOrderId = req.query.merchant_order_id;
-      const userId = req.query.userId;
-      const newOrder = postOrder(userId, paymentId, statusId, merchantOrderId);
-      console.log(newOrder, "FEEDBACK PENDING ORDEN REGISTRADA OK");
-        res.send(`
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+payRouter.get("/feedback/pending", async function (req, res) {
+  try {
+    const {
+      payment_id: paymentId,
+      status: statusId,
+      merchant_order_id: merchantOrderId,
+    } = req.query;
+    const cartUserId = arrayPreference.category_id;
+
+    const newOrder = await postOrder(
+      cartUserId,
+      paymentId,
+      statusId,
+      merchantOrderId
+    );
+    console.log(
+      paymentId,
+      statusId,
+      cartUserId,
+      merchantOrderId,
+      "FEEDBACK PENDING ORDEN REGISTRADA OK"
+    );
+    console.log(newOrder, "FEEDBACK PENDING ORDEN REGISTRADA OK");
+
+    res.send(`
         <!DOCTYPE html>
         <html>
           <head>
@@ -93,19 +157,40 @@ payRouter.post("/create_preference", (req, res) => {
             </div>
           </body>
         </html>
-      `)
-    })
+      `);
     
-    payRouter.get('/feedback/failure', function (req, res) {
-      const paymentId = req.query.payment_id;
-      const statusId = req.query.status;
-      const merchantOrderId = req.query.merchant_order_id;
-      const userId = req.query.userId;
-      const newOrder = postOrder(userId, paymentId, statusId, merchantOrderId);
-      console.log(newOrder, "FEEDBACK FAILURE ORDEN REGISTRADA OK");
-      enviarMail();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
-        res.send(`
+payRouter.get("/feedback/failure", async function (req, res) {
+  
+  try {
+    const {
+      payment_id: paymentId,
+      status: statusId,
+      merchant_order_id: merchantOrderId,
+    } = req.query;
+    const cartUserId = arrayPreference.category_id;
+
+    const newOrder = await postOrder(
+      cartUserId,
+      paymentId,
+      statusId,
+      merchantOrderId
+    );
+    console.log(
+      paymentId,
+      statusId,
+      cartUserId,
+      merchantOrderId,
+      "FEEDBACK FAILURE ORDEN REGISTRADA OK"
+    );
+    console.log(newOrder, "FEEDBACK FAILURE ORDEN REGISTRADA OK");
+
+    res.send(`
         <!DOCTYPE html>
           <html>
             <head>
@@ -122,7 +207,11 @@ payRouter.post("/create_preference", (req, res) => {
             </div>
             </body>
         </html>
-              `)
-            })
+              `);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
-    module.exports = {payRouter}
+module.exports = { payRouter };

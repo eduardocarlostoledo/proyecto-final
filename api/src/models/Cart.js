@@ -6,6 +6,10 @@ module.exports = (sequelize)=>{
             type:DataTypes.INTEGER,
             allowNull:false,
         },
+        cartUserId:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
         name:{
             type:DataTypes.STRING,
             allowNull:false,

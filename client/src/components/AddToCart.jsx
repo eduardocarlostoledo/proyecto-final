@@ -3,16 +3,21 @@ import '../styles/Card.css';
 import swal from 'sweetalert';
 import { useDispatch } from 'react-redux';
 import { update } from '../redux/actions/CartActions';
-
+import { useSelector } from 'react-redux';
+import { UserActive } from '../redux/actions/UsersActions';
 
 export default function AddToCart (item){
 
     const [message, setMessage] = useState('');
     const dispatch =  useDispatch()
 
+    const userActiveOwnerOfCart = useSelector(state => state.UserActive);    
+
     const handleSubmit = e => {
         e.preventDefault();
-        const newItem = { name: item.name, image: item.image, price: item.price };
+        const newItem = { name: item.name, image: item.image, price: item.price, cartUserId: userActiveOwnerOfCart.id };
+        console.log("NEW USER ITEM" , userActiveOwnerOfCart)
+        console.log("NEW ITEM" , newItem)
         fetch('http://localhost:3001/cart', {
             method: 'POST',
             headers: {

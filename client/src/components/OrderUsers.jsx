@@ -24,7 +24,7 @@ export const OrderUsers = () => {
         },
         {
           title: 'Usuario ID',
-          dataIndex: 'userId',
+          dataIndex: 'cartUserId',
           render: (text) => <p>{text}</p>,
         },
         {

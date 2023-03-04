@@ -1,22 +1,17 @@
 const { Order } = require("../db");
 
-const postOrder = async (order) => {
-    const {
-        userId, 
-        paymentId,
-        statusId, 
-        merchantOrderId    
-    } = order
-        
-    console.log("POST CONTROLLER ORDER", 
-        userId, 
-        paymentId,
-        statusId, 
-        merchantOrderId    
-    );   
+const postOrder = async (cartUserId, paymentId, statusId, merchantOrderId) => {
+    // const {
+    //     cartUserId, 
+    //     paymentId,
+    //     statusId, 
+    //     merchantOrderId    
+    // } = order
+          
     try {
+        console.log("POST CONTROLLER ORDER",         cartUserId,         paymentId,        statusId,         merchantOrderId        )
         const newOrder = await Order.create({ 
-            userId, 
+            cartUserId, 
             paymentId,
             statusId, 
             merchantOrderId        
