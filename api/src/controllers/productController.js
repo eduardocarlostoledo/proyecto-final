@@ -1,6 +1,6 @@
 const { Product, User, Type, Brand } = require("../db");
 const {Op} = require('sequelize')
-const {uploadImage}=require('../utils/cloudinary')
+const {uploadImage, deleteImage}=require('../utils/cloudinary')
 const fs =require('fs-extra');
 
 // Obtiene los tipos de productos de la BDD
@@ -140,7 +140,7 @@ const postProduct = async (product,image) => {
       });
       
       //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
-      await fs.unlink(image.tempFilePath)
+      await fs.remove(image.tempFilePath)
 
       console.log(product.name, newProduct, "POSTOK")
 
@@ -153,15 +153,18 @@ const postProduct = async (product,image) => {
 
 const putProduct = async (id,product, image) => {
   const { name, price, type, brand, description,info_adicional, stock } = product;
-
+  const productToUpdate=await Product.findByPk(id) 
+  if(!productToUpdate) throw Error('El producto que desea actualizar no existe')
   if (!product && !image) throw Error('No se envió ningun dato para actualizar')
 
   if(image){
     //invoco la funcion para subir la imagen a cloudinary
     const result=await uploadImage(image.tempFilePath)
+    deleteImage(productToUpdate.image.public_id)
     await Product.update({image:{public_id:result.public_id,secure_url:result.secure_url}}, { where: { id } })
+    
     //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
-    await fs.unlink(image.tempFilePath)
+    await fs.remove(image.tempFilePath)
   }
   if(type){
     const [newType,created]=await Type.findOrCreate({where:{name:type}})
@@ -170,8 +173,8 @@ const putProduct = async (id,product, image) => {
   }
 
   if(brand){
-    const newBrand=await Brand.findOrCreate({where:{name:brand}})
-    const brandId= created ? newType.id : newType.dataValues.id;
+    const [newBrand, created]=await Brand.findOrCreate({where:{name:brand}})
+    const brandId= created ? newBrand.id : newBrand.dataValues.id;
     await Product.update({brandId}, { where: { id } })
   }
 

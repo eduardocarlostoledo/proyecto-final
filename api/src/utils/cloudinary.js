@@ -9,7 +9,7 @@ const uploadImage= async(filePath)=>{
 }
 
 const deleteImage= async(id)=>{
-    return await v2.uploader.upload.destroy(id)
+    return await v2.uploader.destroy(id)
 }
 
 v2.config({
@@ -20,4 +20,4 @@ v2.config({
 })
 
 
-module.exports={uploadImage}
+module.exports={uploadImage,deleteImage}
