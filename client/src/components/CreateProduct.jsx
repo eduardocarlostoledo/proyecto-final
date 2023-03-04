@@ -45,14 +45,12 @@ function validate(input) {
     if(!input.stock) 
         errors.stock="Stock is required";
     if(input.stock < 1 || input.stock > 1000) 
-        errors.stock="Stock is required";
+        errors.stock="Stock from 1 to 1000";
   
     if (!input.price) {
         errors.price = "price is required";
     }
-    if (isNaN(input.price)) {
-        errors.price = "Number or Decimal";
-    }
+    
     if (isNaN(input.price)) {
         errors.price = "Number or Decimal";
     }
