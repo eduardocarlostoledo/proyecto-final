@@ -12,7 +12,6 @@ const getTypeProducts = async() => {
     return products;
   } catch (error) {
     throw new Error("Error retrieving product by Type: " + error.message);
-
   }
 }
 
@@ -20,7 +19,6 @@ const getTypeProducts = async() => {
 
 const getBrandProducts = async() => {
   try {
-    
     const products = await Brand.findAll();
     return products;
   } catch (error) {
@@ -96,7 +94,9 @@ const getProductName = async (product) => {
         description: p.description,
         type: p.type.name,
         brand: p.brand.name,
-        inCart:p.inCart
+        inCart:p.inCart,
+        reviews:p.reviews,
+        calification:p.calification
       }
     })
     if (result) return result;
@@ -110,7 +110,7 @@ const getProductName = async (product) => {
 const postProduct = async (product,image) => {
   const { name, price, type, brand, description,info_adicional, stock} = product;
   console.log(product.name, "POST")
-  if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
+  if (!name || !price || !type || !brand || !description || !image || !stock) throw Error("Mandatory data missing");
   else {
     try {
       const [typeData, createdType] = await Type.findOrCreate({
@@ -151,6 +151,35 @@ const postProduct = async (product,image) => {
   }
 };
 
+const putProduct = async (id,product, image) => {
+  const { name, price, type, brand, description,info_adicional, stock } = product;
+
+  if (!product && !image) throw Error('No se envió ningun dato para actualizar')
+
+  if(image){
+    //invoco la funcion para subir la imagen a cloudinary
+    const result=await uploadImage(image.tempFilePath)
+    await Product.update({image:{public_id:result.public_id,secure_url:result.secure_url}}, { where: { id } })
+    //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
+    await fs.unlink(image.tempFilePath)
+  }
+  if(type){
+    const [newType,created]=await Type.findOrCreate({where:{name:type}})
+    const typeId = created ? newType.id : newType.dataValues.id;
+    await Product.update({typeId}, { where: { id } })
+  }
+
+  if(brand){
+    const newBrand=await Brand.findOrCreate({where:{name:brand}})
+    const brandId= created ? newType.id : newType.dataValues.id;
+    await Product.update({brandId}, { where: { id } })
+  }
+
+  await Product.update({name, price, description,info_adicional, stock }, { where: { id } })
+
+  return await Product.findByPk(id);
+}
+
 const BuildSearch = async (socket) => {
   try {
     const products = await Product.findAll({
@@ -177,6 +206,25 @@ const BuildSearch = async (socket) => {
   }
 };
 
+const putReview = async (productId,review) => {
+  //busco el producto con el id recibido por parametro
+  let product = await Product.findByPk(productId);
+
+  //si el producto no existe lanzo un error
+  if(!product) throw Error("The product not exists");
+
+  //obtengo la cantidad total de reviews
+  const totalReviews=product.reviews.length + 1;
+
+  //obtengo la suma total de calificaciones
+  const totalCalifications=product.reviews.reduce((acc, review) => acc + review.calification, 0) + review.calification
+
+  //actualizo el producto
+  await product.update({reviews:[...product.reviews,review], calification:(totalCalifications/totalReviews).toFixed(1)});
+
+  return "The review was added";
+}
+
 module.exports = {
   postProduct,
   getProducts,
@@ -184,5 +232,7 @@ module.exports = {
   getProductsByName,
   getBrandProducts,
   getTypeProducts,
-  BuildSearch
+  putProduct,
+  BuildSearch,
+  putReview
 };
