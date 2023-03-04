@@ -11,6 +11,7 @@ import {
     FILTER_BY_BRAND,
     FILTER_BY_TYPE,
     FILTER_PRECIO,
+    ADD_REVIEW
     } from './actions/ProductActions'
     
     import{
@@ -66,6 +67,9 @@ import {
             case UPDATE_PRODUCT: 
             
                 return{ ...state, }
+
+            case ADD_REVIEW:
+                return{...state}
 
             case GET_ALL_BRANDS: 
             
