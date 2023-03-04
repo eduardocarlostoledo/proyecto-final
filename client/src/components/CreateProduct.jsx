@@ -48,7 +48,7 @@ function validate(input) {
         errors.stock="Stock from 1 to 1000";
   
     if (!input.price) {
-        errors.price = "price is required";
+        errors.price = "Price is required";
     }
     
     if (isNaN(input.price)) {
@@ -192,9 +192,9 @@ export const CreateProducts = () => {
                         <div className='name'>
                             <label className='nameLabelMap'>New Type</label>
                             <div className="ContainerTypeBrand">
-                                <input className='inputNew' type='text' value={typeInput} name='type' placeholder="Name Type" onChange={(e) => setTypeInput(e.target.value)}></input> 
-                                <select className='selectName' name='type' placeholder="Select Type" onChange={e=>handleChange(e)} required={true}>
-                                    <option value="" disabled selected>Select Type</option>
+                                <input className='inputNew' type='text' value={typeInput} name='type' placeholder="Type Name" onChange={(e) => setTypeInput(e.target.value)}></input> 
+                                <select className='selectName' name='type' placeholder="Select Type" onChange={e=>handleChange(e)} required={true}defaultValue="">
+                                    <option value="" disabled>Select Type</option>
                                     {types && types.map((type, index) => (
                                         <option key={index} value={type.name}>{type.name}</option>
                                     ))}
@@ -206,9 +206,9 @@ export const CreateProducts = () => {
                         <div className='name'>
                             <label className='nameLabelMap'>New Brand</label>
                             <div className="ContainerTypeBrand">
-                                <input className='inputNew' type='text' value={brandInput} name='brand' placeholder="Name Brand" onChange={(e) => setBrandInput(e.target.value)}></input> 
-                                <select className='selectName' name='brand' placeholder="Select Brand" onChange={e=>handleChange(e)} required={true}>
-                                    <option value="" disabled selected>Select Brand</option>
+                                <input className='inputNew' type='text' value={brandInput} name='brand' placeholder="Brand Name" onChange={(e) => setBrandInput(e.target.value)}></input> 
+                                <select className='selectName' name='brand' placeholder="Select Brand" onChange={e=>handleChange(e)} required={true} defaultValue="">
+                                    <option value="" disabled>Select Brand</option>
                                     {brands && brands.map((brand, index) => (
                                         <option key={index} value={brand.name}>{brand.name}</option>
                                     ))}
@@ -220,9 +220,9 @@ export const CreateProducts = () => {
                     </div>
 
                     {(input.type === "Processor" || input.type === "Motherboard") && 
-                        <div>
-                            <label>Socket</label>
-                            <input type="text" name="socket" value={input.info_adicional.socket} onChange={(e) => handleSocketChange(e)} />
+                        <div className="name">
+                            <label className="nameLabel">Socket</label>
+                            <input  className="input" type="text" name="socket" value={input.info_adicional.socket} onChange={(e) => handleSocketChange(e)} />
                         </div>
                     }
                     
