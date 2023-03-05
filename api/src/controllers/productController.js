@@ -1,6 +1,6 @@
 const { Product, User, Type, Brand } = require("../db");
 const {Op} = require('sequelize')
-const {uploadImage}=require('../utils/cloudinary')
+const {uploadImage, deleteImage}=require('../utils/cloudinary')
 const fs =require('fs-extra');
 
 // Obtiene los tipos de productos de la BDD
@@ -147,7 +147,7 @@ const postProduct = async (product,image) => {
       });
       
       //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
-      await fs.unlink(image.tempFilePath)
+      await fs.remove(image.tempFilePath)
 
       console.log(product.stock, newProduct, "POSTOK")
 
