@@ -7,11 +7,19 @@ export const POST_CART = 'POST_CART';
 export const GET_UPDATE = 'GET_UPDATE';
 export const UPDATE = 'UPDATE';
 
-export const getCart = () => {
-    return async function(dispatch) {
-        const carts = await axios('http://localhost:3001/cart')
-        console.log(carts)
-        return dispatch({type: GET_CART, payload:carts.data})
+// export const getCart = () => {
+//     return async function(dispatch) {
+//         const carts = await axios('http://localhost:3001/cart')
+//         console.log(carts)
+//         return dispatch({type: GET_CART, payload:carts.data})
+//     }
+// }
+export const getCart = () => async (dispatch) =>{
+    try {
+        return await axios('http://localhost:3001/cart').then(r=>
+            dispatch({type: GET_CART, payload:r.data}))
+    } catch (error) {
+            console.log(error)
     }
 }
 

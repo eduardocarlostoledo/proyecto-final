@@ -10,7 +10,7 @@ export default function Paginado({charactersPerPage, product, paginado}){
     }
     
     return(
-        <nav className="container">
+        <nav className="containerPaginado">
             <ul className="paginado">
                 {pageNumbers && pageNumbers.map(number => (
                     <li key={number}>

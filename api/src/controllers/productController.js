@@ -46,7 +46,8 @@ const getProductsByName = async (productName) => {
         price:p.price,
         description: p.description,
         type: p.type.name,
-        brand: p.brand.name
+        brand: p.brand.name,
+        stock: p.stock,
       }
     })
     return result;
@@ -70,7 +71,8 @@ const getProducts = async () => {
           description: p.description,
           type: p.type.name,
           brand: p.brand.name,
-          info_adicional: p.info_adicional
+          info_adicional: p.info_adicional,
+          stock: p.stock,
         }
       })
       return result;
@@ -95,6 +97,7 @@ const getProductName = async (product) => {
         type: p.type.name,
         brand: p.brand.name,
         inCart:p.inCart,
+        sstock:p.stock,
         reviews:p.reviews,
         calification:p.calification
       }
@@ -109,7 +112,7 @@ const getProductName = async (product) => {
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 const postProduct = async (product,image) => {
   const { name, price, type, brand, description,info_adicional, stock} = product;
-  console.log(product.name, "POST")
+  console.log(product.stock, "POST")
   if (!name || !price || !type || !brand || !description || !image || !stock) throw Error("Mandatory data missing");
   else {
     try {
@@ -135,14 +138,14 @@ const postProduct = async (product,image) => {
         image:{public_id:result.public_id,secure_url:result.secure_url},
         typeId: typeData.id,
         brandId: brandData.id,
-        info_adicional:product.info_adicional,
-        stock:product.stock
+        info_adicional: product.info_adicional,
+        stock: product.stock,
       });
       
       //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
       await fs.remove(image.tempFilePath)
 
-      console.log(product.name, newProduct, "POSTOK")
+      console.log(product.stock, newProduct, "POSTOK")
 
       return newProduct;
     } catch (error) {
@@ -200,7 +203,8 @@ const BuildSearch = async (socket) => {
         description: p.description,
         info_adicional: p.info_adicional,
         type: p.type.name,
-        brand: p.brand.name
+        brand: p.brand.name,
+        stock: p.stock,
       }
     })
     return result;

@@ -17,15 +17,10 @@ export const Products = () => {
     
     useEffect(() => {
       dispatch(getAllProducts())
+      dispatch(getAllBrands())
+      dispatch(getAllTypes())
     },[dispatch]);
 
-    useEffect(() => {
-        dispatch(getAllBrands())
-    },[dispatch])
-
-    useEffect(() => {
-        dispatch(getAllTypes())
-    },[dispatch])
 
     const [currentPage, setCurrentPage] = useState(1)
     const [charactersPerPage, ] = useState(9) //setCharactersPerPage
