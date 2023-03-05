@@ -63,7 +63,10 @@ import {
 
             case GET_PRODUCT_DETAIL: 
             
-                return { ...state, productDetail:action.payload }
+                return { 
+                    ...state, 
+                    productDetail:action.payload, 
+                }
 
             case CREATE_PRODUCT: 
             

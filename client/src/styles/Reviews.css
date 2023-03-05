@@ -4,27 +4,41 @@
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    flex-wrap: wrap;
+}
+
+.StarReview{
+    margin-left: 560px;
+    transform: translateY(40px);
+}
+
+.DivReview{
+    display: flex;
+    flex-direction: column;
+}
+
+.NameReview{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .inputReview{
-    width: 600px;
+    height: 100px;  
+    width: 680px;
+    padding: 20px;
+    text-align: justify;
 }
 
 .ButtonReview{
-
-}
-.starsCalification{
-    display:flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-right: 160px;
     margin-top: 40px;
-}
-.star{
-    cursor:pointer;
-    transition: color 200ms
-}
-input[type="radio"]{
-    display:none
+    width: 680px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.627);
+    color: rgb(255, 255, 255);
+    user-select: none;
+    margin-bottom: 40px;
 }

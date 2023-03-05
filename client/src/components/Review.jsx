@@ -36,9 +36,15 @@ const Review = ({productId,nameUser,lastnameUser, setUpdateReviews}) => {
     }
     return (
         <div className='ContainerReviews'>
-            <StarsCalification setCalif={setCalification} key={key}/>
-            <input className='inputReview' onChange={handleInput} type="text" value={comment}/>
-            <button className='ButtonReview' onClick={handleClick}>Send review</button>
+            <div className='StarReview'>
+                <StarsCalification setCalif={setCalification} key={key}/>
+            </div>
+            <div className='DivReview'>
+                <label className='NameReview'>Reviews</label>
+                {/* <input className='inputReview' onChange={handleInput} type="text" value={comment}/> */}
+                <textarea className='inputReview' type="text" value={comment} placeholder="Review" onChange={handleInput}></textarea>                 
+                <button className='ButtonReview' onClick={handleClick}>Send review</button>
+            </div>
             
         </div>
     );

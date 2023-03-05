@@ -8,10 +8,10 @@
     margin-top: 60px;
     height: auto;
     width: 1100px;
-    margin-bottom: 10rem;
     background-color: #ffffff;
     border-radius: 20px;
     padding: 60px;
+    margin-bottom: 20px;
 }
 
 .DetailC img{
@@ -62,11 +62,32 @@
     border-radius: 20px;
     text-align: justify;
     padding: 40px;
+    margin-bottom: 20px;
+}
+
+.AmountDetail{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: blueviolet;
+    background-color: antiquewhite;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .ButtonDetail{
     margin-top: 20px;
     margin-left: -120px;
+}
+
+.ReviewListo{
+    text-align: justify;
+    background-color: white;
+    border-radius: 20px;
+    margin: 40px;
+    padding-bottom: 20px;
+    padding-right: 40px;
+    padding-left: 40px;
 }
 
 @media only screen and (max-width: 1700px) {
@@ -81,3 +102,8 @@
         left: 90px;
     }
   }
+
+.ContainerR{
+    display: flex;
+    flex-direction: column;
+}

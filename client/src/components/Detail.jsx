@@ -68,9 +68,10 @@ export const Detail = () => {
               <p><b>{detail.brand}</b></p>
           </div>
           <div className="Detalle">
-            <h2>Price: $ {detail.price}</h2>
+            <h2><b>Price: $ {detail.price}</b></h2>
             <br />
             <p>{detail.description}</p>
+            <h6><b>Info Adicional:</b> {detail.info_adicional}</h6>
           </div>
 
         
@@ -83,11 +84,11 @@ export const Detail = () => {
               image={detail.image} 
               />
             </div>
-            : <>
+            : <div className="AmountDetail">
                 <p>This product is already in your cart</p>
                 <p>Amount: {product?.amount}</p> 
                 {/* EL ? EVITA QUE ROMPA LA WEB DE DETAIL POST DELETE CAR POST PAYMENT */}
-              </>
+              </div>
               }
         
 
@@ -95,9 +96,10 @@ export const Detail = () => {
         </div>
         <div className="ContainerR">
           {detail.reviews?.map((r)=>(
-            <div>
+            <div className="ReviewListo">
               <StarsCalification width={10} calif={r.calification}/>
-              <p>{r.nameUser + " " +r.lastnameUser + ": "+ r.comment}</p>
+              <p><b>{r.nameUser + " " +r.lastnameUser + ": "}</b></p>
+              <p>{r.comment}</p>
             </div>
           )) }
           {userActive!==null?

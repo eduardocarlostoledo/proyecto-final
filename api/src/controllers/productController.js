@@ -50,6 +50,7 @@ const getProductsByName = async (productName) => {
         type: p.type.name,
         brand: p.brand.name,
         stock: p.stock,
+        info_adicional: p.info_adicional,
       }
     })
     return result;
@@ -101,7 +102,8 @@ const getProductName = async (product) => {
         inCart:p.inCart,
         stock: p.stock,
         reviews:p.reviews,
-        calification:p.calification
+        calification:p.calification,
+        info_adicional: p.info_adicional
       }
     })
     if (result) return result;

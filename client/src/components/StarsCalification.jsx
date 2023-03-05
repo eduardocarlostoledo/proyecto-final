@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
-import "../styles/Reviews.css";
+import "../styles/StarsCalification.css";
 const StarsCalification = ({calif, setCalif, width}) => {
     const [calification, setCalification] = useState(1)
     const [hover,setHover]=useState('')
