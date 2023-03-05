@@ -97,7 +97,7 @@ const getProductName = async (product) => {
         type: p.type.name,
         brand: p.brand.name,
         inCart:p.inCart,
-        sstock:p.stock,
+        stock:p.stock,
         reviews:p.reviews,
         calification:p.calification
       }

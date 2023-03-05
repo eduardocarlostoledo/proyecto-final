@@ -118,7 +118,6 @@ export const CreateProducts = () => {
             data.append("image", input.image)
             data.append("price", input.price)
             data.append("description", input.description)
-            data.append("stock", input.stock)
             data.append("brand", input.brand)
             data.append("type", input.type)
             data.append("stock", input.stock)
