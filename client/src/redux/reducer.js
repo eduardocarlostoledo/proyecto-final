@@ -13,6 +13,7 @@ import {
     FILTER_BY_BRAND,
     FILTER_BY_TYPE,
     FILTER_PRECIO,
+    ADD_REVIEW,
     } from './actions/ProductActions'
     
     import{
@@ -197,6 +198,8 @@ import {
                 ChangeNav: true
             }
             
+            case ADD_REVIEW:
+                return{...state}
                 
             default: return {...state}
             

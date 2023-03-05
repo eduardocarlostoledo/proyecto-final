@@ -13,7 +13,7 @@ import {
 function validate(input) {
     let errors = {};
     const regexName = /^[A-Za-z0-9\s]+$/g;
-    const regexDesc = /^[A-Za-z0-9\s]+$/g;
+    
 
     if (input.name && !regexName.test(input.name)) {
         errors.name = "can't include special characters or numbers";
@@ -27,15 +27,11 @@ function validate(input) {
     if (input.name.length < 6) {
         errors.name = "Min 6 characters";
     }
-    if (input.description && !regexDesc.test(input.description)) {
-        errors.description = "can't include special characters";
-    }
+    
     if (!input.description) {
         errors.description = "Description is required";
     }
-    if (input.description.length > 45) {
-        errors.description = "Max 45 characters";
-    }
+    
     if (input.description.length < 10) {
         errors.description = "Min 10 characters";
     }
@@ -51,9 +47,6 @@ function validate(input) {
         errors.price = "Price is required";
     }
     
-    if (isNaN(input.price)) {
-        errors.price = "Number or Decimal";
-    }
     if(!input.type.length){
         errors.type = 'Place the name of a type and select the same'    
     }
@@ -180,9 +173,10 @@ export const CreateProducts = () => {
                     </div>
                     <div className='name'>
                         <label className='nameLabel'>Description</label>
-                        <input className='input' type='text' value={input.description} name= 'description' placeholder="Description" onChange={(e) => handleChange(e)} required={true}></input>                 
+                        <textarea style={{height: "100px"}} className='input' name='description' placeholder="Description" onChange={(e) => handleChange(e)} required={true}></textarea>                 
                         {errors.description && (<p className='spanError'>{errors.description}</p>)}
                     </div>
+
                     <div className='name'>
                         <label className='nameLabel'>Stock</label>
                         <input className='input' type='number' value={input.stock} min="1" max="1000" name = 'stock' placeholder="Stock" onChange={(e) => handleChangeStock(e)} required={true}></input>                  

@@ -36,6 +36,19 @@ module.exports = (sequelize) => {
         info_adicional: {
             type:DataTypes.JSONB
         },
+        calification:{
+            type:DataTypes.DOUBLE,
+            defaultValue:0,
+        },
+        reviews:{
+            type:DataTypes.ARRAY(DataTypes.JSONB({
+                nameUser:DataTypes.STRING,
+                lastnameUser:DataTypes.STRING,
+                calification:DataTypes.INTEGER,
+                comment: DataTypes.STRING
+            })),
+            defaultValue:[]
+        },
         inCart:{
             type:DataTypes.BOOLEAN,
             allowNull:false,

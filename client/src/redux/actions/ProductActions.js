@@ -10,6 +10,7 @@ export const GET_PAGE = 'GET_PAGE';
 export const FILTER_BY_BRAND = 'FILTER_BY_BRAND';
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
 export const FILTER_PRECIO = 'FILTER_PRECIO';
+export const ADD_REVIEW = 'ADD_REVIEW';
 
 export const getAllProducts = () => async (dispatch) => {
     try {
@@ -124,4 +125,9 @@ export const filterByType = (payload) => {
 
 export const filterByPrice = (payload) => {
   return { type: FILTER_PRECIO, payload}
+}
+
+export const addReview=(id,payload) =>async(dispatch) => {
+  return await axios.put(`http://localhost:3001/products/review/${id}`,payload).then(r=>
+  dispatch({type: ADD_REVIEW, payload}))
 }

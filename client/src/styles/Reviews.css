@@ -1,0 +1,30 @@
+.ContainerReviews{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.inputReview{
+    width: 600px;
+}
+
+.ButtonReview{
+
+}
+.starsCalification{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 160px;
+    margin-top: 40px;
+}
+.star{
+    cursor:pointer;
+    transition: color 200ms
+}
+input[type="radio"]{
+    display:none
+}

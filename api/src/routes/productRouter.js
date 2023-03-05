@@ -5,7 +5,9 @@ const { postProduct,
   getProductsByName,
   getBrandProducts,
   getTypeProducts,
-  BuildSearch
+  BuildSearch,
+  putReview,
+  putProduct,
   } = require('../controllers/productController')
 
 const productRouter = Router()
@@ -23,6 +25,17 @@ productRouter.post('/', async (req,res) => {
     res.status(201).send({ status: "OK", data: newProduct });
   } catch (error) {
     return res.status(400).send({ error: error.message });
+  }
+});
+
+productRouter.put('/:id', async (req,res) => {
+  let image=false;
+  if(req.files) image =req.files.image;
+  try {
+    const updateProduct = await putProduct(req.params.id,req.body,image);
+    res.status(201).send(updateProduct);
+  } catch (error) {
+    return res.status(400).send(error.message);
   }
 });
   
@@ -123,5 +136,15 @@ productRouter.get("/", async (req, res) => {
     }
   });
   
+//ruta para añadir review
+productRouter.put("/review/:id", async (req, res) =>{
+  try {
+    const {id}=req.params;
+    const result= await putReview(id,req.body);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json(error.message)
+  }
+})
 
 module.exports = {productRouter}

@@ -100,6 +100,8 @@ const getProductName = async (product) => {
         brand: p.brand.name,
         inCart:p.inCart,
         stock: p.stock,
+        reviews:p.reviews,
+        calification:p.calification
       }
     })
     if (result) return result;
@@ -181,6 +183,57 @@ const BuildSearch = async (socket) => {
   }
 };
 
+const putProduct = async (id,product, image) => {
+  const { name, price, type, brand, description,info_adicional, stock } = product;
+  const productToUpdate=await Product.findByPk(id) 
+  if(!productToUpdate) throw Error('El producto que desea actualizar no existe')
+  if (!product && !image) throw Error('No se envió ningun dato para actualizar')
+
+  if(image){
+    //invoco la funcion para subir la imagen a cloudinary
+    const result=await uploadImage(image.tempFilePath)
+    deleteImage(productToUpdate.image.public_id)
+    await Product.update({image:{public_id:result.public_id,secure_url:result.secure_url}}, { where: { id } })
+    
+    //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
+    await fs.remove(image.tempFilePath)
+  }
+  if(type){
+    const [newType,created]=await Type.findOrCreate({where:{name:type}})
+    const typeId = created ? newType.id : newType.dataValues.id;
+    await Product.update({typeId}, { where: { id } })
+  }
+
+  if(brand){
+    const [newBrand, created]=await Brand.findOrCreate({where:{name:brand}})
+    const brandId= created ? newBrand.id : newBrand.dataValues.id;
+    await Product.update({brandId}, { where: { id } })
+  }
+
+  await Product.update({name, price, description,info_adicional, stock }, { where: { id } })
+
+  return await Product.findByPk(id);
+}
+
+const putReview = async (productId,review) => {
+    //busco el producto con el id recibido por parametro
+    let product = await Product.findByPk(productId);
+
+    //si el producto no existe lanzo un error
+    if(!product) throw Error("The product not exists");
+
+    //obtengo la cantidad total de reviews
+    const totalReviews=product.reviews.length + 1;
+
+    //obtengo la suma total de calificaciones
+    const totalCalifications=product.reviews.reduce((acc, review) => acc + review.calification, 0) + review.calification
+
+    //actualizo el producto
+    await product.update({reviews:[...product.reviews,review], calification:(totalCalifications/totalReviews).toFixed(1)});
+
+    return "The review was added";
+}
+
 module.exports = {
   postProduct,
   getProducts,
@@ -188,5 +241,7 @@ module.exports = {
   getProductsByName,
   getBrandProducts,
   getTypeProducts,
-  BuildSearch
+  BuildSearch,
+  putProduct,
+  putReview,
 };
