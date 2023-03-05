@@ -14,7 +14,7 @@ section{
     padding: 100px;
     width: 100%;
     min-height: 100vh;
-    background-color:#e7b8ff;
+    background-color: rgb(199, 198, 198);
 }
 
 .cover{
@@ -84,7 +84,6 @@ section{
 
 .post{
     position: relative;
-    margin-bottom: 50px;
 }
 
 .post .contentBx{
