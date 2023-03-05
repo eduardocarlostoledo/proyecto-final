@@ -6,14 +6,13 @@ import {AiFillSetting} from "react-icons/ai"
 import { addAllOrders } from '../redux/actions/OrderActions';
 import { getUserById } from '../redux/actions/UsersActions';
 
-export const OrderUsers = ({params}) => {
-
+export const OrderUsers = () => {
   
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(addAllOrders())
-        dispatch(getUserById(params.id))
-    },[dispatch, params.id])
+        dispatch(getUserById())
+    },[dispatch])
 
     
     let users = useSelector((state) => state.users || {});
