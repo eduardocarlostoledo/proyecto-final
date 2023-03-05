@@ -34,3 +34,11 @@ body {
 }
 
 
+.ContainerLogo a{
+  color: rgb(251, 90, 184);
+  text-decoration: none;
+}
+.ContainerLogo a:hover{
+  color: blue;
+  text-decoration: none;
+}
