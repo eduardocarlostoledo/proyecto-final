@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname === "/admin/settings" || location.pathname === "/admin/Users" || location.pathname === "/admin/Products" ? null : <NavBar />}
+      {location.pathname === "/admin/settings" || location.pathname === "/admin/Users" || location.pathname === "/admin/Products" || location.pathname.startsWith("/detail/") ? null : <NavBar />}
       {/* {(location.pathname == "/admin" || location.pathname == "/admin/Users") && <NavAdmin />} */}
       <Routes>
         <Route exact path="/" element={<Home/>} />

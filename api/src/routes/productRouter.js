@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {postProduct,
+const { postProduct,
   getProducts,
   getProductName,
   getProductsByName,
@@ -7,13 +7,15 @@ const {postProduct,
   getTypeProducts,
   BuildSearch,
   putReview,
-  putProduct
+  putProduct,
   } = require('../controllers/productController')
 
 const productRouter = Router()
 
 
 // Ruta POST de Productos, va a ser utilizada por el administrador.
+
+
 
 productRouter.post('/', async (req,res) => {
   try {
@@ -25,7 +27,7 @@ productRouter.post('/', async (req,res) => {
     return res.status(400).send({ error: error.message });
   }
 });
- 
+
 productRouter.put('/:id', async (req,res) => {
   let image=false;
   if(req.files) image =req.files.image;
@@ -36,7 +38,18 @@ productRouter.put('/:id', async (req,res) => {
     return res.status(400).send(error.message);
   }
 });
+  
 
+// Ruta GET para traer todos los tipos de productos.
+
+// productRouter.get("/types", async (req, res) => {
+//   try {
+//       const products = await getTypeProducts();
+//     res.status(200).json({ data: products});
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
 productRouter.get("/BuildSearch", async (req, res) => {
   try {
     const {socket,type} = req.query
@@ -48,7 +61,6 @@ productRouter.get("/BuildSearch", async (req, res) => {
   }
 });
 
-// Ruta GET para traer todos los tipos de productos.
 productRouter.get("/types", async (req, res) => {
   try {
     const products = await getTypeProducts();
@@ -68,6 +80,18 @@ productRouter.post("/types", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+
+// Ruta GET para traer todos las marcas de productos.
+
+// productRouter.get("/brands", async (req, res) => {
+//   try {
+//       const products = await getBrandProducts();
+//     res.status(200).json({ data: products});
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// });
 
 productRouter.get("/brands", async (req, res) => {
   try {   
@@ -103,15 +127,15 @@ productRouter.get("/", async (req, res) => {
 
 //Ruta GET de productos por Name, busca el producto con un nombre exactamente igual al que recibe por parametro. (Ruta para el detail)
 
-productRouter.get("/:name", async (req, res) => {
-  try {
+  productRouter.get("/:name", async (req, res) => {
+    try {
       const result = await getProductName(req.params.name);
       result.length > 0 ? res.status(200).json({ data: result, message: "Producto solicitado" }) : res.status(404).json({ error: "Producto no encontrado" });
-  } catch (error) {
+    } catch (error) {
       res.status(400).json({ error: error.message });
-  }
-});
-
+    }
+  });
+  
 //ruta para añadir review
 productRouter.put("/review/:id", async (req, res) =>{
   try {

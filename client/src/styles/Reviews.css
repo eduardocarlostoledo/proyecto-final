@@ -1,10 +1,44 @@
-.starsCalification{
-    display:flex
+.ContainerReviews{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
 }
-.star{
-    cursor:pointer;
-    transition: color 200ms
+
+.StarReview{
+    margin-left: 560px;
+    transform: translateY(40px);
 }
-input[type="radio"]{
-    display:none
+
+.DivReview{
+    display: flex;
+    flex-direction: column;
+}
+
+.NameReview{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.inputReview{
+    height: 100px;  
+    width: 680px;
+    padding: 20px;
+    text-align: justify;
+}
+
+.ButtonReview{
+    margin-top: 40px;
+    width: 680px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.627);
+    color: rgb(255, 255, 255);
+    user-select: none;
+    margin-bottom: 40px;
 }

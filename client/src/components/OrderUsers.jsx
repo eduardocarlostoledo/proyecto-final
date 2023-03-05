@@ -3,17 +3,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tag } from "antd"
 import {AiFillSetting} from "react-icons/ai"
 
-import { addAllOrders } from '../redux/actions/OrderActions'
+import { addAllOrders } from '../redux/actions/OrderActions';
+import { getUserById } from '../redux/actions/UsersActions';
 
 export const OrderUsers = () => {
-
-    
+  
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(addAllOrders())
+        dispatch(getUserById())
     },[dispatch])
 
+    
+    let users = useSelector((state) => state.users || {});
     let orders = useSelector((state) => state.order || [])
+
+    // Obtén la información del usuario para cada orden
+    orders = orders.map((order) => {
+      const user = users[order.cartUserId] || {}; // Busca la información del usuario por ID
+      return {
+        ...order,
+        user: user,
+      };
+    });
     const columns = [
         {
           title: 'ID',
@@ -25,7 +37,8 @@ export const OrderUsers = () => {
         {
           title: 'Usuario ID',
           dataIndex: 'cartUserId',
-          render: (text) => <p>{text}</p>,
+          render: (text, record) => <p>{record.user && record.user.email}</p>
+
         },
         {
           title: 'Payment ID',
@@ -77,4 +90,3 @@ export const OrderUsers = () => {
     
   )
 }
-

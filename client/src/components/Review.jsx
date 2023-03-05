@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import "../styles/Reviews.css";
 import { useDispatch } from 'react-redux';
 import { addReview } from '../redux/actions/ProductActions';
 import StarsCalification from './StarsCalification';
 import swal from 'sweetalert';
 
 const Review = ({productId,nameUser,lastnameUser, setUpdateReviews}) => {
-    const [comment,setComment]=useState('');
-    const [calification,setCalification]=useState(1);
-    const [key,setKey]=useState(Date.now()); //clave dinamica
+    const [comment,setComment] = useState('');
+    const [calification,setCalification] = useState(1);
+    const [key,setKey] = useState(Date.now()); //clave dinamica
     
     const dispatch=useDispatch();
 
@@ -34,10 +35,16 @@ const Review = ({productId,nameUser,lastnameUser, setUpdateReviews}) => {
 
     }
     return (
-        <div>
-            <StarsCalification setCalif={setCalification} key={key}/>
-            <input onChange={handleInput} type="text" value={comment}/>
-            <button onClick={handleClick}>Send review</button>
+        <div className='ContainerReviews'>
+            <div className='StarReview'>
+                <StarsCalification setCalif={setCalification} key={key}/>
+            </div>
+            <div className='DivReview'>
+                <label className='NameReview'>Reviews</label>
+                {/* <input className='inputReview' onChange={handleInput} type="text" value={comment}/> */}
+                <textarea className='inputReview' type="text" value={comment} placeholder="Review" onChange={handleInput}></textarea>                 
+                <button className='ButtonReview' onClick={handleClick}>Send review</button>
+            </div>
             
         </div>
     );

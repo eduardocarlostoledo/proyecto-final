@@ -13,7 +13,7 @@ import {
     FILTER_BY_BRAND,
     FILTER_BY_TYPE,
     FILTER_PRECIO,
-    ADD_REVIEW
+    ADD_REVIEW,
     } from './actions/ProductActions'
     
     import{
@@ -63,7 +63,10 @@ import {
 
             case GET_PRODUCT_DETAIL: 
             
-                return { ...state, productDetail:action.payload }
+                return { 
+                    ...state, 
+                    productDetail:action.payload, 
+                }
 
             case CREATE_PRODUCT: 
             
@@ -72,9 +75,6 @@ import {
             case UPDATE_PRODUCT: 
             
                 return{ ...state, }
-
-            case ADD_REVIEW:
-                return{...state}
 
             case GET_ALL_BRANDS: 
             
@@ -201,6 +201,8 @@ import {
                 ChangeNav: true
             }
             
+            case ADD_REVIEW:
+                return{...state}
                 
             default: return {...state}
             

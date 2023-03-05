@@ -34,14 +34,12 @@ export const Home = () => {
                 </div>
             </div> 
             <section className="post" id="post">
-                <div className="title">
-                    <h2>Products</h2>
-                </div>
+                
                 <div className="contentBx">
                     <div className="postColumn">
                         <div className="postBox extraHeight">
                             <div className="img">
-                                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_664916-MLA52913909469_122022-F.webp" alt="" className='cover'/>
+                                <img src="https://www.venex.com.ar/products_images/1625487702_0413607bi.jpg" alt="" className='cover'/>
                             </div>
                             <div className="textBox">
                                 <h3>Auriculares gamer inalámbricos Corsair Virtuoso RGB Wireless SE espresso con luz rgb LED</h3>
@@ -133,5 +131,3 @@ export const Home = () => {
         </div>
     )
 }
-
-
