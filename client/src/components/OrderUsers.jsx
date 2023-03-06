@@ -3,17 +3,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tag } from "antd"
 import {AiFillSetting} from "react-icons/ai"
 
-import { addAllOrders } from '../redux/actions/OrderActions'
+import { addAllOrders } from '../redux/actions/OrderActions';
+import { getUserById } from '../redux/actions/UsersActions';
 
 export const OrderUsers = () => {
-
-    
+  
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(addAllOrders())
+        dispatch(getUserById())
     },[dispatch])
 
+    
+    let users = useSelector((state) => state.users || {});
     let orders = useSelector((state) => state.order || [])
+
+    // Obtén la información del usuario para cada orden
+    orders = orders.map((order) => {
+      const user = users[order.cartUserId] || {}; // Busca la información del usuario por ID
+      return {
+        ...order,
+        user: user,
+      };
+    });
     const columns = [
         {
           title: 'ID',
@@ -23,9 +35,10 @@ export const OrderUsers = () => {
           render: (text) => <p>{text}</p>,
         },
         {
-          title: 'Usuario ID',
+          title: 'Usuario email',
           dataIndex: 'cartUserId',
-          render: (text) => <p>{text}</p>,
+          render: (text) => <p>{text}</p>
+
         },
         {
           title: 'Payment ID',
@@ -38,13 +51,13 @@ export const OrderUsers = () => {
           filters: [
             { text: 'Pending', value: 'pending' },
             { text: 'Failure', value: 'failure' },
-            { text: 'Sucsess', value: 'success'}
+            { text: 'Approved', value: 'approved'}
           ],
           onFilter: (value, record) => record.statusId.indexOf(value) === 0,
           render: (statusId) => (
             <>
-                {statusId === "success" ? (
-                    <Tag color="green">Success</Tag>
+                {statusId === "approved" ? (
+                    <Tag color="green">Approved</Tag>
                     ) : statusId === "failure" ? (
                     <Tag color="red">Failure</Tag>
                     ) : (
@@ -77,4 +90,3 @@ export const OrderUsers = () => {
     
   )
 }
-

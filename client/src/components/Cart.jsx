@@ -21,13 +21,13 @@ export default function Cart() {
     const price = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
     const total = price.toFixed(1)
     const description = cartItems.map(e=>e.name)
-    const cartUserId = cartItems.filter(e=>e.cartUserId)
+    const cartUserId = cartItems.filter(e=>e.cartUserId) // tomamos con cartUserId el email para el Order
 
     const orderData = {
         quantity: 1,
         description: description.toString(),
         price: total,
-        category_id: cartUserId
+        category_id: cartUserId // lo pasamos como category_id a traves de la preferencia de MP
     };
 
     const handleCheckout = (e) =>{
