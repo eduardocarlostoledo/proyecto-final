@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
             unique: true
         },
         country: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING
         },
         city: {
             type: DataTypes.STRING

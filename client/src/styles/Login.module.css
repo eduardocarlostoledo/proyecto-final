@@ -68,6 +68,7 @@
 .down {
     margin-top: 15px;
     text-align: center;
+    margin-bottom: 19px;
 }
 
 .icon { 
@@ -101,3 +102,14 @@
     color: red;
     margin-left: 133px;
 }
+
+#signInDiv {
+    color: white;
+    font-size: 23px;
+    background-color: gray;
+    width: 440px;
+    height: 45px;
+    margin-top: 15px;
+    border: none;
+}
+

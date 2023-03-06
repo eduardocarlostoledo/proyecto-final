@@ -20,7 +20,7 @@ export const NavBar = () => {
     
     const carts = useSelector((state) => state.cart);
     const itemQuantity = carts.reduce((acc, item) => acc + item.amount, 0);
-    console.log(itemQuantity);
+    // console.log(itemQuantity);
     
     useEffect(() => {
         dispatch(getUpdate())

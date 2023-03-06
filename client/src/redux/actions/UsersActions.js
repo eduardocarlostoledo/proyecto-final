@@ -6,7 +6,7 @@ export const UPDATE_USER="UPDATE_USER";
 export const GET_EMAIL="GET_EMAIL";
 export const USER_ACTIVE="USER_ACTIVE";
 export const CHANGE_NAV="CHANGE_NAV";
-
+export const GET_ID= "GET_ID";
 
 export function getAllUsers () { 
   return async function(dispatch){
@@ -53,6 +53,7 @@ export function GetFiltersForEmail () {
 };
 
 export function UserActive (payload) { 
+  console.log(payload, "paylo");
   return  function(dispatch){
       return dispatch({
           type: USER_ACTIVE,
@@ -72,7 +73,7 @@ export function ChangeNav () {
 
 export function PutUser(payload) { 
   localStorage.setItem("USUARIO", JSON.stringify(payload))
-  console.log(payload.id, "asdaID");
+  // console.log(payload.id, "asdaID");
   return async function(dispatch){
       const response = await axios.put(`http://localhost:3001/users/${payload.id}`,payload);
       return response;
@@ -94,6 +95,18 @@ export function deleteUserLocalStorage() {
     return async function(dispatch){
         const response = await axios.post(`http://localhost:3001/users/google/`,payload);
         return response;
+    };
+  };
+  
+
+  export function loginGoogle(payload) { 
+    return async function(dispatch){
+        let json  = await axios.post(`http://localhost:3001/users/loginGoogle`,payload);
+        return json.data
+      //   return dispatch({
+      //     type: GET_ID,
+      //     payload: json.data
+      // });
     };
   };
   

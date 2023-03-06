@@ -36,7 +36,7 @@ const putUser = async (user, id) => {
         return changeUser
       }
 
-      const changeUser = await User.update({ admin , status ,name, lastname, email, image, password, phonenumber, country, city, address }, { where: { id } })
+      const changeUser = await User.update({ admin, status, name, lastname, email, image, password, phonenumber, country, city, address }, { where: { id } })
       return changeUser
 
 
@@ -52,10 +52,10 @@ const postUserGoogle = async (req, res) => {
     const { name, lastname, email, image} = req.body;
     if (!name || !lastname || !email) return res.json({ msg: 'Missing required fields', success: false  });
 
-    const userBD = await User.findOne({ where: { email: `${email}` } });
-    if (userBD) {
-      return res.json({ msg: 'The email already exists', success: false  });
-    }
+    // const userBD = await User.findOne({ where: { email: `${email}` } });
+    // if (userBD) {
+    //   return res.json({ msg: 'The email already exists', success: false  });
+    // }
     await User.create({
       name: name,
       lastname: lastname,
@@ -79,7 +79,7 @@ const postUsers = async (req, res) => {
   const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
  
   try {
-    const { name, lastname, email, password, } = req.body;
+    const { name, lastname, email, password} = req.body;
 
     if (!name || !lastname || !password || !email) return res.json({ msg: 'Missing required fields' });
 
@@ -132,7 +132,21 @@ const postUsers = async (req, res) => {
   }
 };
 
+const loginGoogle = async (req, res) => { 
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ where: { email: `${email}` } });
+    
+      res.status(200).send({
+        data: user,
+        success: true,
+      });
+    
 
+  } catch (error) {
+    return res.json({ msg: `Error 404 - ${error}` });s
+  }
+}
 
 const loginUser = async (req, res) => {
   try {
@@ -177,5 +191,5 @@ const deleteUser = async (req, res) => {
 
 
 module.exports = {
-  putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle
+  putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle, loginGoogle
 }

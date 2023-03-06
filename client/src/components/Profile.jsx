@@ -1,35 +1,39 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "../styles/Profile.css"
 import { BiLogOutCircle } from "react-icons/bi"
 import { FaPhone, FaCity } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom"
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
-import { PutUser, deleteUserLocalStorage } from '../redux/actions/UsersActions';
+import { PutUser, deleteUserLocalStorage, getAllUsers } from '../redux/actions/UsersActions';
 import swal from 'sweetalert';
 
 
 export default function Profile() {
+  useEffect( ()=> { 
+    dispatch(getAllUsers());
+  },[])
+
+
   const userActive = JSON.parse(localStorage.getItem("USUARIO"))
   const navigate = useNavigate();
   const [Panel, setPanel] = useState(true);
   const dispatch = useDispatch()
 
+
   const [input, setInput] = useState({
     image: userActive.image ? userActive.image : "",
     city: userActive.city ? userActive.city : "",
-    id: userActive.id,
+    id: userActive.id ,
     phonenumber: userActive.phonenumber ? userActive.phonenumber : "",
     address: userActive.address ? userActive.address : "",
     country: userActive.country ? userActive.country : "",
     email: userActive.email,
   });
 
-
   function handleChange(e) {
-    console.log(e.target.value);
     setInput({
       ...input,
       [e.target.name]: e.target.value
@@ -38,7 +42,6 @@ export default function Profile() {
 
   function CerrarSes(e) {
     e.preventDefault();
-    // dispatch(deleteUserLocalStorage())
     setTimeout(() => {
       dispatch(deleteUserLocalStorage())
       window.localStorage.removeItem("USUARIO")
@@ -53,7 +56,7 @@ export default function Profile() {
 
       image: userActive.image ? userActive.image : "",
       city: userActive.city ? userActive.city : "",
-      id: userActive.id,
+      id:  userActive.id,
       phonenumber: userActive.phonenumber ? userActive.phonenumber : "",
       address: userActive.address ? userActive.address : "",
       country: userActive.country ? userActive.country : "",
@@ -80,8 +83,6 @@ export default function Profile() {
     });
     setPanel(true)
   }
-
-
 
 
   return (

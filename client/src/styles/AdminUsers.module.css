@@ -1,0 +1,29 @@
+.banned {
+    font-size: 18px;
+    color: red;
+}
+.Desbanned{
+    font-size: 18px;
+    color: green;
+}
+
+
+.DesAdmin{
+    font-size: 18px;
+    color: rgb(59, 59, 202);
+}
+
+
+.Setadmin{
+    font-size: 18px;
+    color: rgb(39, 117, 39);
+}
+
+.llave { 
+    font-size: 18px;
+}
+
+.btnIcons{ 
+    border: none;
+    background-color: white;
+}

@@ -3,10 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from "../styles/Login.module.css";
 import { Link, useNavigate } from "react-router-dom"
-import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { userLogin, UserActive, ChangeNav, postUsersGoogle } from '../redux/actions/UsersActions';
+import { userLogin, UserActive, ChangeNav, postUsersGoogle, loginGoogle } from '../redux/actions/UsersActions';
 import swal from 'sweetalert';
 import jwt_decode from "jwt-decode";
 
@@ -37,8 +36,7 @@ function validate(input) {
 
 
 export const Login = () => {
-    const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/
-    const regexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const [example, setExample] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [errors, setErrors] = useState({})
@@ -67,35 +65,62 @@ export const Login = () => {
     };
 
 
-    const viewAlert = () => {
-        console.log(infoGoogle);
-        swal({
-          title: "Iniciar sesion con mi cuenta de Google",
-          text: "Al iniciar sesion das permiso a de acceder a tus datos como nombre, correo e imagen de perfil",
-          icon: "warning",
-          buttons: ["No", "Si"]
-        }).then((respuesta) => {
-          if(respuesta){
-            dispatch(postUsersGoogle(infoGoogle));
+
+
+    // const viewAlert =  () => {
+   
+    //         setTimeout( async ()=> {
+    //             const email = {email: infoGoogle.email}
+    //             dispatch(postUsersGoogle(infoGoogle));
+    //             dispatch(ChangeNav())
+    //             const usuario = await dispatch(loginGoogle(email))
+    //             console.log(usuario, "usuario");
+    //             localStorage.setItem("USUARIO", JSON.stringify(infoGoogle))
+    //             navigate("/Profile")
+
+    //         }, 800)
+    //   }
+
+
+    const viewAlert = async  () => {
+
+          let hola = await dispatch(postUsersGoogle(infoGoogle));
+          console.log(hola, "post");
+           const email = {
+            email : infoGoogle.email
+           } 
+           console.log(email, "mail");
+           const usuario = await dispatch(loginGoogle(email))
+           console.log(usuario,  "usuario");
+           if (usuario.success) {
+            dispatch(UserActive(usuario))
             dispatch(ChangeNav())
-            localStorage.setItem("USUARIO", JSON.stringify(infoGoogle))
-            navigate("/Profile")
-          }
-        })
-      }
+           }
+            setTimeout( ()=> {
+                navigate("/Profile")
 
+        }, 800)
+  }
 
-
-    function HandleCallbackResponse(response) {
-        console.log("encode JWT ID :" + response.credential)
+     function HandleCallbackResponse(response) {
         var userObject = jwt_decode(response.credential);  
         SetInfoGoogle({ email: userObject.email,
         lastname: userObject.family_name,
         name: userObject.given_name,
         image: userObject.picture
         }
-        )
-
+        )     
+        swal({
+            title: "Iniciar sesion con mi cuenta de Google",
+            text: "Al iniciar sesion das permiso a de acceder a tus datos como nombre, correo e imagen de perfil",
+            icon: "warning",
+            buttons: ["No", "Si"]
+          }).then( (respuesta) => {
+          if(respuesta){
+            setExample(true)
+          }
+        })
+       
     }
 
     useEffect(() => {
@@ -108,17 +133,16 @@ export const Login = () => {
             document.getElementById("signInDiv"),
             { theme: "outline", size: "large" },
         );
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     
 
-
     async function handleSubmit(e) {
         e.preventDefault();
-
         if (!input.password || !input.email) {
-            return swal("Invalid", "Missing required fields!, HOLA", "error");
+            return swal("Invalid", "Missing required fields!", "error");
         }
         else {
             const response = await dispatch(userLogin(input));
@@ -140,23 +164,9 @@ export const Login = () => {
                     setErrormsg(false)
                 }, 5000)
                 return
-            }
+          }
 
         }
-
-        // if (input.email && input.email.length > 0 && input.email !== "") {
-        //     if (!regexEmail.test(input.email)) {
-        //         // return swal("Invalid","Email invalid", "error")
-        //         return setErrors(errors.password = "invalid pass")
-        //     }
-        //   }
-        //   if (input.password && input.password.length > 0 && input.password !== "") {
-        //     if (!regexPassword.test(input.password)) {
-        //         return setErrors(errors.password = "invalid pass")
-        //         // return swal("Invalid","Password invalid", "error")
-        //     }
-        //   }
-
     }
 
     return (
@@ -168,12 +178,10 @@ export const Login = () => {
                 <Form.Group className={styles.pack} controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control name='email' onChange={e => handleChange(e)} value={input.email} className={styles.inputs} type="email" placeholder="Enter email" />
-                    {/* {(errors.email && input.email.length > 0) && (<p className={styles.spanError}>{errors.email}</p>)} */}
                 </Form.Group>
                 <Form.Group className={styles.pack} controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control className={styles.inputs} name='password' value={input.password} onChange={e => handleChange(e)} type="password" placeholder="Password" />
-                    {/* {(errors.password && input.password.length > 0) && (<p className={styles.spanError}>{errors.password}</p>)} */}
+                    <Form.Control className={styles.inputs} name='password' value={input.password} onChange={e => handleChange(e)} type="password" placeholder="Password" />      
                 </Form.Group>
                 {errormsg && <small className={styles.msgerr}>Password or email invalid</small>}
                 <div className={styles.containerBtn}>
@@ -181,23 +189,16 @@ export const Login = () => {
                         Login
                     </Button>
                 </div>
-                <div className={styles.containerBtn}>
-                    <Button className={styles.btnR} type="submit">
-                        <FcGoogle className={styles.icon} />
-                        Continue with Google
-                    </Button>
-                </div>
                 <div className={styles.down}>
                     <h5>Dont have an account? <Link to="/Register"><button className={styles.here}>Register</button></Link> </h5>
                 </div>
-            </Form>
-                 { !infoGoogle.name && !infoGoogle.email && !infoGoogle.lastname && <button id="signInDiv"></button>}
-                 {
-                   infoGoogle.name && infoGoogle.email && infoGoogle.lastname && <button className="button" onClick={() => viewAlert()}>Ingresar al Sitio</button>
+                    <div className={styles.containerBtn}>
+                     {  !infoGoogle.name && !infoGoogle.email && !infoGoogle.lastname && <div id="signInDiv"></div>}
+                    {
+                   example && infoGoogle.name && infoGoogle.email && infoGoogle.lastname && <div onClick={viewAlert()}><strong>Ingresando...</strong></div>
                  }
-                 <div>
-                    <div id="signInDiv"></div>
-                 </div>
+                  </div>
+            </Form>
         </div>
     )
 

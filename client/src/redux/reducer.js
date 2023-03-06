@@ -23,8 +23,8 @@ import {
         UPDATE_USER,
         GET_EMAIL,
         USER_ACTIVE,
+        GET_ID,
         CHANGE_NAV,
-        ChangeNav
     } from './actions/UsersActions';
     
     const initialState= {
@@ -42,7 +42,8 @@ import {
         cart: [],
         update: false,
         order: [],
-        shopping: []
+        shopping: [],
+        idgoogle: {}
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -203,6 +204,12 @@ import {
             
             case ADD_REVIEW:
                 return{...state}
+                
+            case GET_ID: 
+            return {
+                ...state, 
+                idgoogle: action.payload
+            }
                 
             default: return {...state}
             

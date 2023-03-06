@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const { putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle } = require("../controllers/usersController")
+const { putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle, loginGoogle } = require("../controllers/usersController")
 
 const userRouter = Router()
 
@@ -15,12 +15,15 @@ userRouter.post('/google', postUserGoogle) // users/google
 
 userRouter.post('/login', loginUser)
 
+
+userRouter.post("/loginGoogle", loginGoogle)
+
 //////////////////////////////// MODIFICAR USUARIO  /////////////////////////////////////// 
 
 userRouter.put("/:id", async (req, res) => {
   const {id}=req.params;
   try {
-    const user =await putUser(req.body,id)
+    const user = await putUser(req.body,id)
     res.status(200).json("Usuario actualizado")
   } catch (error) {
     res.status(400).json(error.message)

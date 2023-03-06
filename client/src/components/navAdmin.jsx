@@ -1,9 +1,10 @@
 import {BsFillPeopleFill} from "react-icons/bs"
 import {MdProductionQuantityLimits, MdPowerSettingsNew }from "react-icons/md"
 import {AiFillSetting} from "react-icons/ai"
-import {TfiReload} from "react-icons/tfi"
+import {TfiReload} from "react-icons/tfi";
+import { useSelector } from "react-redux";
 
-export function NavAdmin({handleFilter,handleInputChange,handleSubmit,handleClick}) {
+export function NavAdmin({handleClick, handleSubmit, handleInputChange}) {
   return (
     <nav className="navbar bg-body-tertiary fixed-top">
       <div className="container-fluid">
@@ -36,7 +37,7 @@ export function NavAdmin({handleFilter,handleInputChange,handleSubmit,handleClic
         </button>
         <div
           className="offcanvas offcanvas-end"
-          tabindex="-1"
+          tabIndex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
         >

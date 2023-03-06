@@ -49,7 +49,7 @@ function validate(input) {
         errors.password = "Max 20 caracteres";
     }
     
-    if (input.password.length < 5) {
+    if (input.password.length < 8) {
         errors.password = "Min 8 Caracteress, 1 Mayusc, 1 Minus";
     }
     if (input.passwordConfirm !== input.password) {
@@ -123,7 +123,7 @@ export const Register = () => {
         
           if (input.password && input.password.length > 0 && input.password !== "") {
             if (!regexPassword.test(input.password)) {
-                return swal("Invalid","Password invalid", "error")
+                return swal("Invalid","Password invalid require 1May 1Min", "error")
             }
           }
 
