@@ -7,7 +7,7 @@ module.exports = (sequelize)=>{
             allowNull:false,
         },
         cartUserId:{
-            type:DataTypes.INTEGER,
+            type:DataTypes.STRING,
             allowNull:false
         },
         name:{
