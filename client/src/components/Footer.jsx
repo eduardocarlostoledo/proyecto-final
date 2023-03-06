@@ -36,7 +36,7 @@ export const Footer = () => {
                 </div>
                 <div>
                     <h6>Laia Perez Lupia</h6>
-                    <p>{" "} <a href="https://www.linkedin.com/in/leankrn/">LinkedIn{" "}</a>
+                    <p>{" "} <a href="https://www.linkedin.com/in/laia-m%C3%ADa-perez-029531245/">LinkedIn{" "}</a>
                     </p>
                 </div>
                 <div>
