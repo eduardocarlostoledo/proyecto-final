@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/CreateProduct.css";
 import swal from 'sweetalert';
+import { NavAdmin } from "./navAdmin";
 
 import {
   getAllBrands,
@@ -149,7 +150,7 @@ export const CreateProducts = () => {
 
     return (
         <div className="container">
-                    
+             <NavAdmin />           
             <div className='containerForm'>
             <h1 className='title'>Create Product</h1>
                 <form onSubmit={(e) => handleSubmit(e)}>

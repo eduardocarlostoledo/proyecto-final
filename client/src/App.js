@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" || location.pathname.startsWith("/detail/") ? null : <NavBar />}
+      { location.pathname === "/admin/CreateProduct" || location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" || location.pathname.startsWith("/detail/") ? null : <NavBar />}
       {/* {(location.pathname == "/admin" || location.pathname == "/admin/Users") && <NavAdmin />} */}
       <Routes>
         <Route exact path="/" element={<Home/>} />
@@ -44,7 +44,7 @@ function App() {
 
         <Route path="/Login" element={<Login/>} />
 
-        <Route path="/CreateProduct" element={<CreateProducts/>} />
+        <Route path="admin/CreateProduct" element={<CreateProducts/>} />
 
         <Route path="/Profile" element={<Profile/>} />
 
@@ -57,7 +57,7 @@ function App() {
         <Route path="/admin/users" element={<AdminUsers />} />
 
       </Routes>
-     {location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" ? null : <Footer />}
+     { location.pathname === "/admin/CreateProduct" ||location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" ? null : <Footer />}
     </div>
   );
 }

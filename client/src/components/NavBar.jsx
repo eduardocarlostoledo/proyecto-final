@@ -34,7 +34,6 @@ export const NavBar = () => {
                 <Link to="/"><button><ion-icon className="iconHome" name="home-outline"></ion-icon> Home</button></Link>
                 <Link to="/Products"><button>Products</button></Link>
                 <Link to="/BuildPc"><button>Build PC</button></Link>
-                <Link to="/CreateProduct"><button>Create</button></Link>
             </div>
         {/* <div className="ContainerSearch">
             <Search />
