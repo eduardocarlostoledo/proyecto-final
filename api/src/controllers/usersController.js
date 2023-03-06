@@ -36,7 +36,7 @@ const putUser = async (user, id) => {
         return changeUser
       }
 
-      const changeUser = await User.update({ name, lastname, email, image, password, phonenumber, country, city, address }, { where: { id } })
+      const changeUser = await User.update({ admin , status ,name, lastname, email, image, password, phonenumber, country, city, address }, { where: { id } })
       return changeUser
 
 
