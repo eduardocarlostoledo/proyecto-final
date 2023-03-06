@@ -45,30 +45,15 @@ const ProductExpanded = ({
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    console.log(input);
   };
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
-
-    // Object.keys(input).forEach(key => data.append(key, input[key]));
-    const data = new FormData()
-    data.append("id", input.id)
-    data.append("name", input.name)
-    data.append("image", input.image)
-    data.append("price", input.price)
-    data.append("description", input.description)
-    data.append("brand", input.brand)
-    data.append("type", input.type)
-    data.append("stock", input.stock)
-    data.append("info_adicional", input.info_adicional)
-
-    console.log(data);
-    dispatch(updateProduct(data));
+    const data = new FormData();
+    Object.keys(input).forEach((key) => data.append(key, input[key]));
+    dispatch(updateProduct(input.id, data));
     setEditProduct(0);
     swal("success", "Product modified successfully", "success");
-    console.log(data , "ENVIADO");
   }
 
   const handleChangeImage = (e) => {
@@ -107,44 +92,61 @@ const ProductExpanded = ({
           <AiOutlineClose
             onClick={() => setEditProduct(0)}
             color="red"
-            size="50px"
+            size="30px"
             style={{
               position: "absolute",
-              top: "20px",
-              right: "20px",
+              top: "10px",
+              right: "10px",
               cursor: "pointer",
             }}
           />
           <div className="NameImgDiv">
-            <input
-              className="InputsEdits"
-              value={input.name}
-              onChange={(e) => handleChange(e)}
-              name="name"
-              placeholder="Name"
-            ></input>
-            <input
-              type="file"
-              name="image"
-              onChange={(e) => handleChangeImage(e)}
-              className="InputsEdits"
-            ></input>
-            {input.image ? (
+            <div>
+              <label className="LabelNameImg">
+                <strong> Name</strong>
+              </label>
+              <input
+                className="InputsEdits"
+                value={input.name}
+                onChange={(e) => handleChange(e)}
+                name="name"
+                placeholder="Name"
+              ></input>
+            </div>
+            <div>
+              <label className="LabelNameImg">
+                <strong>Image</strong>
+              </label>
+              <input
+                type="file"
+                name="image"
+                onChange={(e) => handleChangeImage(e)}
+                className="InputsEdits"
+              ></input>
+            </div>
+            {/* {input.image ? (
               <img className="imgEdit" src={input.image} alt={name}></img>
             ) : (
               <img className="imgEdit" src={image} alt={name}></img>
-            )}
+            )} */}
+            <div>
+              <label className="LabelNameImg">
+                <strong>Price </strong>
+              </label>
+              <input
+                className="InputsEdits"
+                value={input.price}
+                onChange={(e) => handleChange(e)}
+                type="number"
+                name="price"
+                placeholder="Price"
+              ></input>
+            </div>
           </div>
           <div className="restoDePropsDiv">
-            <input
-              className="InputsEdits"
-              value={input.price}
-              onChange={(e) => handleChange(e)}
-              type="number"
-              name="price"
-              placeholder="Price"
-            ></input>
-
+            <label className="LabelNameImg">
+              <strong>Stock</strong>
+            </label>
             <input
               className="InputsEdits"
               value={input.stock}
@@ -214,21 +216,30 @@ const ProductExpanded = ({
             </div>
 
             {(input.type === "Motherboard" || input.type === "processor") && (
-              <input
-                className="InputsEdits"
-                value={input.info_adicional}
-                onChange={(e) => handleChange(e)}
-                name="info_adicional"
-                placeholder="Socket"
-              ></input>
+              <div>
+                <label className="LabelNameImg">
+                  <strong>Socket</strong>
+                </label>
+                <input
+                  className="InputsEdits"
+                  value={input.info_adicional}
+                  onChange={(e) => handleChange(e)}
+                  name="info_adicional"
+                  placeholder="Socket"
+                ></input>
+              </div>
             )}
+            <div>
+
+            <label className="LabelNameImg"><strong>Description</strong></label>
             <input
               className="InputsEdits"
               value={input.description}
               onChange={(e) => handleChange(e)}
               name="description"
               placeholder="Descripcion"
-            ></input>
+              ></input>
+              </div>
           </div>
           <div className="ButtonDiv">
             <button onClick={(e) => handleSubmit(e)} className="ButtonSubmit">
@@ -244,7 +255,6 @@ const ProductExpanded = ({
 export const AdminProducts = () => {
   const dispatch = useDispatch();
   const [editProduct, setEditProduct] = useState(0);
-  const handleFilter = () => {};
   const [name, setName] = useState("");
 
   useEffect(() => {
@@ -371,7 +381,6 @@ export const AdminProducts = () => {
                 description={record.description}
                 editProduct={editProduct}
                 setEditProduct={setEditProduct}
-                handleClick={handleClick}
               />
             ),
           }}
