@@ -118,7 +118,9 @@ export const CreateProducts = () => {
             data.append("description", input.description)
             data.append("brand", input.brand)
             data.append("type", input.type)
-            data.append("info_adicional", input.info_adicional.socket)
+            const info_adicional = { socket: input.info_adicional.socket }
+            const info_adicional_str = JSON.stringify(info_adicional)
+            data.append("info_adicional", info_adicional_str)
             
             setErrors(validate(input))
             dispatch(createProduct(data));

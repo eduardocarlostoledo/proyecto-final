@@ -32,6 +32,15 @@ export const BuildPc = () => {
     PowerSupply: "",
     case: "",
   });
+  const [inputPrice, setInputPrice] = useState({
+    Processor: 0,
+    Motherboard: 0,
+    RAM: 0,
+    GraphicsCard: 0,
+    storage: 0,
+    PowerSupply: 0,
+    case: 0,
+  })
   const [Price, setPrice] = useState(0);
 
   console.log(data,"lo que hay en el estado");
@@ -96,10 +105,19 @@ export const BuildPc = () => {
       ...input,
       [item.type]:item
     })
-    let valor = Math.floor(Price + item.price)
-    console.log(valor);
-    setPrice(valor)
+    // let valor = Math.floor(Price + item.price)
+    setInputPrice({...inputPrice, [item.type]:item.price})
+    
+    let valor = 0
+
+    for (const key in inputPrice) {
+      valor += inputPrice[key]
+      console.log(valor)
+    }
+      
+     setPrice(valor)
   }
+
 
   const handleStep = (property) => {
     if(property === "Processor") setbutton(false)
@@ -161,7 +179,7 @@ export const BuildPc = () => {
                name={item.name}
                price={item.price}
                image={item.image}
-               isForBuildPc={true}
+               isForBuildPC={true}
                key={item.id}
               />
           </div>
