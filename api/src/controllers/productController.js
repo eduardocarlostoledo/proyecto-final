@@ -99,7 +99,8 @@ const getProductName = async (product) => {
         inCart:p.inCart,
         stock:p.stock,
         reviews:p.reviews,
-        calification:p.calification
+        calification:p.calification,
+        info_adicional:p.info_adicional
       }
     })
     if (result) return result;

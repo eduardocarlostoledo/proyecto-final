@@ -71,7 +71,7 @@ export const Detail = () => {
             <h2><b>Price: $ {detail.price}</b></h2>
             <br />
             <p>{detail.description}</p>
-            <h6><b>Info Adicional:</b> {detail.info_adicional}</h6>
+            {detail.info_adicional && (<h6><b>Info Adicional:</b> {detail.info_adicional}</h6>)}
           </div>
 
         

@@ -11,7 +11,7 @@
     background-color: #ffffff;
     border-radius: 20px;
     padding: 60px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 .DetailC img{
@@ -84,7 +84,9 @@
     text-align: justify;
     background-color: white;
     border-radius: 20px;
-    margin: 40px;
+    margin-right: 140px;
+    margin-left: 140px;
+    margin-bottom: 40px;
     padding-bottom: 20px;
     padding-right: 40px;
     padding-left: 40px;
