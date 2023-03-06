@@ -26,7 +26,7 @@ enviarMail = async (producto, precio, email) => {
 
     const transport = nodemailer.createTransport(config)
 
-    const info = await transport.sendMail(mensaje)
+    const info = transport.sendMail(mensaje)
 
     console.log(info)
 }

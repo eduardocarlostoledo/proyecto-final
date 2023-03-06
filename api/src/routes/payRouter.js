@@ -6,30 +6,52 @@ const enviarMail = require("../mail/nodemail");
 const { postOrder } = require("../controllers/orderControllers");
 const { Cart } = require("../db");
 
-let arrayPreference = {}
+let objectPreference = {};
 
 payRouter.post("/create_preference", (req, res) => {
   
-  enviarMail(req.body.description, req.body.price ); //como acomodarlo
+  //enviarMail(req.body.description, req.body.price ); //como acomodarlo
 
-  arrayPreference = 
-    {
-      title: req.body.description,
-      unit_price: Number(req.body.price),
-      quantity: Number(req.body.quantity),
-      category_id: String(req.body.category_id[0].cartUserId),
-    }  
+  const { 
+    description : product_description, 
+    price : total_order_price,
+    category_id: [{ 
+      id : id_order, 
+      prodId, 
+      cartUserId: buyer_email, 
+      name: product_name, 
+      image: product_image, 
+      amount: product_amount, 
+      price: product_unit_price, 
+      order, 
+      userId 
+    }] 
+  } = req.body;
+  
+  const objectPreference = { 
+    product_description :product_description,// propiedad description cart item
+    total_order_price : total_order_price, //precio total de la orden
+    category_id: [{ 
+      id_order:id_order,  //nro de orden
+      prodId:prodId, //id product
+      buyer_email:buyer_email, //email comprador
+      product_name:product_name, //nombre de producto
+      product_image,  //imagen de producto
+      product_amount:product_amount, //cantidad comprada
+      product_unit_price:product_unit_price, // precio unitario del producto
+      order:order, 
+      userId:userId 
+    }] 
+  };
 
-  console.log("LLEGA PREFERENCIA PUSH ARRAY", arrayPreference);  
-  console.log("LLEGA PREFERENCIA", req.body);  
-  console.log("LLEGA PREFERENCIA", req.body.category_id[0].cartUserId);
+  console.log("OBJETOS DE PREFERENCIA" , objectPreference)
+
   let preference = {
     items: [
       {
         title: req.body.description,
         unit_price: Number(req.body.price),
-        quantity: Number(req.body.quantity),
-        category_id: String(req.body.category_id[0].cartUserId),
+        quantity: Number(req.body.quantity)        
       },
     ],
     back_urls: {
@@ -39,8 +61,7 @@ payRouter.post("/create_preference", (req, res) => {
     },
     auto_return: "approved",
   };
-  console.log("PREFERENCE", preference);
-
+  
   mercadopago.preferences
     .create(preference)
     .then(function (response) {
@@ -48,40 +69,48 @@ payRouter.post("/create_preference", (req, res) => {
         id: response.body.id,
         data: response.body.items
       });     
-
-      console.log("MERCADOPAGO.PREFERENCES.CREATE", response.body);
-      console.log("MERCADOPAGO.PREFERENCES.CREATE", response.body.items);     
-      
     })   
-
     .catch(function (error) {
       console.log(error);
     });
 });
 
 payRouter.get("/feedback/success", async function (req, res) {  
-  console.log("FEEDBACK SUCCESS", arrayPreference );
+  console.log("FEEDBACK SUCCESS", objectPreference );
   try {
     const {
       payment_id: paymentId,
       status: statusId,
       merchant_order_id: merchantOrderId,
     } = req.query;
-    const cartUserId = arrayPreference.category_id;
+    
+    objectPreference = {
+      product_description : product_description,
+      total_order_price : total_order_price,
+      prodId : prodId,
+      buyer_email : buyer_email,
+      product_name : product_name,
+      product_image : product_image,
+      product_amount : product_amount,
+      product_unit_price : product_unit_price
+    };
 
-    const newOrder = await postOrder(
-      cartUserId,
-      paymentId,
-      statusId,
-      merchantOrderId
-    );
-    console.log(
-      paymentId,
-      statusId,
-      cartUserId,
-      merchantOrderId,
-      "FEEDBACK SUCCESS ORDEN REGISTRADA OK"
-    );
+//enviarMail(arrayPreference.title, arrayPreference.price, arrayPreference.category_id)
+    
+const newOrder = await postOrder({
+  product_description,
+  total_order_price,
+  prodId,
+  buyer_email,
+  product_name,
+  product_image,
+  product_amount,
+  product_unit_price,
+  paymentId,
+  statusId,
+  merchantOrderId
+});
+    
     console.log(newOrder, "FEEDBACK SUCCESS ORDEN REGISTRADA OK");
     
     res.send(`
