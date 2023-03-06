@@ -72,6 +72,13 @@
    margin: 10px;
 }
 
+.CardFinish{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   margin-bottom: 25px;
+}
+
 .Priceh2 {
    display: flex;
    flex-direction: column;

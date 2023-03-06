@@ -1,7 +1,6 @@
 import '../styles/Steps.css'
 
 export default function Steps ({input,price,handleStep}) {
-    console.log(input,"xd");
     return (
         <div className='steps_wrapper'>
             <h2 className='steps_title'>BUILD YOUR PC</h2>
