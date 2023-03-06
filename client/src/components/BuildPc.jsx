@@ -4,6 +4,9 @@ import axios from "axios";
 import "../styles/BuildPc.css";
 import swal from "sweetalert";
 import Card from "./Card";
+import amd from "../images/AMD_Logo.png"
+import intel from "../images/Intel_Logo.png"
+
 
 const UpdatePrice = (setPrice, input) => {
   let suma = 0;
@@ -144,18 +147,18 @@ export const BuildPc = () => {
     <div className="DivBuild">
       <Steps input={input} price={Price} handleStep={handleStep}></Steps>
       <div className="ButtonsAndCards">
-        <button
+        <img
           className={button ? "displaynone" : "button"}
-          onClick={() => filterProcess("Amd")}
+          onClick={() => filterProcess("AMD")}
+          src={amd}
         >
-          Amd
-        </button>
-        <button
+        </img>
+        <img
           className={button ? "displaynone" : "button"}
           onClick={() => filterProcess("Intel")}
+          src={intel}
         >
-          Intel
-        </button>
+        </img>
 
         <div className={Complete ? "displaynone" : "AllCards"}>
           {data ? (
@@ -169,19 +172,12 @@ export const BuildPc = () => {
                   key={item.id}
                 />
               </div>
-              // {/* //   <button  className="Buttons">
-              // //   {item.name}
-              // //   {item.price}
-              // //   <img src={item.image}></img>
-              // //   {item.description}
-              // //   </button> */}
-              // {/* // </div> */}
             ))
           ) : (
             <p>Loading...</p>
           )}
         </div>
-        <div className={Complete ? "CardFinish" : "displaynone"}>
+        <div className={Complete ? "CompleteCards" : "displaynone"}>
           <Card {...input.Processor} isForBuildPc={true} />
           <Card {...input.Motherboard} isForBuildPc={true} />
           <Card {...input.RAM} isForBuildPc={true} />
@@ -191,7 +187,7 @@ export const BuildPc = () => {
           <Card {...input.case} isForBuildPc={true} />
         </div>
         <div className={Complete ? "Priceh2" : "displaynone"}>
-          <h2>Total price of assembly: $USD {Price}</h2>
+          <h2 className="finished_price">Total price of assembly</h2><h3 className="finished_usd">$USD {Price}</h3>
           <button onClick={() => addMapCart()}>Add to cart</button>
         </div>
       </div>

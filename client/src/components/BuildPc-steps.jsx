@@ -4,7 +4,7 @@ export default function Steps ({input,price,handleStep}) {
     return (
         <div className='steps_wrapper'>
             <h2 className='steps_title'>BUILD YOUR PC</h2>
-            <h3>$ {price}</h3>
+            
             <div className='type_wrapper'>
                 
                 <div className='icons'>
@@ -52,6 +52,11 @@ export default function Steps ({input,price,handleStep}) {
                 
                 <img src="" alt="" />
             </div>
+            <div className='current_price_div'>
+                <h3>Current price of assambley</h3>
+                <h3 className='current_price_ammount'>$ {price}</h3>
+            </div>
+            
         </div>
     )
 }
