@@ -19,6 +19,7 @@ export default function Card({name, image, price, isForBuildPc}) {
          {!isForBuildPc && <AddToCart name={name} image={image} price={price} />}
         </div>
 
+
     </div>
   );
 }

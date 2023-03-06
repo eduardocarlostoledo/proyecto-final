@@ -190,6 +190,7 @@ export const BuildPc = () => {
               <h2>Total price of assembly: $USD {Price}</h2>
               <button onClick={() => addMapCart()}>Add to cart</button>
           </div>
+          
 
       </div>
     </div>

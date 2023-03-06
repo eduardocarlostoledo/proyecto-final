@@ -50,7 +50,6 @@ export default function Steps ({input,price,handleStep}) {
 
                 </div>
                 
-                
                 <img src="" alt="" />
             </div>
         </div>
