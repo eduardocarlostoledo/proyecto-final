@@ -3,7 +3,7 @@ import {MdProductionQuantityLimits, MdPowerSettingsNew }from "react-icons/md"
 import {AiFillSetting} from "react-icons/ai"
 import {TfiReload} from "react-icons/tfi"
 
-export function NavAdmin({handleFilter}) {
+export function NavAdmin({handleFilter,handleInputChange,handleSubmit,handleClick}) {
   return (
     <nav className="navbar bg-body-tertiary fixed-top">
       <div className="container-fluid">
@@ -16,11 +16,12 @@ export function NavAdmin({handleFilter}) {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                onChange={(e) => handleInputChange(e)}
               />
-              <button onClick={() => handleFilter()} className="btn btn-outline-success" type="submit">
+              <button onClick={(e) => handleSubmit(e)} className="btn btn-outline-success" type="submit">
                 Search
               </button>
-              <button onClick={() => handleFilter()} className="btn btn-outline-success" type="submit">
+              <button onClick={(e) => handleClick(e)} className="btn btn-outline-success" type="submit">
                 <TfiReload />
               </button>
             </form>

@@ -65,7 +65,7 @@ export const createProduct =  (payload)=> async(dispatch)=>{
 
 
 export const updateProduct= (payload)=> async()=>{
-    return await axios.put("/products",payload)
+    return await axios.put(`http://localhost:3001/products/${payload.id}`,payload)
 };
 
 // export const getAllBrands = () => async (dispatch) => {
