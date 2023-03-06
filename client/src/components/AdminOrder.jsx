@@ -6,7 +6,7 @@ import {AiFillSetting} from "react-icons/ai"
 import { addAllOrders } from '../redux/actions/OrderActions';
 import { getUserById } from '../redux/actions/UsersActions';
 
-export const OrderUsers = () => {
+export const AdminOrder = () => {
   
     const dispatch = useDispatch()
     useEffect(() => {

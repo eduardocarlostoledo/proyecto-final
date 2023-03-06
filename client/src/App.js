@@ -15,8 +15,9 @@ import { GetFiltersForEmail } from "./redux/actions/UsersActions";
 import { useEffect } from "react";
 import Cart from "./components/Cart";
 import {AdminProducts} from "./components/AdminProducts"
-import {OrderUsers} from "./components/OrderUsers";
+import {AdminOrder} from "./components/AdminOrder";
 import { AdminUsers } from "./components/AdminUsers";
+import { OrderUser } from "./components/OrderUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,7 +53,9 @@ function App() {
 
         <Route path="admin/Products" element={<AdminProducts />} />
 
-        <Route path="/Order" element={<OrderUsers/>}/>
+        <Route path="admin/Order" element={<AdminOrder/>}/>
+
+        <Route path="/OrderUser" element={<OrderUser/>}/>
         
         <Route path="/admin/users" element={<AdminUsers />} />
 
