@@ -192,7 +192,7 @@ const BuildSearch = async (socket) => {
     const products = await Product.findAll({
       include: [Type,Brand],
       where: {
-        "info_adicional.socket": socket,
+        "info_adicional": socket,
       },
     });
     const result = products.map((p) => {

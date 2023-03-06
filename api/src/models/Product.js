@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
             }
         },
         info_adicional: {
-            type:DataTypes.JSONB
+            type:DataTypes.STRING
         },
         calification:{
             type:DataTypes.DOUBLE,
