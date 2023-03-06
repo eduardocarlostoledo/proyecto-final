@@ -1,6 +1,7 @@
 const { Product, User, Type, Brand } = require("../db");
 const {Op} = require('sequelize')
-
+const {uploadImage}=require('../utils/cloudinary')
+const fs =require('fs-extra');
 
 // Obtiene los tipos de productos de la BDD
 
@@ -75,7 +76,7 @@ const getProductsByName = async (productName) => {
       return {
         id: p.id,
         name: p.name,
-        image:p.image,
+        image:p.image.secure_url,
         price:p.price,
         description: p.description,
         type: p.type.name,
@@ -98,7 +99,7 @@ const getProducts = async () => {
         return {
           id: p.id,
           name: p.name,
-          image:p.image,
+          image:p.image.secure_url,
           price:p.price,
           description: p.description,
           type: p.type.name,
@@ -122,11 +123,12 @@ const getProductName = async (product) => {
       return {
         id: p.id,
         name: p.name,
-        image:p.image,
+        image:p.image.secure_url,
         price:p.price,
         description: p.description,
         type: p.type.name,
-        brand: p.brand.name
+        brand: p.brand.name,
+        inCart:p.inCart
       }
     })
     if (result) return result;
@@ -137,9 +139,9 @@ const getProductName = async (product) => {
 };
 
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
-const postProduct = async (product) => {
-  const { name, price, type, brand, image, description,info_adicional } = product;
-  console.log(product.info_adicional, "POST")
+const postProduct = async (product,image) => {
+  const { name, price, type, brand, description,info_adicional, stock} = product;
+  console.log(product.name, "POST")
   if (!name || !price || !type || !brand || !description || !image ) throw Error("Mandatory data missing");
   else {
     try {
@@ -155,16 +157,22 @@ const postProduct = async (product) => {
       });
       console.log(brandData.name, "POST")
 
+      //invoco la funcion para subir la imagen a cloudinary
+      const result=await uploadImage(image.tempFilePath)
+
       const newProduct = await Product.create({
-        name,
-        price,
-        description,
-        image,
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        image:{public_id:result.public_id,secure_url:result.secure_url},
         typeId: typeData.id,
         brandId: brandData.id,
-        info_adicional
+        info_adicional:product.info_adicional,
+        stock:product.stock
       });
-    
+      
+      //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
+      await fs.unlink(image.tempFilePath)
 
       console.log(product.name, newProduct, "POSTOK")
 
@@ -200,7 +208,6 @@ const BuildSearch = async (socket) => {
     throw new Error("Error retrieving products by brand: " + error.message);
   }
 };
-
 
 module.exports = {
   postProduct,

@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = require('./routes/index.js');
+const fileUpload =require('express-fileupload');
 const cors = require("cors");
 const mercadopago = require("mercadopago");
 mercadopago.configure({
@@ -11,6 +12,12 @@ require('./db.js');
 const server = express();
 
 server.name = 'API';
+
+//para subir archivo a cloudinary
+server.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: './uploads'
+}))
 
 server.use(express.json())
 server.use((req, res, next) => {

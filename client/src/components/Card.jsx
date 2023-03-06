@@ -13,7 +13,7 @@ export default function Card({name, image, price, isForBuildPC}) {
             <hr />
           </div>
           </Link>
-          <p class="card_p_nombre">{name}</p>
+          <p className="card_p_nombre">{name}</p>
           
           <strong class="card_strong_precio"> $ {price}</strong>
           {isForBuildPC ? null : <AddToCart name={name} image={image} price={price} />}
@@ -22,3 +22,4 @@ export default function Card({name, image, price, isForBuildPC}) {
     </div>
   );
 }
+

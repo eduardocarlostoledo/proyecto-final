@@ -21,5 +21,10 @@ module.exports = (sequelize)=>{
         price:{
             type: DataTypes.DOUBLE,
             allowNull: false
+        },
+        order: {
+            type: DataTypes.BIGINT,
+            allowNull: false,
+            defaultValue: 0
         }
     },{timestamps:false})}

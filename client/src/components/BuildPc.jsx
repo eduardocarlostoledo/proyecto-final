@@ -5,6 +5,7 @@ import "../styles/BuildPc.css";
 import Card from "./Card";
 import AMD_img from '../images/AMD_Logo.png'
 import Intel_img from '../images/Intel_Logo.png'
+import swal from "sweetalert";
 
 function Component({ name, price, image }) {
   return (
@@ -95,8 +96,46 @@ export const BuildPc = () => {
       ...input,
       [item.type]:item
     })
-    setPrice(Price + item.price)
+    let valor = Math.floor(Price + item.price)
+    console.log(valor);
+    setPrice(valor)
   }
+
+  const handleStep = (property) => {
+    if(property === "Processor") setbutton(false)
+    setComplete(false)
+    setType(property)
+    let shouldChange = false;
+    for (const key in input) {
+      if (key === property) {
+        shouldChange = true;
+      }
+      if (shouldChange) {
+        input[key] = '';
+      }
+    }
+  }
+
+  const addMapCart = () => {
+    console.log("add map cart");
+    for (const key in input) {
+      console.log(key, "ESTA ES LA LLAVE");
+      handleAddCart(input[key])
+    }
+  }
+
+  const handleAddCart = (item) => {
+    const newItem = { name: item.name, image: item.image, price: item.price };
+    fetch('http://localhost:3001/cart', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newItem)
+    })
+    .then(response => response.json())
+    .then(data => swal('Success', "Cart Added!", 'success'));
+};
 
   const filterProcess = (marca) => {
     setbutton(true)
@@ -108,38 +147,49 @@ export const BuildPc = () => {
       <Steps 
       input={input}
       price={Price}
+      handleStep={handleStep}
       ></Steps>
       <div className="ButtonsAndCards">
-        <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Amd")}><img src={AMD_img} className='build_logo'/></button>
-        <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Intel")}><img src={Intel_img} className='build_logo'/></button>
+        <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Amd")}>Amd</button>
+        <button className={button ? "displaynone" : "button"} onClick={() => filterProcess("Intel")}>Intel</button>
 
         <div className={Complete ? "displaynone" : "AllCards" }>
         {data ? ( data.map((item) => (
-                <button onClick={(e) => handleSelect(e,item)} className='card_button'>
-                {/* {item.name}
-                {item.price}
-                <img src={item.image}></img>
-                {item.description} */}
-                <Card name={item.name} image={item.image} price={item.price} isForBuildPC={true}/>
-                </button>
+
+          <div onClick={(e) => handleSelect(e,item)} className="Card"> 
+              <Card 
+               name={item.name}
+               price={item.price}
+               image={item.image}
+               isForBuildPc={true}
+               key={item.id}
+              />
+          </div>
+              // {/* //   <button  className="Buttons">
+              // //   {item.name}
+              // //   {item.price}
+              // //   <img src={item.image}></img>
+              // //   {item.description}
+              // //   </button> */}
+              // {/* // </div> */}
             ))
         ) : (
           <p>Loading...</p>
           )}
           </div>
-          <div className={Complete ? "CompleteCards" : "displaynone" }>
-            <Card {...input.Processor} isForBuildPC={true}></Card>
-            <Card {...input.Motherboard} isForBuildPC={true}></Card>
-            <Card {...input.RAM} isForBuildPC={true}></Card>
-            <Card {...input.GraphicsCard} isForBuildPC={true}></Card>
-            <Card {...input.storage} isForBuildPC={true}></Card>
-            <Card {...input.PowerSupply} isForBuildPC={true}></Card>
-            <Card {...input.case} isForBuildPC={true}></Card>
+          <div className={Complete ? "" : "displaynone" }>
+            <Card {...input.Processor} isForBuildPc={true} />
+            <Card {...input.Motherboard} isForBuildPc={true} />
+            <Card {...input.RAM} isForBuildPc={true} />
+            <Card {...input.GraphicsCard} isForBuildPc={true} />
+            <Card {...input.storage} isForBuildPc={true} />
+            <Card {...input.PowerSupply} isForBuildPc={true} />
+            <Card {...input.case} isForBuildPc={true} />
 
           </div>
           <div className={Complete ? "Priceh2" : "displaynone" }>
               <h2>Total price of assembly: $USD {Price}</h2>
-
+              <button onClick={() => addMapCart()}>Add to cart</button>
           </div>
 
       </div>

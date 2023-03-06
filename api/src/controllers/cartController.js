@@ -12,7 +12,7 @@ const addProductCart = async (product) => {
     if(name && image && price ){
         //si el producto no esta en el carrito lo agrego, y cambio el atributo in Cart del product a true
         if(!prod.inCart) {
-          await Cart.create({ prodId:prod.id,name, image, price, amount: 1 })
+          await Cart.create({ prodId:prod.id,name, image, price, amount: 1,order:Date.now() })
           await prod.update({inCart:true})
         }
         //si el prooducto ya esta en el carrito actualizo la cantidad de ese producto 
@@ -27,7 +27,7 @@ const addProductCart = async (product) => {
 }
 
 const getProductsCart = async () => {
-      const productsCart = await Cart.findAll();
+      const productsCart = await Cart.findAll({order: [['order', 'ASC']]});
       if(!productsCart.length)throw Error("No hay productos en el carrito")
       return productsCart;
 };
@@ -53,9 +53,22 @@ const deleteProductCart=async (prodId) => {
   return "Se quitó el producto del carrito";
 }
 
+const deleteAllCart=async () => {
+  const cart = await Cart.findAll();
+  //Lanza un error en caso de fallo
+  if(!cart) throw Error("No hay productos en el carrito")
+  /* Eliminar todo el contenido del carrito */
+  await Cart.destroy({ where: {} });
+  /* Actualizar la columna 'inCart' de todos los productos a false */
+  await Product.update({ inCart: false }, { where: {} });
+  /* Devolver una respuesta exitosa */
+  return "El carrito se eliminó"
+} 
+
   module.exports = {
+    deleteAllCart,
     getProductsCart,
     addProductCart,
-    deleteProductCart
+    deleteProductCart,
   };
   

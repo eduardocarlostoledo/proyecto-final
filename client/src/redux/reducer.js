@@ -1,3 +1,6 @@
+import { GET_CART, GET_UPDATE, UPDATE} from './actions/CartActions';
+import { ADD_ALL_ORDERS, GET_ALL_SHOPPING } from './actions/OrderActions';
+
 import {
     GET_ALL_PRODUCTS,
     GET_ALL_PRODUCTS_NAME,
@@ -19,7 +22,8 @@ import {
         UPDATE_USER,
         GET_EMAIL,
         USER_ACTIVE,
-        CHANGE_NAV
+        CHANGE_NAV,
+        ChangeNav
     } from './actions/UsersActions';
     
     const initialState= {
@@ -33,7 +37,11 @@ import {
         userDetail:{},
         emails : [],
         UserActive : {},
-        ChangeNav : JSON.parse(localStorage.getItem("UserActive")),
+        ChangeNav :  false,
+        cart: [],
+        update: false,
+        order: [],
+        shopping: []
     }
     
     const rootReducer = (state=initialState,action) => {
@@ -96,64 +104,100 @@ import {
 
 
             case GET_PAGE:
+
                 return {...state, paginatedProducts:action.payload}
 
-                case USER_ACTIVE: 
+            case USER_ACTIVE: 
+            
                 const userActive = action.payload;
-                window.localStorage.removeItem("UserActive")
-                window.localStorage.setItem("UserActive", false)
                 const uss = localStorage.setItem("USUARIO", JSON.stringify(userActive))
                 return { ...state,
-                    ChangeNav: JSON.parse(localStorage.getItem("UserActive")),
-                    UserActive : JSON.parse(localStorage.getItem("USUARIO")) }
+                    ChangeNav: true,
+                    UserActive : JSON.parse(localStorage.getItem("USUARIO")) 
+                }
 
+        
+            case FILTER_BY_BRAND:
+                const fBrands = state.allProducts;
+                const brandsFilter = action.payload === 'All' ? fBrands : fBrands.filter(el => el.brand === action.payload)
+        
+                return {
+                    ...state, 
+                    products: brandsFilter
+                }
 
-                    // case  CHANGE_NAV:
-                    //     window.localStorage.removeItem("UserActive")
-                    //     window.localStorage.setItem("UserActive", true)
-                    //     return {
-                    //         ...state, 
-                    //         ChangeNav: JSON.parse(localStorage.getItem("UserActive")),
-                    //     }
         
-                    case FILTER_BY_BRAND:
-                        const fBrands = state.allProducts;
-                        const brandsFilter = action.payload === 'All' ? fBrands : fBrands.filter(el => el.brand === action.payload)
+            case FILTER_BY_TYPE:
+                const fTypes = state.allProducts;
+                const typesFilter = action.payload === 'All' ? fTypes : fTypes.filter(el => el.type === action.payload)
         
-                        return {
-                            ...state, 
-                            products: brandsFilter
-                        }
-                        
-        
-                    case FILTER_BY_TYPE:
-                        const fTypes = state.allProducts;
-                        const typesFilter = action.payload === 'All' ? fTypes : fTypes.filter(el => el.type === action.payload)
-        
-                        return {
-                            ...state, 
-                            products: typesFilter
-                        }
+                return {
+                    ...state, 
+                    products: typesFilter
+                }
                     
-                    case FILTER_PRECIO: //funciona
+            case FILTER_PRECIO: //funciona
         
-                        let sortPrice;
-                        if (action.payload === "all") sortPrice = state.allProducts;
-                        else
-                        sortPrice =
-                        action.payload === "ASC"
-                        ? state.products.sort(
-                            (a, b) => a.price - b.price
-                        )
-                        : state.products.sort(
-                            (a, b) => b.price - a.price
-                        );
-        
-                        return {
-                            ...state,
-                            products: sortPrice,
-                        };        
+                let sortPrice;
+                if (action.payload === "all") sortPrice = state.allProducts;
+                else
+                sortPrice =
+                action.payload === "ASC"
+                ? state.products.sort(
+                    (a, b) => a.price - b.price
+                )
+                : state.products.sort(
+                    (a, b) => b.price - a.price
+                );
             
+                return {
+                    ...state,
+                    products: sortPrice,
+                };        
+            
+            case "deleteUserLocalStorage":
+                return { 
+                    ...state, 
+                    ChangeNav: false
+                }
+
+                
+            case GET_CART: 
+
+                return{
+                    ...state,
+                    cart:action.payload
+                }
+
+            case GET_UPDATE:
+                
+                return{
+                    ...state,
+                }
+            case UPDATE:
+                return {
+                    ...state,
+                    update: action.payload,
+                }
+                case ADD_ALL_ORDERS: 
+                return{
+                    ...state, 
+                    order: action.payload,
+                }
+            
+            case GET_ALL_SHOPPING: 
+                return{
+                    ...state,
+                    shopping: action.payload,
+                }
+
+            case CHANGE_NAV: 
+            return { 
+                ...state, 
+                ChangeNav: true
+            }
+            
+                
             default: return {...state}
             
         }

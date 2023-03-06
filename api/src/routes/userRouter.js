@@ -1,11 +1,15 @@
 const { Router } = require('express');
 
-const { putUser, getUsers, getUserId, loginUser, postUsers, deleteUser } = require("../controllers/usersController")
+const { putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle } = require("../controllers/usersController")
 
 const userRouter = Router()
 
 //////////////////////////////// CREAR USUARIO /////////////////////////////////////// 
 userRouter.post('/register', postUsers) // users/register
+
+
+//////////////////////////////// CREAR USUARIO /////////////////////////////////////// 
+userRouter.post('/google', postUserGoogle) // users/google
 
 //////////////////////////////// INICIAR SESSION  /////////////////////////////////////// 
 

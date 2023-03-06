@@ -19,7 +19,7 @@ productRouter.post('/', async (req,res) => {
   try {
     let product = req.body;
     console.log(product);
-    const newProduct = await postProduct(product);
+    const newProduct = await postProduct(product,req.files.image);
     res.status(201).send({ status: "OK", data: newProduct });
   } catch (error) {
     return res.status(400).send({ error: error.message });
@@ -48,11 +48,32 @@ productRouter.get("/BuildSearch", async (req, res) => {
 //     res.status(400).json({ error: error.message });
 //   }
 // });
+productRouter.get("/BuildSearch", async (req, res) => {
+  try {
+    const {socket,type} = req.query
+    console.log(socket,type);
+    const products = await BuildSearch(socket,type);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
 
 productRouter.get("/types", async (req, res) => {
   try {
     const products = await getTypeProducts();
     res.status(200).json(products); //cambio el retorno para q sea mas limpio dejo copia arriba
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+/* Ruta post para types */
+productRouter.post("/types", async (req, res) => {
+  const {name} = req.body;
+  try {   
+    const postProducts = await Type.findOrCreate({name});
+    res.status(200).json(postProducts);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -74,6 +95,16 @@ productRouter.get("/brands", async (req, res) => {
   try {   
     const products = await getBrandProducts();
     res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+productRouter.post("/brands", async (req, res) => {
+  const {name} = req.body;
+  try {   
+    const postProducts = await Brand.findOrCreate({name});
+    res.status(200).json(postProducts);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

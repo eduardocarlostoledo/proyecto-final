@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from "../styles/Login.module.css";
@@ -5,8 +6,9 @@ import { Link, useNavigate } from "react-router-dom"
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { userLogin, UserActive, ChangeNav } from '../redux/actions/UsersActions';
+import { userLogin, UserActive, ChangeNav, postUsersGoogle } from '../redux/actions/UsersActions';
 import swal from 'sweetalert';
+import jwt_decode from "jwt-decode";
 
 function validate(input) {
 
@@ -46,6 +48,12 @@ export const Login = () => {
         password: "",
     });
 
+    const [infoGoogle, SetInfoGoogle] = useState({
+        email: "",
+        lastname: "",
+        name: "",
+        image: "",
+    })
 
     function handleChange(e) {
         setInput({
@@ -59,12 +67,58 @@ export const Login = () => {
     };
 
 
+    const viewAlert = () => {
+        console.log(infoGoogle);
+        swal({
+          title: "Iniciar sesion con mi cuenta de Google",
+          text: "Al iniciar sesion das permiso a de acceder a tus datos como nombre, correo e imagen de perfil",
+          icon: "warning",
+          buttons: ["No", "Si"]
+        }).then((respuesta) => {
+          if(respuesta){
+            dispatch(postUsersGoogle(infoGoogle));
+            dispatch(ChangeNav())
+            localStorage.setItem("USUARIO", JSON.stringify(infoGoogle))
+            navigate("/Profile")
+          }
+        })
+      }
+
+
+
+    function HandleCallbackResponse(response) {
+        console.log("encode JWT ID :" + response.credential)
+        var userObject = jwt_decode(response.credential);  
+        SetInfoGoogle({ email: userObject.email,
+        lastname: userObject.family_name,
+        name: userObject.given_name,
+        image: userObject.picture
+        }
+        )
+
+    }
+
+    useEffect(() => {
+        /* global google */
+        google.accounts.id.initialize({
+            client_id: "816022596259-o6ktnr2grp3kpla75vn0f7n12o8nmej7.apps.googleusercontent.com",
+            callback: HandleCallbackResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("signInDiv"),
+            { theme: "outline", size: "large" },
+        );
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    
+
 
     async function handleSubmit(e) {
         e.preventDefault();
- 
+
         if (!input.password || !input.email) {
-            return swal("Invalid", "Missing required fields!", "error");
+            return swal("Invalid", "Missing required fields!, HOLA", "error");
         }
         else {
             const response = await dispatch(userLogin(input));
@@ -77,7 +131,6 @@ export const Login = () => {
                         email: "",
                         password: ""
                     });
-                    window.localStorage.setItem("UserActive", false)
                     navigate("/Profile")
                 }, 1300)
 
@@ -123,7 +176,7 @@ export const Login = () => {
                     {/* {(errors.password && input.password.length > 0) && (<p className={styles.spanError}>{errors.password}</p>)} */}
                 </Form.Group>
                 {errormsg && <small className={styles.msgerr}>Password or email invalid</small>}
-                <div className={styles.containerBtn}> 
+                <div className={styles.containerBtn}>
                     <Button className={styles.btnR} type="submit">
                         Login
                     </Button>
@@ -138,6 +191,13 @@ export const Login = () => {
                     <h5>Dont have an account? <Link to="/Register"><button className={styles.here}>Register</button></Link> </h5>
                 </div>
             </Form>
+                 { !infoGoogle.name && !infoGoogle.email && !infoGoogle.lastname && <button id="signInDiv"></button>}
+                 {
+                   infoGoogle.name && infoGoogle.email && infoGoogle.lastname && <button className="button" onClick={() => viewAlert()}>Ingresar al Sitio</button>
+                 }
+                 <div>
+                    <div id="signInDiv"></div>
+                 </div>
         </div>
     )
 
