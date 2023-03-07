@@ -1,7 +1,7 @@
 const { Cart,Product } = require("../db");
 
 const addProductCart = async (product) => {
-    const { name, image, price, cartUserId } = product;
+    const { name, image, price } = product;
     //busco el producto que coincida con el name 
     const prod=await Product.findOne({where:{name}});
 
@@ -12,7 +12,7 @@ const addProductCart = async (product) => {
     if(name && image && price ){
         //si el producto no esta en el carrito lo agrego, y cambio el atributo in Cart del product a true
         if(!prod.inCart) {
-          await Cart.create({ prodId:prod.id,name, image, price, cartUserId, amount: 1,order:Date.now() })
+          await Cart.create({ prodId:prod.id,name, image, price, amount: 1,order:Date.now() })
           await prod.update({inCart:true})
         }
         //si el prooducto ya esta en el carrito actualizo la cantidad de ese producto 
