@@ -3,31 +3,30 @@ const payRouter = Router();
 const mercadopago = require("mercadopago");
 const { deleteAllCart } = require("../controllers/cartController");
 const enviarMail = require("../mail/nodemail");
-const { postOrder } = require("../controllers/orderControllers");
+const { postOrder, updateProductStock } = require("../controllers/orderControllers");
 const { Cart } = require("../db");
 
 let arrayPreference = {}
 
-payRouter.post("/create_preference", (req, res) => {
-  
-  //enviarMail(req.body.description, req.body.price ); //como acomodarlo
-
+payRouter.post("/preference", (req, res) => {  
+  console.log("LLEGA REQ.BODY", req.body);  
   arrayPreference = 
     {
-      product_description: req.body.description,     
-      total_order_price: req.body.price,      
-      prodId: req.body.category_id[0].prodId,
-      buyer_email: req.body.category_id[0].cartUserId,
-      product_name: req.body.category_id[0].name,
-      product_image: req.body.category_id[0].image,
-      product_amount: req.body.category_id[0].amount,
-      product_unit_price: req.body.category_id[0].price,
+      product_description: req.body[0].product_description,     
+      total_order_price: req.body[1].total_order_price,      
+      prodId: req.body[0].prodId,
+      buyer_email: req.body[1].buyer_email,
+      product_name: req.body[0].product_name,
+      product_image: req.body[0].product_image,
+      product_amount: req.body[0].product_amount,
+      product_unit_price: req.body[0].product_unit_price,
     }  
+    console.log("TENGO PREFERENCE", arrayPreference);  
+  });
+  
 
- 
+payRouter.post("/create_preference", (req, res) => {    
   console.log("LLEGA PREFERENCIA", req.body);  
-  console.log("LLEGA PREFERENCIA", req.body.category_id[0].cartUserId);
-
   let preference = {
     items: [
       {
@@ -42,8 +41,7 @@ payRouter.post("/create_preference", (req, res) => {
       pending: "http://localhost:3001/pay/feedback/pending",
     },
     auto_return: "approved",
-  };
-  console.log("PREFERENCE", preference);
+  };  
 
   mercadopago.preferences
     .create(preference)
@@ -51,13 +49,8 @@ payRouter.post("/create_preference", (req, res) => {
       res.send({
         id: response.body.id,
         data: response.body.items
-      });     
-
-      console.log("MERCADOPAGO.PREFERENCES.CREATE", response.body);
-      console.log("MERCADOPAGO.PREFERENCES.CREATE", response.body.items);     
-      
+      });           
     })   
-
     .catch(function (error) {
       console.log(error);
     });
@@ -82,7 +75,7 @@ payRouter.get("/feedback/success", async function (req, res) {
       product_unit_price
     } = arrayPreference
 
-    const newOrder = await postOrder(
+    const newOrder = await postOrder(      
       paymentId,
       statusId,
       merchantOrderId,
@@ -95,6 +88,9 @@ payRouter.get("/feedback/success", async function (req, res) {
       product_amount,
       product_unit_price
     );
+
+    await updateProductStock(prodId, product_amount)
+    console.log("SE HA DESCONTADO" ,prodId, product_amount, "DEL STOCK")
     
     console.log(newOrder, "FEEDBACK SUCCESS ORDEN REGISTRADA OK");
     
@@ -137,7 +133,6 @@ payRouter.get("/feedback/pending", async function (req, res) {
       status: statusId,
       merchant_order_id: merchantOrderId,
     } = req.query;
-
     const {
       product_description,     
       total_order_price,      
@@ -162,7 +157,9 @@ payRouter.get("/feedback/pending", async function (req, res) {
       product_amount,
       product_unit_price
     );
-        
+    await updateProductStock(prodId, product_amount)
+    console.log("SE HA DESCONTADO" ,prodId, product_amount, "DEL STOCK")
+
     console.log(newOrder, "FEEDBACK PENDING ORDEN REGISTRADA OK");
 
     res.send(`
@@ -183,8 +180,8 @@ payRouter.get("/feedback/pending", async function (req, res) {
           </body>
         </html>
       `);
-      await deleteAllCart(); // esto elimina el carrito al realizar una compra exitosa
-    
+  await deleteAllCart(); // esto elimina el carrito al realizar una compra exitosa
+  
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
@@ -192,7 +189,6 @@ payRouter.get("/feedback/pending", async function (req, res) {
 });
 
 payRouter.get("/feedback/failure", async function (req, res) {
-  
   try {
     const {
       payment_id: paymentId,
@@ -223,6 +219,7 @@ payRouter.get("/feedback/failure", async function (req, res) {
       product_amount,
       product_unit_price
     );
+        
     console.log(newOrder, "FEEDBACK FAILURE ORDEN REGISTRADA OK");
 
     res.send(`
