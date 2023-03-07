@@ -1,7 +1,7 @@
 const { Order } = require("../db");
 const { Router } = require('express');
 const orderRouter = Router()
-const { postOrder } = require("../controllers/orderControllers")
+const { postOrder, getOrders } = require("../controllers/orderControllers")
 
 // orderRouter.post('/', async (req,res) => {
 //     try {
@@ -27,10 +27,11 @@ orderRouter.post('/', async (req,res) => {
     }
 })
 
+
 orderRouter.get('/', async (req,res) => {   
     
     try {
-        const response = await Order.findAll();
+        const response = await getOrders();
         res.status(201).send(response);   
     } catch (error) {
         res.status(400).json("Error Handler Get Order")   

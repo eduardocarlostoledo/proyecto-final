@@ -1,29 +1,73 @@
-const { Order } = require("../db");
+const { Order, User } = require("../db");
 
-const postOrder = async (cartUserId, paymentId, statusId, merchantOrderId) => {
-    // const {
-    //     cartUserId, 
-    //     paymentId,
-    //     statusId, 
-    //     merchantOrderId    
-    // } = order
-          
-    try {
-        console.log("POST CONTROLLER ORDER",         cartUserId,         paymentId,        statusId,         merchantOrderId        )
-        const newOrder = await Order.create({ 
-            cartUserId, 
-            paymentId,
-            statusId, 
-            merchantOrderId        
-        });
-        
-        console.log("POST CONTROLLER CREATED ORDER", newOrder );   
+const postOrder = async (
+    paymentId,
+    statusId,
+    merchantOrderId,
+    product_description,     
+    total_order_price,      
+    prodId,
+    buyer_email,
+    product_name,
+    product_image,
+    product_amount,
+    product_unit_price) => {  
 
-        return newOrder
-    } catch (error) {
-        throw Error(error.message);
-    }  
-    
+  try {
+    console.log(
+      "POST CONTROLLER ORDER",
+      paymentId,
+      statusId,
+      merchantOrderId,
+      product_description,     
+      total_order_price,      
+      prodId,
+      buyer_email,
+      product_name,
+      product_image,
+      product_amount,
+      product_unit_price
+    );
+    const newOrder = await Order.create({
+        paymentId,
+        statusId,
+        merchantOrderId,
+        product_description,     
+        total_order_price,      
+        prodId,
+        buyer_email,
+        product_name,
+        product_image,
+        product_amount,
+        product_unit_price
+    });
+
+    console.log("POST CONTROLLER CREATED ORDER", newOrder);
+
+    return newOrder;
+  } catch (error) {
+    throw Error(error.message);
+  }
 };
 
-module.exports = {postOrder}
+const getOrders = async () => {
+  const orders = await Order.findAll({
+    include: {
+      model: User,
+      attributes: [
+        "name",
+        "email",
+        "phonenumber",
+        "country",
+        "city",
+        "address",
+      ],
+      through: {
+        attributes: [],
+      },
+    },
+  });
+  return orders;
+};
+
+module.exports = { postOrder, getOrders };

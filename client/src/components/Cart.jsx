@@ -27,7 +27,7 @@ export default function Cart() {
         quantity: 1,
         description: description.toString(),
         price: total,
-        category_id: cartUserId
+        category_id: cartUserId // seteo category_id para que pase por la preferencia de MP
     };
 
     const handleCheckout = (e) =>{
