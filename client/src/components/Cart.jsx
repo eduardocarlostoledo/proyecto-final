@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import mercadopago from "./mercadopago";
 import "../styles/Cart.css";
 import swal from 'sweetalert';
@@ -85,7 +85,6 @@ export default function Cart() {
       }
     };
 
-
     // Create preference when click on checkout button
     const createCheckoutButton = (preferenceId) => {
         // Initialize the checkout
@@ -116,14 +115,13 @@ export default function Cart() {
         }
     }
 
-
     return (
         <div className='ContainerCart'>
             <h2 className='h2'>Shopping Cart</h2>
             
             <div className='NavCart'>
                     {cartItems.length == 0 ? (
-                        <p>Cart is empty</p>
+                        <p>el carrito esta vacio</p>
 
                     ) : ( cartItems.map(item => (
                         <div >
