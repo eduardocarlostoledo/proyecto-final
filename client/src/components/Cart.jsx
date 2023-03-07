@@ -5,52 +5,64 @@ import swal from 'sweetalert';
 import ItemCart from './ItemCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { update } from '../redux/actions/CartActions';
+import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {
     const up= useSelector((state) => state.update)
     const [cartItems, setCartItems] = useState([]);
     const dispatch=useDispatch()
+    const userActive= localStorage.getItem("USUARIO")!==null
+               ?JSON.parse(localStorage.getItem("USUARIO"))
+               :null
+    const navigate=useNavigate();
+
     useEffect(() => {
         fetch('http://localhost:3001/cart')
         .then(response => response.json())
         .then(data => setCartItems([...data]))
-        .catch(error =>swal('Carrito Vacio', "Carrito Vacio", 'error') );
+        .catch(error =>swal('Cart is empty', "Cart is empty", 'error') );
     }, [up]);
 
     const price = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
     const total = price.toFixed(1)
     const description = cartItems.map(e=>e.name)
-    const cartUserId = cartItems.filter(e=>e.cartUserId)
+    // const cartUserId = cartItems.filter(e=>e.cartUserId)
 
     const orderData = {
         quantity: 1,
         description: description.toString(),
         price: total,
-        category_id: cartUserId
+        category_id: userActive!==null? userActive.cartUserId :null
     };
 
     const handleCheckout = (e) =>{
         e.preventDefault();
+        if(!cartItems.length) swal('Cart is empty', "Cart is empty", 'error')
+        else if(userActive===null){
+            swal('You must log in to buy!', "You must log in to buy!", 'error')
+            navigate("/login")
+        }
+        else{ 
+            fetch("http://localhost:3001/pay/create_preference", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(orderData),
+            })
+            .then(function (response) {
+                console.log("RESPONSE" , response)
+                return response.json();
+            })
 
-        fetch("http://localhost:3001/pay/create_preference", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
-        })
-        .then(function (response) {
-            console.log("RESPONSE" , response)
-            return response.json();
-        })
-
-        .then(
-            function (preference) {
-            createCheckoutButton(preference.id);
-        })
-        .catch(function () {
-            alert("Unexpected error");
-        });
+            .then(
+                function (preference) {
+                createCheckoutButton(preference.id);
+            })
+            .catch(function () {
+                alert("Unexpected error");
+            })
+        }
     }
 
 
@@ -77,7 +89,7 @@ export default function Cart() {
             // Actualizar el estado local del carrito para que se muestre vacío
             setCartItems([]);
             dispatch(update(true))
-            swal('Carrito Vacio', "Carrito Vacio", 'error');
+            swal('Cart is empty', "Cart is empty", 'error');
         } catch (error) {
             // Si hay un error, mostrar una alerta
             swal('Error', 'No se pudo eliminar el carrito', 'error');
@@ -91,7 +103,7 @@ export default function Cart() {
             
             <div className='NavCart'>
                     {cartItems.length == 0 ? (
-                        <p>el carrito esta vacio</p>
+                        <p>Cart is empty</p>
 
                     ) : ( cartItems.map(item => (
                         <div >

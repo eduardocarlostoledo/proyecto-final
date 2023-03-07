@@ -11,30 +11,21 @@ export default function AddToCart (item){
     const [message, setMessage] = useState('');
     const dispatch =  useDispatch()
   
-    const userActiveOwnerOfCart = localStorage.getItem("USUARIO")!==null
-              ?JSON.parse(localStorage.getItem("USUARIO"))
-              :null
-
     const handleSubmit = e => {
         e.preventDefault();
   
-        if(userActiveOwnerOfCart===null)swal('Error', "You must log in to add products to cart!", 'error')
-        else {
-            const newItem = { name: item.name, image: item.image, price: item.price, cartUserId: userActiveOwnerOfCart.id };
-            console.log("NEW USER ITEM" , userActiveOwnerOfCart)
-            console.log("NEW ITEM" , newItem)
-            fetch('http://localhost:3001/cart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newItem)
-            })
-            .then(response => response.json())
-            .then(data => swal('Success', "Cart Added!", 'success'))
-            dispatch(update(true))
-        }
-        
+        const newItem = { name: item.name, image: item.image, price: item.price};
+        console.log("NEW ITEM" , newItem)
+        fetch('http://localhost:3001/cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newItem)
+        })
+        .then(response => response.json())
+        .then(data => swal('Success', "Product added to cart!", 'success'))
+        dispatch(update(true))
     };
     
 
