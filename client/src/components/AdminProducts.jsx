@@ -2,12 +2,14 @@ import { NavAdmin } from "./navAdmin";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Tag } from "antd";
+import { FaBan,FaUserCheck } from "react-icons/fa"
 import {
-  getAllProducts,
-  getAllProductsName,
+  getAdminProducts,
+  getAllProductsNameForAdmin,
   getAllBrands,
   getAllTypes,
   updateProduct,
+  banOrUnbanProd,
 } from "../redux/actions/ProductActions";
 import { AiFillSetting, AiOutlineClose } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
@@ -230,16 +232,17 @@ const ProductExpanded = ({
               </div>
             )}
             <div>
-
-            <label className="LabelNameImg"><strong>Description</strong></label>
-            <input
-              className="InputsEdits"
-              value={input.description}
-              onChange={(e) => handleChange(e)}
-              name="description"
-              placeholder="Descripcion"
+              <label className="LabelNameImg">
+                <strong>Description</strong>
+              </label>
+              <input
+                className="InputsEdits"
+                value={input.description}
+                onChange={(e) => handleChange(e)}
+                name="description"
+                placeholder="Descripcion"
               ></input>
-              </div>
+            </div>
           </div>
           <div className="ButtonDiv">
             <button onClick={(e) => handleSubmit(e)} className="ButtonSubmit">
@@ -258,7 +261,7 @@ export const AdminProducts = () => {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAdminProducts());
     dispatch(getAllBrands());
     dispatch(getAllTypes());
   }, [dispatch]);
@@ -270,14 +273,45 @@ export const AdminProducts = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getAllProductsName(name));
+    dispatch(getAllProductsNameForAdmin(name));
     console.log(name);
   };
 
   // Boton para traer todo de nuevo
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(getAllProducts());
+    dispatch(getAdminProducts());
+  };
+
+  // const banProducts = (e,id) => {
+  //   e.preventDefault();
+  //   dispatch(banOrUnbanProd(id))
+  // };
+
+  const banProducts = (value) => {
+    if (value.status) {
+      swal({
+        title: "Are you sure you want to stop showing it?",
+        text: "do not show it",
+        icon: "warning",
+        buttons: ["Not", "yes"],
+      }).then((respuesta) => {
+        if (respuesta) {
+          dispatch(banOrUnbanProd(value.id));
+        }
+      });
+    } else {
+      swal({
+        title: "Are you sure you want to show it?",
+        text: "show it",
+        icon: "warning",
+        buttons: ["Not", "yes"],
+      }).then((respuesta) => {
+        if (respuesta) {
+          dispatch(banOrUnbanProd(value.id));
+        }
+      });
+    }
   };
 
   let products = useSelector((state) => state.products || []);
@@ -309,23 +343,21 @@ export const AdminProducts = () => {
       render: (text) => <p>{text}</p>,
     },
     {
-      title: "Infomation adicional",
-      dataIndex: "info_adicional",
-      key: "info_adicional",
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
       render: (value) => (
         <Tag color={value === true ? "green" : "red"}>
-          {value === true
-            ? "Additional information"
-            : "No Additional information"}
+          {value === true ? "View" : "Not view"}
         </Tag>
       ),
       filters: [
         {
-          text: "Additional information",
+          text: "Status",
           value: true,
         },
         {
-          text: "no Additional information",
+          text: "Banned",
           value: false,
         },
       ],
@@ -343,12 +375,13 @@ export const AdminProducts = () => {
             <BiEditAlt />
           </button>
 
-          <button
-            className="ButtonsActions"
-            onClick={() => console.log(value.password)}
-          >
-            <AiFillSetting />
+          {value.status ? <button className="ButtonsActions" onClick={() => banProducts(value)} >
+            <FaBan />
           </button>
+          : <button className="ButtonsActions" onClick={() => banProducts(value)} >
+          <FaUserCheck />
+        </button>
+          }
         </div>
       ),
     },

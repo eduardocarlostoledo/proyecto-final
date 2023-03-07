@@ -21,9 +21,27 @@ export const getAllProducts = () => async (dispatch) => {
     }
 }
 
+export const getAdminProducts = () => async (dispatch) => {
+    try {
+        return await axios('http://localhost:3001/products/ForAdmin').then(r=>
+            dispatch({type: GET_ALL_PRODUCTS, payload:r.data}))
+    } catch (error) {
+            console.log(error)
+    }
+}
+
 export const getAllProductsName =(name)=>async (dispatch)=>{
   try {
     return await axios(`http://localhost:3001/products?name=${name}`).then((r)=>
+      dispatch({type:GET_ALL_PRODUCTS_NAME, payload: r.data}))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getAllProductsNameForAdmin = (name) => async (dispatch)=>{
+  try {
+    return await axios(`http://localhost:3001/products/ForAdmin?name=${name}`).then((r)=>
       dispatch({type:GET_ALL_PRODUCTS_NAME, payload: r.data}))
   } catch (error) {
     console.log(error)
@@ -68,23 +86,13 @@ export const updateProduct= (id,payload)=> async()=>{
     return await axios.put(`http://localhost:3001/products/${id}`,payload)
 };
 
-// export const getAllBrands = () => async (dispatch) => {
-//     try {
-//         return await axios.get('http://localhost:3001/products/brands').then(r=>
-//             dispatch({type: GET_ALL_BRANDS, payload:r.data.data}))
-//     } catch (error) {
-//             console.log(error)
-//     }
-// }
 
-// export const getAllTypes = () => async (dispatch) => {
-//     try {
-//         return await axios.get('http://localhost:3001/products/types').then(r=>
-//             dispatch({type: GET_ALL_TYPES, payload:r.data.data}))
-//     } catch (error) {
-//             console.log(error)
-//     }
-// }
+export const banOrUnbanProd= (id)=> async()=>{
+    return await axios.put(`http://localhost:3001/products/ban/${id}`)
+};
+
+
+
 export const getAllBrands = () => {
   return async function(dispatch){
     const json = await axios.get('http://localhost:3001/products/brands')
