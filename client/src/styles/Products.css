@@ -2,31 +2,7 @@
 .Products{
     margin-top: 100px;
 }
-.Marcas{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    gap: 4px;
-    flex-wrap: wrap;
-}
 
-.MarcaContainer{
-    background-color: rgb(255, 255, 255);
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
-
-.MarcaContainer:hover{
-    background-color: #e7b8ff;
-}
 .DivCardsFilters {
     display: flex;
     flex-direction: row;
@@ -63,22 +39,21 @@
 .DivFilter {
     padding: 20px;
     width: 300px;
-    height: 800px;
+    height: 500px;
     background-color: white;
-    margin-top: 100px;
     border-radius: 10px;
-    
+    margin-top: 40px;
     display: flex;
     justify-content: space-between;
     align-content: center;
     flex-direction: column;
     align-items: center;
     text-transform: uppercase;
-    margin-left: 20px;
+    margin-left: 40px;
     margin-right: 60px;
 }
 .CardContainer{
-    margin-top: 88px;
+    margin-top: -20px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
