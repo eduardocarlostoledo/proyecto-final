@@ -11,6 +11,7 @@ import {
   updateProduct,
   banOrUnbanProd,
 } from "../redux/actions/ProductActions";
+import { update } from "../redux/actions/CartActions";
 import { AiFillSetting, AiOutlineClose } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import ".././styles/AdminProducts.css";
@@ -55,6 +56,7 @@ const ProductExpanded = ({
     Object.keys(input).forEach((key) => data.append(key, input[key]));
     dispatch(updateProduct(input.id, data));
     setEditProduct(0);
+    dispatch(update(true))
     swal("success", "Product modified successfully", "success");
   }
 
@@ -258,13 +260,15 @@ const ProductExpanded = ({
 export const AdminProducts = () => {
   const dispatch = useDispatch();
   const [editProduct, setEditProduct] = useState(0);
+  const change = useSelector(state => state.update)
   const [name, setName] = useState("");
 
   useEffect(() => {
     dispatch(getAdminProducts());
     dispatch(getAllBrands());
     dispatch(getAllTypes());
-  }, [dispatch]);
+    dispatch(update(false))
+  }, [dispatch,change]);
 
   const handleInputChange = (e) => {
     e.preventDefault();

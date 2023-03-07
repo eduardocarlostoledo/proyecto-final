@@ -7,7 +7,6 @@ body {
   margin-bottom: 20px;
 } */
 
- 
 
 .ContainerFooter{
   position: absolute;
@@ -21,10 +20,11 @@ body {
 .ContainerLogo{
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+justify-content: space-around;
 align-items: center;
 align-content: center
 }
+
 .Logo{
 display: flex;
 flex-direction: row;
@@ -33,12 +33,32 @@ align-items: center;
 align-content: center;
 }
 
+.LinkMembers h3{
+  color: black;
+  
+}
 
 .ContainerLogo a{
 color: rgb(251, 90, 184);
 text-decoration: none;
 }
+
 .ContainerLogo a:hover{
 color: blue;
 text-decoration: none;
+}
+.Copyright {
+  margin: auto;
+}
+
+@media screen and (max-width: 650px){
+  .ContainerFooter{
+    width: 100%;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .Computer{
+    display: none;
+  }
 }

@@ -33,33 +33,6 @@
     
 }
 
-@media screen and (max-width: 680px){
-    .DivCardsFilters{
-        flex-direction: column;
-        justify-content: center;
-    }
-    .CardContainer{
-        justify-content: center;
-    }
-    .DivFilter{
-        justify-content: center;
-    }
-}
-@media screen and (max-width: 480px){
-    .DivCardsFilters{
-        flex-direction: column;
-        justify-content: center;
-    }
-    .CardContainer{
-        justify-content: center;
-    }
-    .DivFilter{
-        justify-content: center;
-        transform: translateX(30px);
-    }
-}
-
-
 .DivFilter {
     padding: 20px;
     width: 300px;
@@ -187,3 +160,29 @@
 }
 
 
+@media screen and (max-width: 650px){
+    .DivCardsFilters{
+        flex-direction: column;
+        justify-content: center;
+        background-color: red;
+    }
+    .CardContainer{
+        justify-content: center;
+    }
+    .DivFilter{
+        justify-content: center;
+    }
+}
+/* @media screen and (max-width: 480px){
+    .DivCardsFilters{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .CardContainer{
+        justify-content: center;
+    }
+    .DivFilter{
+        justify-content: center;
+        transform: translateX(30px);
+    } */
+/* } */

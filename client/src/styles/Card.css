@@ -135,3 +135,34 @@ font-size: 1.8vh;
 }
 
 
+@media screen and (max-width: 650px){
+    .contenedor_card{
+        width: 10rem;
+        height:17rem;
+        margin: 0;
+        padding: 0;
+    }
+    .LinkImage {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+    .card_p_nombre {
+        padding: 5px;
+    }
+    .card_strong_precio{
+        margin: 0;
+        padding-left: .5rem;
+    }
+    .ButtonCart {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .contenedor_card{
+        width: 9rem;
+        height:17rem;
+        margin: 0;
+        padding: 0;
+    }
+    }
