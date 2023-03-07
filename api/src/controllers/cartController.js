@@ -28,7 +28,7 @@ const addProductCart = async (product) => {
 
 const getProductsCart = async () => {
       const productsCart = await Cart.findAll({order: [['order', 'ASC']]});
-      if(!productsCart.length)throw Error("No hay productos en el carrito")
+      if(!productsCart.length) return  productsCart
       return productsCart;
 };
 

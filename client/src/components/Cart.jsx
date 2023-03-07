@@ -3,20 +3,19 @@ import mercadopago from "./mercadopago";
 import "../styles/Cart.css";
 import swal from 'sweetalert';
 import ItemCart from './ItemCart';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { update } from '../redux/actions/CartActions';
 
 export default function Cart() {
-
+    const up= useSelector((state) => state.update)
     const [cartItems, setCartItems] = useState([]);
-
+    const dispatch=useDispatch()
     useEffect(() => {
         fetch('http://localhost:3001/cart')
         .then(response => response.json())
         .then(data => setCartItems([...data]))
         .catch(error =>swal('Carrito Vacio', "Carrito Vacio", 'error') );
-        
-    }, [cartItems]);
+    }, [up]);
 
     const price = cartItems.reduce((acc, item) => acc + (item.price * item.amount)  , 0)
     const total = price.toFixed(1)
@@ -77,7 +76,8 @@ export default function Cart() {
             });
             // Actualizar el estado local del carrito para que se muestre vacío
             setCartItems([]);
-
+            dispatch(update(true))
+            swal('Carrito Vacio', "Carrito Vacio", 'error');
         } catch (error) {
             // Si hay un error, mostrar una alerta
             swal('Error', 'No se pudo eliminar el carrito', 'error');
