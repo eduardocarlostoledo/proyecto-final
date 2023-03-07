@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const enviarPass = require('../mail/changePass')
-const { putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle, loginGoogle } = require("../controllers/usersController")
+const { putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle, loginGoogle, findUser } = require("../controllers/usersController")
 
 const userRouter = Router()
 
@@ -14,8 +14,6 @@ userRouter.post('/google', postUserGoogle) // users/google
 //////////////////////////////// INICIAR SESSION  /////////////////////////////////////// 
 
 userRouter.post('/login', loginUser)
-
-
 userRouter.post("/loginGoogle", loginGoogle)
 
 //////////////////////////////// MODIFICAR USUARIO  /////////////////////////////////////// 
@@ -45,16 +43,68 @@ userRouter.put("/:id", async (req, res) => {
 
 
 
+
  //////////////////////////////// TRAER TODOS LOS USUARIOS  ////////////////////////////////
 
-  userRouter.get("/", async (req,res) => {
-    try {
-        const users = await getUsers();         
+//   userRouter.get("/", async (req,res) => {
+//     try {
+//         const users = await getUsers();         
+//         res.status(200).json({data: users,message: "Listado de usuarios"})
+//     } catch (error) {
+//         res.status(400).json(error.message)
+//     } 
+//  })
+
+userRouter.get("/", async (req, res) => {
+  const regex_FullText = /^([a-zA-Z ]+)/i;
+
+  const { name } = req.query;
+  let users
+
+  try {
+    if (name) {
+      if (name.trim() === "") {
+        users = await getUsers();
         res.status(200).json({data: users,message: "Listado de usuarios"})
-    } catch (error) {
-        res.status(400).json(error.message)
-    } 
- })
+      } else {
+        if (regex_FullText.test(name)) {
+
+          users = await findUser(name.trim());  // aca
+          if (users.length == 0) {
+            res.status(500).json({
+              status: false,
+              msg: `No se encontro ningun User con el atributo ${name}`,
+              errorCode: 12
+            })
+
+          } else {
+            res.status(200).json({data: users, message: "Listado de usuarios"})
+          }
+        } else {
+          res.status(500).json({
+            status: false,
+            msg: `Formato de busqueda invalido`,
+            errorCode: 14
+          });
+        }
+      }
+    } else {
+      users = await getUsers();
+      res.status(200).json({data: users,message: "Listado de usuarios"})
+    }
+
+
+  } catch (error) {
+    res.status(400).json({
+      status: false,
+      msg: `Entro al catch, ${error.message}`,
+      errorCode: 400
+    });
+  }
+})
+
+
+
 
  //////////////////////////////// TRAER USUARIO POR PARAMETRO ////////////////////////////////
 

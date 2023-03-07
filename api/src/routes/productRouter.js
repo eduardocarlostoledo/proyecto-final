@@ -53,6 +53,7 @@ productRouter.put('/:id', async (req,res) => {
 //     res.status(400).json({ error: error.message });
 //   }
 // });
+
 productRouter.get("/BuildSearch", async (req, res) => {
   try {
     const {socket,type} = req.query

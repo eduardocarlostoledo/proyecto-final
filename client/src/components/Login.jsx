@@ -66,20 +66,13 @@ export const Login = () => {
 
 
 
-
-    // const viewAlert =  () => {
-   
-    //         setTimeout( async ()=> {
-    //             const email = {email: infoGoogle.email}
-    //             dispatch(postUsersGoogle(infoGoogle));
-    //             dispatch(ChangeNav())
-    //             const usuario = await dispatch(loginGoogle(email))
-    //             console.log(usuario, "usuario");
-    //             localStorage.setItem("USUARIO", JSON.stringify(infoGoogle))
-    //             navigate("/Profile")
-
-    //         }, 800)
-    //   }
+    
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    if (isAuthenticated === "On") {
+      navigate('/Profile');
+    }
+  }, [navigate]);
 
 
     const viewAlert = async  () => {
@@ -88,18 +81,42 @@ export const Login = () => {
           console.log(hola, "post");
            const email = {
             email : infoGoogle.email
-           } 
+           }
            console.log(email, "mail");
            const usuario = await dispatch(loginGoogle(email))
            console.log(usuario,  "usuario");
-           if (usuario.success) {
-            dispatch(UserActive(usuario))
-            dispatch(ChangeNav())
-           }
-            setTimeout( ()=> {
-                navigate("/Profile")
 
-        }, 800)
+           if (usuario.success) {
+            console.log(usuario.data.status, "status");  // ACA TENGO
+           
+            if (usuario.data.status) {
+
+                if (usuario.data.admin) {
+
+                    dispatch(UserActive(usuario))
+                    dispatch(ChangeNav())
+                    localStorage.setItem('isAuthenticated', "On");
+                    setTimeout( ()=> {
+                        navigate("/admin/users")
+                }, 800)
+
+                } else { 
+                    dispatch(UserActive(usuario))
+                    dispatch(ChangeNav())
+                    localStorage.setItem('isAuthenticated', "On");
+                    setTimeout( ()=> {
+                        navigate("/Profile")
+        
+                }, 800)
+                }
+            
+
+
+            } else { 
+                return swal("User Banned", "your account has been suspended", "error");
+            }
+    }
+
   }
 
      function HandleCallbackResponse(response) {
@@ -138,7 +155,6 @@ export const Login = () => {
     }, []);
 
     
-
     async function handleSubmit(e) {
         e.preventDefault();
         if (!input.password || !input.email) {
@@ -147,17 +163,43 @@ export const Login = () => {
         else {
             const response = await dispatch(userLogin(input));
             if (response.data.success) {
-                dispatch(UserActive(response.data))
-                dispatch(ChangeNav())
-                setErrormsg(false)
-                setTimeout(() => {
-                    setInput({
-                        email: "",
-                        password: ""
-                    });
-                    navigate("/Profile")
-                }, 1300)
+                   
+                    if (response.data.data.status) {
 
+                        if (response.data.data.admin) { 
+                            dispatch(UserActive(response.data))
+                            dispatch(ChangeNav())
+                            localStorage.setItem('isAuthenticated', "On");
+                            setErrormsg(false)
+                            setTimeout(() => {
+                                setInput({
+                                    email: "",
+                                    password: ""
+                                });
+                                navigate("/admin/users")
+                            }, 1300)
+
+                        } else { 
+                            dispatch(UserActive(response.data))
+                            dispatch(ChangeNav())
+                            localStorage.setItem('isAuthenticated', "On");
+                            setErrormsg(false)
+                            setTimeout(() => {
+                                setInput({
+                                    email: "",
+                                    password: ""
+                                });
+                                navigate("/Profile")
+                            }, 1300)
+                        }
+
+                
+        
+
+                    } else { 
+                        return swal("User Banned", "your account has been suspended", "error");
+                    }
+               
             } else {
                 setErrormsg(true)
                 setTimeout(() => {
@@ -168,6 +210,7 @@ export const Login = () => {
 
         }
     }
+
 
     return (
         <div className={styles.ContainerAllForm}>
@@ -203,3 +246,35 @@ export const Login = () => {
     )
 
 }
+
+
+// async function handleSubmit(e) {
+//     e.preventDefault();
+//     if (!input.password || !input.email) {
+//         return swal("Invalid", "Missing required fields!", "error");
+//     }
+//     else {
+//         const response = await dispatch(userLogin(input));
+//         if (response.data.success) {
+//             dispatch(UserActive(response.data))
+//             dispatch(ChangeNav())
+//             localStorage.setItem('isAuthenticated', "On");
+//             setErrormsg(false)
+//             setTimeout(() => {
+//                 setInput({
+//                     email: "",
+//                     password: ""
+//                 });
+//                 navigate("/Profile")
+//             }, 1300)
+
+//         } else {
+//             setErrormsg(true)
+//             setTimeout(() => {
+//                 setErrormsg(false)
+//             }, 5000)
+//             return
+//       }
+
+//     }
+//  }

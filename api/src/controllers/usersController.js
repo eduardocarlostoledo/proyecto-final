@@ -1,5 +1,6 @@
 const { User } = require('../db')
 const { encrypt, compare } = require('../helpers/bcrypt');
+const { Op } = require("sequelize");
 
 const getUsers = async () => {
   
@@ -188,8 +189,17 @@ const deleteUser = async (req, res) => {
   }
 };
 
+//Busco el User por query 
+const findUser = async (name) => {
 
+  const results = await User.findAll({
+      where: {
+          name: { [Op.iLike]: `%${name}%` },
+      }
+  });
+  return results
+}
 
 module.exports = {
-  putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle, loginGoogle
+  putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle, loginGoogle,findUser
 }

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Table, Tag } from "antd";
 import { AiFillSetting } from "react-icons/ai";
 import { addAllOrders } from "../redux/actions/OrderActions";
+import { NavAdmin } from './navAdmin';
+
 
 export const AdminOrder = () => {
   const dispatch = useDispatch();
@@ -37,7 +39,7 @@ export const AdminOrder = () => {
       filters: [
         { text: 'Pending', value: 'pending' },
         { text: 'Failure', value: 'failure' },
-        { text: 'Approved', value: 'approved'},
+        { text: 'Approved', value: 'approved' },
       ],
       onFilter: (value, record) => record.statusId.indexOf(value) === 0,
       render: (statusId) => (
@@ -86,7 +88,7 @@ export const AdminOrder = () => {
       title: 'Product Amount',
       dataIndex: 'product_amount',
       render: (text) => <p>{text}</p>,
-    },        
+    },
     {
       title: 'Product Unit Price',
       dataIndex: 'product_unit_price',
@@ -104,10 +106,11 @@ export const AdminOrder = () => {
   ];
 
   return (
-        <div style={{marginTop: "100px", padding: "60px"}}>
-    
-            <Table  columns={columns} dataSource={orders}/>
-        </div>
-        
-      )
-    }
+    <div>
+      <NavAdmin />
+      <div style={{ marginTop: "80px", padding: "20px" }}>
+        <Table style={{ backgroundColor: "rgb(245, 245, 235)" }} columns={columns} dataSource={orders} />
+      </div>
+    </div>
+  )
+}

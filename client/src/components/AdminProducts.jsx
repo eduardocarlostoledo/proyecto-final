@@ -397,7 +397,7 @@ export const AdminProducts = () => {
       />
 
       <div style={{ marginTop: "80px", padding: "20px" }}>
-        <Table
+        <Table style={{backgroundColor: "rgb(245, 245, 235)"}}
           columns={columns}
           dataSource={newProducts}
           expandable={{

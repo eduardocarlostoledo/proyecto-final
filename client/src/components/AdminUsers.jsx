@@ -2,7 +2,7 @@ import { NavAdmin } from "./navAdmin";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Table, Tag } from "antd";
-import { getAllUsers, PutUser } from "../redux/actions/UsersActions";
+import { getAllUsers, PutUser, getAllUsersName} from "../redux/actions/UsersActions";
 import { AiFillSetting } from "react-icons/ai";
 import { FaBan } from "react-icons/fa"
 import { GrUserAdmin } from "react-icons/gr"
@@ -10,6 +10,23 @@ import swal from "sweetalert"
 import { FaUserCheck } from "react-icons/fa"
 import { MdOutlineVerifiedUser } from "react-icons/md"
 import styles from "../styles/AdminUsers.module.css";
+
+const InfoUser = ({name, image, lastname, status}) => {
+
+  return (
+    <div className={styles.Contenedor}>
+        <div className={styles.ContenedorImg}>
+            <img src={image ? image : "https://cdn-icons-png.flaticon.com/512/3135/3135768.png"} alt={name} />
+        </div>
+        <div className={styles.ContenedorData}>
+              <h4>{name} {lastname} {status ? <span className={styles.verde}>User Active</span> : <span className={styles.rojo}>User Banned</span> }</h4>
+              <div className={styles.centrado}><h5>Ordenes</h5></div>
+        </div>
+    </div>
+  )
+}
+
+
 
 export const AdminUsers = () => {
  
@@ -32,7 +49,6 @@ export const AdminUsers = () => {
     key: user.id,
   }));
 
-  console.log(newUsers, "estos son los usuarios");
 
 
   const [name, setName] = useState("");
@@ -44,41 +60,43 @@ export const AdminUsers = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-   return newUsers = newUsers[1]
-
+    dispatch(getAllUsersName(name));
+    setName("");
   };
 
-  console.log(name, "name");
 
-
+ 
   
   const setAdmin = (value) => {
 
+    const { password, ...values } = value;
+   
+    console.log({...values, admin: value.admin});
+     
     if (value.admin) { 
       swal({
-        title: "Estas seguro que Deseas QUIIIITAR ADMIN",
-        text: "QUITAR ADMIN",
+        title: `Estas seguro que deseas quitar admin a ${value.name}`,
+        text: "Quitar ADMIN",
         icon: "warning",
         buttons: ["No", "Si"]
       }).then( (respuesta) => {
       if(respuesta){
         dispatch(PutUser({
-          ...value, admin: !value.admin
+          ...values, admin: !value.admin
        }));
        setReload(!reload)
       }
     })
     } else { 
       swal({
-        title: "Estas seguro que Deseas HACERLLOOOO ADMIN",
-        text: "SERA ADMIN",
+        title: `Estas seguro que deseas hacer admin a ${value.name}`,
+        text: "Sera ADMIN",
         icon: "warning",
         buttons: ["No", "Si"]
       }).then( (respuesta) => {
       if(respuesta){
         dispatch(PutUser({
-          ...value, admin: !value.admin
+          ...values, admin: !value.admin
        }));
        setReload(!reload)
       }
@@ -94,8 +112,8 @@ export const AdminUsers = () => {
   const setStatus = (value) => { 
     if(value.status) { 
       swal({
-        title: "Estas seguro que Deseas baenar",
-        text: "BANEARRR",
+        title: `Estas seguro que deseas bannear a ${value.name}`,
+        text: "Bann",
         icon: "warning",
         buttons: ["No", "Si"]
       }).then( (respuesta) => {
@@ -107,8 +125,8 @@ export const AdminUsers = () => {
     })
     } else { 
       swal({
-        title: "Estas seguro que Deseas QUITARLEEE EL BANN",
-        text: "DESBANEAR",
+        title: `Estas seguro que deseas hacer quitar el bann a ${value.name}`,
+        text: "Desbanear",
         icon: "warning",
         buttons: ["No", "Si"]
       }).then( (respuesta) => {
@@ -211,13 +229,19 @@ export const AdminUsers = () => {
         </div>
       ),
     },
+    Table.EXPAND_COLUMN,
   ];
+
 
   return (
     <div>
-      <NavAdmin handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleClick={handleClick} />
-     <div style={{ marginTop: "100px" }}>
-        <Table columns={column} dataSource={newUsers} />
+      <NavAdmin name={name} handleInputChange={handleInputChange} handleSubmit={handleSubmit} handleClick={handleClick} />
+     <div style={{ marginTop: "80px", padding: "20px" }}>
+        <Table style={{backgroundColor: "rgb(245, 245, 235)"}} columns={column} dataSource={newUsers}   expandable={{
+            expandedRowRender: (record) => (
+              <InfoUser name={record.name} lastname={record.lastname} image={record.image} status={record.status}/>
+            ),
+          }}/>
       </div>
     </div>
   );
