@@ -1,4 +1,29 @@
-const { Order, User } = require("../db");
+const { Order, User, Product } = require("../db");
+
+
+async function updateProductStock(prodId, product_amount) {
+  try {
+    const product = await Product.findOne({ where: { id: prodId } });
+
+    if (product) {
+      const newStock = product.stock - product_amount;
+
+      await Product.update({ stock: newStock }, { where: { id: prodId } });
+
+      console.log(
+        `El stock del producto con ID ${prodId} se ha actualizado a ${newStock}.`
+      );
+    } else {
+      console.log(`No se encontró un producto con ID ${prodId}.`);
+    }
+  } catch (error) {
+    console.log(
+      `Error al actualizar el stock del producto con ID ${prodId}: ${error.message}`
+    );
+  }
+}
+
+
 
 const postOrder = async (
     paymentId,
@@ -80,4 +105,4 @@ const getOrders = async () => {
 //   return orders;
 // };
 
-module.exports = { postOrder, getOrders };
+module.exports = { postOrder, getOrders, updateProductStock };

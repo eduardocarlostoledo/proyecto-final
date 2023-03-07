@@ -15,7 +15,7 @@ export default function AddToCart (item){
 
     const handleSubmit = e => {
         e.preventDefault();
-        const newItem = { name: item.name, image: item.image, price: item.price, cartUserId: userActiveOwnerOfCart.email };
+        const newItem = { name: item.name, image: item.image, price: item.price };
         console.log("NEW USER ITEM" , userActiveOwnerOfCart)
         console.log("NEW ITEM" , newItem)
         fetch('http://localhost:3001/cart', {
