@@ -38,6 +38,36 @@ const getProductsByName = async (productName) => {
         },
       },
     });
+    const filterBans = products.filter( product => product.status === true)
+    const result = filterBans.map((p) => {
+      return {
+        id: p.id,
+        name: p.name,
+        image:p.image.secure_url,
+        price:p.price,
+        description: p.description,
+        type: p.type.name,
+        brand: p.brand.name,
+        stock: p.stock,
+        status:p.status
+      }
+    })
+    return result;
+  } catch (error) {
+    throw new Error("Error retrieving product by Name: " + error.message);
+  }
+};
+
+const getProductsByNameForAdmin = async (productName) => {
+  try {
+    const products = await Product.findAll({
+      include: [Type,Brand],
+      where: {
+        name: {
+          [Op.iLike]: `%${productName}%`,
+        },
+      },
+    });
     const result = products.map((p) => {
       return {
         id: p.id,
@@ -48,6 +78,7 @@ const getProductsByName = async (productName) => {
         type: p.type.name,
         brand: p.brand.name,
         stock: p.stock,
+        status:p.status
       }
     })
     return result;
@@ -62,6 +93,30 @@ const getProductsByName = async (productName) => {
 const getProducts = async () => {
     try {
       const allProducts = await Product.findAll({include: [Type,Brand]});
+      const filterBans = allProducts.filter( product => product.status === true)
+      const result = filterBans.map((p) => {
+        return {
+          id: p.id,
+          name: p.name,
+          image:p.image.secure_url,
+          price:p.price,
+          description: p.description,
+          type: p.type.name,
+          brand: p.brand.name,
+          info_adicional: p.info_adicional,
+          stock: p.stock,
+          status:p.status
+        }
+      })
+      return result;
+    } catch (error) {
+      throw new Error("Error retrieving products: " + error.message);
+    }
+  };
+
+const getProductsForAdmin = async () => {
+    try {
+      const allProducts = await Product.findAll({include: [Type,Brand]});
       const result = allProducts.map((p) => {
         return {
           id: p.id,
@@ -73,6 +128,7 @@ const getProducts = async () => {
           brand: p.brand.name,
           info_adicional: p.info_adicional,
           stock: p.stock,
+          status:p.status
         }
       })
       return result;
@@ -87,7 +143,8 @@ const getProducts = async () => {
 const getProductName = async (product) => {
   try {
     const products = await Product.findAll({include: [Type,Brand],where:{name:product}});
-    const result = products.map((p) => {
+    const filterBans = products.filter( product => product.status === true)
+    const result = filterBans.map((p) => {
       return {
         id: p.id,
         name: p.name,
@@ -100,7 +157,8 @@ const getProductName = async (product) => {
         stock:p.stock,
         reviews:p.reviews,
         calification:p.calification,
-        info_adicional:p.info_adicional
+        info_adicional:p.info_adicional,
+        status:p.status
       }
     })
     if (result) return result;
@@ -109,6 +167,8 @@ const getProductName = async (product) => {
     throw new Error("Error retrieving product by name: " + error.message);
   }
 };
+
+
 
 // Crea un producto en la BDD, esta accion sirve para testear. (Unicamente va a ser ejecutada por un administrador, no el usuario)
 const postProduct = async (product,image) => {
@@ -187,6 +247,14 @@ const putProduct = async (id,product, image) => {
   return await Product.findByPk(id);
 }
 
+const banOrUnban = async (id) => {
+  const {status} = await Product.findByPk(id)
+
+  await Product.update({status:!status}, { where: { id } })
+
+  return await Product.findByPk(id);
+}
+
 const BuildSearch = async (socket) => {
   try {
     const products = await Product.findAll({
@@ -195,7 +263,8 @@ const BuildSearch = async (socket) => {
         "info_adicional": socket,
       },
     });
-    const result = products.map((p) => {
+    const filterBans = products.filter( product => product.status === true)
+    const result = filterBans.map((p) => {
       return {
         id: p.id,
         name: p.name,
@@ -206,6 +275,7 @@ const BuildSearch = async (socket) => {
         type: p.type.name,
         brand: p.brand.name,
         stock: p.stock,
+        status:p.status
       }
     })
     return result;
@@ -242,5 +312,8 @@ module.exports = {
   getTypeProducts,
   putProduct,
   BuildSearch,
-  putReview
+  putReview,
+  banOrUnban,
+  getProductsForAdmin,
+  getProductsByNameForAdmin
 };

@@ -8,6 +8,9 @@ const { postProduct,
   BuildSearch,
   putReview,
   putProduct,
+  banOrUnban,
+  getProductsForAdmin,
+  getProductsByNameForAdmin
   } = require('../controllers/productController')
 
 const productRouter = Router()
@@ -125,6 +128,15 @@ productRouter.get("/", async (req, res) => {
   }
 });
 
+productRouter.get("/ForAdmin", async (req, res) => {
+  try {
+    let products = req.query.name ?  await getProductsByNameForAdmin(req.query.name) : await getProductsForAdmin() 
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 //Ruta GET de productos por Name, busca el producto con un nombre exactamente igual al que recibe por parametro. (Ruta para el detail)
 
   productRouter.get("/:name", async (req, res) => {
@@ -141,6 +153,16 @@ productRouter.put("/review/:id", async (req, res) =>{
   try {
     const {id}=req.params;
     const result= await putReview(id,req.body);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json(error.message)
+  }
+})
+
+productRouter.put("/ban/:id", async (req, res) =>{
+  try {
+    const {id}=req.params;
+    const result= await banOrUnban(id);
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json(error.message)
