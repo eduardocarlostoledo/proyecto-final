@@ -10,6 +10,7 @@ import {
   getAllTypes,
   createProduct,
 } from "../redux/actions/ProductActions";
+import { useNavigate } from "react-router-dom";
 
 function validate(input) {
     let errors = {};
@@ -101,6 +102,7 @@ export const CreateProducts = () => {
         console.log(input, 'ACA ESTA EL INPUT MOTHERBOARD O PROCESS')
     };
     
+    const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!input.name || !input.image || !input.price || !input.description || !input.type.length || !input.brand.length) {
@@ -131,6 +133,7 @@ export const CreateProducts = () => {
                 type: [],
                 info_adicional:{ "socket" : ""}
             });
+            navigate('/Products')
         }
     }
 
