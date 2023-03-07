@@ -23,8 +23,6 @@ async function updateProductStock(prodId, product_amount) {
   }
 }
 
-
-
 const postOrder = async (
     paymentId,
     statusId,
@@ -38,21 +36,7 @@ const postOrder = async (
     product_amount,
     product_unit_price) => {  
 
-  try {
-    console.log(
-      "POST CONTROLLER ORDER",
-      paymentId,
-      statusId,
-      merchantOrderId,
-      product_description,     
-      total_order_price,      
-      prodId,
-      buyer_email,
-      product_name,
-      product_image,
-      product_amount,
-      product_unit_price
-    );
+  try {    
     const newOrder = await Order.create({
         paymentId,
         statusId,
@@ -83,26 +67,5 @@ const getOrders = async () => {
     throw new Error("Error retrieving orders: " + error.message);
   }
 };
-
-
-// const getOrders = async () => {
-//   const orders = await Order.findAll({
-//     include: {
-//       model: User,
-//       attributes: [
-//         "name",
-//         "email",
-//         "phonenumber",
-//         "country",
-//         "city",
-//         "address",
-//       ],
-//       through: {
-//         attributes: [],
-//       },
-//     },
-//   });
-//   return orders;
-// };
 
 module.exports = { postOrder, getOrders, updateProductStock };

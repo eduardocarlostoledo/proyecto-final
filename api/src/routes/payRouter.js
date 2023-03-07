@@ -25,8 +25,7 @@ payRouter.post("/preference", (req, res) => {
   });
   
 
-payRouter.post("/create_preference", (req, res) => {  
-  enviarMail(arrayPreference.product_description, arrayPreference.total_order_price ,arrayPreference.buyer_email ); //como acomodarlo  
+payRouter.post("/create_preference", (req, res) => {    
   console.log("LLEGA PREFERENCIA", req.body);  
   let preference = {
     items: [
