@@ -116,40 +116,40 @@ export default function Cart() {
     }
 
     return (
-        <div className='ContainerCart'>
-            <h2 className='h2'>Shopping Cart</h2>
-            
-            <div className='NavCart'>
-                    {cartItems.length == 0 ? (
-                        <p>el carrito esta vacio</p>
+      <div className='ContainerCart'>
+          <h2 className='h2'>Shopping Cart</h2>
+          
+          <div className='NavCart'>
+                  {cartItems.length == 0 ? (
+                      <p>el carrito esta vacio</p>
 
-                    ) : ( cartItems.map(item => (
-                        <div >
-                            <ItemCart
-                                name= {item.name}
-                                price= {item.price}
-                                amount= {item?.amount}
-                                image= {item.image}
-                                prodId= {item.prodId}
-                                key={item.id}
+                  ) : ( cartItems.map(item => (
+                      <div >
+                          <ItemCart
+                              name= {item.name}
+                              price= {item.price}
+                              amount= {item?.amount}
+                              image= {item.image}
+                              prodId= {item.prodId}
+                              key={item.id}
 
-                                handleDeleteAllCart={handleDeleteAllCart}
-                            /> 
+                              handleDeleteAllCart={handleDeleteAllCart}
+                          /> 
 
-                        </div>
+                      </div>
 
-                        ))
-                    )}
+                      ))
+                  )}
 
-        
-            </div>
-            <button className='ButtonDeleteAll' onClick={handleDeleteAllCart}>Delete All Cart</button>
+      
+          </div>
+          <button className='ButtonDeleteAll' onClick={handleDeleteAllCart}>Delete All Cart</button>
 
-            <h3 className='h3'>Total: ${total}</h3>
-            <div className='BotonCheckout'>
-                <button className='ButtonCart' onClick={handleCheckout}>Checkout</button>
-                <div  id="button-checkout"></div>
-            </div>
-        </div>
-    );
+          <h3 className='h3'>Total: ${total}</h3>
+          <div className='BotonCheckout'>
+              <button className='ButtonCart' onClick={handleCheckout}>Checkout</button>
+              <div  id="button-checkout"></div>
+          </div>
+      </div>
+  );
 }
