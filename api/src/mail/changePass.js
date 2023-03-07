@@ -1,8 +1,6 @@
 const nodemailer = require('nodemailer')
 
-enviarMail = async (producto, precio, usuario) => {
-
-    let cantidades = producto.split(',')
+enviarPass = async (usuario, clave) => {
 
     const config = {
         host: 'smtp.gmail.com',
@@ -15,12 +13,10 @@ enviarMail = async (producto, precio, usuario) => {
 
     const mensaje = {
         from: 'computer.store.original@gmail.com',
-        to: usuario,
-        subject: 'compra realizada de forma exitosa!' ,
-        text: `muchas gracias por comprar en Computer Store a continuacion adjunto el detalle de su compra:
-        producto/s: ${producto}
-        cantidad de productos: ${cantidades.length}
-        compra total: ${precio}
+        to: usuario ,
+        subject: 'codigo para cambio de contraseña' ,
+        text: `su codigo solicitado para el cambio de contraseña de su usuario en nuestra pagina 
+                computer store es el siguiente ${clave}
                 `
     }
 
@@ -31,4 +27,4 @@ enviarMail = async (producto, precio, usuario) => {
     console.log(info)
 }
 
-module.exports = enviarMail
+module.exports = enviarPass
