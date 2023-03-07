@@ -1,5 +1,5 @@
 const { Router } = require('express');
-
+const enviarPass = require('../mail/changePass')
 const { putUser, getUsers, getUserId, loginUser, postUsers, deleteUser, postUserGoogle, loginGoogle } = require("../controllers/usersController")
 
 const userRouter = Router()
@@ -29,6 +29,20 @@ userRouter.put("/:id", async (req, res) => {
     res.status(400).json(error.message)
   }
  })
+
+ ///////////////////////////// PERMITIR CAMBIO DE CONTRASEÑA Y ENVIO DE MAIL /////////////////////////////
+ userRouter.get("/changePass", (req, res) => {//esto deberia obtener el mai, enviar un mail con el codigo y la ruta retornara un codigo, 
+  const { email } = req.body
+
+    let code = String(Math.random()).substr(2,6)
+    try{
+      enviarPass(email, code)
+      res.status(200).json({pass: code})
+    } catch {
+      res.status(400).json(error.message)
+    }
+ })
+
 
 
  //////////////////////////////// TRAER TODOS LOS USUARIOS  ////////////////////////////////
