@@ -9,7 +9,7 @@
     
 }
 
-@media screen and (max-width: 680px){
+/* @media screen and (max-width: 680px){
     .DivCardsFilters{
         flex-direction: column;
         justify-content: center;
@@ -33,7 +33,7 @@
         justify-content: center;
         transform: translateX(30px);
     }
-}
+} */
 
 
 .DivFilter {
@@ -61,7 +61,7 @@
 }
 
 .DivProducts{
-    margin-bottom: 280px;
+    margin-bottom: 230px;
 }
 
 .ContainerFilters{
@@ -162,3 +162,50 @@
 }
 
 
+@media screen and (max-width: 650px){
+    .DivCardsFilters{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .DivProducts{
+        margin-bottom: -130px;
+    }
+    .DivFilter{
+        justify-content: center;
+        width: 80%;
+        height: 240px; 
+        margin: 0;
+    }
+    .DivFilter h2{
+        display: none;
+    }
+    .searchButton {
+        margin: 0;
+    }
+    .Todos{
+        margin-bottom: 5px;
+    }
+    .ContainerFilters {
+        gap: 5px;
+        margin-bottom: 0;
+    }
+    .CardContainer{
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        gap: 0;
+    }
+    .DivAllCards{
+        margin: 0;
+        height: 16rem;
+        width: 9.7rem;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .DivAllCards{
+        width: 8.75rem;
+        margin: 0px;
+    }
+}

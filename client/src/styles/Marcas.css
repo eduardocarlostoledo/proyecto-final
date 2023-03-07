@@ -23,3 +23,9 @@
 .MarcaContainer:hover{
     background-color: #e7b8ff;
 }
+
+@media screen and (max-width: 650px){
+    .Marcas {
+        display: none;
+    }
+}

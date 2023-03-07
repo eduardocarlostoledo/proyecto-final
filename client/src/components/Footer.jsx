@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 
 export const Footer = () => {
@@ -5,11 +6,11 @@ export const Footer = () => {
         <footer className='ContainerFooter'>
             <div className='ContainerLogo'>
                 <div className='Logo'>
-                    <h3>Computer Store</h3>
-                    <img width="80px" src="https://static.vecteezy.com/system/resources/thumbnails/009/096/946/small/monitor-screen-computer-with-colorful-rainbow-bubble-illustration-logo-design-vector.jpg" alt="" />
+                    <h3 className='Computer'>Computer Store</h3>
+                    <img width="60px" src="https://static.vecteezy.com/system/resources/thumbnails/009/096/946/small/monitor-screen-computer-with-colorful-rainbow-bubble-illustration-logo-design-vector.jpg" alt="" />
                     {/* logos */}
                 </div>
-                <div>
+                {/* <div>
                     <h6>Franco Chaparro</h6>
                     <p>{" "} <a href="https://www.linkedin.com/in/franco-chaparro-134743252/">LinkedIn{" "}</a>
                     </p>
@@ -43,11 +44,12 @@ export const Footer = () => {
                     <h6>Claudio Bernal</h6>
                     <p>{" "} <a href="https://www.linkedin.com/in/claudio-andres-bernal-denis-148283234/">LinkedIn{" "}</a>
                     </p>
-                </div>
-                
+                </div> */}
+                <Link className='LinkMembers' to="/about">
+              <h3><strong> Members </strong></h3>    
+                </Link>
             </div>
-                        
-                 
+                        <p className='Copyright' >Copyright ©. Computer store.</p> 
         </footer>
     
     )
