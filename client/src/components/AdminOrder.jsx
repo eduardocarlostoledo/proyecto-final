@@ -4,28 +4,21 @@ import { Table, Tag } from "antd"
 import {AiFillSetting} from "react-icons/ai"
 
 import { addAllOrders } from '../redux/actions/OrderActions';
-import { getUserById } from '../redux/actions/UsersActions';
 
-export const OrderUsers = () => {
+
+export const AdminOrder = () => {
   
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(addAllOrders())
-        dispatch(getUserById())
+        
     },[dispatch])
 
     
-    let users = useSelector((state) => state.users || {});
+    
     let orders = useSelector((state) => state.order || [])
 
-    // Obtén la información del usuario para cada orden
-    orders = orders.map((order) => {
-      const user = users[order.cartUserId] || {}; // Busca la información del usuario por ID
-      return {
-        ...order,
-        user: user,
-      };
-    });
+  
     const columns = [
         {
           title: 'ID',
@@ -35,9 +28,9 @@ export const OrderUsers = () => {
           render: (text) => <p>{text}</p>,
         },
         {
-          title: 'Usuario ID',
-          dataIndex: 'cartUserId',
-          render: (text, record) => <p>{record.user && record.user.email}</p>
+          title: 'Buyer email',
+          dataIndex: 'buyer_email',
+          render: (text) => <p>{text}</p>
 
         },
         {
@@ -51,13 +44,13 @@ export const OrderUsers = () => {
           filters: [
             { text: 'Pending', value: 'pending' },
             { text: 'Failure', value: 'failure' },
-            { text: 'Sucsess', value: 'success'}
+            { text: 'Approved', value: 'approved'}
           ],
           onFilter: (value, record) => record.statusId.indexOf(value) === 0,
           render: (statusId) => (
             <>
-                {statusId === "success" ? (
-                    <Tag color="green">Success</Tag>
+                {statusId === "approved" ? (
+                    <Tag color="green">Aproved</Tag>
                     ) : statusId === "failure" ? (
                     <Tag color="red">Failure</Tag>
                     ) : (
@@ -72,6 +65,41 @@ export const OrderUsers = () => {
           render: (text) => <p>{text}</p>,
         },
         {
+          title: 'Product Description',
+          dataIndex: 'product_description',
+          render: (text) => <p>{text}</p>,
+        },
+        {
+          title: 'Total Order Id',
+          dataIndex: 'total_order_price',
+          render: (text) => <p>{text}</p>,
+        },
+        {
+          title: 'Prod ID',
+          dataIndex: 'prodId',
+          render: (text) => <p>{text}</p>,
+        },
+        {
+          title: 'Product Name',
+          dataIndex: 'product_name',
+          render: (text) => <p>{text}</p>,
+        },
+        {
+          title: 'Product Image',
+          dataIndex: 'product_image',
+          render: (text) => <p>{text}</p>,
+        },
+        {
+          title: 'Product Amount',
+          dataIndex: 'product_amount',
+          render: (text) => <p>{text}</p>,
+        },        
+        {
+          title: 'Product Unit Price',
+          dataIndex: 'product_unit_price',
+          render: (text) => <p>{text}</p>,
+        },
+        {
           title: 'Acciones',
           dataIndex: '',
           render: (value) => (
@@ -81,7 +109,6 @@ export const OrderUsers = () => {
           ),
         },
       ];
-
   return (
     <div style={{marginTop: "100px", padding: "60px"}}>
 

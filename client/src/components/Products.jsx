@@ -84,7 +84,6 @@ export const Products = () => {
                 <div className="DivCardsFilters">
                     <div className="DivFilter">
                         <h2>Filters</h2>
-                        <Marcas/>
                         <button className="Todos" onClick={(e) => handleClick(e)}>Reload all Products</button>
                         <div className="SearchButton" id="InputB">
                             <input className='InputB' type='text' placeholder="Search..." onChange={(e) => handleInputChange(e)}/> 
