@@ -51,23 +51,12 @@ const postOrder = async (
 };
 
 const getOrders = async () => {
-    const orders = await Order.findAll({
-      include: {
-        model: User,
-        attributes: [
-          "name",
-          "email",
-          "phonenumber",
-          "country",
-          "city",
-          "address",
-        ],
-        through: {
-          attributes: [],
-        },
-      },
-    });
-    return orders;
+  try {
+    const allorders = await Order.findAll();
+    return allorders;
+  } catch (error) {
+    throw new Error("Error retrieving orders: " + error.message);
+  }
 };
   
 module.exports = { postOrder, getOrders };

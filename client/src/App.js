@@ -52,7 +52,7 @@ function App() {
 
         <Route path="admin/Products" element={<AdminProducts />} />
 
-        <Route path="admin/Orders" element={<AdminOrder/>}/>
+        <Route path="/admin/Orders" element={<AdminOrder/>}/>
         
         <Route path="/admin/users" element={<AdminUsers />} />
 

@@ -18,7 +18,7 @@ export default function AddToCart (item){
     const handleSubmit = e => {
         e.preventDefault();
   
-        if(userActiveOwnerOfCart===null)swal('Error', "You must log in to add products to cart!", 'error')
+        if(userActiveOwnerOfCart===null)swal('Oops...', "You must log in to add products to cart!", 'info')
         else {
             const newItem = { name: item.name, image: item.image, price: item.price, cartUserId: userActiveOwnerOfCart.email };
             console.log("NEW USER ITEM" , userActiveOwnerOfCart)

@@ -24,9 +24,10 @@ payRouter.post("/create_preference", (req, res) => {
       product_unit_price: req.body.category_id[0].price,
     }  
 
-  console.log("LLEGA PREFERENCIA PUSH ARRAY", arrayPreference);  
+ 
   console.log("LLEGA PREFERENCIA", req.body);  
   console.log("LLEGA PREFERENCIA", req.body.category_id[0].cartUserId);
+
   let preference = {
     items: [
       {
@@ -182,6 +183,7 @@ payRouter.get("/feedback/pending", async function (req, res) {
           </body>
         </html>
       `);
+      await deleteAllCart(); // esto elimina el carrito al realizar una compra exitosa
     
   } catch (error) {
     console.error(error);
