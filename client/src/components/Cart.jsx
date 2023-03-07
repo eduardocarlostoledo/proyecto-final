@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from 'react';
 import mercadopago from "./mercadopago";
 import "../styles/Cart.css";
 import swal from 'sweetalert';
