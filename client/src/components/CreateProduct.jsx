@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/CreateProduct.css";
 import swal from 'sweetalert';
+import { NavAdmin } from "./navAdmin"
 
 import {
   getAllBrands,
@@ -148,6 +149,8 @@ export const CreateProducts = () => {
 
 
     return (
+        <div>
+  <NavAdmin />
         <div className="container">
                     
             <div className='containerForm'>
@@ -191,7 +194,7 @@ export const CreateProducts = () => {
                                     <option value="" disabled>Select Type</option>
                                     {types && types.map((type, index) => (
                                         <option key={index} value={type.name}>{type.name}</option>
-                                    ))}
+                                        ))}
                                     {typeInput && <option value={typeInput}>{typeInput}</option>}
                                 </select>
                                 {errors.type && (<p className='spanSError'>{errors.type}</p>)}
@@ -224,5 +227,6 @@ export const CreateProducts = () => {
                 </form>
             </div>                  
         </div>
+                                        </div>
     );
 };

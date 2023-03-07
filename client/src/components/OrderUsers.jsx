@@ -2,9 +2,9 @@ import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Tag } from "antd"
 import {AiFillSetting} from "react-icons/ai"
-
 import { addAllOrders } from '../redux/actions/OrderActions';
 import { getUserById } from '../redux/actions/UsersActions';
+import { NavAdmin } from './navAdmin';
 
 export const OrderUsers = () => {
   
@@ -83,9 +83,11 @@ export const OrderUsers = () => {
       ];
 
   return (
-    <div style={{marginTop: "100px", padding: "60px"}}>
-
-        <Table  columns={columns} dataSource={orders}/>
+    <div>
+       <NavAdmin />
+      <div style={{marginTop: "80px", padding: "20px"}}>
+        <Table style={{backgroundColor: "rgb(245, 245, 235)"}} columns={columns} dataSource={orders}/>
+    </div>
     </div>
     
   )

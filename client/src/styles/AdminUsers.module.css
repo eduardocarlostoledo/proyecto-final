@@ -27,3 +27,38 @@
     border: none;
     background-color: white;
 }
+
+.Contenedor {
+    width: 100%;
+    display: flex;
+}
+
+.ContenedorImg { 
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ContenedorImg img { 
+    width: 90%;
+    height: 250px;
+    border-radius: 15%;
+    padding: 10px;
+}
+
+.ContenedorData {
+    width: 75%;
+    padding: 10px;
+}
+
+
+.verde {
+    color: green;
+    font-size: 13px;
+}
+
+.rojo {
+    color: red;
+    font-size: 13px;
+}

@@ -7,6 +7,8 @@ export const GET_EMAIL="GET_EMAIL";
 export const USER_ACTIVE="USER_ACTIVE";
 export const CHANGE_NAV="CHANGE_NAV";
 export const GET_ID= "GET_ID";
+export const GET_ALL_QUERY= "GET_ALL_QUERY";
+
 
 export function getAllUsers () { 
   return async function(dispatch){
@@ -103,10 +105,16 @@ export function deleteUserLocalStorage() {
     return async function(dispatch){
         let json  = await axios.post(`http://localhost:3001/users/loginGoogle`,payload);
         return json.data
-      //   return dispatch({
-      //     type: GET_ID,
-      //     payload: json.data
-      // });
+    };
+  };
+  
+  export function getAllUsersName (name) { 
+    return async function(dispatch){
+        let json = await axios.get(`http://localhost:3001/users?name=${name}`)
+        return dispatch({
+            type:  GET_ALL_QUERY,
+            payload: json.data.data
+        });
     };
   };
   

@@ -2,23 +2,33 @@ import React, { useEffect, useState } from "react"
 import "../styles/Profile.css"
 import { BiLogOutCircle } from "react-icons/bi"
 import { FaPhone, FaCity } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from "react-router-dom"
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
-import { PutUser, deleteUserLocalStorage, getAllUsers } from '../redux/actions/UsersActions';
+import { PutUser, deleteUserLocalStorage, getAllUsers, UserActive } from '../redux/actions/UsersActions';
 import swal from 'sweetalert';
+import { useNavigate, useHistory  } from "react-router-dom"
 
 
 export default function Profile() {
-  useEffect( ()=> { 
+  useEffect(() => {
     dispatch(getAllUsers());
-  },[])
+  }, [])
+
+  // const history = useHistory();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    if (isAuthenticated === "afuera") {
+      navigate('/login');
+    }
+  }, [navigate]);
+
 
 
   const userActive = JSON.parse(localStorage.getItem("USUARIO"))
-  const navigate = useNavigate();
   const [Panel, setPanel] = useState(true);
   const dispatch = useDispatch()
 
@@ -26,7 +36,7 @@ export default function Profile() {
   const [input, setInput] = useState({
     image: userActive.image ? userActive.image : "",
     city: userActive.city ? userActive.city : "",
-    id: userActive.id ,
+    id: userActive.id,
     phonenumber: userActive.phonenumber ? userActive.phonenumber : "",
     address: userActive.address ? userActive.address : "",
     country: userActive.country ? userActive.country : "",
@@ -45,6 +55,7 @@ export default function Profile() {
     setTimeout(() => {
       dispatch(deleteUserLocalStorage())
       window.localStorage.removeItem("USUARIO")
+      localStorage.setItem('isAuthenticated', "afuera");
       navigate("/Login")
     }, 1300)
   }
@@ -56,7 +67,7 @@ export default function Profile() {
 
       image: userActive.image ? userActive.image : "",
       city: userActive.city ? userActive.city : "",
-      id:  userActive.id,
+      id: userActive.id,
       phonenumber: userActive.phonenumber ? userActive.phonenumber : "",
       address: userActive.address ? userActive.address : "",
       country: userActive.country ? userActive.country : "",
@@ -134,11 +145,46 @@ export default function Profile() {
               <div className="prueba">
                 <Form.Group className="mb-3" controlId="Country">
                   <Form.Label>Country</Form.Label>
-                  <Form.Control name='country' value={input.country} onChange={e => handleChange(e)} className="inputs" disabled={false} type="text" placeholder="Enter country" />
+                  <Form.Control style={{ userSelect: "none", border: "0.01rem solid grey", backgroundColor: "white" }} name='country' value={input.country} onChange={e => handleChange(e)} className="inputs" disabled={true} type="text" placeholder="Enter country" />
                 </Form.Group>
+
                 <Form.Group className="mb-3" controlId="City">
                   <Form.Label>City</Form.Label>
-                  <Form.Control name='city' value={input.city} onChange={e => handleChange(e)} className="inputs" type="text" placeholder="Enter city" />
+                  <Form.Select style={{ border: "0.01rem solid grey", width: "210px" }} name="city" onChange={e => handleChange(e)} aria-label="Default select example">
+                    <option> {userActive.city ? userActive.city : "Select City"}</option>
+                    <option value="Buenos Aires">Buenos Aires</option>
+                    <option value="Catamarca">Catamarca</option>
+                    <option value="Chaco">Chaco</option>
+                    <option value="Chubut">Chubut</option>
+                    <option value="CABA">Ciudad Autónoma de Buenos Aires</option>
+                    <option value="Córdoba">Córdoba</option>
+                    <option value="Corrientes">Corrientes</option>
+                    <option value="Entre Ríos">Entre Ríos</option>
+                    <option value="Formosa">Formosa</option>
+                    <option value="Jujuy">Jujuy</option>
+                    <option value="La Pampa">La Pampa</option>
+                    <option value="La Rioja">La Rioja</option>
+                    <option value="Mendoza">Mendoza</option>
+                    <option value="Misiones">Misiones</option>
+                    <option value="Neuquén">Neuquén</option>
+                    <option value="Río Negro">Río Negro</option>
+                    <option value="Salta">Salta</option>
+                    <option value="San Juan">San Juan</option>
+                    <option value="San Luis">San Luis</option>
+                    <option value="Santa Cruz">Santa Cruz</option>
+                    <option value="Santa Fe">Santa Fe</option>
+                    <option value="Santiago del Estero">Santiago del Estero</option>
+                    <option value="Tierra del Fuego">Tierra del Fuego</option>
+                    <option value="Tucumán">Tucumán</option>
+                  </Form.Select>
+                  {/* <select name="" id="">
+                  <option value="LORENZO">Formosa</option>
+                  <option value="LORENZO">Buenos aires</option>
+                  <option value="LORENZO">TEMPERLET</option>
+                  <option value="LORENZO">RIQUELMEN</option>
+                  <option value="LORENZO">LORENZO</option>
+                 </select> */}
+                  {/* <Form.Control name='city' value={input.city} onChange={e => handleChange(e)} className="inputs" type="text" placeholder="Enter city" /> */}
                 </Form.Group>
               </div>
               <div className="prueba">

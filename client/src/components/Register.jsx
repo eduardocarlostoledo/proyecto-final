@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import styles from "../styles/Register.module.css";
 import { Link, useNavigate } from 'react-router-dom';
@@ -84,6 +84,14 @@ export const Register = () => {
         passwordConfirm: "",
     });
 
+
+    useEffect(() => {
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        if (isAuthenticated === "On") {
+          navigate('/Profile');
+        }
+      }, [navigate]);
+    
 
     function handleChange(e) {
         setInput({

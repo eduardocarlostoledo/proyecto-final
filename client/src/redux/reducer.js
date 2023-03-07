@@ -25,6 +25,7 @@ import {
         USER_ACTIVE,
         GET_ID,
         CHANGE_NAV,
+        GET_ALL_QUERY
     } from './actions/UsersActions';
     
     const initialState= {
@@ -47,6 +48,7 @@ import {
     }
     
     const rootReducer = (state=initialState,action) => {
+        let fran
 
         switch(action.type) {
 
@@ -161,9 +163,11 @@ import {
                 };        
             
             case "deleteUserLocalStorage":
+                localStorage.setItem("Navbar", JSON.stringify(true))
+                 fran = JSON.parse(localStorage.getItem("Navbar"))
                 return { 
                     ...state, 
-                    ChangeNav: false
+                    ChangeNav: fran
                 }
 
                 
@@ -197,9 +201,11 @@ import {
                 }
 
             case CHANGE_NAV: 
+            localStorage.setItem("Navbar", JSON.stringify(false))
+             fran = JSON.parse(localStorage.getItem("Navbar"))
             return { 
                 ...state, 
-                ChangeNav: true
+                ChangeNav: fran
             }
             
             case ADD_REVIEW:
@@ -211,6 +217,11 @@ import {
                 idgoogle: action.payload
             }
                 
+            case GET_ALL_QUERY:
+                return { 
+                    ...state, 
+                    users: action.payload
+                }
             default: return {...state}
             
         }

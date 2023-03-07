@@ -9,7 +9,7 @@ import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
 import { Register } from "./components/Register";
 import Profile  from "./components/Profile";
-import {Login} from "./components/Login"
+import {Login} from "./components/Login";
 import {CreateProducts} from "./components/CreateProduct";
 import { GetFiltersForEmail } from "./redux/actions/UsersActions";
 import { useEffect } from "react";
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      {location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" || location.pathname.startsWith("/detail/") ? null : <NavBar />}
+      {location.pathname === "/CreateProduct" || location.pathname === "/Order" || location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" || location.pathname.startsWith("/detail/") ? null : <NavBar />}
       {/* {(location.pathname == "/admin" || location.pathname == "/admin/Users") && <NavAdmin />} */}
       <Routes>
         <Route exact path="/" element={<Home/>} />
@@ -57,7 +57,7 @@ function App() {
         <Route path="/admin/users" element={<AdminUsers />} />
 
       </Routes>
-     {location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" ? null : <Footer />}
+     { location.pathname === "/CreateProduct" || location.pathname === "/Order" || location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" ? null : <Footer />}
     </div>
   );
 }

@@ -7,13 +7,16 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCart, getUpdate } from "../redux/actions/CartActions";
 import { update } from "../redux/actions/CartActions";
-
+// import { useSelector } from "react-redux";
 
 
 export const NavBar = () => {   
 
-    let Nav = useSelector((state) => state.ChangeNav);
-    
+    // let Nav = useSelector((state) => state.ChangeNav);
+    // let Nav = useSelector((state) => state.UserActive);
+    let usuario = JSON.parse(localStorage.getItem("USUARIO"))
+    // console.log(Nav);
+    // let Nav 
 
     const dispatch = useDispatch();
     const up = useSelector((state) => state.update)
@@ -40,10 +43,11 @@ export const NavBar = () => {
             <Search />
         </div> */}
         <div className="ContainerInfo">
-           { !Nav ? <div className="LogAndSign">
+           { 
+           JSON.parse(localStorage.getItem("Navbar")) ? <div className="LogAndSign">
             <Link to="/Login"><button className="BtnLogSing" >Log in</button></Link>
             <Link to="/Register"><button className="BtnLogSing">Sign up</button></Link>
-            </div>  :  <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link> 
+            </div>  :   <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link>
             }  
             <Link to='/Cart'>
                 <button className="CartContainer"> <AiOutlineShoppingCart className="Cart" />{itemQuantity}</button>
@@ -54,3 +58,6 @@ export const NavBar = () => {
     </div>
     )
 }
+{/* <Link to="/Profile"><button className="BtnUser"> {usuario.image ? <img className="imageIcon" src={usuario.image} alt={usuario.name} /> : <FaUserCircle className="UserLogo2"/>}</button></Link> */}
+
+{/* <Link to="/Profile"><button className="BtnUser"><FaUserCircle className="UserLogo"/></button></Link> */}
