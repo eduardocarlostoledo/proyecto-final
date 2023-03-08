@@ -51,7 +51,7 @@
     justify-content: center;
     align-items: center;
     max-width: 1200px; /* ajusta el valor según tus necesidades */
-    margin: 20px; /* esto centrará el contenedor horizontalmente */ 
+    margin: 20px auto; /* esto centrará el contenedor horizontalmente */ 
 
 }
 .Galery{
