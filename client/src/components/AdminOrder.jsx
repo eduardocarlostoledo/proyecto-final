@@ -55,7 +55,7 @@ export const AdminOrder = () => {
       ),
     },
     {
-      title: 'Merchant Order ID',
+      title: 'Order ID',
       dataIndex: 'merchantOrderId',
       render: (text) => <p>{text}</p>,
     },
@@ -79,11 +79,11 @@ export const AdminOrder = () => {
       dataIndex: 'product_name',
       render: (text) => <p>{text}</p>,
     },
-    {
-      title: 'Product Image',
-      dataIndex: 'product_image',
-      render: (text) => <p>{text}</p>,
-    },
+    // {
+    //   title: 'Product Image',
+    //   dataIndex: 'product_image',
+    //   render: (text) => <p>{text}</p>,
+    // },
     {
       title: 'Product Amount',
       dataIndex: 'product_amount',

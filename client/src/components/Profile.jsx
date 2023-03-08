@@ -2,20 +2,35 @@ import React, { useEffect, useState } from "react"
 import "../styles/Profile.css"
 import { BiLogOutCircle } from "react-icons/bi"
 import { FaPhone, FaCity } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card';
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
 import { PutUser, deleteUserLocalStorage, getAllUsers, UserActive } from '../redux/actions/UsersActions';
 import swal from 'sweetalert';
-import { useNavigate, useHistory  } from "react-router-dom"
-
+import { useNavigate, Link  } from "react-router-dom"
+import { BsSendDash } from "react-icons/bs"
 
 export default function Profile() {
+
   useEffect(() => {
     dispatch(getAllUsers());
   }, [])
 
+  const [country, setCountrie] = useState({})
+
+  useEffect(() => {
+    fetch(`http://localhost:3001/order`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCountrie(data);
+      })
+      .catch((error) => console.log(error));
+    return () => setCountrie({});
+  }
+    , []);
+  
+console.log(country, "count");
   // const history = useHistory();
   const navigate = useNavigate();
 
@@ -28,20 +43,22 @@ export default function Profile() {
 
 
 
-  const userActive = JSON.parse(localStorage.getItem("USUARIO"))
+  const userActive = JSON.parse(localStorage.getItem("USUARIO")) || []
+  // const userActive = useSelector((state) => state.userActive)
   const [Panel, setPanel] = useState(true);
   const dispatch = useDispatch()
 
-
+  
   const [input, setInput] = useState({
     image: userActive.image ? userActive.image : "",
     city: userActive.city ? userActive.city : "",
-    id: userActive.id,
+    id: userActive.id ,
     phonenumber: userActive.phonenumber ? userActive.phonenumber : "",
     address: userActive.address ? userActive.address : "",
     country: userActive.country ? userActive.country : "",
     email: userActive.email,
   });
+
 
   function handleChange(e) {
     setInput({
@@ -86,7 +103,9 @@ export default function Profile() {
     if (input.city === "") input.city = userActive.city
     dispatch(PutUser({
       ...input, name: userActive.name,
-      lastname: userActive.lastname
+      lastname: userActive.lastname,
+      status: userActive.status, 
+      admin: userActive.admin
     }));
     swal("success", 'User modified successfully', "success")
     setInput({
@@ -98,14 +117,14 @@ export default function Profile() {
 
   return (
     <div className="contenedor_profile">
-      <div className="Container">
+     {!JSON.parse(localStorage.getItem("Navbar")) ? <div className="Container">
         <div className="izquierda">
           <div className="containerImg">
             <Card.Img className="ImagenProfile" variant="top" src={userActive.image ? userActive.image : "https://cdn-icons-png.flaticon.com/512/3135/3135768.png"} />
           </div>
           <div className="InfoUser">
             <div className="InfoUser-Name">
-              <h3>{userActive.name}</h3>
+              <h3>{userActive.name} {userActive.admin ? <span style={{ color: "green", fontSize: "11px", border: "0.01rem solid green", padding: "2px", borderRadius: "6px"}}>admin</span> : ""}</h3>
             </div>
             <div>
               <FaCity className="icono"></FaCity><span>{userActive.city ? userActive.city : "Ciudad"}, {userActive.country ? userActive.country : "Pais"}</ span>
@@ -127,6 +146,24 @@ export default function Profile() {
           </div>
           <h3><a href="https://login.live.com/" target="_blank" rel="noopener noreferrer">{userActive.email}</a></h3>
           <h4>Direccion: {userActive.address ? userActive.address : "Street 151515"}</h4>
+        { 
+       userActive.admin ? <div style={{marginTop: "15px"}}>
+              <div>
+              <Link to="/admin/users"><button className="dashboard"><span><BsSendDash /> Dashboard Admin</span></button></Link>
+              </div>
+          </div>
+        :
+          <div style={{marginTop: "15px"}}>
+             <h3><strong>Mis Ordenes</strong></h3>
+             {country.length > 0 && country?.map((e, index) => {
+                    if(e.buyer_email === userActive.email ) {
+                       return (<h6 key={index}>{e.product_name} {e.product_unit_price} $ <span style={{color: "green", fontSize: "11px", border: "0.01rem solid green", padding: "2px", borderRadius: "6px"}}>{e.statusId}</span></h6>)
+                    }
+                  })
+              }
+          </div>
+        }
+
         </div>
           :
           <div className="modificar">
@@ -150,7 +187,7 @@ export default function Profile() {
 
                 <Form.Group className="mb-3" controlId="City">
                   <Form.Label>City</Form.Label>
-                  <Form.Select style={{ border: "0.01rem solid grey", width: "210px" }} name="city" onChange={e => handleChange(e)} aria-label="Default select example">
+                  <Form.Select style={{ border: "0.01rem solid grey", width: "203px" }} name="city" onChange={e => handleChange(e)} aria-label="Default select example">
                     <option> {userActive.city ? userActive.city : "Select City"}</option>
                     <option value="Buenos Aires">Buenos Aires</option>
                     <option value="Catamarca">Catamarca</option>
@@ -177,14 +214,6 @@ export default function Profile() {
                     <option value="Tierra del Fuego">Tierra del Fuego</option>
                     <option value="Tucumán">Tucumán</option>
                   </Form.Select>
-                  {/* <select name="" id="">
-                  <option value="LORENZO">Formosa</option>
-                  <option value="LORENZO">Buenos aires</option>
-                  <option value="LORENZO">TEMPERLET</option>
-                  <option value="LORENZO">RIQUELMEN</option>
-                  <option value="LORENZO">LORENZO</option>
-                 </select> */}
-                  {/* <Form.Control name='city' value={input.city} onChange={e => handleChange(e)} className="inputs" type="text" placeholder="Enter city" /> */}
                 </Form.Group>
               </div>
               <div className="prueba">
@@ -213,6 +242,11 @@ export default function Profile() {
           </div>
         }
       </div>
+:  <div className="Container"> 
+    
+</div>
+}
+
     </div>
   )
 }

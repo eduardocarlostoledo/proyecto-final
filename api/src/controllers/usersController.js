@@ -1,4 +1,4 @@
-const { User } = require('../db')
+const { User, Order } = require('../db')
 const { encrypt, compare } = require('../helpers/bcrypt');
 const { Op } = require("sequelize");
 

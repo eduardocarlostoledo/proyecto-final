@@ -14,7 +14,7 @@ import { GiHamburgerMenu } from "react-icons/gi"
 
 export function NavAdmin({handleClick, handleSubmit, handleInputChange, name}) {
   // const UserAdmin = useSelector((state) => state.UserActive);
-  const UserAdmin = JSON.parse(localStorage.getItem("USUARIO"));
+  const UserAdmin = JSON.parse(localStorage.getItem("USUARIO")) || [];
   const Location = useLocation()
   const navigate = useNavigate();
   const dispatch = useDispatch()
@@ -36,7 +36,7 @@ export function NavAdmin({handleClick, handleSubmit, handleInputChange, name}) {
           admin {UserAdmin.name} {UserAdmin.lastname}
         </h2>
 
-     { Location.pathname === "/Order" || Location.pathname === "/CreateProduct" ? null :  <form className="d-flex mt-3" role="search">
+     { Location.pathname === "/admin/Orders" || Location.pathname === "/admin/CreateProduct" ? null :  <form className="d-flex mt-3" role="search">
               <input
                 className="inputt"
                 value={name}
@@ -112,13 +112,13 @@ export function NavAdmin({handleClick, handleSubmit, handleInputChange, name}) {
               </li>
 
               <li className="nav-item">
-              <Link style={{textDecoration: "none"}} to="/Order">  <a className="nav-link" href="#">
+              <Link style={{textDecoration: "none"}} to="/admin/Orders">  <a className="nav-link" href="#">
                  <BsBorderStyle  /> Orders
                 </a> </Link>
               </li>
 
               <li className="nav-item">
-              <Link style={{textDecoration: "none"}} to="/CreateProduct">  <a className="nav-link" href="#">
+              <Link style={{textDecoration: "none"}} to="/admin/CreateProduct">  <a className="nav-link" href="#">
                  <IoIosCreate  /> Create Product
                 </a> </Link>
               </li>

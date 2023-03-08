@@ -59,7 +59,8 @@ function validate(input) {
 }
 
 export const CreateProducts = () => {
-
+    
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
     const brands = useSelector((state) => state.brands);
     const types = useSelector((state) => state.types);
@@ -68,6 +69,8 @@ export const CreateProducts = () => {
         dispatch(getAllBrands());
         dispatch(getAllTypes());
     }, [dispatch]);
+
+
 
     const [errors, setErrors] = useState({});
 

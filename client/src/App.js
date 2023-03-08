@@ -17,11 +17,27 @@ import Cart from "./components/Cart";
 import {AdminProducts} from "./components/AdminProducts"
 import { AdminUsers } from "./components/AdminUsers";
 import { AdminOrder } from "./components/AdminOrder";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
+  const userActive = JSON.parse(localStorage.getItem("USUARIO")) || []
 
+  useEffect(()=>{
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    if (isAuthenticated === "afuera" && location.pathname.substring(0, 6) === "/admin") {
+      navigate('/login');
+    }
+  },[])
+  
+  useEffect(()=>{
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    if (isAuthenticated === "On" && location.pathname.substring(0, 6) === "/admin" && !userActive.admin) {
+      navigate('/Profile');
+    }
+  },[])
 
   useEffect(()=>{
     dispatch(GetFiltersForEmail())
@@ -29,7 +45,7 @@ function App() {
 
   return (
     <div className="App">
-      { location.pathname === "/admin/CreateProduct" || location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" || location.pathname.startsWith("/detail/") ? null : <NavBar />}
+      { location.pathname === "/admin/Orders" || location.pathname === "/admin/CreateProduct" || location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" || location.pathname.startsWith("/detail/") ? null : <NavBar />}
       {/* {(location.pathname == "/admin" || location.pathname == "/admin/Users") && <NavAdmin />} */}
       <Routes>
         <Route exact path="/" element={<Home/>} />
@@ -57,7 +73,7 @@ function App() {
         <Route path="/admin/users" element={<AdminUsers />} />
 
       </Routes>
-     { location.pathname === "/admin/CreateProduct" ||location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" ? null : <Footer />}
+     {location.pathname === "/admin/Orders" ||  location.pathname === "/admin/CreateProduct" ||location.pathname === "/admin/settings" || location.pathname === "/admin/users" || location.pathname === "/admin/Products" ? null : <Footer />}
     </div>
   );
 }
