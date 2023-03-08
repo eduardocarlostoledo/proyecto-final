@@ -178,3 +178,8 @@
         width: 50px;
     }
 }
+@media screen and (max-width: 361px) {
+    .Responsive{
+        width: 100%;
+    }
+}
