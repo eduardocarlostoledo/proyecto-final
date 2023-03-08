@@ -46,7 +46,7 @@
 @media screen and (max-width: 650px){
     .inputReview{
         height: 100px;  
-        width: 500px;
+        width: 400px;
         padding: 20px;
         text-align: justify;
     }
@@ -59,14 +59,14 @@
     }
     .inputReview{
         height: 100px;  
-        width: 500px;
+        width: 400px;
         padding: 20px;
         text-align: justify;
         margin-left: 20px;
     }
     .ButtonReview{
         
-        width: 500px;
+        width: 400px;
         height: 40px;
         margin-left: 20px;
     }
@@ -104,15 +104,33 @@
 }
 
 @media screen and (max-width: 450px){
-    .ContainerReviews{
-        margin-left: 180px;
+    
+    
+    .StarReview{
+        margin-left: 60px;
+        transform: translateY(40px);
+    }   
+    .NameReview{
+        margin-left: 20px;
     }
     .inputReview{
         height: 50px;  
-        width: 500px;
+        width: 300px;
         padding: 20px;
         text-align: justify;
     }
+    .ButtonReview{
+        
+        width: 300px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 361px){
+    .ContainerReviews{
+        transform: translateX(-0.5rem);
+    }
+    
     .StarReview{
         margin-left: 100px;
         transform: translateY(40px);
@@ -122,15 +140,13 @@
     }
     .inputReview{
         height: 50px;  
-        width: 500px;
+        width: 300px;
         padding: 20px;
         text-align: justify;
-        margin-left: 20px;
     }
     .ButtonReview{
         
-        width: 500px;
+        width: 300px;
         height: 40px;
-        margin-left: 20px;
     }
 }
