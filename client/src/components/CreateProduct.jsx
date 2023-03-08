@@ -109,7 +109,7 @@ export const CreateProducts = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!input.name || !input.image || !input.price || !input.description || !input.type.length || !input.brand.length) {
-            return swal('Hello', 'Cannot create product', 'error')
+            return swal('Cannot create product', '', 'error')
         } else {
             
             const data = new FormData()
@@ -125,7 +125,7 @@ export const CreateProducts = () => {
             setErrors(validate(input))
             dispatch(createProduct(data));
             console.log(data)
-            swal('hello', "Created product", 'success');
+            swal('Created product', "", 'success');
             setInput({
                 name: "",
                 image: "",

@@ -113,3 +113,8 @@
     border: none;
 }
 
+@media (max-width: 500px) {
+    .ContainerAll {
+      width: 80%;
+    }
+  }

@@ -72,6 +72,7 @@ export const Detail = () => {
             <br />
             <p>{detail.description}</p>
             {detail.info_adicional && (<h6><b>Info Adicional:</b> {detail.info_adicional}</h6>)}
+            <p><strong>Stock:</strong> {detail.stock}</p>
           </div>
 
         

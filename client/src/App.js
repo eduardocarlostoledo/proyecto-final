@@ -18,6 +18,7 @@ import {AdminProducts} from "./components/AdminProducts"
 import { AdminUsers } from "./components/AdminUsers";
 import { AdminOrder } from "./components/AdminOrder";
 import { useNavigate } from "react-router-dom";
+import About from "./components/About"
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +60,8 @@ function App() {
         <Route path="/Register" element={<Register/>} />
 
         <Route path="/Login" element={<Login/>} />
+
+        <Route path="/about" element={<About/>} />
 
         <Route path="admin/CreateProduct" element={<CreateProducts/>} />
 

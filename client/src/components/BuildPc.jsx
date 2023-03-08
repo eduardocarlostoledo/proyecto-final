@@ -6,6 +6,8 @@ import swal from "sweetalert";
 import Card from "./Card";
 import amd from "../images/AMD_Logo.png"
 import intel from "../images/Intel_Logo.png"
+import { useDispatch } from "react-redux";
+import { update } from "../redux/actions/CartActions";
 
 
 const UpdatePrice = (setPrice, input) => {
@@ -34,6 +36,8 @@ export const BuildPc = () => {
     case: "",
   });
   const [Price, setPrice] = useState(0);
+
+  const dispatch = useDispatch()
 
   const getDataFiltrado = (type) => {
     axios
@@ -123,6 +127,7 @@ export const BuildPc = () => {
     for (const key in input) {
       handleAddCart(input[key]);
     }
+    dispatch(update(true))
   };
 
   const handleAddCart = (item) => {
@@ -135,7 +140,8 @@ export const BuildPc = () => {
       body: JSON.stringify(newItem),
     })
       .then((response) => response.json())
-      .then((data) => swal("Success", "Cart Added!", "success"));
+      .then((data) => swal("Success", "Cart Added!", "success"))
+      .catch((error) => console.log("ACAAAAAAAAAAAAAAAAAAAAA", error.message))
   };
 
   const filterProcess = (marca) => {

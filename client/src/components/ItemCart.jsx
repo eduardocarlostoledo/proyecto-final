@@ -3,13 +3,19 @@ import "../styles/Card.css"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
 import { addToCart, deleteOneCart ,getCart,update} from "../redux/actions/CartActions";
+import swal from "sweetalert";
 
-export default function ItemCart({name, image, price, amount,prodId,handleDeleteAllCart}) {
+export default function ItemCart({name, image, price,product, amount,prodId,handleDeleteAllCart}) {
 
     const dispatch=useDispatch();
     const cart= useSelector((state) => state.cart);
 
     const handleAdd=()=>{
+        console.log(product)
+        if(product.stock <= amount) {
+            swal('Stock limit', "", 'error') 
+            return null  
+        } 
         dispatch(addToCart({name, image,  price}))
         dispatch(update(true)) //2 a 3
     }

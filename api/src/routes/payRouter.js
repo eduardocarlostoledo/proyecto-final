@@ -8,20 +8,26 @@ const { Cart } = require("../db");
 
 let arrayPreference = {}
 
+let arrayProducts = []
+
 payRouter.post("/preference", (req, res) => {  
-  console.log("LLEGA REQ.BODY", req.body);  
+  console.log("LLEGA REQ.BODY", req.body); 
+  console.log("APAREZCO!!!!!!!!!!! ", req.body[0].buyer_email) 
   arrayPreference = 
     {
-      product_description: req.body[0].product_description,     
-      total_order_price: req.body[1].total_order_price,      
-      prodId: req.body[0].prodId,
-      buyer_email: req.body[1].buyer_email,
-      product_name: req.body[0].product_name,
-      product_image: req.body[0].product_image,
-      product_amount: req.body[0].product_amount,
-      product_unit_price: req.body[0].product_unit_price,
+      product_description: "description",     
+      total_order_price: req.body[0].total_order_price,      
+      prodId: req.body[1].prodId,
+      buyer_email: req.body[0].buyer_email,
+      product_name: req.body[1].product_name,
+      product_image: req.body[1].product_image,
+      product_amount: req.body[1].product_amount,
+      product_unit_price: req.body[1].product_unit_price,
     }  
     console.log("TENGO PREFERENCE", arrayPreference);  
+
+    req.body.map((prod) => prod.buyer_email ? null : arrayProducts.push({id:prod.prodId, amount: prod.product_amount}))
+    console.log("ACA ESTOY!!!!!!!!!", arrayProducts)
   });
   
 
@@ -42,6 +48,8 @@ payRouter.post("/create_preference", (req, res) => {
     },
     auto_return: "approved",
   };  
+
+  arrayPreference = {...arrayPreference, product_description:req.body.description}
 
   mercadopago.preferences
     .create(preference)
@@ -89,8 +97,11 @@ payRouter.get("/feedback/success", async function (req, res) {
       product_unit_price
     );
     await enviarMail(product_name, total_order_price, buyer_email, statusId)
-    await updateProductStock(prodId, product_amount)
-    console.log("SE HA DESCONTADO" ,prodId, product_amount, "DEL STOCK")
+
+    //Hacer aca la funcion
+    arrayProducts.map((prod) => updateProductStock(prod.id, prod.amount))
+
+    console.log("SE HA DESCONTADO" ,prodId, 1, "DEL STOCK")
     
     console.log(newOrder, "FEEDBACK SUCCESS ORDEN REGISTRADA OK");
     

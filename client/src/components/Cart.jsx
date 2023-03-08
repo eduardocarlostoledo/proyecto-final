@@ -17,6 +17,9 @@ export default function Cart() {
                :null
     const navigate=useNavigate();
 
+    const products = useSelector((state) => state.allProducts);
+
+
     useEffect(() => {
         fetch('http://localhost:3001/cart')
         .then(response => response.json())
@@ -64,7 +67,7 @@ export default function Cart() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(preferencia),
+          body: JSON.stringify(preferencia.reverse()),
         });
             fetch("http://localhost:3001/pay/create_preference", {
             method: "POST",
@@ -137,6 +140,7 @@ export default function Cart() {
                                 image= {item.image}
                                 prodId= {item.prodId}
                                 key={item.id}
+                                product={products.find((prod) => prod.name == item.name)}
 
                                 handleDeleteAllCart={handleDeleteAllCart}
                             /> 

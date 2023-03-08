@@ -1,4 +1,4 @@
-const { Order, Product } = require("../db");
+const { Order, Product, User } = require("../db");
 
 
 async function updateProductStock(prodId, product_amount) {
@@ -7,6 +7,8 @@ async function updateProductStock(prodId, product_amount) {
 
     if (product) {
       const newStock = product.stock - product_amount;
+
+      newStock <= 0 ? await Product.update({status: false}, { where: { id: prodId } }) : null
 
       await Product.update({ stock: newStock }, { where: { id: prodId } });
 
@@ -50,6 +52,9 @@ const postOrder = async (
         product_amount,
         product_unit_price
     });
+
+    const user=await User.findOne({where:{email:buyer_email}})
+    user.addOrder(newOrder);
 
     console.log("POST CONTROLLER CREATED ORDER", newOrder);
 
