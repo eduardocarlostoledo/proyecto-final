@@ -85,12 +85,12 @@ export const Register = () => {
     });
 
 
-    useEffect(() => {
-        const isAuthenticated = localStorage.getItem('isAuthenticated');
-        if (isAuthenticated === "On") {
-          navigate('/Profile');
-        }
-      }, [navigate]);
+    // useEffect(() => {
+    //     const isAuthenticated = localStorage.getItem('isAuthenticated');
+    //     if (isAuthenticated === "On") {
+    //       navigate('/Profile');
+    //     }
+    //   }, [navigate]);
     
 
     function handleChange(e) {

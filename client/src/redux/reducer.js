@@ -39,7 +39,7 @@ import {
         userDetail:{},
         emails : [],
         UserActive : {},
-        ChangeNav :  false,
+        ChangeNav : JSON.parse(localStorage.getItem("Navbar")),
         cart: [],
         update: false,
         order: [],

@@ -67,12 +67,12 @@ export const Login = () => {
 
 
     
-  useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
-    if (isAuthenticated === "On") {
-      navigate('/Profile');
-    }
-  }, [navigate]);
+//   useEffect(() => {
+//     const isAuthenticated = localStorage.getItem('isAuthenticated');
+//     if (isAuthenticated === "On") {
+//       navigate('/Profile');
+//     }
+//   }, [navigate]);
 
 
     const viewAlert = async  () => {

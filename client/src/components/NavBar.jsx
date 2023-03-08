@@ -53,7 +53,7 @@ export const NavBar = () => {
             <Search />
         </div> */}
         <div className="ContainerInfo">
-          {!Nav ? (
+          {Nav ? (
             <div className="LogAndSign">
               <Link to="/Login">
                 <button className="BtnLogSing">Log in</button>

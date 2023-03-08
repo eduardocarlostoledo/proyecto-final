@@ -34,12 +34,12 @@ console.log(country, "count");
   // const history = useHistory();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated');
-    if (isAuthenticated === "afuera") {
-      navigate('/login');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const isAuthenticated = localStorage.getItem('isAuthenticated');
+  //   if (isAuthenticated === "afuera") {
+  //     navigate('/login');
+  //   }
+  // }, [navigate]);
 
 
 
