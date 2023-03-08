@@ -28,7 +28,7 @@ export default function AddToCart (item){
 
 
     return (
-        <div>
+        <div className='addToCartDiv'>
             <form onSubmit={handleSubmit}>
                 <button className="ButtonC" type="submit"> <AiOutlineShoppingCart className="Cart" /></button>
                 {message && <p className='ButtonMessage'>{message}</p>}

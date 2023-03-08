@@ -159,6 +159,12 @@ font-size: 1.8vh;
     .ButtonCart {
         display: none;
     }
+    .addToCartDiv{
+        transform: scale(.7);
+        position: absolute;
+        margin-top: -7px;
+        margin-left: -46px;
+    }
 }
 
 @media screen and (max-width: 400px){

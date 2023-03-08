@@ -101,6 +101,7 @@ export const BuildPc = () => {
     }
     if (item.type === "case") {
       setType("Complete");
+      console.log(input);
     }
     setInput({
       ...input,
@@ -125,6 +126,7 @@ export const BuildPc = () => {
 
   const addMapCart = () => {
     for (const key in input) {
+      console.log(input[key]);
       handleAddCart(input[key]);
     }
     dispatch(update(true))

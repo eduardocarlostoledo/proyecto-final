@@ -129,7 +129,7 @@ export default function Cart() {
             
             <div className='NavCart'>
                     {cartItems.length == 0 ? (
-                        <p>Cart is empty</p>
+                        <p className='EmptyP'>Cart is empty</p>
 
                     ) : ( cartItems.map(item => (
                         <div >

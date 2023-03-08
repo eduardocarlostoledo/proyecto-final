@@ -157,7 +157,7 @@ console.log(country, "count");
              <h3><strong>Mis Ordenes</strong></h3>
              {country.length > 0 && country?.map((e, index) => {
                     if(e.buyer_email === userActive.email ) {
-                       return (<h6 key={index}>{e.product_description} <br/> {e.total_order_price} $ <span style={{color: "green", fontSize: "11px", border: "0.01rem solid green", padding: "2px", borderRadius: "6px"}}>{e.statusId}</span><hr/></h6>)
+                       return (<h6 key={index}>Products: {e.product_description} <br/> Total price {e.total_order_price} $ <span style={{color: "green", fontSize: "11px", border: "0.01rem solid green", padding: "2px", borderRadius: "6px"}}>{e.statusId}</span><hr/></h6>)
                     }
                   })
               }

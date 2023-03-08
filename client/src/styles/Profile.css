@@ -179,3 +179,41 @@
     border: 1px solid green;
     color: green;
 }
+
+@media screen and (max-width: 450px){
+    .contenedor_profile{
+        height: 50%;
+        margin-top: 100px;
+    }
+    .Container{
+        height: 30rem;
+        width: 95%;
+    }
+    .card-img-top{
+        width: 100px ;
+        height: 100px ;
+    }
+    .derecha {
+        padding-left: 10px;
+    }
+    .InfoUser-Name{
+        padding: 0
+    }
+    .InfoUser{
+        padding-left: 2px;
+    }
+    .logout{
+        padding: 5px;
+        margin-top: 40px;
+    }
+    .modificar{
+        padding-left: 10px;
+        padding-right: 15px;
+        width: 60%;
+        height: 37.5rem;
+    }
+    .prueba{
+        display: flex;
+        flex-direction: column;
+    }
+}

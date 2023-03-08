@@ -10,9 +10,9 @@ export default function AboutCard ({image,name,linkedin,github,portfolio}) {
             {image}
             <h5 className="integrant_name">{name}</h5>
             <div>
-               <a href={linkedin}><img className="link" src={linkedin_logo} target="_blank"/></a>
-                {github ? <a href={github}><img className="link" src={github_logo} href={github} target="_blank"/></a> : null}
-                {portfolio ? <a href={portfolio}><img className="link" src={portfolio_logo} href={portfolio} target="_blank"/></a> : null} 
+               <a target="_blank" rel="noopener noreferrer" href={linkedin}><img className="link" src={linkedin_logo} /></a>
+                {github ? <a  target="_blank" rel="noopener noreferrer" href={github}><img className="link" src={github_logo} href={github}/></a> : null}
+                {portfolio ? <a target="_blank" rel="noopener noreferrer" href={portfolio}><img className="link" src={portfolio_logo} href={portfolio} /></a> : null} 
             </div>
         </div>
     )

@@ -268,7 +268,7 @@ const BuildSearch = async (socket) => {
       return {
         id: p.id,
         name: p.name,
-        image:p.image,
+        image:p.image.secure_url,
         price:p.price,
         description: p.description,
         info_adicional: p.info_adicional,
