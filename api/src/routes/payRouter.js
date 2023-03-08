@@ -88,7 +88,7 @@ payRouter.get("/feedback/success", async function (req, res) {
       product_amount,
       product_unit_price
     );
-
+    await enviarMail(product_name, total_order_price, buyer_email, statusId)
     await updateProductStock(prodId, product_amount)
     console.log("SE HA DESCONTADO" ,prodId, product_amount, "DEL STOCK")
     
@@ -157,6 +157,7 @@ payRouter.get("/feedback/pending", async function (req, res) {
       product_amount,
       product_unit_price
     );
+    await enviarMail(product_name, total_order_price, buyer_email, statusId)
     await updateProductStock(prodId, product_amount)
     console.log("SE HA DESCONTADO" ,prodId, product_amount, "DEL STOCK")
 

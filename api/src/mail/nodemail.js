@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 
-enviarMail = async (producto, precio, usuario) => {
+enviarMail = async (producto, precio, usuario, statusId) => {
 
     let cantidades = producto.split(',')
 
@@ -21,6 +21,7 @@ enviarMail = async (producto, precio, usuario) => {
         producto/s: ${producto}
         cantidad de productos: ${cantidades.length}
         compra total: ${precio}
+        estado compra: ${statusId}
                 `
     }
 
