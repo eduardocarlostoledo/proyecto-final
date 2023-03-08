@@ -17,12 +17,9 @@ import Cart from "./components/Cart";
 import {AdminProducts} from "./components/AdminProducts"
 import { AdminUsers } from "./components/AdminUsers";
 import { AdminOrder } from "./components/AdminOrder";
-<<<<<<< Updated upstream
-=======
 import { useNavigate } from "react-router-dom";
 import About from "./components/About"
 import { ProtectedRoute } from  "./components/ProtectedRoute";
->>>>>>> Stashed changes
 import ChangePass from "./components/ChangePass"
 
 function App() {
@@ -51,14 +48,10 @@ function App() {
 
         <Route path="/Login" element={<Login/>} />
 
-<<<<<<< Updated upstream
-        <Route path="/changePass" element={<ChangePass/>} />
-=======
         <Route path="/about" element={<About/>} />
         <Route path="/changePass" element={<ChangePass/>} />
 
         <Route path="admin/CreateProduct" element={<CreateProducts/>} />
->>>>>>> Stashed changes
 
         <Route path="admin/CreateProduct" element={<CreateProducts/>} />
 
