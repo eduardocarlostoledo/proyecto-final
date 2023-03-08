@@ -12,3 +12,21 @@
 input[type="radio"]{
     display:none
 }
+
+@media screen and (max-width: 650px){
+    .starsCalification{
+
+        margin-top: 20px;
+    }
+    
+}
+@media screen and (max-width: 550px){
+    .starsCalification{
+        transform: translateX(100px);
+    }
+}
+@media screen and (max-width: 450px){
+    .starsCalification{
+        transform: translateX(200px);
+    }
+}
