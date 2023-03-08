@@ -97,7 +97,9 @@ export const Detail = () => {
         <div className="ContainerR">
           {detail.reviews?.map((r)=>(
             <div className="ReviewListo">
-              <StarsCalification width={10} calif={r.calification}/>
+              <div className="starR">
+                <StarsCalification width={10} calif={r.calification}/>
+              </div>
               <p><b>{r.nameUser + " " +r.lastnameUser + ": "}</b></p>
               <p>{r.comment}</p>
             </div>

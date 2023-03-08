@@ -126,15 +126,19 @@
         padding: 60px;
         margin-bottom: 60px;
     }
+    .ReviewListo{
+        width: 500px;
+        transform: translateX(-60px);
+    }
     
 }
 @media screen and (max-width: 550px){
     .DetailC{
-        margin-left: 80px;
+        margin-left: 60px;
     }
     .ReviewListo{
         width: 500px;
-        transform: translateX(10px);
+        transform: translateX(-80px);
     }
     .starR{
         margin-right: 40px;
@@ -147,7 +151,7 @@
     }
     .ReviewListo{
         width: 500px;
-        transform: translateX(10px);
+        transform: translateX(-60px);
     }
     .starR{
         margin-right: 40px;

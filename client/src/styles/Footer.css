@@ -55,6 +55,7 @@ text-decoration: none;
   .ContainerFooter{
     width: 100%;
     padding: 0;
+    padding-left: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
   }
