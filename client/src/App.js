@@ -17,6 +17,7 @@ import Cart from "./components/Cart";
 import {AdminProducts} from "./components/AdminProducts"
 import { AdminUsers } from "./components/AdminUsers";
 import { AdminOrder } from "./components/AdminOrder";
+import ChangePass from "./components/ChangePass"
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,8 @@ function App() {
         <Route path="/Register" element={<Register/>} />
 
         <Route path="/Login" element={<Login/>} />
+
+        <Route path="/changePass" element={<ChangePass/>} />
 
         <Route path="admin/CreateProduct" element={<CreateProducts/>} />
 
