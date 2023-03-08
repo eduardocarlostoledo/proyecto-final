@@ -29,7 +29,7 @@ userRouter.put("/:id", async (req, res) => {
  })
 
  ///////////////////////////// PERMITIR CAMBIO DE CONTRASEÑA Y ENVIO DE MAIL /////////////////////////////
- userRouter.get("/changePass", (req, res) => {//esto deberia obtener el mai, enviar un mail con el codigo y la ruta retornara un codigo, 
+ userRouter.post("/changePass", (req, res) => {//esto deberia obtener el mai, enviar un mail con el codigo y la ruta retornara un codigo, 
   const { email } = req.body
 
     let code = String(Math.random()).substr(2,6)

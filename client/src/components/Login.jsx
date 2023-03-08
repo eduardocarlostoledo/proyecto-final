@@ -232,6 +232,9 @@ export const Login = () => {
                         Login
                     </Button>
                 </div>
+                <div style={{marginLeft: "150px", color: "rgb(0, 96, 151)", cursor: "pointer"}}>
+                   <Link to="/changePass">I forgot my password</Link> 
+                </div>
                 <div className={styles.down}>
                     <h5>Dont have an account? <Link to="/Register"><button className={styles.here}>Register</button></Link> </h5>
                 </div>

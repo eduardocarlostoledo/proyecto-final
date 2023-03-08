@@ -20,6 +20,9 @@ import { AdminOrder } from "./components/AdminOrder";
 import { useNavigate } from "react-router-dom";
 import About from "./components/About"
 import { ProtectedRoute } from  "./components/ProtectedRoute";
+import ChangePass from "./components/ChangePass"
+
+
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -60,6 +63,8 @@ function App() {
         <Route element={<ProtectedRoute redirecTo={"/Profile"} isAllowed={!userActive.status} />}>
         <Route path="/Register" element={<Register/>}/>
         <Route path="/Login" element={<Login/>} />
+        <Route path="/changePass" element={<ChangePass/>} />
+        
         </Route>
 
         <Route path="/about" element={<About/>} />
