@@ -41,7 +41,7 @@ export const Detail = () => {
   return (
     <div>
         <div className="Link">
-          <Link className="Link" to="/">
+          <Link className="Link" to="/Products">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"
