@@ -75,7 +75,10 @@ export function ChangeNav () {
 
 export const PutUser=(payload, id)=> async()=>{ 
   const user=await axios.put(`http://localhost:3001/users/${id}`,payload);
-  localStorage.setItem("USUARIO", JSON.stringify(user))
+  const cacho=await axios.get(`http://localhost:3001/users/${id}`);
+  localStorage.setItem("USUARIO", JSON.stringify(cacho.data.data))
+
+  console.log(cacho.data.data, "USER PUT USER")
   return user;
 };
 
