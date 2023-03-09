@@ -73,13 +73,9 @@ export function ChangeNav () {
 };
 
 
-export function PutUser(payload) { 
+export const PutUser=(payload, id)=> async()=>{ 
   localStorage.setItem("USUARIO", JSON.stringify(payload))
-  // console.log(payload.id, "asdaID");
-  return async function(dispatch){
-      const response = await axios.put(`http://localhost:3001/users/${payload.id}`,payload);
-      return response;
-  };
+  return await axios.put(`http://localhost:3001/users/${id}`,payload);
 };
 
 

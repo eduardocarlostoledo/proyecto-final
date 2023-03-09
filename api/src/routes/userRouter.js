@@ -20,8 +20,10 @@ userRouter.post("/loginGoogle", loginGoogle)
 
 userRouter.put("/:id", async (req, res) => {
   const {id}=req.params;
+  let image=false;
+  if(req.files) image =req.files.image;
   try {
-    const user = await putUser(req.body,id)
+    const user = await putUser(req.body,image,id)
     res.status(200).json("Usuario actualizado")
   } catch (error) {
     res.status(400).json(error.message)

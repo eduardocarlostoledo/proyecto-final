@@ -7,15 +7,17 @@ import Card from 'react-bootstrap/Card';
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
 import { PutUser, deleteUserLocalStorage, getAllUsers, UserActive } from '../redux/actions/UsersActions';
+import {update} from '../redux/actions/CartActions';
 import swal from 'sweetalert';
 import { useNavigate, Link  } from "react-router-dom"
 import { BsSendDash } from "react-icons/bs"
 
 export default function Profile() {
-
+  const up= useSelector((state) => state.update)
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [])
+    update(false);
+  }, [up])
 
   const [country, setCountrie] = useState({})
 
@@ -66,6 +68,9 @@ console.log(country, "count");
       [e.target.name]: e.target.value
     });
   };
+  const handleChangeImage =(e) => {
+    setInput({ ...input, image: e.target.files[0]})
+  }
 
   function CerrarSes(e) {
     e.preventDefault();
@@ -94,24 +99,29 @@ console.log(country, "count");
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (input.email === "") input.email = userActive.email
-    if (input.password === "") input.password = userActive.password
-    if (input.passwordConfirm === "") input.passwordConfirm = userActive.passwordConfirm
-    if (input.phonenumber === "") input.phonenumber = userActive.phonenumber
-    if (input.country === "") input.country = userActive.country
-    if (input.image === "") input.image = userActive.image
-    if (input.city === "") input.city = userActive.city
-    dispatch(PutUser({
-      ...input, name: userActive.name,
-      lastname: userActive.lastname,
-      status: userActive.status, 
-      admin: userActive.admin
-    }));
+    // if (input.email === "") input.email = userActive.email
+    // if (input.password === "") input.password = userActive.password
+    // if (input.passwordConfirm === "") input.passwordConfirm = userActive.passwordConfirm
+    // if (input.phonenumber === "") input.phonenumber = userActive.phonenumber
+    // if (input.country === "") input.country = userActive.country
+    // if (input.image === "") input.image = userActive.image
+    // if (input.city === "") input.city = userActive.city
+    const data = new FormData();
+    Object.keys(input).forEach((key) => data.append(key, input[key]));
+    dispatch(PutUser(data, input.id))
+    // dispatch(PutUser({
+    //   ...input, name: userActive.name,
+    //   lastname: userActive.lastname,
+    //   status: userActive.status, 
+    //   admin: userActive.admin
+    // }));
+    dispatch(update(true))
     swal("success", 'User modified successfully', "success")
     setInput({
       ...input
     });
     setPanel(true)
+    
   }
 
 
@@ -120,7 +130,7 @@ console.log(country, "count");
      {!JSON.parse(localStorage.getItem("Navbar")) ? <div className="Container">
         <div className="izquierda">
           <div className="containerImg">
-            <Card.Img className="ImagenProfile" variant="top" src={userActive.image ? userActive.image : "https://cdn-icons-png.flaticon.com/512/3135/3135768.png"} />
+            <Card.Img className="ImagenProfile" variant="top" src={userActive.image ? userActive.image.secure_url : "https://cdn-icons-png.flaticon.com/512/3135/3135768.png"} />
           </div>
           <div className="InfoUser">
             <div className="InfoUser-Name">
@@ -223,7 +233,7 @@ console.log(country, "count");
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="Imagen">
                   <Form.Label>Imagen URL</Form.Label>
-                  <Form.Control name='image' value={input.image} onChange={e => handleChange(e)} className="inputs" type="text" placeholder="Enter URL image" />
+                  <Form.Control name='image' onChange={e => handleChangeImage(e)} className="inputs" type="file" placeholder="Enter URL image" />
                 </Form.Group>
               </div>
               <div className="sopapa">

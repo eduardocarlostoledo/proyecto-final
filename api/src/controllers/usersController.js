@@ -1,7 +1,8 @@
 const { User, Order } = require('../db')
 const { encrypt, compare } = require('../helpers/bcrypt');
 const { Op } = require("sequelize");
-
+const {uploadImage, deleteImage}=require('../utils/cloudinary')
+const fs =require('fs-extra');
 const getUsers = async () => {
   
   try {
@@ -23,21 +24,29 @@ const getUserId = async (userId) => {
   }
 };
 
-const putUser = async (user, id) => {
-  const { name, lastname, email, image, password, phonenumber, country, city, address, admin , status } = user
+const putUser = async (user,image, id) => {
+  const { name, lastname, email, password, phonenumber, country, city, address, admin , status } = user
 
-  if (!user) throw Error('User data missing')
+  if (!user&&!image) throw Error('User data missing')
   else {
     try {
       // const userBD = await User.findOne({ where: { email: `${email}` } });
       // if (userBD) throw Error('The email already exists')
       if (password) {
         const passwordHash = await encrypt(password);
-        const changeUser = await User.update({ admin , status , name, lastname, email, image, password: passwordHash, phonenumber, country, city, address }, { where: { id } })
+        const changeUser = await User.update({ admin , status , name, lastname, email, password: passwordHash, phonenumber, country, city, address }, { where: { id } })
         return changeUser
       }
-
-      const changeUser = await User.update({ admin, status, name, lastname, email, image, password, phonenumber, country, city, address }, { where: { id } })
+      if(image){
+        //invoco la funcion para subir la imagen a cloudinary
+        const userToUpdate=await User.findByPk(id)
+        const result=await uploadImage(image.tempFilePath)
+        if(userToUpdate.image) deleteImage(productToUpdate.image.public_id)
+        await User.update({image:{public_id:result.public_id,secure_url:result.secure_url}}, { where: { id } })
+        //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
+        await fs.remove(image.tempFilePath)
+      }
+      const changeUser = await User.update({ admin, status, name, lastname, email, password, phonenumber, country, city, address }, { where: { id } })
       return changeUser
 
 

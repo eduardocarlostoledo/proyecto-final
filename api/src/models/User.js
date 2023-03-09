@@ -19,7 +19,9 @@ module.exports = (sequelize) => {
             unique: true
         },
         image: {
-            type: DataTypes.TEXT
+            type: DataTypes.JSON,
+            public_id: DataTypes.STRING,
+            secure_url: DataTypes.STRING,
         },
         password: {
             type: DataTypes.STRING,
