@@ -41,7 +41,7 @@ const putUser = async (user,image, id) => {
         //invoco la funcion para subir la imagen a cloudinary
         const userToUpdate=await User.findByPk(id)
         const result=await uploadImage(image.tempFilePath)
-        if(userToUpdate.image) deleteImage(productToUpdate.image.public_id)
+        if(userToUpdate.image && userToUpdate.image.public_id) deleteImage(userToUpdate.image.public_id)
         await User.update({image:{public_id:result.public_id,secure_url:result.secure_url}}, { where: { id } })
         //borro la imagen de la carpeta uploads para que solo quede guardada en cloudinary
         await fs.remove(image.tempFilePath)
@@ -70,7 +70,7 @@ const postUserGoogle = async (req, res) => {
       name: name,
       lastname: lastname,
       email: email,
-      image: image,
+      image: {public_id:null,secure_url: image},
       password: "XDRWQDFF11asedfa123"
     });
     return res.json({ msg: `User create succesfully`, success: true });

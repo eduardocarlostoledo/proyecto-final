@@ -7,17 +7,15 @@ import Card from 'react-bootstrap/Card';
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
 import { PutUser, deleteUserLocalStorage, getAllUsers, UserActive } from '../redux/actions/UsersActions';
-import {update} from '../redux/actions/CartActions';
 import swal from 'sweetalert';
 import { useNavigate, Link  } from "react-router-dom"
 import { BsSendDash } from "react-icons/bs"
 
 export default function Profile() {
-  const up= useSelector((state) => state.update)
+  const userActive = JSON.parse(localStorage.getItem("USUARIO")) || []
   useEffect(() => {
     dispatch(getAllUsers());
-    update(false);
-  }, [up])
+  }, [])
 
   const [country, setCountrie] = useState({})
 
@@ -44,15 +42,13 @@ console.log(country, "count");
   // }, [navigate]);
 
 
-
-  const userActive = JSON.parse(localStorage.getItem("USUARIO")) || []
   // const userActive = useSelector((state) => state.userActive)
   const [Panel, setPanel] = useState(true);
   const dispatch = useDispatch()
 
   
   const [input, setInput] = useState({
-    image: userActive.image ? userActive.image : "",
+    image: userActive.image ? userActive.image.secure_url : "",
     city: userActive.city ? userActive.city : "",
     id: userActive.id ,
     phonenumber: userActive.phonenumber ? userActive.phonenumber : "",
@@ -115,7 +111,6 @@ console.log(country, "count");
     //   status: userActive.status, 
     //   admin: userActive.admin
     // }));
-    dispatch(update(true))
     swal("success", 'User modified successfully', "success")
     setInput({
       ...input
