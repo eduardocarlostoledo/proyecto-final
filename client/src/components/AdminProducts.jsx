@@ -336,7 +336,6 @@ export const AdminProducts = () => {
       title: "Nombre",
       dataIndex: "name",
       key: "name",
-      sorter: (a, b) => a.name - b.name,
       render: (text) => <p>{text}</p>,
     },
 
@@ -357,15 +356,15 @@ export const AdminProducts = () => {
       ),
       filters: [
         {
-          text: "Status",
+          text: "view",
           value: true,
         },
         {
-          text: "Banned",
+          text: "Not view",
           value: false,
         },
       ],
-      onFilter: (value, record) => record.admin === value,
+      onFilter: (value, record) => record.status === value,
     },
     {
       title: "actions",

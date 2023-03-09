@@ -136,6 +136,9 @@ font-size: 1.8vh;
     gap: 60px;
     margin-bottom: 20px;
 }
+.ContainerSumRestResponsive{
+    display: none;
+}
 
 
 @media screen and (max-width: 650px){
@@ -165,6 +168,12 @@ font-size: 1.8vh;
         margin-top: -7px;
         margin-left: -46px;
     }
+    .ContainerSumRest{
+        display: none;
+    }
+    .ContainerSumRestResponsive{
+
+    }
 }
 
 @media screen and (max-width: 400px){
@@ -173,5 +182,8 @@ font-size: 1.8vh;
         height:17rem;
         margin: 0;
         padding: 0;
+    }
+    .ContainerSumRestResponsive{
+
     }
     }

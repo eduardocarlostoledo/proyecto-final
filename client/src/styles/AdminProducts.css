@@ -1,7 +1,7 @@
 .productExpandedDiv {
     display: flex;
     justify-content: space-around;
-    min-height: 400px;
+    min-height: 250px;
     align-items: center;
 }
 
@@ -15,7 +15,7 @@
 
 .ImgDivInfo {
     margin: 20px;
-    width: 400px;
+    width: 220px;
     border-radius: 10px;
 }
 
