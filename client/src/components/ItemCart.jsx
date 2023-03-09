@@ -87,12 +87,12 @@ export default function ItemCart({
             </svg>
           </button>
         </div>
-        <div className="ContainerSumRestResponsive">
-          <button className="buttonResAdd">
+        <div  className="ContainerSumRestResponsive">
+          <button onClick={() => handleDelete()} className="buttonRes">
             <AiOutlineMinus />
           </button>
-          <p>{amount}</p>
-          <button className="buttonResDiss">
+          <p className="pResponsive"><strong>{amount}</strong></p>
+          <button onClick={() => handleAdd()}  className="buttonRes">
             <IoIosAdd />
           </button>
         </div>
