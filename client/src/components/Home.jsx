@@ -91,7 +91,7 @@ Master Edition Hyper 212 Black Heatsink, CPU Air Cooler, Silencio FP120 Fan, Ano
                     <div className='Card'>
                         <img className='CardImg' src="https://www.comeros.com.ar/wp-content/uploads/2022/01/Comeros-ASUS-ROG-STRIX-RTX3060TI-O8G-V2-GAMING-fcc87b-1.webp" alt="Imagen 1" />
                         <div className='CardB'>
-                            <p className='CardText'>Notebook Asus Rog Strix G17 16gb Ryzen 7 6800h 512gb Pcreg</p>
+                            <p className='CardText'>Notebook Asus Rog Strix G17 16gb Ryzen 7 6800h 512gb</p>
                             <button class='CardButton'><Link to='/Products'>View More</Link></button>
                         </div>
                     </div>

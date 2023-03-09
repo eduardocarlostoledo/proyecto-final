@@ -72,9 +72,12 @@
     grid-area: precio;
     margin-right: 60%;
     margin-top: -2rem;
+<<<<<<< HEAD
 }
 .ContainerSumRestResponsive{
     display: none;
+=======
+>>>>>>> e3cdefa853c057eeca0afa837933065b136030e5
 }
 .card_contenedor_buttons{
     grid-area: buttons;

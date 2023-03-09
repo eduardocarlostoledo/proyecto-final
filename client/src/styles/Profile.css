@@ -63,7 +63,11 @@
  }
 .derecha {
     background-color:  rgb(247, 247, 247);
+<<<<<<< HEAD
     height: 100%;
+=======
+    height: auto;
+>>>>>>> e3cdefa853c057eeca0afa837933065b136030e5
     width: 70%;
     min-height: 370px;
     padding-left: 50px;
