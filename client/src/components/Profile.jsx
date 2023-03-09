@@ -7,16 +7,20 @@ import Card from 'react-bootstrap/Card';
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
 import { PutUserProfile, deleteUserLocalStorage, getAllUsers, UserActive } from '../redux/actions/UsersActions';
+import { getUpdate, update  } from '../redux/actions/CartActions';
 import swal from 'sweetalert';
 import { useNavigate, Link  } from "react-router-dom"
 import { BsSendDash } from "react-icons/bs"
 
 export default function Profile() {
+  const dispatch = useDispatch()
+  const up = useSelector(state => state.update)
   const userActive = JSON.parse(localStorage.getItem("USUARIO")) || []
   useEffect(() => {
+    dispatch(getUpdate());    
     dispatch(getAllUsers());
-  }, [])
-
+    dispatch(update(false));
+  }, [up])
   const [country, setCountrie] = useState({})
 
   useEffect(() => {
@@ -44,7 +48,6 @@ console.log(country, "count");
 
   // const userActive = useSelector((state) => state.userActive)
   const [Panel, setPanel] = useState(true);
-  const dispatch = useDispatch()
 
   
   const [input, setInput] = useState({
@@ -95,6 +98,7 @@ console.log(country, "count");
 
   function handleSubmit(e) {
     e.preventDefault();
+    
     // if (input.email === "") input.email = userActive.email
     // if (input.password === "") input.password = userActive.password
     // if (input.passwordConfirm === "") input.passwordConfirm = userActive.passwordConfirm
@@ -105,6 +109,7 @@ console.log(country, "count");
     const data = new FormData();
     Object.keys(input).forEach((key) => data.append(key, input[key]));
     dispatch(PutUserProfile(data, input.id))
+    dispatch(update(true));
     // dispatch(PutUser({
     //   ...input, name: userActive.name,
     //   lastname: userActive.lastname,
