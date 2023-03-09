@@ -75,9 +75,7 @@ export default function ChangePass() {
           setRender(4);
         });
     } else {
-      setAlerta(
-        "passwords do not match or do not meet security requirements"
-      );
+      setAlerta("passwords do not match or do not meet security requirements");
     }
   };
 
@@ -97,7 +95,8 @@ export default function ChangePass() {
       >
         {" "}
         <p className="PingresaEmail">
-        Please, put the email account to recover your password, and follow instructions to verify your identity.
+          Please, put the email account to recover your password, and follow
+          instructions to verify your identity.
         </p>
         <input
           className="inputEmail"
@@ -117,7 +116,7 @@ export default function ChangePass() {
   } else if (render === 2) {
     return (
       <div
-      className="DivIngresaEmail"
+        className="DivIngresaEmail"
         style={{
           width: "500px",
           height: "400px",
@@ -128,21 +127,25 @@ export default function ChangePass() {
           marginLeft: "400px",
         }}
       >
-        <p  className="PingresaEmail" style={{ color: "red"}}>{alerta}</p>
+        <p className="PingresaEmail" style={{ color: "red" }}>
+          {alerta}
+        </p>
         <input
-        className="inputEmail"
+          className="inputEmail"
           defaultValue=""
           placeholder="codigo"
           type="text"
           onChange={(e) => setInput({ ...input, codeUser: e.target.value })}
         />
-        <button className="botonsIngresaEmail" onClick={() => compareCode()}>send</button>
+        <button className="botonsIngresaEmail" onClick={() => compareCode()}>
+          send
+        </button>
       </div>
     );
   } else if (render === 3) {
     return (
       <div
-      className="DivIngresaEmail"
+        className="DivIngresaEmail"
         style={{
           width: "500px",
           height: "400px",
@@ -152,12 +155,14 @@ export default function ChangePass() {
           marginTop: "100px",
           marginLeft: "400px",
         }}
-      > <p className="PingresaEmail">
-
-        enter the new password below, remember that it must have at least 1 uppercase, 1 lowercase and at least 8 characters.
-      </p>
+      >
+        {" "}
+        <p className="PingresaEmail">
+          enter the new password below, remember that it must have at least 1
+          uppercase, 1 lowercase and at least 8 characters.
+        </p>
         <input
-        className="inputEmail"
+          className="inputEmail"
           type="password"
           placeholder="nueva contraseña"
           onChange={(e) => setInput({ ...input, password1: e.target.value })}
@@ -165,20 +170,22 @@ export default function ChangePass() {
         <br />
         reenter it <br />
         <input
-        className="inputEmail"
+          className="inputEmail"
           type="password"
           placeholder="nueva contraseña"
           onChange={(e) => setInput({ ...input, password2: e.target.value })}
         />{" "}
         <br />
-        <button className="botonsIngresaEmail" onClick={() => changePassword()}>send</button>
+        <button className="botonsIngresaEmail" onClick={() => changePassword()}>
+          send
+        </button>
         <p style={{ color: "red", fontSize: "2vh" }}>{alerta}</p>
       </div>
     );
   } else if (render === 4) {
     return (
       <div
-      className="DivIngresaEmail"
+        className="DivIngresaEmail"
         style={{
           fontSize: "4vh",
           width: "500px",
@@ -189,17 +196,20 @@ export default function ChangePass() {
           marginTop: "100px",
           marginLeft: "400px",
         }}
-      > <p className="PSuccessfully" >
-        Your Password has being change Successfully.
-
-      </p>
-        <Link className="LinkBack" to="/Login">Back to Login</Link>
+      >
+        {" "}
+        <p className="PSuccessfully">
+          Your Password has being change Successfully.
+        </p>
+        <Link className="LinkBack" to="/Login">
+          Back to Login
+        </Link>
       </div>
     );
   } else {
     return (
       <div
-      className="inputEmail"
+        className="inputEmail"
         style={{
           width: "500px",
           height: "400px",
@@ -211,7 +221,7 @@ export default function ChangePass() {
         }}
       >
         <p style={{ color: "red", fontSize: "2vh" }}>
-        there has been an error try again later!
+          there has been an error try again later!
         </p>
       </div>
     );
