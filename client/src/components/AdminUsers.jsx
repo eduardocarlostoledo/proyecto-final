@@ -185,8 +185,6 @@ export const AdminUsers = () => {
     {
       title: "Nombre",
       dataIndex: "name",
-      sorter: (a, b) => a.name - b.name,
-      defaultSortOrder: "descend",
       render: (text) => <p>{text}</p>,
     },
     {
@@ -239,9 +237,6 @@ export const AdminUsers = () => {
       dataIndex: "",
       render: (value) => (
         <div>
-          <button className={styles.btnIcons} onClick={() => console.log(value)}>
-            <AiFillSetting className={styles.llave} />
-          </button>
 
         {value.status ? <button className={styles.btnIcons}  onClick={() => setStatus(value)} >
             <FaBan className={styles.banned}/>

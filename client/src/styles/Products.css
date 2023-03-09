@@ -1,40 +1,12 @@
 
 .Products{
-    margin-top: 100px;
+    margin-top: 120px;
 }
 
 .DivCardsFilters {
     display: flex;
     flex-direction: row;
-    
 }
-
-/* @media screen and (max-width: 680px){
-    .DivCardsFilters{
-        flex-direction: column;
-        justify-content: center;
-    }
-    .CardContainer{
-        justify-content: center;
-    }
-    .DivFilter{
-        justify-content: center;
-    }
-}
-@media screen and (max-width: 480px){
-    .DivCardsFilters{
-        flex-direction: column;
-        justify-content: center;
-    }
-    .CardContainer{
-        justify-content: center;
-    }
-    .DivFilter{
-        justify-content: center;
-        transform: translateX(30px);
-    }
-} */
-
 
 .DivFilter {
     padding: 20px;
@@ -195,11 +167,6 @@
         margin: 0;
         padding: 0;
         gap: 0;
-    }
-    .DivAllCards{
-        margin: 0;
-        height: 16rem;
-        width: 9.7rem;
     }
 }
 

@@ -73,7 +73,16 @@ export function ChangeNav () {
 };
 
 
-export const PutUser=(payload, id)=> async()=>{ 
+export function PutUser(payload) { 
+  // localStorage.setItem("USUARIO", JSON.stringify(payload))
+  // console.log(payload.id, "asdaID");
+  return async function(dispatch){
+      const response = await axios.put(`http://localhost:3001/users/${payload.id}`,payload);
+      return response;
+  };
+};
+
+export const PutUserProfile=(payload, id)=> async()=>{ 
   const user=await axios.put(`http://localhost:3001/users/${id}`,payload);
   const cacho=await axios.get(`http://localhost:3001/users/${id}`);
   localStorage.setItem("USUARIO", JSON.stringify(cacho.data.data))

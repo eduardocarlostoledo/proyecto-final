@@ -33,7 +33,7 @@ export function NavAdmin({handleClick, handleSubmit, handleInputChange, name}) {
     <nav className="navbar bg-body-tertiary fixed-top ">
       <div className="container-fluid">
         <h2 className="navbar-brand" >
-          admin {UserAdmin.name} {UserAdmin.lastname}
+          Computer store
         </h2>
 
      { Location.pathname === "/admin/Orders" || Location.pathname === "/admin/CreateProduct" ? null :  <form className="d-flex mt-3" role="search">
@@ -140,7 +140,7 @@ export function NavAdmin({handleClick, handleSubmit, handleInputChange, name}) {
          <img src={UserAdmin.image ? UserAdmin.image : "https://cdn-icons-png.flaticon.com/512/3135/3135768.png"} alt="admin" />
         </div>
         <div className="Contname" >
-            <span>{UserAdmin.name} {UserAdmin.lastname}</span>
+            <span>Computer store</span>
         </div>
       </div>
 

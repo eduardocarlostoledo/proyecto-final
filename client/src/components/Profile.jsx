@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from 'react-bootstrap/Card';
 import { IoSettingsOutline } from "react-icons/io5"
 import Form from 'react-bootstrap/Form';
-import { PutUser, deleteUserLocalStorage, getAllUsers, UserActive } from '../redux/actions/UsersActions';
+import { PutUserProfile, deleteUserLocalStorage, getAllUsers, UserActive } from '../redux/actions/UsersActions';
 import swal from 'sweetalert';
 import { useNavigate, Link  } from "react-router-dom"
 import { BsSendDash } from "react-icons/bs"
@@ -104,7 +104,7 @@ console.log(country, "count");
     // if (input.city === "") input.city = userActive.city
     const data = new FormData();
     Object.keys(input).forEach((key) => data.append(key, input[key]));
-    dispatch(PutUser(data, input.id))
+    dispatch(PutUserProfile(data, input.id))
     // dispatch(PutUser({
     //   ...input, name: userActive.name,
     //   lastname: userActive.lastname,
@@ -132,7 +132,7 @@ console.log(country, "count");
               <h3>{userActive.name} {userActive.admin ? <span style={{ color: "green", fontSize: "11px", border: "0.01rem solid green", padding: "2px", borderRadius: "6px"}}>admin</span> : ""}</h3>
             </div>
             <div>
-              <FaCity className="icono"></FaCity><span>{userActive.city ? userActive.city : "Ciudad"}, {userActive.country ? userActive.country : "Pais"}</ span>
+              <FaCity className="icono"></FaCity><span>{userActive.city ? userActive.city : "Ciudad"}, Argentina</ span>
             </div>
             <div>
               <FaPhone className="icono"></FaPhone><span>{userActive.phonenumber ? userActive.phonenumber : "+54 9 11 2222 5555"}</span>
@@ -150,7 +150,7 @@ console.log(country, "count");
             <button onClick={() => setPanel(false)} className="hola"><IoSettingsOutline className="setting"></IoSettingsOutline></button>
           </div>
           <h3><a href="https://login.live.com/" target="_blank" rel="noopener noreferrer">{userActive.email}</a></h3>
-          <h4>Direccion: {userActive.address ? userActive.address : "Street 151515"}</h4>
+          <h4>Address: {userActive.address ? userActive.address : "Street 151515"}</h4>
         { 
        userActive.admin ? <div style={{marginTop: "15px"}}>
               <div>
@@ -159,7 +159,7 @@ console.log(country, "count");
           </div>
         :
           <div style={{marginTop: "15px"}}>
-             <h3><strong>Mis Ordenes</strong></h3>
+             <h3><strong>My orders</strong></h3>
              {country.length > 0 && country?.map((e, index) => {
                     if(e.buyer_email === userActive.email ) {
                        return (<h6 key={index}>Products: {e.product_description} <br/> Total price {e.total_order_price} $ <span style={{color: "green", fontSize: "11px", border: "0.01rem solid green", padding: "2px", borderRadius: "6px"}}>{e.statusId}</span><hr/></h6>)
