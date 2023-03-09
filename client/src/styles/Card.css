@@ -32,6 +32,7 @@
     height: 150px;
     width: 150px;
     object-fit: contain;
+    border-bottom: blue;
 }
 
 .card_p_nombre{
@@ -39,7 +40,7 @@
     margin-left: 4%;
     margin-right: 2%;
     font-size: 16px;
-    margin-top: 0;
+    margin-top: -2rem;
     text-align: justify;
 }
 
@@ -57,20 +58,20 @@
     grid-area: img;
     margin-top: 20%;
     margin-left: 10%;
-    margin-bottom: 20px;
 }
 
 
 .card_p_cantidad{
     margin-left: 1vw;
     margin-right: 1vw;
+    
 }
 
 .card_strong_precio{
     font-size: 18px;
     grid-area: precio;
     margin-right: 60%;
-    margin-top: 3%;
+    margin-top: -2rem;
 }
 
 .card_contenedor_buttons{
@@ -127,6 +128,8 @@ font-size: 1.8vh;
     margin-bottom: 30px;
     background-color: black;
     border-radius: 20px;
+    position: absolute;
+    margin-top: -2rem;
 }
 
 .ContainerSumRest{

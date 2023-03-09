@@ -14,15 +14,18 @@
      display: flex;
      justify-content: space-around;
      user-select: none;
-     box-shadow: 15px 15px 8px rgba(155, 147, 147, 0.75);
 }
 
 
 .izquierda{ 
     background-color: rgb(247, 247, 247);
-    height: 100%;
-    width: 30%;
+    height: auto;
+    width: 35%;
+    min-height: 370px;
     border-right: 0.001em solid rgb(185, 179, 179);
+    text-align: justify;
+    border-radius: 20px 0 0 20px;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.411);
 }
 
 
@@ -48,7 +51,7 @@
 
 
 .InfoUser {
-    padding-left: 20px;
+    padding-left: 3rem;
 }
 
 .InfoUser-Name {
@@ -60,10 +63,13 @@
  }
 .derecha {
     background-color:  rgb(247, 247, 247);
+    height: auto;
     width: 70%;
-    height: 100%;
+    min-height: 370px;
     padding-left: 50px;
     padding-top: 20px;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 2rem 2rem 2rem rgba(0, 0, 0, 0.2);
 
 }
 
@@ -73,7 +79,6 @@
     height: 370px;
     padding-left: 50px;
     padding-top: 20px;
-    box-shadow: 15px 15px 8px rgba(155, 147, 147, 0.75);
 }
 
 .derecha h3 { 
@@ -159,18 +164,20 @@
     background-color: rgb(63, 55, 55);
 }
 .logout { 
-    background-color: white;
-    border: none;
+    border: 0.5px solid rgba(0, 0, 0, 0.141);
+    background-color: rgb(247, 247, 247);
+    border-radius: 20px;
     color:  rgb(35, 102, 179);
     font-size: 19px;
-    padding-top: 50px;
+    margin-top: 2rem;
+    padding: 0.6rem;
     position: absolute;
 }
 
 .logout:hover { 
-    background-color: white;
+    background-color:black;
     border: none;
-    color: blue;
+    color: white;
     font-size: 19px;
 }
 
